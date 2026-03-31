@@ -65,7 +65,7 @@
       ],
       "settings": {
         "width": "boxed",
-        "height": "21/9",
+        "height": "xl",
         "enable_custom_height": true,
         "custom_height": 500,
         "autoplay": false,
