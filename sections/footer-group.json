@@ -111,7 +111,7 @@
           "settings": {
             "title": "ByMetz Family Member",
             "title_underline_style": "none",
-            "newsletter_text": "<p>Word nu lid van de ByMetz Family en krijg altijd de laagste prijs op ons hele assortiment, in de winkel én webshop. Meld je hier aan.</p>",
+            "newsletter_text": "<p>Word nu lid van de ByMetz Family en krijg altijd de laagste prijs op ons hele assortiment, in de winkel én webshop.</p>",
             "footer_button_style": "primary plain",
             "enable_newsletter_terms_checkbox": false,
             "newsletter_terms_text": ""
