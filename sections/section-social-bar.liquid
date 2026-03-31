@@ -1,0 +1,285 @@
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{%- liquid
+  capture title_classes
+    echo 'w720'
+    if section.settings.text_alignment == 'center'
+      echo ' text-center align-center'
+    endif
+  endcapture
+-%}
+
+{%- if section.settings.title != blank or section.settings.text != blank -%}
+  <header class="{{ title_classes }} title-styling
+    {% if section.settings.title_underline_style != 'none' %}
+      title-underline-none
+      {% if section.settings.title_underline_style contains 'accent' %}
+        title-underline-accent
+      {% elsif section.settings.title_underline_style contains 'gradient' %}
+        title-underline-gradient
+      {% endif %}
+      {% if section.settings.title_underline_style contains 'secondary_font' %}
+        title-underline-secondary-font
+      {% endif %}
+    {% endif %}
+  "
+    {% if section.settings.enable_animations %}data-sal="fade" data-sal-duration="500"{% endif %}>
+    {%- if section.settings.title != blank -%}
+      {{ section.settings.title }}
+    {%- endif -%}
+    {%- if section.settings.text != empty -%}
+      {{ section.settings.text }}
+    {%- endif -%}
+  </header>
+{%- endif -%}
+
+{%- capture 'socials' -%}
+  {%- if settings.social_instagram -%}instagram|{{settings.social_instagram}}|{{ settings.social_instagram_name }}->{%- endif -%}
+  {%- if settings.social_pinterest -%}pinterest|{{settings.social_pinterest}}|{{ settings.social_pinterest_name }}->{%- endif -%}
+  {%- if settings.social_youtube -%}youtube|{{settings.social_youtube}}|{{ settings.social_youtube_name }}->{%- endif -%}
+  {%- if settings.social_facebook -%}facebook|{{settings.social_facebook}}|{{ settings.social_facebook_name }}|facebook-circle->{%- endif -%}
+  {%- if settings.social_twitter -%}twitter|{{settings.social_twitter}}|{{ settings.social_twitter_name }}->{%- endif -%}
+  {%- if settings.social_tiktok -%}tiktok|{{settings.social_tiktok}}|{{ settings.social_tiktok_name }}->{%- endif -%}
+  {%- if settings.social_tumblr -%}tumblr|{{settings.social_tumblr}}|{{ settings.social_tumblr_name }}->{%- endif -%}
+  {%- if settings.social_snapchat -%}snapchat|{{settings.social_snapchat}}|{{ settings.social_snapchat_name }}|snapchat-outline->{%- endif -%}
+  {%- if settings.whatsapp and settings.whatsapp > 0 -%}whatsapp|{{ settings.whatsapp }}{%- endif -%}
+{%- endcapture -%}
+{%- capture 'socials_placeholder' -%}
+  instagram->pinterest->youtube->facebook|facebook-circle->twitter->tiktok->tumblr->snapchat|snapchat-outline->whatsapp
+{%- endcapture -%}
+
+<ul class="l4sc plain{% if section.settings.show_in_circle %} strong static{% endif %} size-{{ section.settings.icon_width }}{% if section.settings.text_alignment == 'center' %} text-center{% endif %} hover-move-up"
+    {% if section.settings.enable_animations %}data-sal="fade" data-sal-duration="500"{% endif %}>
+  {%- assign socials = socials | split: "->" -%}
+  {%- if socials.size > 0 -%}
+    {%- for social in socials -%}
+      {%- assign social_info = social | split: '|' -%}
+      {%- assign social_translation = 'socials.' | append: social_info[0] -%}
+      <li><a aria-label="{{ social_translation | t }}" href="{% if social_info[0] == 'whatsapp' %}https://wa.me/{% endif %}{{ social_info[1] }}" rel="external noopener" target="external"><i aria-hidden="true" class="icon-{%- if social_info[3] -%}{{ social_info[3] }}{%- else -%}{{ social_info[0] }}{%- endif -%}"></i><span>{{ social_translation | t }}</span></a></li>
+    {%- endfor -%}
+  {% else %}
+    {%- assign social_placeholders = socials_placeholder | split: "->" -%}
+    {%- for social in social_placeholders -%}
+      {%- assign social_info = social | split: '|' -%}
+      {%- assign social_translation = 'socials.' | append: social_info[0] -%}
+      <li><a aria-label="{{ social_translation | t }}" href="#" rel="external noopener" target="external"><i aria-hidden="true" class="icon-{%- if social_info[1] -%}{{ social_info[1] }}{%- else -%}{{ social_info[0] }}{%- endif -%}"></i><span>{{ social_translation | t }}</span></a></li>
+    {%- endfor -%}
+  {% endif -%}
+</ul>
+{%- if link and section.settings.text_alignment == 'center' -%}
+  {{ link | replace: 'class-x', 'm0 text-center' }}
+{%- elsif link and section.settings.text_alignment == 'start' -%}
+  {{ link | replace: 'class-x', 'm0 mobile-only' }}
+{%- endif -%}
+
+<style>
+  #shopify-section-{{ section.id }} { z-index: {{ section.settings.fix_zindex }}!important; }
+  #shopify-section-{{ section.id }} .l4sc:not(.strong) { color: var(--{{ section.settings.color_palette }}_bg); }
+  #shopify-section-{{ section.id }} .l4sc a:hover { --secondary_bg: var(--{{ section.settings.color_palette }}_{{ section.settings.button_color_active }}_btn_bg); }
+  #shopify-section-{{ section.id }} .l4sc.strong a:not(:hover) { --secondary_text: var(--{{ section.settings.color_palette }}_fg); --secondary_bg: var(--{{ section.settings.color_palette }}_bg); }
+  #shopify-section-{{ section.id }} .l4sc.strong a:hover { --secondary_text: var(--{{ section.settings.color_palette }}_{{ section.settings.button_color_active }}_btn_fg); --secondary_bg_btn_dark: var(--{{ section.settings.color_palette }}_{{ section.settings.button_color_active }}_btn_bg); }
+  @media only screen and (min-width: 47.5em) {
+    #shopify-section-{{ section.id }} { margin-bottom: {{ section.settings.spacing_desktop }}px; }
+    {% if section.settings.spacing_desktop < 0 %}
+      #shopify-section-{{ section.id }} + *.has-kinetic-text { pointer-events: none; }
+    {% endif %}
+  }
+  @media only screen and (max-width: 47.5em) {
+      #shopify-section-{{ section.id }} { margin-bottom: {{ section.settings.spacing_mobile }}px; }
+    {% if section.settings.spacing_mobile < 0 %}
+      #shopify-section-{{ section.id }} + *.has-kinetic-text { pointer-events: none; }
+    {% endif %}
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.social_bar.name",
+  "tag": "article",
+  "class": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_palette",
+      "label": "t:global.color_palette.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "select",
+      "id": "button_color_active",
+      "label": "t:sections.social_bar.settings.button_color_active.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:global.button.button_style.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:global.button.button_style.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:global.button.button_style.tertiary.label"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "select",
+      "id": "icon_width",
+      "label": "t:sections.social_bar.settings.icon_width.label",
+      "options": [
+        {
+          "value": "s",
+          "label": "t:sections.social_bar.settings.icon_width.options__1.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.social_bar.settings.icon_width.options__2.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.social_bar.settings.icon_width.options__3.label"
+        }
+      ],
+      "default": "l"
+    },
+    {
+      "id": "show_in_circle",
+      "type": "checkbox",
+      "label": "t:sections.social_bar.settings.show_in_circle.label",
+      "default": true
+    },
+    {
+      "id": "text_alignment",
+      "type": "select",
+      "label": "t:global.typography.content_position.label",
+      "options": [
+        {
+          "value": "start",
+          "label": "t:global.alignment.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:global.alignment.center.label"
+        }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "header",
+      "content": "t:global.typography.title.label"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "t:global.typography.title.label",
+      "info": "t:global.typography.title.info",
+      "default": "<h2>Social media bar</h2>"
+    },
+    {
+      "type": "select",
+      "id": "title_underline_style",
+      "label": "t:global.typography.title_underline_style.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:global.typography.title_underline_style.none.label"
+        },
+        {
+          "value": "secondary_font",
+          "label": "t:global.typography.title_underline_style.secondary_font.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_accent",
+          "label": "t:global.typography.title_underline_style.secondary_font_accent.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_gradient",
+          "label": "t:global.typography.title_underline_style.secondary_font_gradient.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "accent",
+          "label": "t:global.typography.title_underline_style.accent.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        },
+        {
+          "value": "gradient",
+          "label": "t:global.typography.title_underline_style.gradient.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:global.typography.text.header"
+    },
+    {
+      "id": "text",
+      "type": "richtext",
+      "label": "t:global.typography.text.label",
+      "default": "<p>Give customers details about the social media account(s)</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:global.animation.header"
+    },
+    {
+      "id": "enable_animations",
+      "type": "checkbox",
+      "label": "t:global.animation.label",
+      "info": "t:global.animation.info",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:global.spacing.header"
+    },
+    {
+      "id": "spacing_desktop",
+      "type": "range",
+      "label": "t:global.spacing.spacing_desktop.label",
+      "min": -300,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "id": "spacing_mobile",
+      "type": "range",
+      "label": "t:global.spacing.spacing_mobile.label",
+      "min": -300,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "id": "fix_zindex",
+      "type": "range",
+      "label": "t:global.fix_zindex.label",
+      "info": "t:global.fix_zindex.info",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.social_bar.presets.name",
+      "settings": {
+      }
+    }
+  ]
+}
+{% endschema %}

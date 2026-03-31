@@ -1,0 +1,284 @@
+{%- paginate blog.articles by section.settings.pagination_qty -%}
+  <article class="m0">
+    <header class="cols{% if section.settings.text_alignment == 'center' %} text-center align-center{% endif %}">
+      {%- if section.settings.title != empty -%}
+        <div class="title-styling
+          {% if section.settings.title_underline_style != 'none' %}
+            title-underline-none
+            {% if section.settings.title_underline_style contains 'accent' %}
+              title-underline-accent
+            {% elsif section.settings.title_underline_style contains 'gradient' %}
+              title-underline-gradient
+            {% endif %}
+            {% if section.settings.title_underline_style contains 'secondary_font' %}
+              title-underline-secondary-font
+            {% endif %}
+          {% endif %}
+        ">
+          {{ section.settings.title }}
+        </div>
+      {%- else -%}
+        <{{ section.settings.title_size }} >
+          {{ blog.title }}
+        </{{ section.settings.title_size }}>
+      {%- endif -%}
+    </header>
+    {% if section.settings.show_tags and blog.tags.size > 0 %}
+      <p class="link-btn mobile-compact">
+        {%- liquid
+          assign button_class = ''
+          assign active_button_class = ''
+          if settings.button_style == 'inv'
+            assign button_class = 'inv'
+          else
+            assign active_button_class = 'inv'
+          endif
+          assign replacement = '<a class="' | append: button_class | append: '" '
+          assign active_replacement = '<a class="' | append: active_button_class | append: '" '
+        -%}
+        {%- for tag in blog.all_tags -%}
+          {%- if current_tags contains tag -%}
+            {{ tag | link_to_remove_tag: tag | replace: '<a ', active_replacement }}
+          {%- else -%}
+            {{ tag | link_to_tag: tag | replace: '<a ', replacement }}
+          {%- endif -%}
+        {%- endfor -%}
+      </p>
+    {% endif %}
+    <ul class="l4ne landscape wide">
+      {%- for article in blog.articles -%}
+        {%- liquid
+          if section.index > 2 or forloop.first == false
+            assign lazyload = true
+          else
+            assign lazyload = false
+          endif
+        -%}
+        {%- render 'article-item',
+          article: article, show_excerpt: section.settings.show_excerpt, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author, button_style: section.settings.button_style_post, lazyload: lazyload, blog_title_size: section.settings.blog_title_size
+        -%}
+      {%- endfor -%}
+    </ul>
+  </article>
+  {% render 'pagination',
+    paginate: paginate,
+    show_amount: true
+  %}
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "t:main.blog.name",
+  "settings": [
+    {
+      "id": "text_alignment",
+      "type": "select",
+      "label": "t:global.typography.title_position.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:global.alignment.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:global.alignment.center.label"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "id": "title_size",
+      "type": "select",
+      "label": "t:global.typography.title_size.label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:global.typography.title_size.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:global.typography.title_size.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:global.typography.title_size.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:global.typography.title_size.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:global.typography.title_size.h5.label"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "t:main.blog.settings.title.label",
+      "info": "t:main.blog.settings.title.info"
+    },
+    {
+      "type": "select",
+      "id": "title_underline_style",
+      "label": "t:global.typography.title_underline_style.label",
+      "info": "t:main.blog.settings.title_underline_style.info",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:global.typography.title_underline_style.none.label"
+        },
+        {
+          "value": "secondary_font",
+          "label": "t:global.typography.title_underline_style.secondary_font.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_accent",
+          "label": "t:global.typography.title_underline_style.secondary_font_accent.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_gradient",
+          "label": "t:global.typography.title_underline_style.secondary_font_gradient.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "accent",
+          "label": "t:global.typography.title_underline_style.accent.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        },
+        {
+          "value": "gradient",
+          "label": "t:global.typography.title_underline_style.gradient.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "t:main.blog.settings.show_tags.label"
+    },
+    {
+      "type": "range",
+      "id": "pagination_qty",
+      "label": "t:main.blog.settings.pagination_qty.label",
+      "min": 3,
+      "max": 15,
+      "step": 3,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "t:main.blog.settings.blog_posts.header"
+    },
+    {
+      "type": "select",
+      "id": "blog_title_size",
+      "label": "t:global.typography.blog_title_size.label",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:global.typography.title_size.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:global.typography.title_size.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:global.typography.title_size.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:global.typography.title_size.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:global.typography.title_size.h5.label"
+        }
+      ],
+      "default": "h5"
+    },
+    {
+      "id": "show_image",
+      "type": "checkbox",
+      "label": "t:main.blog.settings.blog_posts.show_image.label",
+      "default": true
+    },
+    {
+      "id": "show_date",
+      "type": "checkbox",
+      "label": "t:main.blog.settings.blog_posts.show_date.label",
+      "default": true
+    },
+    {
+      "id": "show_author",
+      "type": "checkbox",
+      "label": "t:main.blog.settings.blog_posts.show_author.label",
+      "default": true
+    },
+    {
+      "id": "show_excerpt",
+      "type": "checkbox",
+      "label": "t:main.blog.settings.blog_posts.show_excerpt.label"
+    },
+    {
+      "type": "select",
+      "id": "button_style_post",
+      "label": "t:main.blog.settings.blog_posts.button_style_post.label",
+      "options": [
+        {
+          "value": "primary plain",
+          "label": "t:global.button.button_style.primary.label",
+          "group": "t:global.button.button_style.group.plain"
+        },
+        {
+          "value": "secondary plain",
+          "label": "t:global.button.button_style.secondary.label",
+          "group": "t:global.button.button_style.group.plain"
+        },
+        {
+          "value": "tertiary plain",
+          "label": "t:global.button.button_style.tertiary.label",
+          "group": "t:global.button.button_style.group.plain"
+        },
+        {
+          "value": "primary inv",
+          "label": "t:global.button.button_style.primary.label",
+          "group": "t:global.button.button_style.group.inv"
+        },
+        {
+          "value": "secondary inv",
+          "label": "t:global.button.button_style.secondary.label",
+          "group": "t:global.button.button_style.group.inv"
+        },
+        {
+          "value": "tertiary inv",
+          "label": "t:global.button.button_style.tertiary.label",
+          "group": "t:global.button.button_style.group.inv"
+        },
+        {
+          "value": "primary link",
+          "label": "t:global.button.button_style.primary.label",
+          "group": "t:global.button.button_style.group.link"
+        },
+        {
+          "value": "secondary link",
+          "label": "t:global.button.button_style.secondary.label",
+          "group": "t:global.button.button_style.group.link"
+        },
+        {
+          "value": "tertiary link",
+          "label": "t:global.button.button_style.tertiary.label",
+          "group": "t:global.button.button_style.group.link"
+        }
+      ],
+      "default": "primary link"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,142 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section_slideshow_aTcfAj": {
+      "type": "section-slideshow",
+      "blocks": {
+        "slide_74fHda": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20230315-114447-min.jpg",
+            "layout": "background",
+            "image_width": 50,
+            "overlay_opacity": 30,
+            "color_palette": "scheme-8",
+            "text_position": "align-bottom align-start text-start",
+            "content_width": 1280,
+            "title": "<h2>Webshop & Winkel in Eindhoven</h2>",
+            "title_underline_style": "none",
+            "text": "",
+            "show_first_link": false,
+            "first_link_text": "",
+            "first_link_url": "/",
+            "first_button_style": "primary plain",
+            "show_second_link": false,
+            "second_link_text": "Button",
+            "second_link_url": "/",
+            "second_button_style": "secondary plain"
+          }
+        },
+        "slide_hPHBEe": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Afbeelding_van_WhatsApp_op_2025-04-06_om_21.53.13_36010eca-min.jpg",
+            "layout": "background",
+            "image_width": 50,
+            "overlay_opacity": 30,
+            "color_palette": "scheme-8",
+            "text_position": "align-bottom align-start text-start",
+            "content_width": 1280,
+            "title": "<h2>Grootste Tassen- en Kofferwinkel van Nederland</h2>",
+            "title_underline_style": "none",
+            "text": "",
+            "show_first_link": false,
+            "first_link_text": "",
+            "first_link_url": "/",
+            "first_button_style": "primary plain",
+            "show_second_link": false,
+            "second_link_text": "Button",
+            "second_link_url": "/",
+            "second_button_style": "secondary plain"
+          }
+        }
+      },
+      "block_order": [
+        "slide_74fHda",
+        "slide_hPHBEe"
+      ],
+      "settings": {
+        "width": "boxed",
+        "height": "21/9",
+        "enable_custom_height": true,
+        "custom_height": 500,
+        "autoplay": false,
+        "autoplay_seconds": 5,
+        "enable_controls": false,
+        "height_mobile": "1/1",
+        "enable_animations": false,
+        "spacing_desktop": 0,
+        "spacing_mobile": 0,
+        "fix_zindex": 0
+      }
+    },
+    "section_custom_liquid_6xyzG4": {
+      "type": "section-custom-liquid",
+      "name": "t:sections.custom_liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{%- comment -%}\nByMetz SEO Intro Block (zonder FAQ)\n- Assortiment knop -> https://bymetz.nl/collections/all?sort_by=created-descending\n- Route knop -> Google Maps routebeschrijving met bestemming vooraf ingevuld (api=1)\n- Subtiele highlight alleen op \"ByMetz\" (#EA6C44)\n- Collectie-links met sort_by=created-descending (nieuwste eerst)\n- Chip volgorde: Handtassen & schoudertassen, Koffers, Reistassen, Rugzakken, Schooltassen, Laptoptassen\n{%- endcomment -%}\n\n{%- assign base_url = shop.url | default: request.origin -%}\n\n{%- assign url_all_sorted   = 'https://bymetz.nl/collections/all?sort_by=created-descending' -%}\n{%- assign url_tassen       = 'https://bymetz.nl/collections/tassen?sort_by=created-descending' -%}\n{%- assign url_koffers      = 'https://bymetz.nl/collections/koffers?sort_by=created-descending' -%}\n{%- assign url_reistassen   = 'https://bymetz.nl/collections/reistassen?sort_by=created-descending' -%}\n{%- assign url_rugzakken    = 'https://bymetz.nl/collections/rugzakken?sort_by=created-descending' -%}\n{%- assign url_schooltassen = 'https://bymetz.nl/collections/schooltassen?sort_by=created-descending' -%}\n{%- assign url_laptoptassen = 'https://bymetz.nl/collections/laptoptassen?sort_by=created-descending' -%}\n\n{%- comment -%}\nGoogle Maps Directions URL (api=1) – opent routebeschrijving met bestemming ingevuld.\n{%- endcomment -%}\n{%- assign maps_directions_url = 'https://www.google.com/maps/dir/?api=1&destination=ByMetz.nl%20-%20Tassen%20%26%20Koffers%2C%20Winkelcentrum%20Woensel%2059%2C%205625%20AD%20Eindhoven&travelmode=driving' -%}\n\n{%- comment -%} Fix voor SearchAction (curly braces apart) {%- endcomment -%}\n{%- assign search_target = base_url | append: '/search?q=' | append: '{search_term_string}' -%}\n{%- assign store_name = shop.name | default: 'ByMetz' -%}\n{%- assign store_description = 'Tassenwinkel in Eindhoven (Winkelcentrum Woensel 59, 5625 AD) met tassen, koffers en reistassen. Familiebedrijf met persoonlijk advies en online bestellen.' -%}\n\n<section class=\"bymetz-seo\" aria-labelledby=\"bymetz-seo-title\">\n  <header class=\"bymetz-seo__header\">\n    <h2 id=\"bymetz-seo-title\" class=\"bymetz-seo__title\">\n      Tassen kopen in Eindhoven? Ontdek <span class=\"bymetz-seo__hl\">ByMetz</span> in Winkelcentrum Woensel\n    </h2>\n\n    <p class=\"bymetz-seo__lead\">\n      <strong>ByMetz</strong> is dé <strong>tassenwinkel in Eindhoven</strong> voor <strong>tassen</strong>, <strong>koffers</strong> en <strong>reistassen</strong>.\n      Al meer dan <strong>50 jaar</strong> helpen we je met <strong>persoonlijk advies</strong> en een assortiment voor werk, school en reizen.\n    </p>\n  </header>\n\n  <nav class=\"bymetz-seo__quicklinks\" aria-label=\"Snelle links naar categorieën\">\n    <a class=\"bymetz-seo__chip\" href=\"{{ url_tassen }}\">Handtassen & schoudertassen</a>\n    <a class=\"bymetz-seo__chip\" href=\"{{ url_koffers }}\">Koffers</a>\n    <a class=\"bymetz-seo__chip\" href=\"{{ url_reistassen }}\">Reistassen</a>\n    <a class=\"bymetz-seo__chip\" href=\"{{ url_rugzakken }}\">Rugzakken</a>\n    <a class=\"bymetz-seo__chip\" href=\"{{ url_schooltassen }}\">Schooltassen</a>\n    <a class=\"bymetz-seo__chip\" href=\"{{ url_laptoptassen }}\">Laptoptassen</a>\n  </nav>\n\n  <div class=\"bymetz-seo__grid\">\n    <div class=\"bymetz-seo__col\">\n      <h3 class=\"bymetz-seo__h3\">Shoppen in Eindhoven (Woensel)</h3>\n      <p class=\"bymetz-seo__text\">\n        Kom je liever in het echt vergelijken? In onze winkel in <strong>Winkelcentrum Woensel</strong> kun je rustig passen, voelen en kiezen.\n        Of je nu een <strong>handtas</strong>, <strong>koffer</strong>, <strong>reistas</strong>, <strong>rugzak</strong>, <strong>schooltas</strong> of <strong>laptoptas</strong> zoekt:\n        je krijgt eerlijk advies en je ziet direct wat het beste bij je past.\n      </p>\n      <p class=\"bymetz-seo__text\">\n        Je shopt bij ons overzichtelijk en comfortabel — met veel keuze, snelle vergelijking en hulp als je twijfelt.\n      </p>\n\n      <h3 class=\"bymetz-seo__h3\">Voor werk, school en reizen</h3>\n      <ul class=\"bymetz-seo__list\">\n        <li><strong>Handtassen</strong> & <strong>schoudertassen</strong> voor elke stijl</li>\n        <li><strong>Koffers</strong>: van handbagage tot grote reiskoffers</li>\n        <li><strong>Reistassen</strong> voor weekendjes weg en vakantie</li>\n        <li><strong>Rugzakken</strong> & <strong>schooltassen</strong> voor dagelijks gebruik</li>\n        <li><strong>Laptoptassen</strong> & werktassen voor bescherming en comfort</li>\n      </ul>\n    </div>\n\n    <div class=\"bymetz-seo__col\">\n      <h3 class=\"bymetz-seo__h3\">24/7 online bestellen</h3>\n      <p class=\"bymetz-seo__text\">\n        Liever direct shoppen? Online kun je snel en eenvoudig <strong>tassen, koffers en reistassen bestellen</strong>.\n        Bekijk het assortiment en ontdek wat er net binnen is gekomen.\n      </p>\n\n      <h3 class=\"bymetz-seo__h3\">Waarom ByMetz?</h3>\n      <p class=\"bymetz-seo__text\">\n        Je krijgt service zoals je die van een echt <strong>familiebedrijf</strong> mag verwachten.\n        We helpen je met maat, indeling, materiaal en gebruik — zodat je met een keuze naar huis gaat waar je lang plezier van hebt.\n      </p>\n\n      <div class=\"bymetz-seo__cta\">\n        <a class=\"bymetz-seo__btn bymetz-seo__btn--primary\" href=\"{{ url_all_sorted }}\">\n          Bekijk het assortiment\n        </a>\n        <a class=\"bymetz-seo__btn bymetz-seo__btn--ghost\" href=\"{{ maps_directions_url | escape }}\" target=\"_blank\" rel=\"noopener\">\n          Route naar de winkel (Google Maps)\n        </a>\n      </div>\n    </div>\n  </div>\n</section>\n\n<style>\n  .bymetz-seo{ max-width:1100px; margin:0 auto; padding:26px 16px; }\n  .bymetz-seo__title{ text-align:center; font-weight:950; line-height:1.12; margin:0 0 14px; font-size:clamp(24px,3vw,40px); letter-spacing:-0.015em; }\n\n  /* subtiele highlight alleen op \"ByMetz\" */\n  .bymetz-seo__hl{ position:relative; display:inline-block; font-weight:950; padding:0 .08em; }\n  .bymetz-seo__hl::after{ content:\"\"; position:absolute; left:-.08em; right:-.08em; bottom:.10em; height:.42em; background:rgba(234,108,68,.22); border-radius:.45em; z-index:-1; }\n  .bymetz-seo__hl::before{ content:\"\"; position:absolute; left:-.05em; right:-.05em; bottom:.04em; height:2px; background:#EA6C44; border-radius:99px; opacity:.65; z-index:-1; }\n\n  .bymetz-seo__lead{ text-align:center; margin:0 auto 10px; max-width:920px; line-height:1.7; font-size:1.06em; }\n\n  .bymetz-seo__quicklinks{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:14px 0 22px; }\n  .bymetz-seo__chip{ display:inline-block; padding:10px 14px; border:1px solid rgba(0,0,0,.15); border-radius:999px; text-decoration:none; line-height:1; white-space:nowrap; }\n\n  .bymetz-seo__grid{ display:grid; gap:22px; grid-template-columns:1fr 1fr; align-items:start; }\n\n  .bymetz-seo__h3{ margin:0 0 10px; font-weight:900; line-height:1.25; font-size:1.15em; }\n  .bymetz-seo__text{ margin:0 0 14px; line-height:1.75; }\n  .bymetz-seo__list{ margin:0; padding-left:18px; line-height:1.8; }\n\n  .bymetz-seo__cta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }\n\n  .bymetz-seo__btn{\n    display:inline-block;\n    padding:12px 16px;\n    border-radius:12px;\n    text-decoration:none !important;\n    font-weight:850;\n    border:1px solid rgba(0,0,0,.18);\n    line-height:1.2;\n  }\n\n  /* Fix: tekst mag NIET verdwijnen bij hover/visited/focus */\n  .bymetz-seo__btn--primary,\n  .bymetz-seo__btn--primary:visited,\n  .bymetz-seo__btn--primary:hover,\n  .bymetz-seo__btn--primary:focus,\n  .bymetz-seo__btn--primary:active{\n    background:#EA6C44;\n    border-color:#EA6C44;\n    color:#fff !important;\n    opacity:1 !important;\n  }\n\n  .bymetz-seo__btn--ghost{ background:transparent; }\n  .bymetz-seo__btn--ghost:hover,\n  .bymetz-seo__btn--ghost:focus{\n    opacity:1 !important;\n  }\n\n  @media (max-width: 900px){\n    .bymetz-seo__grid{ grid-template-columns: 1fr; }\n  }\n</style>\n\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@graph\": [\n    {\n      \"@type\": \"WebSite\",\n      \"@id\": {{ base_url | append: \"#website\" | json }},\n      \"url\": {{ base_url | json }},\n      \"name\": {{ store_name | json }},\n      \"inLanguage\": \"nl-NL\",\n      \"potentialAction\": {\n        \"@type\": \"SearchAction\",\n        \"target\": {{ search_target | json }},\n        \"query-input\": \"required name=search_term_string\"\n      }\n    },\n    {\n      \"@type\": \"Store\",\n      \"@id\": {{ base_url | append: \"#store\" | json }},\n      \"name\": {{ store_name | json }},\n      \"url\": {{ base_url | json }},\n      \"inLanguage\": \"nl-NL\",\n      \"areaServed\": \"NL\",\n      \"description\": {{ store_description | json }},\n      \"hasMap\": {{ maps_directions_url | json }},\n      \"telephone\": {{ shop.phone | default: \"\" | json }},\n      \"email\": {{ shop.email | default: \"\" | json }},\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"Winkelcentrum Woensel 59\",\n        \"postalCode\": \"5625 AD\",\n        \"addressLocality\": \"Eindhoven\",\n        \"addressRegion\": \"Noord-Brabant\",\n        \"addressCountry\": \"NL\"\n      }\n    }\n  ]\n}\n</script>",
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    },
+    "section_featured_collection_f7HVjY": {
+      "type": "section-featured-collection",
+      "name": "t:sections.featured_collection.presets.name",
+      "settings": {
+        "collection": "koffers",
+        "layout": "slider",
+        "width": "boxed",
+        "limit": 8,
+        "number_of_items": 4,
+        "text_alignment": "start",
+        "title": "<h2><span style=\"text-decoration:underline\">Onze Bestsellers</span></h2>",
+        "title_underline_style": "accent",
+        "text": "<p>De grootste kofferverdieping van Nederland. Direct online te bestellen.</p>",
+        "show_link": false,
+        "link_text": "Alles bekijken",
+        "button_style": "primary inv",
+        "mobile_layout": "slider",
+        "enable_animations": false,
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    },
+    "section_custom_liquid_NYVrLj": {
+      "type": "section-custom-liquid",
+      "name": "t:sections.custom_liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"bymetz-hours\">\n  <h3 class=\"bymetz-hours__title\">Openingstijden winkel ByMetz Eindhoven</h3>\n\n  <div class=\"bymetz-hours__center\">\n    <table class=\"bymetz-hours__table\" aria-label=\"Openingstijden winkel\">\n      <thead>\n        <tr>\n          <th scope=\"col\">Dag</th>\n          <th scope=\"col\">Openingstijden</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr><td>Maandag</td><td>12:00 – 17:30</td></tr>\n        <tr><td>Dinsdag</td><td>10:00 – 17:30</td></tr>\n        <tr><td>Woensdag</td><td>10:00 – 17:30</td></tr>\n        <tr><td>Donderdag</td><td>10:00 – 17:30</td></tr>\n        <tr><td>Vrijdag</td><td>10:00 – 20:00</td></tr>\n        <tr><td>Zaterdag</td><td>10:00 – 17:00</td></tr>\n        <tr>\n          <td>Zondag</td>\n          <td>\n            12:00 – 17:00\n            <div class=\"bymetz-hours__note\">Let op: eerste en laatste zondag van de maand.</div>\n          </td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n\n<style>\n  .bymetz-hours{\n    width: 100%;\n    padding: 0 16px;           /* altijd ruimte links/rechts zodat rand zichtbaar blijft */\n    box-sizing: border-box;\n  }\n\n  .bymetz-hours__title{\n    margin: 0 0 12px 0;\n    text-align: center;\n    font-weight: 700;\n    font-size: 22px;\n    line-height: 1.2;\n  }\n\n  /* Center wrapper: altijd perfect midden */\n  .bymetz-hours__center{\n    display: flex;\n    justify-content: center;\n    width: 100%;\n  }\n\n  /* BELANGRIJK: override theme table styles die scrollbars veroorzaken */\n  .bymetz-hours__table{\n    display: table !important;     /* voorkomt display:block + overflow scroll */\n    overflow: visible !important;\n    width: fit-content;            /* blok zo breed als inhoud */\n    max-width: 100%;\n    border-collapse: collapse;\n    background: #fff;\n    border: 1px solid rgba(0,0,0,.18); /* duidelijke rechthoek */\n    box-sizing: border-box;\n  }\n\n  .bymetz-hours__table thead th{\n    text-align: left;\n    font-weight: 700;\n    padding: 12px 16px;\n    background: #f4f4f4;\n    border-bottom: 1px solid rgba(0,0,0,.12);\n  }\n\n  .bymetz-hours__table tbody td{\n    padding: 12px 16px;\n    border-bottom: 1px solid rgba(0,0,0,.08);\n    vertical-align: top;\n  }\n\n  .bymetz-hours__table tbody tr:last-child td{\n    border-bottom: 0;\n  }\n\n  /* tijden mogen niet afbreken */\n  .bymetz-hours__table td:nth-child(2){\n    white-space: nowrap;\n  }\n\n  .bymetz-hours__note{\n    margin-top: 6px;\n    font-weight: 700;\n    font-size: 0.95em;\n    white-space: normal;\n  }\n\n  @media (max-width: 600px){\n    .bymetz-hours{ padding: 0 14px; }\n    .bymetz-hours__title{ font-size: 20px; }\n\n    .bymetz-hours__table thead th,\n    .bymetz-hours__table tbody td{\n      padding: 10px 12px;\n      font-size: 14px;\n    }\n  }\n</style>",
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    },
+    "section_custom_liquid_mbnTzn": {
+      "type": "section-custom-liquid",
+      "name": "t:sections.custom_liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{%- comment -%}\nByMetz FAQ Block (los te plaatsen)\n- Adres+route gecombineerd\n- Parkeren toegevoegd als #2\n- Online bestellen uitgebreid (gratis verzending vanaf €29, 1700+ reviews, 9,6 gemiddeld)\n- Producten uitgebreid (portemonnees, riemen, sieraden)\n- Advies ook via WhatsApp (klikbare link)\n- Grootste winkel antwoord uitgebreider\n- Inclusief JSON-LD FAQPage\n{%- endcomment -%}\n\n{%- assign base_url = shop.url | default: request.origin -%}\n{%- assign whatsapp_url = 'https://wa.me/message/NHENYUN3AYQMN1' -%}\n\n<section class=\"bymetz-faq\" aria-labelledby=\"bymetz-faq-title\">\n  <h3 id=\"bymetz-faq-title\" class=\"bymetz-faq__title\">Veelgestelde vragen (FAQ)</h3>\n\n  <div class=\"bymetz-faq__items\">\n    <details class=\"bymetz-faq__item\">\n      <summary>Wat is het adres van ByMetz en hoe kom ik er het snelst?</summary>\n      <div class=\"bymetz-faq__answer\">\n        <p>\n          ByMetz is gevestigd op <strong>Winkelcentrum Woensel 59</strong>, <strong>5625 AD</strong> <strong>Eindhoven</strong>.\n          De snelste route plan je via <strong>Google Maps</strong> door op dit adres te navigeren.\n        </p>\n      </div>\n    </details>\n\n    <details class=\"bymetz-faq__item\">\n      <summary>Kan ik makkelijk parkeren bij de winkel van ByMetz?</summary>\n      <div class=\"bymetz-faq__answer\">\n        <p>\n          Ja. Je kunt <strong>direct achter de winkel</strong> parkeren en via de <strong>achteruitgang</strong> loop je zó naar je auto.\n          Ideaal, want je hoeft niet het hele winkelcentrum door met je nieuwe koffer.\n          In <strong>Winkelcentrum Woensel</strong> zijn bovendien ontzettend veel parkeerplekken en parkeren kost slechts <strong>€0,60 per uur</strong>.\n        </p>\n      </div>\n    </details>\n\n    <details class=\"bymetz-faq__item\">\n      <summary>Kan ik online tassen, koffers en reistassen bestellen?</summary>\n      <div class=\"bymetz-faq__answer\">\n        <p>\n          Ja. Je kunt 24/7 online shoppen en direct jouw favoriete <strong>tas</strong>, <strong>koffer</strong> of <strong>reistas</strong> bestellen.\n          Bestellingen vanaf <strong>€29</strong> verzenden we <strong>gratis</strong>.\n          En fijn om te weten: we hebben inmiddels <strong>meer dan 1700 beoordelingen</strong> mogen ontvangen met een gemiddelde score van <strong>9,6</strong>.\n        </p>\n      </div>\n    </details>\n\n    <details class=\"bymetz-faq__item\">\n      <summary>Welke producten verkoopt ByMetz?</summary>\n      <div class=\"bymetz-faq__answer\">\n        <p>\n          ByMetz verkoopt onder andere <strong>handtassen</strong>, <strong>schoudertassen</strong>, <strong>rugzakken</strong>, <strong>schooltassen</strong>,\n          <strong>laptoptassen</strong>, <strong>koffers</strong>, <strong>reistassen</strong>, <strong>portemonnees</strong>, <strong>riemen</strong> en <strong>sieraden</strong>.\n        </p>\n      </div>\n    </details>\n\n    <details class=\"bymetz-faq__item\">\n      <summary>Helpen jullie met het kiezen van de juiste koffer of tas?</summary>\n      <div class=\"bymetz-faq__answer\">\n        <p>\n          Ja. We helpen je graag met persoonlijk advies over formaat, gewicht, indeling, materiaal en gebruik (werk, school of reis).\n          Dat kan in de winkel én eenvoudig via WhatsApp:\n          <a class=\"bymetz-faq__link\" href=\"{{ whatsapp_url }}\" target=\"_blank\" rel=\"noopener\">stuur ons een bericht via WhatsApp</a>.\n        </p>\n      </div>\n    </details>\n\n    <details class=\"bymetz-faq__item\">\n      <summary>Is ByMetz de grootste tassen- en kofferwinkel van Nederland?</summary>\n      <div class=\"bymetz-faq__answer\">\n        <p>\n          Ja. ByMetz heeft <strong>2 verdiepingen</strong> en meer dan <strong>500 m²</strong> winkeloppervlak.\n          Daardoor kun je bij ons heel veel modellen, maten en stijlen in één keer vergelijken — van dagelijkse tassen tot reis- en zakenoplossingen.\n          Voor koffers hebben we een uitzonderlijk ruime afdeling, waardoor je snel de juiste koffer vindt op basis van <strong>formaat</strong>, <strong>gewicht</strong>,\n          <strong>indeling</strong> en jouw type reis.\n        </p>\n      </div>\n    </details>\n  </div>\n</section>\n\n<style>\n  .bymetz-faq{ max-width:1100px; margin:0 auto; padding:26px 16px; }\n  .bymetz-faq__title{ margin:0 0 12px; font-weight:900; font-size:1.25em; line-height:1.2; }\n\n  .bymetz-faq__item{\n    border:1px solid rgba(0,0,0,.10);\n    border-radius:12px;\n    padding:10px 12px;\n    margin-top:10px;\n    background:#fff;\n  }\n  .bymetz-faq__item summary{ cursor:pointer; font-weight:900; }\n  .bymetz-faq__answer{ margin-top:8px; line-height:1.7; }\n\n  .bymetz-faq__link{ font-weight:800; text-decoration: underline; }\n</style>\n\n<script type=\"application/ld+json\">\n{\n  \"@context\":\"https://schema.org\",\n  \"@type\":\"FAQPage\",\n  \"@id\": {{ base_url | append: \"#faq\" | json }},\n  \"mainEntity\":[\n    {\n      \"@type\":\"Question\",\n      \"name\":\"Wat is het adres van ByMetz en hoe kom ik er het snelst?\",\n      \"acceptedAnswer\":{\n        \"@type\":\"Answer\",\n        \"text\":\"ByMetz is gevestigd op Winkelcentrum Woensel 59, 5625 AD Eindhoven. De snelste route plan je via Google Maps door te navigeren op dit adres.\"\n      }\n    },\n    {\n      \"@type\":\"Question\",\n      \"name\":\"Kan ik makkelijk parkeren bij de winkel van ByMetz?\",\n      \"acceptedAnswer\":{\n        \"@type\":\"Answer\",\n        \"text\":\"Ja. Je kunt direct achter de winkel parkeren en via de achteruitgang loop je zo naar je auto. In Winkelcentrum Woensel zijn veel parkeerplekken en parkeren kost €0,60 per uur.\"\n      }\n    },\n    {\n      \"@type\":\"Question\",\n      \"name\":\"Kan ik online tassen, koffers en reistassen bestellen?\",\n      \"acceptedAnswer\":{\n        \"@type\":\"Answer\",\n        \"text\":\"Ja. Je kunt 24/7 online shoppen en tassen, koffers en reistassen bestellen. Bestellingen vanaf €29 verzenden we gratis. We hebben meer dan 1700 beoordelingen ontvangen met een gemiddelde score van 9,6.\"\n      }\n    },\n    {\n      \"@type\":\"Question\",\n      \"name\":\"Welke producten verkoopt ByMetz?\",\n      \"acceptedAnswer\":{\n        \"@type\":\"Answer\",\n        \"text\":\"ByMetz verkoopt onder andere handtassen, schoudertassen, rugzakken, schooltassen, laptoptassen, koffers, reistassen, portemonnees, riemen en sieraden.\"\n      }\n    },\n    {\n      \"@type\":\"Question\",\n      \"name\":\"Helpen jullie met het kiezen van de juiste koffer of tas?\",\n      \"acceptedAnswer\":{\n        \"@type\":\"Answer\",\n        \"text\":\"Ja. We geven persoonlijk advies over formaat, gewicht, indeling, materiaal en gebruik. Dat kan in de winkel én via WhatsApp.\"\n      }\n    },\n    {\n      \"@type\":\"Question\",\n      \"name\":\"Is ByMetz de grootste tassen- en kofferwinkel van Nederland?\",\n      \"acceptedAnswer\":{\n        \"@type\":\"Answer\",\n        \"text\":\"Ja. ByMetz heeft 2 verdiepingen en meer dan 500 m² winkeloppervlak. Daardoor kun je veel modellen, maten en stijlen vergelijken en snel de juiste tas of koffer vinden op basis van formaat, gewicht, indeling en jouw type reis.\"\n      }\n    }\n  ]\n}\n</script>",
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    }
+  },
+  "order": [
+    "section_slideshow_aTcfAj",
+    "section_custom_liquid_6xyzG4",
+    "section_featured_collection_f7HVjY",
+    "section_custom_liquid_NYVrLj",
+    "section_custom_liquid_mbnTzn"
+  ]
+}

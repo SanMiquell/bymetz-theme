@@ -1,0 +1,50 @@
+<aside class="m6pn wide" id="add-products-to-banner" aria-hidden="true" data-products="[]">
+  <div>
+    <header>
+      {%- unless section.settings.shop_the_look_title == empty -%}{{ section.settings.shop_the_look_title }}{%- endunless -%}
+    </header>
+    <div class="syk-slider-container" data-visible-items="{{ section.settings.shop_the_look_items }}" style="--dist: {{ settings.space_between_products }}px; --dist_a: {% if settings.grid_style == 'border' %}0px;{% else %}{{ settings.space_between_products }}px;{% endif %}">
+      <ul class="l4cl {% unless settings.grid_style == 'default' %}l4cl-{{ settings.grid_style }}{% endunless %}" data-number_of_items="{{ section.settings.shop_the_look_items }}" style="--dist: {{ settings.space_between_products }}px; --dist_a: {% if settings.grid_style == 'border' %}0px;{% else %}{{ settings.space_between_products }}px;{% endif %}">
+        {%- liquid
+          for i in (1..section.settings.shop_the_look_items)
+            capture placeholder_int
+              cycle 1, 2, 3, 4, 5, 6
+            endcapture
+            render 'product-item', product: blank, placeholder_int: placeholder_int
+          endfor
+        -%}
+      </ul>
+      <div class="syk-slider-pagination">
+        <span class="syk-slider-button hidden" data-direction="prev" role="button" aria-label="Previous slide"></span>
+        <span class="syk-slider-button" data-direction="next" role="button" aria-label="Next slide"></span>
+      </div>
+    </div>
+  </div>
+</aside>
+{% schema %}
+{
+  "name": "Shop the look drawer",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:settings_schema.shop_the_look.settings.paragraph"
+    },
+    {
+      "id": "shop_the_look_title",
+      "type": "richtext",
+      "label": "t:settings_schema.shop_the_look.settings.shop_the_look_title.label",
+      "default": "<h2>Shop the look</h2>"
+    },
+    {
+      "id": "shop_the_look_items",
+      "type": "range",
+      "label": "t:settings_schema.shop_the_look.settings.shop_the_look_items.label",
+      "info": "t:settings_schema.shop_the_look.settings.shop_the_look_items.info",
+      "min": 4,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    }
+  ]
+}
+{% endschema %}

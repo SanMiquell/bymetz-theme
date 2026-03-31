@@ -1,0 +1,65 @@
+{%- if settings.cart_enable_capture_vat -%}
+    {%- liquid
+        assign show_vat_capture = true
+        assign enable_vat_capture_checkbox = false
+        if settings.cart_capture_vat_hide_markets
+            assign hide_markets = settings.cart_capture_vat_hide_markets_handles | split: ','
+            if hide_markets contains localization.market.handle
+                assign show_vat_capture = false
+            endif
+        endif
+        if settings.cart_capture_vat_hide_logged_in and customer == nil
+            assign show_vat_capture = false
+        endif
+        if show_vat_capture and settings.cart_capture_vat_enable_checkbox and settings.cart_capture_vat_checkbox_text != empty
+            assign enable_vat_capture_checkbox = true
+        endif
+    -%}
+    {%- if show_vat_capture -%}
+        {%- if origin == 'account' %}
+
+            <!-- Begin Exemptify account page VAT ID validation -->
+            <div>
+                {{ "//www.modules4u.biz/shopify/exemptify/js/validate_vat_v1.js.php?shop=**permanent_domain**" | replace: '**permanent_domain**', shop.permanent_domain | script_tag }}
+                <div><div><h2>{{ shop.metafields['exemptify']['m4u_headline'] }}</h2></div>
+                    <input type="text" placeholder="{{ shop.metafields['exemptify']['m4u_vat_id_placeholder'] }}" id="VatId" name="VatId" maxlength="20" style="max-width:160px;">
+                    <div id="ValidStatus"><img id="StatusImg" width="28"></div>
+                    <div id="ErrMsg"></div>
+                    <input id="CustomerId" type="hidden" value="{{ customer.id }}">
+                    <input id="ShopCtyId" type="hidden" value="{{ shop.metafields['exemptify']['country'] }}">
+                    <input id="VatIdSubmit" type="button" value="{{ shop.metafields['exemptify']['m4u_button_validate'] }}">
+                    <input id="DeleteId" type="button" value="{{ shop.metafields['exemptify']['m4u_button_delete'] }}">
+                </div>
+            </div>
+            <!-- End Exemptify account page VAT ID validation -->
+
+        {%- else -%}
+            {%- if enable_vat_capture_checkbox -%}
+                <p class="check{% if origin == 'cartdrawer' %} m20{% endif %}">
+                    <input type="checkbox" id="check_vat-{{ origin }}" aria-label="{{ settings.cart_capture_vat_checkbox_text | strip_html | escape }}" data-toggle="vat-app-{{ origin }}" class="vat-capture-checkbox">
+                    <label for="check_vat-{{ origin }}">{{ settings.cart_capture_vat_checkbox_text | remove: '</p>' | remove: '<p>' }}</label>
+                </p>
+                <div class="hidden" data-element="vat-app-{{ origin }}">
+            {%- endif -%}
+            <!-- Begin Exemptify cart page VAT ID validation -->
+                <div id="ExemptifyCartValidationSnippet" {% if origin == 'cartdrawer' %}class="m20"{% endif %}>
+                    <script src="//www.modules4u.biz/shopify/exemptify/js/validate_vat_v1.js.php?shop={{ shop.permanent_domain }}{{ shop.metafields['exemptify']['price_qs'] }}"></script>
+                    <div><div><h2>{{ shop.metafields['exemptify']['m4u_headline'] }}</h2></div>
+                        <div>{{ shop.metafields['exemptify']['m4u_subheading'] }}</div>
+                        <input type="text" placeholder="{{ shop.metafields['exemptify']['m4u_vat_id_placeholder'] }}" email_ph="{{ shop.metafields['exemptify']['m4u_email_placeholder'] }}" id="VatId" name="attributes[vat-id]" value="{{ cart.attributes.vat-id }}" maxlength="20" style="max-width:160px;" data-required>
+                        <div id="ValidStatus"><img id="StatusImg" width="28"></div>
+                        <div id="ErrMsg"></div>
+                        <div class="custom-error-message-single">Dit veld is verplicht</div>
+                        <div class="custom-error-message-multiple">Deze velden zijn verplicht</div>
+                        <input id="CustomerId" type="hidden" value="{{ customer.id }}">
+                        <input id="ShopCtyId" type="hidden" value="{{ shop.metafields['exemptify']['country'] }}">
+                    </div>
+                </div>
+                <!-- End Exemptify cart page VAT ID validation -->
+
+            {%- if enable_vat_capture_checkbox -%}
+                </div>
+            {%- endif -%}
+        {%- endif -%}
+    {%- endif -%}
+{%- endif -%}

@@ -1,0 +1,317 @@
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{%- liquid
+  assign number = section.settings.number_of_items
+  case number
+    when 2
+      assign width_class = 'width-50'
+    when 3
+      assign width_class = 'width-33'
+    when 4
+      assign width_class = 'width-25'
+    when 5
+      assign width_class = 'width-20'
+    when 6
+      assign width_class = 'width-16'
+    when 7
+      assign width_class = 'width-14'
+    else
+      assign width_class = 'width-12'
+  endcase
+
+  capture title_classes
+    echo 'w900'
+    if section.settings.text_alignment == 'center'
+      echo ' text-center align-center'
+    endif
+    echo ' mobile-text-' | append: section.settings.text_alignment_mobile | append: ' mobile-align-' | append: section.settings.text_alignment_mobile
+  endcapture
+
+  assign content_visibility = true
+  assign content_visibility_m = true
+  if section.settings.spacing_desktop < 0
+    assign content_visibility = false
+  endif
+  if section.settings.spacing_mobile < 0
+    assign content_visibility_m = false
+  endif
+-%}
+
+<article class="{% if content_visibility %}init-cv{% endif %}{% if content_visibility_m %} init-cv-m{% endif %}">
+  <header class="cols">
+    <div class="{{ title_classes }} title-styling
+      {% if section.settings.title_underline_style != 'none' %}
+        title-underline-none
+        {% if section.settings.title_underline_style contains 'accent' %}
+          title-underline-accent
+        {% elsif section.settings.title_underline_style contains 'gradient' %}
+          title-underline-gradient
+        {% endif %}
+        {% if section.settings.title_underline_style contains 'secondary_font' %}
+          title-underline-secondary-font
+        {% endif %}
+      {% endif %}
+    ">
+      {%- if section.settings.title != empty -%}
+        {{ section.settings.title }}
+      {%- endif -%}
+    </div>
+  </header>
+
+  {% if section.settings.layout == 'abc' %}
+    {%- liquid
+      assign letter = ''
+      assign counter = 0
+      assign last_column = false
+      assign new_row = true
+    %}
+    {% for product_vendor in shop.vendors %}
+      {% assign first_letter = product_vendor | capitalize | slice: 0 %}
+      {% assign next_letter = shop.vendors[forloop.index] | capitalize | slice: 0 %}
+      {% if forloop.first or new_row %}
+        <ul class="l4st slider-fraction {{ width_class }} w50-mobile static text-{{ section.settings.text_alignment }} mobile-text-{{ section.settings.text_alignment_mobile }} m0">
+        {% assign new_row = false %}
+      {% endif %}
+      {% if letter != first_letter %}
+        {%- liquid
+          assign letter = first_letter
+          assign counter = counter | plus: 1
+          assign last_column = counter | modulo: number
+        %}
+        <li><h3>{{ first_letter }}</h3>
+      {% endif %}
+      {%- liquid
+        assign vendor_handle = product_vendor | handleize
+        assign vendor_collection = collections[vendor_handle]
+      -%}
+      {%- if vendor_collection != blank -%}
+        <a class="overlay-content" href="{{ vendor_collection.url }}">{{ product_vendor }}</a>
+      {%- else -%}
+        {{ product_vendor | link_to_vendor: class: 'overlay-content' }}
+      {%- endif -%}
+      {% if letter != first_letter %}
+        </li>
+      {% endif %}
+      {% if last_column == 0 and first_letter != next_letter %}
+        {% assign new_row = true %}
+        </ul>
+        <hr class="mobile-hide" style="margin-top: 40px;">
+      {% elsif forloop.last %}
+        </article>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <ul class="l4st grid align-stretch slider-fraction {{ width_class }} w50-mobile static text-{{ section.settings.text_alignment }} mobile-text-{{ section.settings.text_alignment_mobile }} m0">
+    {% for product_vendor in shop.vendors %}
+        <li class="m0">
+          {%- liquid
+            assign vendor_handle = product_vendor | handleize
+            assign vendor_collection = collections[vendor_handle]
+            if vendor_collection != blank and vendor_collection.image.src
+              assign has_vendor_image = true
+            else
+              assign has_vendor_image = false
+            endif
+          -%}
+          {%- if has_vendor_image -%}
+            <figure class="m0">
+              <a href="{{ vendor_collection.url }}">
+                <picture>
+                  <img
+                    src="{{ vendor_collection.image.src | image_url: 180 }}"
+                    srcset="{% render 'image-srcset', image: vendor_collection.image.src, max_width: 720 %}"
+                    sizes="
+                      (min-width: 760px) 180px,
+                      100vw
+                    "
+                    alt="{{ vendor_collection.image.src.alt | default: product_vendor | escape }}"
+                    width="180"
+                    height="90"
+                    loading="{% if section.index > 1 or forloop.first == false %}lazy{% else %}eager{% endif %}"
+                  >
+                </picture>
+              </a>
+            </figure>
+          {% else %}
+            {{ product_vendor | link_to_vendor: class: 'overlay-content text-center' }}
+          {%- endif -%}
+        </li>
+      {% endfor %}
+    </ul>
+    {% style %}
+      {% if section.settings.text_alignment == 'center' %}
+        #shopify-section-{{ section.id }} ul.l4st li figure img { margin: 0 auto; }
+      {% endif %}
+    {% endstyle %}
+  {% endif %}
+</article>
+
+<style>
+  #shopify-section-{{ section.id }} { z-index: {{ section.settings.fix_zindex }}!important; }
+  @media only screen and (min-width: 47.5em) {
+    #shopify-section-{{ section.id }} { margin-bottom: {{ section.settings.spacing_desktop }}px; }
+  }
+  @media only screen and (max-width: 47.5em) {
+    #shopify-section-{{ section.id }} { margin-bottom: {{ section.settings.spacing_mobile }}px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.brand_list.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "id": "layout",
+      "type": "select",
+      "label": "t:sections.brand_list.settings.layout.label",
+      "options": [
+        {
+          "value": "abc",
+          "label": "t:sections.brand_list.settings.layout.options__1.label"
+        },
+        {
+          "value": "grid",
+          "label": "t:sections.brand_list.settings.layout.options__2.label"
+        }
+      ],
+      "default": "abc"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:global.typography.content_position.label",
+      "options": [
+        {
+          "value": "start",
+          "label": "t:global.alignment.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:global.alignment.center.label"
+        }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "range",
+      "id": "number_of_items",
+      "label": "t:sections.brand_list.settings.number_of_items.label",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "t:global.typography.title.label"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "t:global.typography.title.label",
+      "info": "t:global.typography.title.info",
+      "default": "<h2>All brands</h2>"
+    },
+    {
+      "type": "select",
+      "id": "title_underline_style",
+      "label": "t:global.typography.title_underline_style.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:global.typography.title_underline_style.none.label"
+        },
+        {
+          "value": "secondary_font",
+          "label": "t:global.typography.title_underline_style.secondary_font.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_accent",
+          "label": "t:global.typography.title_underline_style.secondary_font_accent.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_gradient",
+          "label": "t:global.typography.title_underline_style.secondary_font_gradient.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "accent",
+          "label": "t:global.typography.title_underline_style.accent.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        },
+        {
+          "value": "gradient",
+          "label": "t:global.typography.title_underline_style.gradient.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:global.mobile.header"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment_mobile",
+      "label": "t:global.typography.content_position.label",
+      "options": [
+        {
+          "value": "start",
+          "label": "t:global.alignment.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:global.alignment.center.label"
+        }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "header",
+      "content": "t:global.spacing.header"
+    },
+    {
+      "id": "spacing_desktop",
+      "type": "range",
+      "label": "t:global.spacing.spacing_desktop.label",
+      "min": -300,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "id": "spacing_mobile",
+      "type": "range",
+      "label": "t:global.spacing.spacing_mobile.label",
+      "min": -300,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "id": "fix_zindex",
+      "type": "range",
+      "label": "t:global.fix_zindex.label",
+      "info": "t:global.fix_zindex.info",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.brand_list.presets.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,280 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "hide_desktop": false,
+        "text_alignment": "start",
+        "hide_mobile": false,
+        "enable_share_button": false
+      }
+    },
+    "section_slideshow_qXPnUj": {
+      "type": "section-slideshow",
+      "blocks": {
+        "slide_pkPLJk": {
+          "type": "slide",
+          "settings": {
+            "layout": "background",
+            "image_width": 50,
+            "overlay_opacity": 0,
+            "color_palette": "",
+            "text_position": "align-center text-center",
+            "content_width": 1280,
+            "title": "<h1>Waarmee kunnen we je van dienst zijn?</h1>",
+            "title_underline_style": "none",
+            "text": "<p>Onze klantenservice staat op werkdagen van 09:00 tot 18:00 voor je klaar</p>",
+            "show_first_link": false,
+            "first_link_text": "Button",
+            "first_link_url": "/",
+            "first_button_style": "primary plain",
+            "show_second_link": false,
+            "second_link_text": "Button",
+            "second_link_url": "/",
+            "second_button_style": "secondary plain"
+          }
+        }
+      },
+      "block_order": [
+        "slide_pkPLJk"
+      ],
+      "settings": {
+        "width": "boxed",
+        "height": "32/9",
+        "enable_custom_height": false,
+        "custom_height": 300,
+        "autoplay": false,
+        "autoplay_seconds": 3,
+        "enable_controls": false,
+        "height_mobile": "16/9",
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    },
+    "page-service-menu": {
+      "type": "page-service-menu",
+      "settings": {
+        "menu": "customer-account-main-menu"
+      }
+    },
+    "section-faq": {
+      "type": "section-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "text",
+          "settings": {
+            "faq_question": "Waar kan ik alles vinden over retourneren?",
+            "icon": "box",
+            "header_image_width": 25,
+            "faq_answer": "<p>Answer question 1</p>",
+            "page": "",
+            "image_width": 465,
+            "liquid": "",
+            "html": "",
+            "show_contact_form": false
+          }
+        },
+        "faq_2": {
+          "type": "text",
+          "settings": {
+            "faq_question": "Hoelang heb ik bedenktijd na een bestelling?",
+            "icon": "bag",
+            "header_image_width": 25,
+            "faq_answer": "<p>Answer question 2</p>",
+            "page": "",
+            "image_width": 465,
+            "liquid": "",
+            "html": "",
+            "show_contact_form": false
+          }
+        },
+        "faq_3": {
+          "type": "text",
+          "settings": {
+            "faq_question": "Hoelang heb ik garantie na een aankoop?",
+            "icon": "mail",
+            "header_image_width": 25,
+            "faq_answer": "<p>Answer question 3</p>",
+            "page": "",
+            "image_width": 465,
+            "liquid": "",
+            "html": "",
+            "show_contact_form": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ],
+      "settings": {
+        "alignment": "left",
+        "compact": true,
+        "title": "<h1>Veelgestelde vragen</h1>",
+        "title_underline_style": "none",
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    },
+    "section-contact-form": {
+      "type": "section-contact-form",
+      "blocks": {
+        "0fd44d31-da56-43fe-972d-74b438cbb328": {
+          "type": "text",
+          "settings": {
+            "title": "Name",
+            "placeholder": "Name",
+            "required": true
+          }
+        },
+        "b8774408-fd65-4d42-865e-40eb5da3e9ee": {
+          "type": "text",
+          "settings": {
+            "title": "Company",
+            "placeholder": "Company",
+            "required": false
+          }
+        },
+        "30c68dd5-0daf-4c67-9e87-30fae9f6db2e": {
+          "type": "email",
+          "settings": {
+            "title": "Email",
+            "placeholder": "Email"
+          }
+        },
+        "e70b7df4-5299-4c87-b7a3-7f0ab2f6cd55": {
+          "type": "tel",
+          "settings": {
+            "title": "Phone number",
+            "placeholder": "Phone number",
+            "required": false
+          }
+        },
+        "7f5b90a3-0ea1-466d-a8bb-fb174e340aed": {
+          "type": "textarea",
+          "settings": {
+            "title": "Message",
+            "placeholder": "Message",
+            "required": true
+          }
+        }
+      },
+      "block_order": [
+        "0fd44d31-da56-43fe-972d-74b438cbb328",
+        "b8774408-fd65-4d42-865e-40eb5da3e9ee",
+        "30c68dd5-0daf-4c67-9e87-30fae9f6db2e",
+        "e70b7df4-5299-4c87-b7a3-7f0ab2f6cd55",
+        "7f5b90a3-0ea1-466d-a8bb-fb174e340aed"
+      ],
+      "settings": {
+        "text_alignment": "start",
+        "content_position": "center",
+        "title": "<h1>Neem contact op</h1>",
+        "title_underline_style": "none",
+        "button_style": "primary plain",
+        "show_placeholder": true,
+        "compact": true,
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    },
+    "page-service-info-blocks": {
+      "type": "page-service-info-blocks",
+      "blocks": {
+        "18ebb386-ad40-4c3f-8386-2c45cb1a6cb2": {
+          "type": "information",
+          "settings": {
+            "color_palette": "scheme-3",
+            "title": "<h4>Account details</h4>",
+            "title_underline_style": "none",
+            "text": "<p><a href=\"/account\" title=\"/account\">Track your last order</a>, <a href=\"/account\" title=\"/account\">view all orders</a> or <a href=\"/account/addresses\" title=\"/account/addresses\">manage your addresses</a>.</p>",
+            "show_login_links": true,
+            "show_shop_address": false,
+            "show_maps_url": false,
+            "show_phone_link": false,
+            "show_mail_link": false,
+            "show_whatsapp_link": false
+          }
+        },
+        "1aac02b6-6669-4da9-8318-348245b71f6a": {
+          "type": "information",
+          "settings": {
+            "color_palette": "scheme-3",
+            "title": "<h4>Customer service</h4>",
+            "title_underline_style": "none",
+            "text": "<p>Give your customers more details about your online store.</p>",
+            "show_login_links": false,
+            "show_shop_address": false,
+            "show_maps_url": false,
+            "show_phone_link": true,
+            "show_mail_link": true,
+            "show_whatsapp_link": true
+          }
+        }
+      },
+      "block_order": [
+        "18ebb386-ad40-4c3f-8386-2c45cb1a6cb2",
+        "1aac02b6-6669-4da9-8318-348245b71f6a"
+      ],
+      "settings": {}
+    },
+    "section-google-maps": {
+      "type": "section-google-maps",
+      "settings": {
+        "google_maps_iframe": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2800.4613648351315!2d-75.69569834823506!3d45.420200278997804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce0502f07d210b%3A0xa1502f7f1d25c118!2sShopify!5e0!3m2!1snl!2snl!4v1653470436404!5m2!1snl!2snl\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "h2"
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "content"
+      ],
+      "settings": {
+        "max_width": 980,
+        "content_alignment": "start",
+        "text_alignment": "start",
+        "spacing_desktop": 50,
+        "spacing_mobile": 30
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "section_slideshow_qXPnUj",
+    "page-service-menu",
+    "section-faq",
+    "section-contact-form",
+    "page-service-info-blocks",
+    "section-google-maps",
+    "main-page"
+  ]
+}

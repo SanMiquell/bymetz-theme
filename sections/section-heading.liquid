@@ -1,0 +1,157 @@
+{%- liquid
+  assign content_visibility = true
+  assign content_visibility_m = true
+  if section.settings.spacing_desktop < 0
+    assign content_visibility = false
+  endif
+  if section.settings.spacing_mobile < 0
+    assign content_visibility_m = false
+  endif
+-%}
+<header class="text-{{ section.settings.text_alignment }}
+  {% if section.settings.title_underline_style != 'none' %}
+    title-underline-none
+    {% if section.settings.title_underline_style contains 'accent' %}
+      title-underline-accent
+    {% elsif section.settings.title_underline_style contains 'gradient' %}
+      title-underline-gradient
+    {% endif %}
+    {% if section.settings.title_underline_style contains 'secondary_font' %}
+      title-underline-secondary-font
+    {% endif %}
+  {% endif %}
+  {% if content_visibility %}init-cv{% endif %}
+  {% if content_visibility_m %}init-cv-m{% endif %}
+">
+  {{ section.settings.title }}
+</header>
+
+<style>
+  #shopify-section-{{ section.id }} { z-index: {{ section.settings.fix_zindex }}!important; }
+  @media only screen and (min-width: 47.5em) {
+    #shopify-section-{{ section.id }} { margin-bottom: {{ section.settings.spacing_desktop }}px; }
+  {% if section.settings.spacing_desktop < 0 %}
+    #shopify-section-{{ section.id }} + *.has-kinetic-text { pointer-events: none; }
+  {% endif %}
+
+  }
+  @media only screen and (max-width: 47.5em) {
+    #shopify-section-{{ section.id }}  { margin-bottom: {{ section.settings.spacing_mobile }}px; }
+  {% if section.settings.spacing_mobile < 0 %}
+    #shopify-section-{{ section.id }} + *.has-kinetic-text { pointer-events: none; }
+  {% endif %}
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.heading.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "id": "text_alignment",
+      "type": "select",
+      "label": "t:global.typography.title_position.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:global.alignment.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:global.alignment.center.label"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "t:global.typography.title.label",
+      "info": "t:global.typography.title.info",
+      "default": "<h2>Tell something about your brand</h2>"
+    },
+    {
+      "type": "select",
+      "id": "title_underline_style",
+      "label": "t:global.typography.title_underline_style.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:global.typography.title_underline_style.none.label"
+        },
+        {
+          "value": "secondary_font",
+          "label": "t:global.typography.title_underline_style.secondary_font.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_accent",
+          "label": "t:global.typography.title_underline_style.secondary_font_accent.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_gradient",
+          "label": "t:global.typography.title_underline_style.secondary_font_gradient.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "accent",
+          "label": "t:global.typography.title_underline_style.accent.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        },
+        {
+          "value": "gradient",
+          "label": "t:global.typography.title_underline_style.gradient.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:global.spacing.header"
+    },
+    {
+      "id": "spacing_desktop",
+      "type": "range",
+      "label": "t:global.spacing.spacing_desktop.label",
+      "min": -300,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "id": "spacing_mobile",
+      "type": "range",
+      "label": "t:global.spacing.spacing_mobile.label",
+      "min": -300,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "id": "fix_zindex",
+      "type": "range",
+      "label": "t:global.fix_zindex.label",
+      "info": "t:global.fix_zindex.info",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.heading.presets.name"
+    }
+  ]
+}
+{% endschema %}

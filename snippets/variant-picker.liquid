@@ -1,0 +1,137 @@
+{%- comment -%}
+* full_variant_dropdown: This variable is used for the product page to display the full variant dropdown when options are enabled
+{%- endcomment -%}
+{% liquid
+    assign product = product
+    assign current_variant = product.selected_or_first_available_variant
+    assign fill_images = fill_images | default: false
+    assign show_images = show_images | default: false
+    assign form_id = form_id | default: 'product_form'
+    assign section = section | default: false
+    assign enable_options = enable_options | default: false
+    assign option = option | default: false
+    assign full_variant_dropdown = full_variant_dropdown | default: false
+    assign show_unavailable_variants = show_unavailable_variants | default: false
+    if custom_height_ratio == nil
+        assign custom_height_ratio = settings.custom_product_image_ratio
+    endif
+    assign custom_height_ratio = custom_height_ratio | divided_by: 100.0
+    assign image_width = 430
+    assign image_height = image_width | times: custom_height_ratio
+    assign image_width_small = image_width | divided_by: 3
+    assign image_height_small = image_height | divided_by: 3
+    assign forloop_index = forloop_index | default: false
+    if origin == 'product-main'
+        assign select_id = 'id-' | append: section.id
+    else
+        assign select_id = form_id | append: '-id'
+    endif
+
+%}
+{% if enable_options and option %}
+    <span style="z-index: {{ 99 | minus: forloop_index }}" data-option-id="option-{{ section.id }}-{{ forloop_index }}" class="syk-variant-picker-wrapper desktop-only{% unless origin == 'product-main' %} up{% endunless %} {% if origin == 'product-main' %} dis-click{% endif %}{% if enable_options and full_variant_dropdown %} hidden{% endif %}">
+        <span class="syk-variant-picker-button">
+            <span>{{ option.selected_value }}</span>
+        </span>
+        <span class="syk-variant-picker">
+            <span class="syk-variant-options">
+                {%- for value in option.values -%}
+                    <span class="syk-variant-option{% unless value.variant.available %} disabled-unavailable{% endunless %}" data-variant-id="{{ value | escape }}">
+                        <span class="text">
+                            <span class="title">{{ value }}</span>
+                            {% if settings.show_price_variant_dropdown and value.variant %}{%- render 'price', product: value.variant.product, price: value.variant.price, origin: 'select' -%}{% endif %}
+                        </span>
+                    </span>
+                {% endfor %}
+          </span>
+        </span>
+    </span>
+    <select
+        class="mobile-only"
+        id="option-{{ section.id }}-{{ forloop_index }}"
+        name="options[{{ section.id }}-{{ option.name | escape }}]"
+        data-template="{{ section.id }}"
+        form="{{ form_id }}"
+        required
+    >
+    {%- for value in option.values -%}
+        <option
+            value="{{ value | escape }}"
+            {% if option.selected_value == value %}selected{% endif %}
+        >
+        {{ value }}
+        </option>
+        {%- endfor -%}
+    </select>
+{% else %}
+    <span class="syk-variant-picker-wrapper desktop-only{% if origin != 'product-main' or section == 'sticky' %} up{% endif %} {% if origin == 'product-main' %} dis-click{% endif %}{% if enable_options and full_variant_dropdown %} hidden{% endif %}">
+        <span class="syk-variant-picker-button">
+            <span>{{ current_variant.title }}</span>
+        </span>
+        <span class="syk-variant-picker">
+            <span class="syk-variant-options">
+                {%- for variant in product.variants -%}
+                    {% if show_unavailable_variants == false and variant.available == false %}{% continue %}{% endif %}
+                    <span class="syk-variant-option{% unless variant.available %} disabled{% endunless %}" data-variant-id="{{ variant.id }}">
+                        {% if variant.image and show_images %}
+                            <span class="img">
+                            <img
+                                src="{% if fill_images %}{{ variant.image | image_url: width: image_width_small, height: image_height_small, crop: 'center' }}{% else %}{{ variant.image | image_url: height: image_height_small }}{% endif %}"
+                                alt="{{ variant.title }}"
+                                width="42"
+                                height="42"
+                            >
+                            </span>
+                        {% endif %}
+                        <span class="text">
+                            <span class="title">{{ variant.title }}</span>
+                            {% if settings.show_price_variant_dropdown %}{%- render 'price', product: product, price: variant.price, origin: 'select' -%}{% endif %}
+                        </span>
+                    </span>
+                {% endfor %}
+          </span>
+        </span>
+    </span>
+    <select
+        {% if origin == 'sticky' %}
+            name="product_id_sticky"
+            id="product_id_sticky"
+        {% else %}
+            name="id"
+            id="{{ select_id }}"
+        {% endif %}
+        class="{% if enable_options %}js-hidden{% endif %}{% if enable_options and full_variant_dropdown %} hidden{% else %} mobile-only{% endif %}"
+        {% if origin == 'product-main' %}
+            data-url="{{ product.url }}"
+            data-template="{{ section.id }}"
+            form="{{ form_id }}"
+        {% endif %}
+    >
+        {%- for variant in product.variants -%}
+            {% if show_unavailable_variants == false and variant.available == false %}{% continue %}{% endif %}
+            {% unless origin == 'product-main' %}
+                {%- liquid
+                    assign featured_media_position = variant.featured_media.position
+                    unless featured_media_position
+                        assign featured_media_position = 1
+                    endunless
+                    if variant.featured_image
+                        assign product_image = variant.featured_image
+                    else
+                        assign product_image = product.featured_image
+                    endif
+                -%}
+            {% endunless %}
+            <option
+                value="{{ variant.id }}"
+                data-variantinfo='{ {% if product_image %}"image":"{%- if fill_images -%}{{ product_image | image_url: width: image_width_2, height: image_height_2, crop: 'center' }}{%- else -%}{{ product_image | image_url: height: image_height_2 }}{%- endif -%}",{% endif %}{%- render 'price', product: product, variant: variant, origin: 'productitem', source: 'variant-selection' -%}}'
+                {% unless variant.available %}disabled data-class="disabled"{% endunless %}
+                {% if enable_options %}data-options='{"id":{{ variant.id }},"available":{{ variant.available }},"options":{{ variant.options | json | escape }}}'{% endif %}
+                {% if variant == current_variant %}selected{% endif %}
+                {% unless origin == 'product-main' %}data-slide-to="{{ featured_media_position | minus: 1 }}"{% endunless %}
+            >
+                {{ variant.title }}
+            </option>
+        {%- endfor -%}
+    </select>
+{% endif %}

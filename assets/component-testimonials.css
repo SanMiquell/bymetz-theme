@@ -1,0 +1,61 @@
+.l4ts.box li:before { content: ""; display: block; overflow: hidden; position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: -1; margin: 0; text-align: left; text-indent: -3000em; direction: ltr; }
+.l4ts .rating-label, .l4ts .swiper-button-nav { display: none; }
+.l4ts:first-child { margin-top: 0; }
+
+.l4ts { display: flex; flex-wrap: wrap; justify-content: center; list-style: none; margin: 42px 0 0 -16px; padding: 0; text-align: center; --main_mr: 14px; }
+.l4ts li { position: relative; z-index: 2; width: 33.33333333333%; margin: 0 0 40px; border-left: 16px solid rgba(0,0,0,0); }
+.l4ts p { font-style: inherit; font-size: 1em; }
+.l4ts q { display: block; max-width: 430px; margin: 0 auto var(--main_mr); font-style: inherit; font-size: calc(var(--main_fz) * 1.1428571429); }
+.l4ts span span { font-weight: var(--main_fw); }
+.l4ts .r6rt { display: inline-block; }
+.l4ts .r6rt .rating > span .fill { color: var(--secondary_bg); }
+.cols + .l4ts, .cols + .l4fs { margin-top: 12px; }
+.l4ts.box { margin-bottom: 24px; margin-left: -16px; }
+.l4ts.box li { margin-bottom: 16px; padding: 42px 26px 36px; border-left-width: 16px; color: var(--primary_text); word-break: break-word; }
+.l4ts.box li:before, .l4ts.box .r6rt .rating > span .fill, .l4ts.wide.box.s4wi .swiper-outer { background: var(--sand); }
+.l4ts.wide li, .l4ts li:first-child:last-child, .l4ts.w100 li, .l4ts li.w100 { width: 100%; }
+.l4ts.wide q, .l4ts > li:first-child:last-child q, .l4ts.w100 q, .l4ts .w100 q { max-width: 644px; margin-left: auto; margin-right: auto; }
+.l4ts.w50 li, .l4ts li.w50 { width: 50%; }
+.l4ts.w50 q, .l4ts .w50 q { max-width: 430px; margin-left: auto; margin-right: auto; }
+.l4ts.s4wi { display: block; margin-left: 0; margin-bottom: 40px; }
+.l4ts .swiper-outer { overflow: hidden; }
+.l4ts.s4wi .li { width: 100%; margin-left: auto; margin-right: auto; margin-bottom: 0; border-left-width: 0; }
+.l4ts .swiper-pagination-bullets, .l4ts .swiper-custom-pagination, .l4ts .swiper-custom-fraction { padding-top: 15px; }
+.l4ts.box .swiper-pagination-bullets, .l4ts.box .swiper-custom-pagination, .l4ts.box .swiper-custom-fraction { padding-top: 20px; }
+#root .l4ts .swiper-custom-pagination .swiper-pagination-bullets { padding-top: 0; }
+.l4ts.s4wi.box li:before { display: block; }
+
+.m6bx[class^="palette-"] .l4ts.box li:before { --primary_bg: var(--bg_secondary); }
+.m6bx[class^=palette-] .l4ts .r6rt[class*="overlay-"] .rating > * .fill { --accent: var(--primary_bg); }
+.m6bx[class^="palette-"] .l4ts .r6rt .rating > span .fill { color: var(--accent); }
+.m6bx[class^="palette-"] .l4ts .r6rt[class*="text-palette-"] .rating > * .fill { color: var(--primary_text); }
+.m6bx .l4ts.box li:before { background: var(--primary_bg)!important; border-radius: var(--b2r); }
+
+@media only screen and (max-width: 1200px) {
+    .l4st, .l4ts, .m6ac { margin-left: -16px; }
+    .l4st li, .l4ts li, .m6ac > * { border-left-width: 16px; }
+}
+@media only screen and (max-width: 1000px) {
+    .l4ts li { width: 50%; }
+    .l4ts.box .swiper-pagination-bullets { padding-top: 0; }
+    .l4ts.box .swiper-button-prev { left: 0; }
+    .l4ts.box .swiper-button-next { right: 0; }
+    .l4ts.box .swiper-pagination-bullets, .l4ts.box .swiper-custom-pagination { padding-top: 4px; }
+    .l4ts.box.slider-fraction .swiper-custom-pagination { padding-top: 12px; }
+    .l4ts q { max-width: 690px; }
+}
+@media only screen and (max-width: 760px) {
+    .l4ts li.w100-mobile { width: 100%; }
+    .l4ts.box li { padding: 15px 26px 10px; }
+    .l4ts { margin-top: 0; margin-bottom: var(--rpp); }
+    .l4ts.box { display: block; }
+    .l4ts li { width: 100%; margin-bottom: 26px; }
+    .l4ts.box .swiper-slide li { margin-bottom: 0; }
+    .l4ts q, .l4ts.s4wi q { max-width: none; margin-bottom: 8px; padding: 0; border-width: 0; font-size: var(--main_fz); line-height: 1.6111111111; }
+    .l4ts.s4wi { margin-bottom: 6px; }
+    .l4ts .swiper-pagination-bullets { margin-top: 0; }
+    .l4ts.box .swiper-pagination-bullets { margin-top: 6px; }
+    .l4ts.s4wi q { padding-left: 20px; padding-right: 20px; border-width: 0; }
+    .l4ts .swiper-button-nav { display: block; bottom: 64px; }
+    .l4ts.box .swiper-button-nav { bottom: 38px; }
+}

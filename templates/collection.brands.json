@@ -1,0 +1,141 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "hide_desktop": false,
+        "text_alignment": "start",
+        "hide_mobile": true,
+        "enable_share_button": false
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "h2",
+            "text_alignment": "left"
+          }
+        },
+        "short_description_iTAmQr": {
+          "type": "short_description",
+          "settings": {
+            "max_width": 980,
+            "content_alignment": "start",
+            "text_alignment": "start",
+            "enable_read_more": true,
+            "short_description": "description",
+            "strip_html": true,
+            "short_description_text": ""
+          }
+        },
+        "brand_slider_t6pRbE": {
+          "type": "brand_slider",
+          "settings": {
+            "multiply": false,
+            "show_border": true
+          }
+        },
+        "sorting": {
+          "type": "sorting",
+          "settings": {}
+        },
+        "product_grid": {
+          "type": "product_grid",
+          "settings": {}
+        },
+        "description_HWFJmn": {
+          "type": "description",
+          "settings": {
+            "max_width": 980,
+            "content_alignment": "start",
+            "text_alignment": "start",
+            "enable_read_more": false
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "short_description_iTAmQr",
+        "brand_slider_t6pRbE",
+        "sorting",
+        "product_grid",
+        "description_HWFJmn"
+      ],
+      "disabled": true,
+      "settings": {
+        "pagination_qty": 48,
+        "pagination_type": "button",
+        "show_amount_of_products_in_collection": true,
+        "products_per_row": 3,
+        "enable_secondary_products_per_row": true,
+        "secondary_products_per_row": 4,
+        "default_grid": "primary",
+        "enable_variants": true,
+        "bulk_title": "Select quantities",
+        "bulk_show_unavailable_variants": true,
+        "bulk_show_variant_images": true,
+        "bulk_shorten_title": false,
+        "bulk_show_deliverytime": false,
+        "show_product_description": true,
+        "enable_grid_list_toggle": true,
+        "default_view": "grid",
+        "custom_product_image_ratio": 100,
+        "fill_images": true,
+        "fill_not_first": false,
+        "images_padding": 0,
+        "images_vertical_position": 0,
+        "show_collection_image": false,
+        "enable_filters": true,
+        "enable_menu": true,
+        "enable_collections": true,
+        "filters_menu_alignment": "left",
+        "filters_layout": "static",
+        "menu_below_filters": false,
+        "filter_menu": "",
+        "collections_menu": [],
+        "filter_sticky": false,
+        "filters_show_more_limit": 7,
+        "image_swatches_size": "xs",
+        "image_swatches_fill_images": true,
+        "image_swatches_show_in_circle": true,
+        "enable_secondary_products_per_row_mobile": true,
+        "default_grid_mobile": "2",
+        "mobile_show_add_to_cart": true,
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 1
+      }
+    },
+    "section_brand_list_zi8caC": {
+      "type": "section-brand-list",
+      "settings": {
+        "layout": "abc",
+        "text_alignment": "start",
+        "number_of_items": 4,
+        "title": "<h2>Onze Merken</h2>",
+        "title_underline_style": "none",
+        "text_alignment_mobile": "start",
+        "spacing_desktop": 30,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "main-collection",
+    "section_brand_list_zi8caC"
+  ]
+}

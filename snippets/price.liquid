@@ -1,0 +1,277 @@
+{%- liquid
+  assign price = price | default: 0
+  assign product = product | default: false
+  assign variant = variant | default: false
+  assign line_item = line_item | default: false
+  assign extraClass = extraClass | default: false
+  assign extraElement = extraElement | default: '<br>'
+  assign origin = origin | default: false
+  assign source = source | default: false
+  assign block = block | default: false
+  assign cart = cart | default: false
+  assign finalLinePrice = final_line_price | default: false
+  assign vatSwitch = false
+  assign break = break | default: false
+  assign dev = dev | default: false
+
+  assign shopPrice = true
+  if settings.login_for_prices and customer == nil
+    assign shopPrice = false
+  endif
+
+  if origin == 'bulk' or origin == 'bulk-input' or origin == 'bulk-subtotal' or source == 'variant-selection'
+    assign price = variant.price
+  endif
+
+  assign taxesIncluded = shop.taxes_included
+
+  assign subTotalExcl = 0
+  assign subTotalIncl = 0
+  assign oldSubTotalExcl = 0
+  assign oldSubTotalIncl = 0
+
+  if origin == 'cartsubtotal'
+    for line_item in cart.items
+      assign final_line_price = line_item.final_line_price
+      assign original_line_price = line_item.original_line_price
+      assign original_compare_price = line_item.variant.compare_at_price | times: line_item.quantity
+      if original_line_price > original_compare_price
+        assign before_line_price = original_line_price
+      elsif line_item.variant.compare_at_price > line_item.variant.price
+        assign before_line_price = line_item.variant.compare_at_price | times: line_item.quantity
+      else
+        assign before_line_price = original_line_price
+      endif
+      if line_item.product.metafields.custom.tax_rate.value != empty and line_item.product.metafields.custom.tax_rate.value != blank
+        assign vatSwitch = true
+        assign taxRate = line_item.product.metafields.custom.tax_rate.value | split: '(' | last | split: ')' | first | split: '%' | first | divided_by: 100.0
+        assign taxRateInitial = taxRate
+        if taxesIncluded
+          assign tax = final_line_price | times: taxRate
+          assign taxRate = 1 | plus: taxRate
+          assign taxRate = tax | divided_by: taxRate
+          assign priceInclTax = final_line_price
+          assign priceExclTax = final_line_price | minus: taxRate
+
+          assign tax = before_line_price | times: taxRateInitial
+          assign taxRate = 1 | plus: taxRateInitial
+          assign taxRate = oldTax | divided_by: taxRate
+          assign priceOldInclTax = before_line_price
+          assign priceOldExclTax = before_line_price | minus: oldTaxRate
+        else
+          assign taxRate = 1 | plus: taxRate
+          assign priceInclTax = final_line_price | times: taxRate
+          assign priceExclTax = final_line_price
+
+          assign priceOldInclTax = before_line_price | times: taxRate
+          assign priceOldExclTax = before_line_price
+        endif
+        assign priceInclTax = priceInclTax | divided_by: 100.0 | round: 2 | times: 100
+        assign priceExclTax = priceExclTax | divided_by: 100.0 | round: 2 | times: 100
+        assign subTotalIncl = subTotalIncl | plus: priceInclTax
+        assign subTotalExcl = subTotalExcl | plus: priceExclTax
+
+        assign oldSubTotalIncl = oldSubTotalIncl | plus: priceOldInclTax
+        assign oldSubTotalExcl = oldSubTotalExcl | plus: priceOldExclTax
+      else
+        assign subTotalIncl = subTotalIncl | plus: final_line_price
+        assign subTotalExcl = subTotalExcl | plus: final_line_price
+
+        assign oldSubTotalIncl = oldSubTotalIncl | plus: before_line_price
+        assign oldSubTotalExcl = oldSubTotalExcl | plus: before_line_price
+      endif
+    endfor
+  endif
+
+  if product and product.metafields.custom.tax_rate.value != empty and product.metafields.custom.tax_rate.value != blank
+    assign taxRate = product.metafields.custom.tax_rate.value | split: '(' | last | split: ')' | first | split: '%' | first | divided_by: 100.0
+    assign taxRateInitial = taxRate
+    assign vatSwitch = true
+    if taxesIncluded
+      assign tax = price | times: taxRate
+      assign taxRate = 1 | plus: taxRate
+      assign taxRate = tax | divided_by: taxRate
+      assign priceInclTax = price
+      assign priceExclTax = price | minus: taxRate
+      if origin == 'bulk' or source == 'variant-selection' or source == 'discount'
+        assign tax = variant.compare_at_price | times: taxRateInitial
+        assign taxRate = 1 | plus: taxRateInitial
+        assign taxRate = tax | divided_by: taxRate
+        assign priceOldInclTax = variant.compare_at_price
+        assign priceOldExclTax = variant.compare_at_price | minus: taxRate
+      endif
+    else
+      assign taxRate = 1 | plus: taxRate
+      assign priceInclTax = price | times: taxRate
+      assign priceExclTax = price
+      if origin == 'bulk' or source == 'variant-selection' or source == 'discount'
+        assign priceOldInclTax = variant.compare_at_price | times: taxRate
+        assign priceOldExclTax = variant.compare_at_price
+      endif
+    endif
+  endif
+  if source == 'cartdrawer'
+    assign priceInclTax = priceInclTax | times: line_item.quantity
+    assign priceExclTax = priceExclTax | times: line_item.quantity
+    assign priceOldInclTax = priceOldInclTax | times: line_item.quantity
+    assign priceOldExclTax = priceOldExclTax | times: line_item.quantity
+  endif
+-%}
+{%- if vatSwitch -%}
+  {%- liquid
+    if origin == 'cartsubtotal' and source contains 'discount'
+      assign priceExclTax = subTotalExcl
+      assign priceInclTax = subTotalIncl
+      assign priceOldExclTax = oldSubTotalExcl
+      assign priceOldInclTax = oldSubTotalIncl
+    endif
+    if settings.sale_label_price == 'percentage' or origin == 'cartsubtotal' and source contains 'discount'
+      assign discountExclTax = priceOldExclTax | minus: priceExclTax | times: 100.0 | divided_by: priceOldExclTax
+      assign discountInclTax = priceOldInclTax | minus: priceInclTax | times: 100.0 | divided_by: priceOldInclTax
+      if discountExclTax > 1
+        assign discountExclTax = discountExclTax | round
+      else
+        assign discountExclTax = discountExclTax | round: 1
+      endif
+      if discountExclTax == 100 and product.price != 0
+        assign discountExclTax = discountExclTax | minus: 0.1
+      endif
+      if discountInclTax > 1
+        assign discountInclTax = discountInclTax | round
+      else
+        assign discountInclTax = discountInclTax | round: 1
+      endif
+      if discountInclTax == 100 and priceInclTax != 0
+        assign discountInclTax = discountInclTax | minus: 0.1
+      endif
+      assign discountExclTax = discountExclTax | append: '%'
+      assign discountInclTax = discountInclTax | append: '%'
+      if origin == 'cartsubtotal' and source contains 'discount'
+        assign discountPercentageExclTax = discountExclTax
+        assign discountPercentageInclTax = discountInclTax
+      endif
+    elsif settings.sale_label_price == 'amount'
+      assign discountExclTax = priceOldExclTax | minus: priceExclTax | money
+      assign discountInclTax = priceOldInclTax | minus: priceInclTax | money
+    endif
+    if origin == 'cartsubtotal' and source contains 'discount'
+      assign discountExclTax = priceOldExclTax | minus: priceExclTax | money
+      assign discountInclTax = priceOldInclTax | minus: priceInclTax | money
+      assign discountPriceExclTax = discountExclTax
+      assign discountPriceInclTax = discountInclTax
+    endif
+  -%}
+  {%- if origin == 'bulk' -%}
+    <span data-syncer-vat-excl class="s1pr {{ extraClass }}">{% if variant.compare_at_price > variant.price and shopPrice %}<span class="old-price" style="--main_fz: {{ settings.product_compare_prices_fontsize }}px">{{ priceOldExclTax | money }}</span>{% if block.settings.selection_type == 'two_rows' or break %} {{ extraElement }} {% endif %} {% endif %}{% if shopPrice %}{{ priceExclTax | money }}{% else %}{{ 0000 | money | money | replace: '0', '-' }}{% endif %}{% if block.settings.selection_type == 'two_rows' or break %}{{ extraElement }} {% endif -%}</span>
+    <span data-syncer-vat-incl class="s1pr {{ extraClass }}">{% if variant.compare_at_price > variant.price and shopPrice %}<span class="old-price" style="--main_fz: {{ settings.product_compare_prices_fontsize }}px">{{ priceOldInclTax | money }}</span>{% if block.settings.selection_type == 'two_rows' or break %} {{ extraElement }} {% endif %} {% endif %}{% if shopPrice %}{{ priceInclTax | money }}{% else %}{{ 0000 | money | money | replace: '0', '-' }}{% endif %}{% if block.settings.selection_type == 'two_rows' or break %}{{ extraElement }} {% endif -%}</span>
+    {%- if template == 'product' -%}
+      {%- if variant.unit_price_measurement and shopPrice -%}
+        {%- liquid
+          capture unit_price_base_unit
+            if variant.available and variant.unit_price_measurement
+              if variant.unit_price_measurement.reference_value != 1
+                echo variant.unit_price_measurement.reference_value
+              endif
+              echo variant.unit_price_measurement.reference_unit
+            endif
+          endcapture
+        -%}
+        <span class="size-12">{% if shopPrice %}{{ variant.unit_price | money }}{% else %}{{ 0000 | money | money | replace: '0', '-' }}{% endif %}&nbsp;{{ 'product.unit_price_separator' | t }} {{ unit_price_base_unit }}</span>
+      {%- endif -%}
+    {%- endif -%}
+  {%- elsif origin == 'bulk-input' -%}
+    data-syncer-bulk-price-excl="{{ priceExclTax }}"
+    data-syncer-bulk-price-incl="{{ priceInclTax }}"
+  {%- elsif source == 'discount' -%}
+    <span data-syncer-price data-syncer-vat-incl>-{{ discountInclTax }}</span>
+    <span data-syncer-price data-syncer-vat-excl>-{{ discountExclTax }}</span>
+  {%- elsif origin == 'productitem' and source == 'variant-selection' -%}
+    "price_old_excl":"{%- if variant.compare_at_price > variant.price -%}{{ priceOldExclTax | money }}{%- endif -%}",{%- if variant.compare_at_price > variant.price -%}"discount_excl":"-{{ discountExclTax }}",{%- endif -%}"price_excl":"{{ priceExclTax | money }}",
+    "price_old_incl":"{%- if variant.compare_at_price > variant.price -%}{{ priceOldInclTax | money }}{%- endif -%}",{%- if variant.compare_at_price > variant.price -%}"discount_incl":"-{{ discountInclTax }}",{%- endif -%}"price_incl":"{{ priceInclTax | money }}"
+  {%- elsif origin == 'bulk-subtotal' -%}
+    {{ 'cart.subtotal' | t }} <span class="s1bx rounded inline font-regular bulk-qty{% if source == 'product' %} size-small{% endif %}">0</span><br> <span data-syncer-vat-incl class="s1pr bulk-price-incl {% unless shopPrice %} s1bl{% endunless %}" {% if source == 'product' %}style="font-size: var(--price_block_font_size);"{% endif %}>{{ '0' | money }}</span><span data-syncer-vat-excl class="s1pr bulk-price-excl {% unless shopPrice %} s1bl{% endunless %}" {% if source == 'product' %}style="font-size: var(--price_block_font_size);"{% endif %}>{{ '0' | money }}</span>
+  {%- elsif origin == 'cartsubtotal' -%}
+    {%- if source == 'attributes' -%}
+      data-total-excl="{{ subTotalExcl | money }}" data-total-incl="{{ subTotalIncl | money }}"
+    {%- elsif source == 'discount-price' -%}
+      <span data-syncer-price data-syncer-vat-incl>{{ discountPriceInclTax }}</span>
+      <span data-syncer-price data-syncer-vat-excl>{{ discountPriceExclTax }}</span>
+    {%- elsif source == 'discount-percentage' -%}
+      <span data-syncer-price data-syncer-vat-incl>-{{ discountPercentageInclTax }}</span>
+      <span data-syncer-price data-syncer-vat-excl>-{{ discountPercentageExclTax }}</span>
+    {%- else %}
+      <span data-syncer-price data-syncer-vat-incl>{{ subTotalIncl | money }}</span>
+      <span data-syncer-price data-syncer-vat-excl>{{ subTotalExcl | money }}</span>
+    {%- endif -%}
+  {%- elsif origin == 'select' -%}
+      <span class="small" data-syncer-price data-syncer-vat-incl>{{ priceInclTax | money }}</span>
+      <span class="small" data-syncer-price data-syncer-vat-excl>{{ priceExclTax | money }}</span>
+  {%- else -%}
+    <span data-syncer-price data-syncer-vat-incl>{{ priceInclTax | money }}</span><span data-syncer-price data-syncer-vat-excl>{{ priceExclTax | money }}</span>
+  {%- endif -%}
+{%- else -%}
+  {%- liquid
+    if origin == 'cartsubtotal' and source contains 'discount'
+      assign priceNew = subTotalIncl
+      assign priceOld = oldSubTotalIncl
+    else
+      assign priceNew = variant.price
+      assign priceOld = variant.compare_at_price
+    endif
+    if settings.sale_label_price == 'percentage' or origin == 'cartsubtotal' and source contains 'discount'
+      assign discount = priceOld | minus: priceNew | times: 100.0 | divided_by: priceOld
+      if discount > 1
+        assign discount = discount | round
+      else
+        assign discount = discount | round: 1
+      endif
+      if discount == 100 and product.price != 0
+        assign discount = discount | minus: 0.1
+      endif
+      assign discount = discount | append: '%'
+      if origin == 'cartsubtotal' and source contains 'discount'
+        assign discountPercentage = discount
+      endif
+    elsif settings.sale_label_price == 'amount'
+      assign discount = priceOld | minus: priceNew | money
+    endif
+    if origin == 'cartsubtotal' and source contains 'discount'
+        assign discountPrice = priceOld | minus: priceNew | money
+    endif
+  -%}
+  {%- if origin == 'bulk' -%}
+    <span class="s1pr {{ extraClass }}">{% if variant.compare_at_price > variant.price and shopPrice %}<span class="old-price" style="--main_fz: {{ settings.product_compare_prices_fontsize }}px">{% if source == 'cartdrawer' %}{{ variant.compare_at_price | times: line_item.quantity | money }}{% else %}{{ variant.compare_at_price | money }}{% endif %}</span>{% if block.settings.selection_type == 'two_rows' or source == 'cartdrawer' or break %} {{ extraElement }}{% endif %} {% endif %}{% if shopPrice %}{% if source == 'cartdrawer' %}{{ finalLinePrice | money }}{% else %}{{ variant.price | money }}{% endif %}{% else %}{{ 0000 | money | money | replace: '0', '-' }}{% endif %}{% if block.settings.selection_type == 'two_rows' or break %}{{ extraElement }} {% endif -%}</span>
+  {%- elsif origin == 'bulk-subtotal' -%}
+    {{ 'cart.subtotal' | t }} <span class="s1bx rounded inline font-regular bulk-qty{% if source == 'product' %} size-small{% endif %}">0</span><br> <span class="s1pr bulk-price" {% if source == 'product' %}style="font-size: var(--price_block_font_size);"{% endif %}>{{ '0' | money }}</span>
+    {%- if template == 'product' -%}
+      {%- if variant.unit_price_measurement and shopPrice -%}
+        {%- liquid
+          capture unit_price_base_unit
+            if variant.available and variant.unit_price_measurement
+              if variant.unit_price_measurement.reference_value != 1
+                echo variant.unit_price_measurement.reference_value
+              endif
+              echo variant.unit_price_measurement.reference_unit
+            endif
+          endcapture
+        -%}
+        <span class="size-12">{% if shopPrice %}{{ variant.unit_price | money }}{% else %}{{ 0000 | money | money | replace: '0', '-' }}{% endif %}&nbsp;{{ 'product.unit_price_separator' | t }} {{ unit_price_base_unit }}</span>
+      {%- endif -%}
+    {%- endif -%}
+  {%- elsif origin == 'cartsubtotal' -%}
+    {%- if source == 'discount-price' -%}
+        {{ discountPrice }}
+    {%- elsif source == 'discount-percentage' -%}
+        -{{ discountPercentage }}
+    {%- elsif source != 'attributes' -%}
+        {{ cart.total_price | money }}
+    {%- endif -%}
+  {%- elsif origin == 'select' -%}
+      <span class="small">{{ price | money }}</span>
+  {%- elsif source == 'discount' -%}
+    -{{ discount }}
+  {%- elsif origin == 'productitem' and source == 'variant-selection' -%}
+    "price_old":"{%- if variant.compare_at_price > variant.price -%}{{ variant.compare_at_price | money }}{%- endif -%}",{% if variant.compare_at_price > variant.price %}"discount":"-{{ discount }}",{% endif %}"price":"{{ variant.price | money }}"
+  {%- else -%}{{ price | money }}{%- endif -%}
+{%- endif -%}
+

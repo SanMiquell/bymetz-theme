@@ -1,0 +1,267 @@
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{% liquid
+    assign show_price = section.settings.search_drawer_show_price
+    if settings.login_for_prices and customer == nil
+        assign show_price = false
+    endif
+%}
+<div class="search-drawer-wrapper" data-section-id="{{ section.id }}">
+{%- if predictive_search.performed -%}
+    <div>
+        <p>{{ 'search.results_plus_term' | t: term: predictive_search.terms }} </p>
+    </div>
+    {%- liquid
+        if section.settings.search_drawer_enable_suggestions
+            assign all_suggestions = predictive_search.resources.queries
+        endif
+        if section.settings.search_drawer_enable_collections
+            if all_suggestions
+                assign all_suggestions = all_suggestions | concat: predictive_search.resources.collections
+            else
+                assign all_suggestions = predictive_search.resources.collections
+            endif
+        endif
+        assign fill_images = settings.fill_product_images
+        if fill_images and settings.fill_not_first
+            assign fill_images = false
+        endif
+
+    -%}
+    {%- if all_suggestions.size > 0 and all_suggestions.first.text != predictive_search.terms -%}
+        {%- if section.settings.search_drawer_enable_suggestions -%}<p class="strong">{{ 'search.suggestions' | t }}</p>{%- endif -%}
+        <ul class="l4pl">
+            {%- for suggestion in all_suggestions limit: 5 -%}
+                {%- unless suggestion.text == predictive_search.terms %}
+                    <li><a href="{{ suggestion.url }}"{% if suggestion.text %} data-search-suggestion="{{ suggestion.text }}"{% endif %}>{{ suggestion.title | highlight: predictive_search.terms }}{{ suggestion.text | highlight: predictive_search.terms }}</a></li>
+                {%- endunless -%}
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+    {%- if section.settings.search_drawer_enable_products and predictive_search.resources.products.size > 0 -%}
+        <ul class="l4ca compact">
+            {%- for product in predictive_search.resources.products -%}
+                {%- liquid
+                    assign rating_value = false
+                    assign rating_count = false
+                    if product.metafields.syncer.reviews
+                        assign locale_ratings = product.metafields.syncer.reviews.value.reviews[localization.language.iso_code]
+                        if locale_ratings
+                            assign rating_value = locale_ratings.rating
+                            assign rating_count = locale_ratings.count
+                        else
+                            assign rating_value = product.metafields.syncer.reviews.value.cumulative_rating
+                            assign rating_count = product.metafields.syncer.reviews.value.total_reviews
+                        endif
+                    elsif product.metafields.reviews.rating
+                        assign rating_value = product.metafields.reviews.rating.value
+                        assign rating_count = product.metafields.reviews.rating_count
+                    endif
+                -%}
+                <li class="{% if product.featured_media == blank %} no-img{% endif %}{% if fill_images %} cover{% endif %}{% if product.compare_at_price > product.price %} has-discount{% endif %}">
+                    {%- if product.featured_media != blank -%}
+                        <figure{% if settings.multiply_product_images == 'multiply' %} class="img-multiply"{% elsif settings.multiply_product_images == 'multiply-bg' %} class="img-multiply-bg"{% endif %}>
+                            <picture>
+                                <img src="{{ product.featured_media | image_url: width: 140 }}"
+                                     srcset="{{ product.featured_media | image_url: width: 70 }} 1x,{{ product.featured_media | image_url: width: 140 }} 2x"
+                                     alt="{{ product.featured_media.alt }}"
+                                     width="70"
+                                     height="71"
+                                >
+                            </picture>
+                        </figure>
+                    {%- endif -%}
+                    <section>
+                        <div class="cols align-middle">
+                            <div>
+                                <h2>
+                                    {%- if section.settings.search_drawer_show_vendor and product.vendor != "vendor-unknown" and product.vendor != shop.name -%}
+                                        <span class="small">{{ product.vendor }}</span>
+                                    {%- endif -%}
+                                    <a href="{{ product.url }}">{{ product.title }} </a>
+                                </h2>
+                            </div>
+                            {%- if show_price -%}
+                                <p class="price s1pr">
+                                {%- if product.compare_at_price > product.price -%}<span class="old-price">{% render 'price', product: product, price: product.compare_at_price %}</span>{%- endif -%}&nbsp;
+                                    {% render 'price', product: product, price: product.price %}
+                                </p>
+                            {%- endif -%}
+                        </div>
+                        {%- if rating_value and settings.show_product_rating -%}
+                            {% capture rating_label %}
+                                {%- if rating_count -%}{{ rating_count }} {{ 'product.reviews.count' | t: count: rating_count | downcase }}{%- endif -%}
+                            {% endcapture %}
+                            {% render 'rating-stars', value: rating_value, label: rating_label %}
+                        {%- endif -%}
+                    </section>
+                </li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+    <p><a href="{{ routes.search_url }}?q={{ predictive_search.terms }}" class="strong inline"><span class="link-underline">{{ 'search.view_all_results' | t }}</span></a></p>
+    {%- liquid
+        assign all_articles = ''
+        if section.settings.search_drawer_enable_pages
+            assign all_articles = predictive_search.resources.pages
+        endif
+        if section.ettings.search_drawer_enable_articles
+            assign all_articles = all_articles | concat: predictive_search.resources.articles
+        endif
+    -%}
+    {%- if all_articles.size > 0 -%}
+        <p class="strong">{{ 'search.questions_and_advice' | t }}</p>
+        <ul class="l4pl">
+            {%- for article in all_articles limit: 5 -%}
+                <li><a href="{{ article.url }}">{{ article.title | highlight: predictive_search.terms }}</a></li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endif -%}
+{%- if section.settings.search_drawer_popular_collections.count > 0 or section.settings.search_drawer_popular_products.count > 0 -%}
+    <div class="search-placeholders">
+        {%- if section.settings.search_drawer_popular_collections.count > 0 -%}
+            {%- if section.settings.search_drawer_popular_collections_title != empty -%}<p class="strong">{{ section.settings.search_drawer_popular_collections_title }}</p>{%- endif -%}
+            <ul class="l4pl">
+                {%- for collection in section.settings.search_drawer_popular_collections -%}
+                    <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+                {%- endfor -%}
+            </ul>
+        {%- endif -%}
+        {%- if section.settings.search_drawer_popular_products.count > 0 -%}
+            {%- if section.settings.search_drawer_popular_products_title != empty -%}<p class="strong margin-10">{{ section.settings.search_drawer_popular_products_title }}</p>{%- endif -%}
+            <ul class="l4ca compact">
+                {%- for product in section.settings.search_drawer_popular_products -%}
+                    <li class="{% if product.featured_media == blank %} no-img{% endif %}{% if settings.fill_product_images %} cover{% endif %}{% if product.compare_at_price > product.price %} has-discount{% endif %}">
+                        {%- if product.featured_media != blank -%}
+                            <figure{% if settings.multiply_product_images == 'multiply' %} class="img-multiply"{% elsif settings.multiply_product_images == 'multiply-bg' %} class="img-multiply-bg"{% endif %}>
+                                <picture>
+                                    <img src="{{ product.featured_media | image_url: width: 140 }}"
+                                         srcset="{{ product.featured_media | image_url: width: 70 }} 1x,{{ product.featured_media | image_url: width: 140 }} 2x"
+                                         alt="{{ product.featured_media.alt }}"
+                                         width="70"
+                                         height="71"
+                                    >
+                                </picture>
+                            </figure>
+                        {%- endif -%}
+                        <section>
+                            <div class="cols align-middle">
+                                <div>
+                                    <h2>
+                                        {%- if section.settings.search_drawer_show_vendor and product.vendor != "vendor-unknown" and product.vendor != shop.name -%}
+                                            <span class="small">{{ product.vendor }}</span>
+                                        {%- endif -%}
+                                        <a href="{{ product.url }}">{{ product.title }} </a>
+                                    </h2>
+                                </div>
+                                {%- if show_price -%}
+                                    <p class="price s1pr">
+                                        {%- if product.compare_at_price > product.price -%}<span class="old-price">{{ product.compare_at_price | money }}</span>&nbsp;{%- endif -%}
+                                        {{ product.price | money }}
+                                    </p>
+                                {%- endif -%}
+                            </div>
+                        </section>
+                    </li>
+                {%- endfor -%}
+            </ul>
+        {%- endif -%}
+    </div>
+{%- endif -%}
+</div>
+{% schema %}
+{
+  "name": "t:settings_schema.search_drawer.name",
+  "settings": [
+    {
+      "id": "enable_search_drawer",
+      "type": "checkbox",
+      "label": "t:settings_schema.search_drawer.settings.enable_search_drawer.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.search_drawer.settings.search_behaviour.header"
+    },
+    {
+      "id": "search_drawer_enable_suggestions",
+      "type": "checkbox",
+      "label": "t:settings_schema.search_drawer.settings.search_behaviour.search_drawer_enable_suggestions.label",
+      "default": true
+    },
+    {
+      "id": "search_drawer_show_price",
+      "type": "checkbox",
+      "label": "t:settings_schema.search_drawer.settings.search_behaviour.search_drawer_show_price.label",
+      "default": true
+    },
+    {
+      "id": "search_drawer_show_vendor",
+      "type": "checkbox",
+      "label": "t:settings_schema.search_drawer.settings.search_behaviour.search_drawer_show_vendor.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.search_drawer.settings.resources.header"
+    },
+    {
+      "id": "search_drawer_enable_collections",
+      "type": "checkbox",
+      "label": "t:settings_schema.search_drawer.settings.resources.search_drawer_enable_collections.label",
+      "default": true
+    },
+    {
+      "id": "search_drawer_enable_products",
+      "type": "checkbox",
+      "label": "t:settings_schema.search_drawer.settings.resources.search_drawer_enable_products.label",
+      "default": true
+    },
+    {
+      "id": "search_drawer_enable_pages",
+      "type": "checkbox",
+      "label": "t:settings_schema.search_drawer.settings.resources.search_drawer_enable_pages.label",
+      "default": true
+    },
+    {
+      "id": "search_drawer_enable_articles",
+      "type": "checkbox",
+      "label": "t:settings_schema.search_drawer.settings.resources.search_drawer_enable_articles.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.search_drawer.settings.popular_collections.header"
+    },
+    {
+      "id": "search_drawer_popular_collections_title",
+      "type": "text",
+      "label": "t:settings_schema.search_drawer.settings.popular_collections.search_drawer_popular_collections_title.label",
+      "info": "t:settings_schema.search_drawer.settings.popular_collections.search_drawer_popular_collections_title.info",
+      "default": "Popular collections"
+    },
+    {
+      "id": "search_drawer_popular_collections",
+      "type": "collection_list",
+      "label": "t:settings_schema.search_drawer.settings.popular_collections.search_drawer_popular_collections.label",
+      "limit": 5
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.search_drawer.settings.popular_products.header"
+    },
+    {
+      "id": "search_drawer_popular_products_title",
+      "type": "text",
+      "label": "t:settings_schema.search_drawer.settings.popular_products.search_drawer_popular_products_title.label",
+      "default": "Popular products"
+    },
+    {
+      "id": "search_drawer_popular_products",
+      "type": "product_list",
+      "label": "t:settings_schema.search_drawer.settings.popular_products.search_drawer_popular_products.label",
+      "limit": 4
+    }
+  ]
+}
+{% endschema %}

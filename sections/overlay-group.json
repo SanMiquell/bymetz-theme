@@ -1,0 +1,78 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "custom.overlay",
+  "name": "Overlay",
+  "sections": {
+    "side-cart": {
+      "type": "section-side-cart",
+      "disabled": true,
+      "settings": {
+        "enable_cart_drawer_header": false,
+        "enable_cart_drawer": false,
+        "cart_drawer_checkout_button": false,
+        "custom_liquid": "",
+        "enable_cart_drawer_upsell_complementary": false,
+        "enable_cart_drawer_upsell_related": false,
+        "enable_cart_drawer_upsell_variants": false
+      }
+    },
+    "shop-the-look": {
+      "type": "section-shop-the-look-drawer",
+      "disabled": true,
+      "settings": {
+        "shop_the_look_title": "<h2>Shop the look</h2>",
+        "shop_the_look_items": 4
+      }
+    },
+    "newsletter": {
+      "type": "section-newsletter-popup",
+      "disabled": true,
+      "settings": {
+        "newsletter_popup_seconds": 5,
+        "newsletter_popup_title": "<h2>Sign up for our newsletter</h2>",
+        "newsletter_title_underline_style": "none",
+        "newsletter_popup_text": "Subscribe to our emails",
+        "enable_newsletter_terms_checkbox": true,
+        "newsletter_terms_text": ""
+      }
+    },
+    "age": {
+      "type": "section-verify-popup",
+      "disabled": true,
+      "settings": {
+        "age_verify_popup_title": "Age verification",
+        "age_verify_popup_text": "<p>Please confirm that you are 18 years or older to enter the shop.</p>",
+        "age_verify_popup_cookie_text": "<p>Our shop uses cookies, by confirming you are agreeing to our <a href=\"/policies/terms-of-service\" target=\"_blank\" title=\"Terms of Service\">terms of service</a> and <a href=\"/policies/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\">privacy policy</a></p>",
+        "age_verify_popup_accept_text": "Yes, I'm 18 years or older",
+        "age_verify_popup_deny_text": "No",
+        "age_verify_popup_denied_title": "Have patience...",
+        "age_verify_popup_denied_text": "<p>You are not old enough to visit the shop yet.</p>"
+      }
+    },
+    "cookie": {
+      "type": "section-cookie-banner",
+      "disabled": true,
+      "settings": {
+        "show_cookiebanner": "banner",
+        "cookiebanner_title": "<h2>Cookies</h2>",
+        "cookiebanner_title_underline_style": "none",
+        "cookiebanner_text": "<p>Our site uses cookies. By clicking on accept you agree with our <a href=\"/policies/terms-of-service\" target=\"_blank\" title=\"Terms of Service\">terms of service</a> and <a href=\"/policies/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\">privacy policy</a>.</p>"
+      }
+    }
+  },
+  "order": [
+    "side-cart",
+    "shop-the-look",
+    "newsletter",
+    "age",
+    "cookie"
+  ]
+}

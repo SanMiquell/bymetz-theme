@@ -1,0 +1,195 @@
+{%- liquid
+    if menu == ''
+        break
+    endif
+
+    if show_dropdown_images
+        if show_dropdown_images_autofill
+            assign image = 'featured_image'
+        else
+            assign image = 'image'
+        endif
+    endif
+
+    if menu_color_palette
+        assign menu_color_palette = menu_color_palette | append: ''
+    endif
+
+    assign menu_with_sub = false
+    assign menu_with_img = false
+%}
+<nav aria-label="{{ 'general.accessibility.menu' | t }}" class="{% if menu_color_palette %}palette-{{ menu_color_palette }} module-color-palette{% endif %} section-menu">
+    <ul data-type="main-nav" class="">
+        {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+        {%- for link in linklists[menu].links -%}
+            {% if link.links != blank %}{% assign menu_with_sub = true %}{% endif %}
+            <li class="{% if link.links != blank %}sub{% endif %}{% if link.active %} active{% endif %}{% if link.url == '#' and link.links != blank %} inactive{% endif %}" {% if link.active %}aria-current="page"{% endif %}>
+                <a accesskey="{{ forloop.index }}" href="{{ link.url }}">
+                    {%- if link.object[image] and show_dropdown_images -%}
+                        {% assign menu_with_img = true %}
+                        <span class="img category{% if show_dropdown_images_rounded %} rounded{% endif %}">
+                            <picture class="{% if settings.multiply_collection_images == 'multiply' %}img-multiply{% elsif settings.multiply_collection_images == 'multiply-bg' %}img-multiply-bg{% endif %}">
+                                <img
+                                    src="{{ link.object[image] | image_url: width: 60, height: 60 }}"
+                                    srcset="{{ link.object[image] | image_url: width: 30, height: 30 }} 1x,{{ link.object[image] | image_url: width: 60, height: 60 }} 2x"
+                                    alt="{{ link.object[image].alt | default: link.title | escape }}"
+                                    width="30"
+                                    height="30"
+                                    loading="lazy"
+                                >
+                            </picture>
+                        </span>
+                    {%- endif -%}
+                    {{ link.title }}
+                </a>
+                {%- if link.links != blank %}
+                <ul {% if layout %}class="wide"{% endif %}>
+                    {%- liquid
+                        assign split = false
+                        assign item_nr = 0
+                        assign total_nr_of_items = 0
+                        for sub in link.links
+                            assign nr_of_items = sub.links.size | at_most: subitems_limit
+                            assign total_nr_of_items = total_nr_of_items | plus: nr_of_items | plus: 1
+                        endfor
+                        if total_nr_of_items > 30
+                            assign nr_of_items_per_col = total_nr_of_items | divided_by: 3
+                        else
+                            assign nr_of_items_per_col = 6
+                        endif
+                    -%}
+                    {%- for sub in link.links -%}
+                        {% if split or forloop.first %}
+                            {% assign split = false %}
+                            <li>
+                                <ul>
+                                    {% endif %}
+                                    <li{%- if sub.object[image] and show_dropdown_images and show_dropdown_images_subs -%} class="with-img"{% endif %}>
+                                        {%- liquid
+                                            assign item_nr = item_nr | plus: 1
+                                            assign item_modulo = item_nr | modulo: nr_of_items_per_col
+                                            if item_modulo == 0
+                                                assign split = true
+                                            endif
+                                        -%}
+                                        <a href="{{ sub.url }}">
+                                            {%- if sub.object[image] and show_dropdown_images and show_dropdown_images_subs -%}
+                                                {% assign menu_with_img = true %}
+                                                <span class="img category{% if show_dropdown_images_rounded %} rounded{% endif %}">
+                                                    <picture class="{% if settings.multiply_collection_images == 'multiply' %}img-multiply{% elsif settings.multiply_collection_images == 'multiply-bg' %}img-multiply-bg{% endif %}">
+                                                        <img
+                                                            src="{{ sub.object[image] | image_url: width: 60, height: 60 }}"
+                                                            srcset="{{ sub.object[image] | image_url: width: 60, height: 60 }} 30w"
+                                                            sizes="
+                                                                (min-width: 1000px) 30px
+                                                                0
+                                                            "
+                                                            alt="{{ sub.object[image].alt | default: sub.title | escape }}"
+                                                            width="30"
+                                                            height="30"
+                                                            loading="lazy"
+                                                        >
+                                                    </picture>
+                                                </span>
+                                            {%- endif -%}
+                                            {{ sub.title }}
+                                        </a>
+                                        {%- if sub.links != blank %}
+                                            <ul>
+                                                {%- for subsub in sub.links limit: subitems_limit -%}
+                                                    {%- liquid
+                                                        assign item_nr = item_nr | plus: 1
+                                                        assign item_modulo = item_nr | modulo: nr_of_items_per_col
+                                                        if item_modulo == 0
+                                                            assign split = true
+                                                        endif
+                                                    -%}
+                                                    <li{%- if subsub.object[image] and show_dropdown_images and show_dropdown_images_subs -%} class="with-img"{% endif %}>
+                                                        <a href="{{ subsub.url }}">
+                                                            {%- if subsub.object[image] and show_dropdown_images and show_dropdown_images_subs -%}
+                                                                {% assign menu_with_img = true %}
+                                                                <span class="img category{% if show_dropdown_images_rounded %} rounded{% endif %}">
+                                                                    <picture class="{% if settings.multiply_collection_images == 'multiply' %}img-multiply{% elsif settings.multiply_collection_images == 'multiply-bg' %}img-multiply-bg{% endif %}">
+                                                                        <img
+                                                                            src="{{ subsub.object[image] | image_url: width: 60, height: 60 }}"
+                                                                            srcset="{{ subsub.object[image] | image_url: width: 60, height: 60 }} 30w"
+                                                                            sizes="
+                                                                               (min-width: 1000px) 30px
+                                                                               0
+                                                                            "
+                                                                            alt="{{ subsub.object[image].alt | default: subsub.title | escape }}"
+                                                                            width="30"
+                                                                            height="30"
+                                                                            loading="lazy"
+                                                                        >
+                                                                    </picture>
+                                                                </span>
+                                                            {%- endif -%}
+                                                            {{ subsub.title }}
+                                                        </a>
+                                                    </li>
+                                                {%- endfor -%}
+                                            </ul>
+                                        {%- endif -%}
+                                    </li>
+                                    {% if split or forloop.last %}
+                                </li>
+                            </ul>
+                        {% endif %}
+                    {%- endfor -%}
+                </ul>
+                {%- endif -%}
+            </li>
+        {%- endfor -%}
+    </ul>
+</nav>
+
+<style>
+    .section-menu-wrapper { min-height: 500px; }
+    nav.section-menu ul { list-style: none; margin-left: 0; margin-right: 0; margin-bottom: 0; padding: 0; }
+    nav.section-menu.module-color-palette > ul::before, nav.section-menu.module-color-palette > ul > li > ul > li::before { content: ""; display: block; overflow: hidden; position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: -1; margin: 0; text-align: left; text-indent: -3000em; direction: ltr; background: var(--primary_bg, #fff); }
+    nav.section-menu.module-color-palette > ul::before { left: var(--d, var(--cols, 0)); width: calc(var(--w_f, 25%) - var(--d, var(--cols, 0))); }
+    nav.section-menu ul li a { text-decoration: none; }
+    nav.section-menu > ul > li > a { display: block; font-weight: var(--main_fw_strong); height: auto; outline-offset: -2px; padding: 14px 20px; position: relative; text-overflow: inherit; white-space: normal; }
+    {% if menu_with_sub %}
+    nav.section-menu > ul > li > a { padding-right: 40px; }
+    {% endif %}
+    nav.section-menu > ul > li a { hyphens: auto; overflow-wrap: break-word; word-break: break-word; }
+    {% if menu_with_img %}
+        nav.section-menu > ul > li a { display: flex; position: relative; }
+        nav.section-menu > ul > li > a { padding-left: 52px; }
+    {% endif %}
+    nav.section-menu > ul > li a .img { align-items: center; justify-content: center; display: flex; left: 0; max-height: 29px !important; object-fit: contain; object-position: center center; position: absolute; top: 50%; transform: translateY(-50%); }
+    nav.section-menu > ul > li a .img picture { width: auto; }
+    nav.section-menu > ul > li > a .img { width: 52px !important; }
+    nav.section-menu > ul > li ul li a .img { margin-right: 15px; }
+    nav.section-menu > ul > li ul li.with-img a { padding-left: 45px; }
+    nav.section-menu > ul > li.sub > a:before { display: block; overflow: visible; position: absolute; right: 0; top: 50%; bottom: auto; margin: -10px 0 0; box-shadow: none; border-radius: 0; border-width: 0; background: none; font-weight: 400; font-family: i; line-height: 20px; text-align: center; text-indent: 0; letter-spacing: normal; content: "\e906"; left: auto; width: 38px; color: inherit; font-size: 8px; }
+    nav.section-menu > ul > li.sub:hover::after { content: ''; height: 100%; left: 25%; position: absolute; top: 0; width: 75%; }
+    nav.section-menu > ul > li.sub > ul { display: none; flex-wrap: wrap; height: 100%; left: 25%; position: absolute; top: 0; width: 75%; }
+    nav.section-menu > ul > li.sub:hover > ul { display: flex; }
+    nav.section-menu > ul > li > ul > * { padding: 18px 0 18px 32px; position: relative; width: 25%; z-index: 2; }
+    nav.section-menu > ul > li > ul > li > ul > li:not(:last-of-type) { margin-bottom: 15px; }
+    nav.section-menu > ul > li ul > li:first-child ul:after { display: none !important; }
+    nav.section-menu > ul > li > ul > *:last-child { padding-right: 24px; }
+    nav.section-menu > ul ul li li a:has(>.img) { align-items: center; display: flex; margin-bottom: 10px; min-height: 30px; }
+    {% if section_id %}
+        {% if menu_color_palette != settings.default_color_scheme.id %}
+            #shopify-section-{{ section_id }} nav.section-menu.module-color-palette > ul::before { border-radius: var(--b2p); }
+            #shopify-section-{{ section_id }} nav.section-menu > ul > li:first-of-type > a { border-top-left-radius: var(--b2p); border-top-right-radius: var(--b2p); overflow: hidden; }
+            #shopify-section-{{ section_id }} nav.section-menu > ul > li:last-of-type > a { border-bottom-left-radius: var(--b2p); border-bottom-right-radius: var(--b2p); overflow: hidden; }
+            #shopify-section-{{ section_id }} nav.section-menu > ul > li > ul > li:first-of-type::before { border-top-left-radius: var(--b2p); border-bottom-left-radius: var(--b2p); left: var(--cols, 0); }
+            #shopify-section-{{ section_id }} nav.section-menu > ul > li > ul > li:last-of-type::before { border-top-right-radius: var(--b2p); border-bottom-right-radius: var(--b2p); }
+        {% endif %}
+        #shopify-section-{{ section_id }} nav.section-menu.module-color-palette > ul::before { background: var(--{{ menu_color_palette }}_bg, #fff); }
+        #shopify-section-{{ section_id }} nav.section-menu.module-color-palette > ul > li > ul > li::before { background: var(--{{ menu_color_palette }}_bg_var, #f5f5f5); }
+        #shopify-section-{{ section_id }} nav.section-menu > ul > li:hover > a { background: var(--{{ menu_color_palette }}_bg_var, #f5f5f5); }
+        #shopify-section-{{ section_id }} nav.section-menu a { color: var(--{{ menu_color_palette }}_fg); }
+        #shopify-section-{{ section_id }} nav.section-menu > ul > li:not(:first-of-type) > a { border-top: 1px solid var(--{{ menu_color_palette }}_bd); }
+        #shopify-section-{{ section_id }} nav.section-menu > ul > li.sub a:hover { color: var(--{{ menu_color_palette }}_accent); }
+        #shopify-section-{{ section_id }} nav.section-menu > ul > li > ul > li > ul:after { border: 0 solid var(--{{ menu_color_palette }}_bd); border-left-width: 1px; bottom: 0; content: ""; direction: ltr; display: block; left: 14px; margin: 0; overflow: hidden; position: absolute; right: 0; text-align: left; text-indent: -3000em; top: 0; z-index: -1; }
+    {% endif %}
+    @media only screen and (max-width: 1000px) {
+        .section-menu-wrapper, nav.section-menu { display: none !important; }
+    }
+</style>

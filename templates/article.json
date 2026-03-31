@@ -1,0 +1,130 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "hide_desktop": false,
+        "text_alignment": "start",
+        "hide_mobile": false,
+        "enable_share_button": false
+      }
+    },
+    "main-article": {
+      "type": "main-article",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "h2",
+            "show_banner": false,
+            "overlay_opacity": 25,
+            "color_palette": "dark",
+            "show_date": true,
+            "show_author": true,
+            "show_article_reading_time": true
+          }
+        },
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {}
+        },
+        "cae634eb-3596-48c8-9d94-628d20d4d95b": {
+          "type": "share_buttons",
+          "settings": {
+            "share_whatsapp": true,
+            "share_facebook": true,
+            "share_twitter": true,
+            "share_pinterest": true,
+            "share_messenger": true,
+            "share_email": true
+          }
+        },
+        "excerpt": {
+          "type": "excerpt",
+          "settings": {}
+        },
+        "content": {
+          "type": "content",
+          "settings": {}
+        },
+        "authorcraft_author_box_Q8exnV": {
+          "type": "shopify://apps/authorcraft/blocks/author_box/362b7802-1d5b-41dc-a60c-8ff8f6e81869",
+          "settings": {
+            "author_box_text_color": "#000000",
+            "author_box_background_color": "#e2e2e2"
+          }
+        },
+        "tags": {
+          "type": "tags",
+          "settings": {}
+        },
+        "comments": {
+          "type": "comments",
+          "settings": {
+            "title_size": "h2"
+          }
+        },
+        "db5d637d-f346-4923-afc2-d959a7a5a8a6": {
+          "type": "spacer",
+          "settings": {
+            "height": 20
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "featured_image",
+        "cae634eb-3596-48c8-9d94-628d20d4d95b",
+        "excerpt",
+        "content",
+        "authorcraft_author_box_Q8exnV",
+        "tags",
+        "comments",
+        "db5d637d-f346-4923-afc2-d959a7a5a8a6"
+      ],
+      "settings": {
+        "font_size": "16px",
+        "compact": true
+      }
+    },
+    "blogs_row": {
+      "type": "section-blog-posts",
+      "disabled": true,
+      "settings": {
+        "blog": "",
+        "number_of_items": 4,
+        "text_alignment": "start",
+        "title": "<h3>Blog posts</h3>",
+        "title_underline_style": "none",
+        "show_link": false,
+        "link_text": "View all",
+        "link_url": "",
+        "button_style": "primary plain",
+        "blog_title_size": "h4",
+        "show_image": true,
+        "show_date": true,
+        "show_author": true,
+        "show_excerpt": false,
+        "button_style_post": "primary link",
+        "enable_animations": false,
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "main-article",
+    "blogs_row"
+  ]
+}

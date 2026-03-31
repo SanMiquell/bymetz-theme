@@ -1,0 +1,233 @@
+{%- liquid
+  capture title_classes
+    echo 'w900'
+    if section.settings.text_alignment == 'center'
+      echo ' text-center align-center'
+    endif
+  endcapture
+-%}
+
+<div class="m6tb static">
+  <nav class="hidden">
+    <ul>
+      <li class="active"><a href="#section-related">{{ section.settings.title }}</a></li>
+    </ul>
+  </nav>
+  <div>
+    <div id="section-related" {% if recommendations.products_count == 0 %}data-hide{% endif %} class="product-recommendations{% if section.settings.mobile_collapse %} tab-closed{% endif %}" data-template="{{ section.id }}" data-product-id="{{ product.id }}" data-limit="{{ section.settings.recommended_products_qty }}" data-intent="related">
+      <article>
+        {%- if recommendations.products_count > 0 -%}
+          {%- liquid
+             assign limit = section.settings.number_of_items
+             case limit
+               when 0
+                 assign width_class = 'w20'
+               when 2
+                 assign width_class = 'w50'
+               when 3
+                 assign width_class = 'w33'
+               when 4
+                 assign width_class = 'w25'
+             endcase
+          -%}
+          <header class="cols">
+            <div class="mobile-hide {{ title_classes }}
+              {% if section.settings.title_underline_style != 'none' %}
+                title-underline-none
+                {% if section.settings.title_underline_style contains 'accent' %}
+                  title-underline-accent
+                {% elsif section.settings.title_underline_style contains 'gradient' %}
+                  title-underline-gradient
+                {% endif %}
+                {% if section.settings.title_underline_style contains 'secondary_font' %}
+                  title-underline-secondary-font
+                {% endif %}
+              {% endif %}
+            ">
+              {%- if section.settings.title != blank -%}
+                {{ section.settings.title }}
+              {%- endif -%}
+            </div>
+          </header>
+          <div class="syk-slider-container" data-visible-items="{{ section.settings.number_of_items }}" style="--dist: {{ settings.space_between_products }}px; --dist_a: {% if settings.grid_style == 'border' %}0px;{% else %}{{ settings.space_between_products }}px;{% endif %}">
+            <ul class="l4cl syk-slider {{ width_class }} {{ section.settings.width }}{% unless settings.grid_style == 'default' %} l4cl-{{ settings.grid_style }}{% endunless %}" style="--dist: {{ settings.space_between_products }}px; --dist_a: {% if settings.grid_style == 'border' %}0px;{% else %}{{ settings.space_between_products }}px;{% endif %}">
+              {%- liquid
+                for product in recommendations.products
+                  capture placeholder_int
+                    cycle 1, 2, 3, 4, 5, 6
+                  endcapture
+                  render 'product-item', product: product, placeholder_int: placeholder_int
+                endfor
+              -%}
+            </ul>
+            <div class="syk-slider-pagination">
+              <span class="syk-slider-button hidden" data-direction="prev" role="button" aria-label="Previous slide"></span>
+              <span class="syk-slider-button" data-direction="next" role="button" aria-label="Next slide"></span>
+            </div>
+          </div>
+      {%- endif -%}
+      </article>
+    </div>
+  </div>
+</div>
+
+<style>
+  @media only screen and (min-width: 47.5em) {
+    #shopify-section-{{ section.id }} {% if slider %}.syk-slider-container{% else %}.l4cl{% endif %} { margin-bottom: {{ section.settings.spacing_desktop }}px; }
+    {% if section.settings.spacing_desktop < 0 %}
+      #shopify-section-{{ section.id }} { position: relative; z-index: 5; }
+      #shopify-section-{{ section.id }} + * { position: relative; z-index: 6; } #shopify-section-{{ section.id }} + *.has-kinetic-text { pointer-events: none; }
+    {% endif %}
+  }
+  @media only screen and (max-width: 47.5em) {
+    #shopify-section-{{ section.id }} { margin-bottom: {{ section.settings.spacing_mobile | minus: -26 }}px; }
+    {% if section.settings.spacing_mobile < 0 %}
+      #shopify-section-{{ section.id }} { position: relative; z-index: 5; }
+      #shopify-section-{{ section.id }} + * { position: relative; z-index: 6; } #shopify-section-{{ section.id }} + *.has-kinetic-text { pointer-events: none; }
+    {% endif %}
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:static_sections.product_recommendations.name",
+  "class": "with-mobile-tab hidden",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:static_sections.product_recommendations.settings.paragraph"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:global.layout.width.label",
+      "options": [
+        {
+          "value": "boxed",
+          "label": "t:global.layout.width.options__1.label"
+        },
+        {
+          "value": "fullwidth",
+          "label": "t:global.layout.width.options__2.label"
+        }
+      ],
+      "default": "boxed"
+    },
+    {
+      "type": "range",
+      "id": "recommended_products_qty",
+      "label": "t:static_sections.product_recommendations.settings.recommended_products_qty.label",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "number_of_items",
+      "label": "t:static_sections.product_recommendations.settings.number_of_items.label",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:global.typography.title_position.label",
+      "options": [
+        {
+          "value": "start",
+          "label": "t:global.alignment.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:global.alignment.center.label"
+        }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "header",
+      "content": "t:global.typography.title.label"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "t:global.typography.title.label",
+      "info": "t:global.typography.title.info",
+      "default": "<h2>You may also like</h2>"
+    },
+    {
+      "type": "select",
+      "id": "title_underline_style",
+      "label": "t:global.typography.title_underline_style.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:global.typography.title_underline_style.none.label"
+        },
+        {
+          "value": "secondary_font",
+          "label": "t:global.typography.title_underline_style.secondary_font.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_accent",
+          "label": "t:global.typography.title_underline_style.secondary_font_accent.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "secondary_font_gradient",
+          "label": "t:global.typography.title_underline_style.secondary_font_gradient.label",
+          "group": "t:global.typography.title_underline_style.group.fonts"
+        },
+        {
+          "value": "accent",
+          "label": "t:global.typography.title_underline_style.accent.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        },
+        {
+          "value": "gradient",
+          "label": "t:global.typography.title_underline_style.gradient.label",
+          "group": "t:global.typography.title_underline_style.group.colors"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:global.spacing.header"
+    },
+    {
+      "id": "spacing_desktop",
+      "type": "range",
+      "label": "t:global.spacing.spacing_desktop.label",
+      "min": -300,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "id": "spacing_mobile",
+      "type": "range",
+      "label": "t:global.spacing.spacing_mobile.label",
+      "min": -300,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:global.mobile.header"
+    },
+    {
+      "id": "mobile_collapse",
+      "type": "checkbox",
+      "label": "t:static_sections.product_recommendations.settings.mobile.mobile_collapse.label",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

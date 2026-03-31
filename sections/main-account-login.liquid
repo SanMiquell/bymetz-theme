@@ -1,0 +1,387 @@
+<div id="recover" class="w630 align-center base-font">
+  <{{ settings.global_title_size }} class="m30">{{ 'customer.recover_password.title' | t }}</{{ settings.global_title_size }}>
+  {%- assign recover_password_form_classes = 'f8lg text-start' %}
+  {%- form 'recover_customer_password', class: recover_password_form_classes -%}
+    {%- if form.posted_successfully? -%}
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var alertAttributes = { message: "{{ 'customer.recover_password.posted_successfully' | t }}", type: "success", origin: "recover_password" },
+                showAlertEvent = new CustomEvent("showAlert", {detail: alertAttributes});
+            window.dispatchEvent(showAlertEvent);
+        });
+      </script>
+    {%- elsif form.errors -%}
+      {%- for error in form.errors -%}
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              var alertAttributes = { message: "{%- if error == 'form' -%}{{ form.errors.messages[error] }}{%- else -%}{{ form.errors.translated_fields[error] | capitalize }} {{ form.errors.messages[error] }}{%- endif -%}", type: "error", origin: "recover_password" },
+                  showAlertEvent = new CustomEvent("showAlert", {detail: alertAttributes});
+              window.dispatchEvent(showAlertEvent);
+          });
+        </script>
+      {%- endfor -%}
+    {%- endif -%}
+    <fieldset>
+      <legend>{{ 'customer.recover_password.title' | t }}</legend>
+      <header>
+        <h2 class="size-16 m20">{{ 'customer.recover_password.subtitle' | t }}</h2>
+        <p>{{ 'customer.recover_password.text' | t }}</p>
+      </header>
+      <p>
+        <label for="email_address">{{ 'customer.recover_password.email' | t }}<span class="overlay-theme">*</span></label>
+        <input type="email" id="email_address" name="email" placeholder="{{ 'customer.recover_password.email' | t }}" required>
+      </p>
+      <p class="submit">
+        <button type="submit"{% if settings.button_style == 'inv' %} class="inv"{% endif %}>{{ 'customer.recover_password.submit' | t }}</button>
+        <a href="{{ routes.account_login_url }}" class="strong inline"><span class="link-underline">{{ 'customer.recover_password.go_back' | t }}</span></a>
+      </p>
+    </fieldset>
+  {%- endform -%}
+</div>
+
+<div id="login" class="w720 align-center base-font">
+  <{{ settings.global_title_size }} class="m30">{{ 'customer.login.title' | t }}</{{ settings.global_title_size }}>
+  <div class="cols b50">
+    {%- assign login_form_class = 'w45 f8vl f8lg text-start' -%}
+    {% form 'customer_login', class: login_form_class %}
+      {%- if form.errors -%}
+        {%- for error in form.errors -%}
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var alertAttributes = { message: "{%- if error == 'form' -%}{{ form.errors.messages[error] }}{%- else -%}{{ form.errors.translated_fields[error] | capitalize }} {{ form.errors.messages[error] }}{%- endif -%}", type: "error", origin: "login" },
+                    showAlertEvent = new CustomEvent("showAlert", {detail: alertAttributes});
+                window.dispatchEvent(showAlertEvent);
+            });
+          </script>
+        {%- endfor -%}
+      {%- endif -%}
+      <fieldset>
+        <legend>{{ 'customer.login.title' | t }}</legend>
+        <header>
+          <h2 class="size-16 m20">{{ 'customer.login.existing_customer' | t }}</h2>
+        </header>
+        {%- if section.blocks.size > 0 -%}
+          <ul class="l4us mobile-only">
+            {%- for block in section.blocks -%}
+              {%- if block.settings.usp != empty -%}
+                <li {{ block.shopify_attributes }} {% if block.settings.usp_item_icon != 'default' or block.settings.image %} class="no-checks"{% endif %} style="--cols: 8px;">
+                  {% if block.settings.image or block.settings.usp_item_icon != 'none' %}
+                    {% if block.settings.image %}
+                      {%- assign image_width = block.settings.image_width -%}
+                      {%- assign image_width_2 = block.settings.image_width | times: 2 -%}
+                      <figure class="m0 no-border" style="width: calc({{ image_width }}px + var(--cols));">
+                        <picture>
+                          <img
+                                  src="{{ block.settings.image | image_url: height: image_width }}"
+                                  srcset="{{ block.settings.image | image_url: height: image_width }} 1x,{{ block.settings.image | image_url: height: image_width_2 }} 2x"
+                                  height="50"
+                                  width="{{ image_width }}"
+                                  style="width:{{ image_width }}px!important; height: auto!important;"
+                                  alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                                  loading="{% if section.index > 1 or forloop.first == false or section.location == 'footer' %}lazy{% else %}eager{% endif %}"
+                          >
+                        </picture>
+                      </figure>
+                    {% else %}
+                      {%- render 'icons', icon: block.settings.usp_item_icon -%}
+                    {% endif %}
+                  {% endif %}
+                  {{ block.settings.usp | replace: '</p><p>', '<br>' | remove: '<p>' | remove: '</p>' }}
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        <p>
+          <label for="email_address">{{ 'customer.login.email' | t }}<span class="overlay-theme">*</span></label>
+          <input type="email" id="email_address" name="customer[email]" placeholder="{{ 'customer.login.email' | t }}" required>
+        </p>
+        {%- if form.password_needed -%}
+          <p class="m20">
+            <label for="password">{{ 'customer.login.password' | t }}<span class="overlay-theme">*</span> <a href="./" class="show"><span>{{ 'general.accessibility.show' | t }}</span> <span class="hidden">{{ 'general.accessibility.hide' | t }}</span></a></label>
+            <input type="password" id="password" name="customer[password]" placeholder="{{ 'customer.login.password' | t }}" required>
+            <a href="{{ routes.account_login_url }}#recover" class="size-12 strong inline"><span class="link-underline">{{ 'customer.login.forgot_password' | t }}</span></a>
+          </p>
+        {%- endif -%}
+        <p class="submit"><button type="submit" class="wide{% if settings.button_style == 'inv' %} inv{% endif %}">{{ 'customer.login.submit' | t }}</button></p>
+      </fieldset>
+    {%- endform -%}
+    <div class="w55">
+      <h2 class="size-16 m15">{{ 'customer.register.title' | t }}</h2>
+      <p class="m15">{{ 'customer.register.create_account_info' | t }}</p>
+      {%- if section.blocks.size > 0 -%}
+        <ul class="l4us mobile-static m20">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.usp != empty -%}
+              <li {{ block.shopify_attributes }} {% if block.settings.usp_item_icon != 'default' or block.settings.image %} class="no-checks"{% endif %} style="--cols: 8px;">
+                <span class="cols cols-mobile" style="--cols: 8px;">
+                  {% if block.settings.image or block.settings.usp_item_icon != 'none' %}
+                    {% if block.settings.image %}
+                      {%- assign image_width = block.settings.image_width -%}
+                      {%- assign image_width_2 = block.settings.image_width | times: 2 -%}
+                      <figure class="m0 no-border" style="width: calc({{ image_width }}px + var(--cols));">
+                        <picture>
+                          <img
+                            src="{{ block.settings.image | image_url: height: image_width }}"
+                            srcset="{{ block.settings.image | image_url: height: image_width }} 1x,{{ block.settings.image | image_url: height: image_width_2 }} 2x"
+                            height="50"
+                            width="{{ image_width }}"
+                            style="width:{{ image_width }}px!important; height: auto!important;"
+                            alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                            loading="{% if section.index > 1 or forloop.first == false or section.location == 'footer' %}lazy{% else %}eager{% endif %}"
+                          >
+                        </picture>
+                      </figure>
+                    {% else %}
+                      {%- render 'icons', icon: block.settings.usp_item_icon -%}
+                    {% endif %}
+                  {% endif %}
+                  <span>
+                    {%- assign usp_text = block.settings.usp | remove: '<p>' | remove: '</p>' | split: '|' -%}
+                    {%- assign cycle_group = 'cycle-' | append: forloop.index -%}
+                    {%- for text in usp_text -%}
+                      {%- capture cycle -%}{% cycle cycle_group: 'odd', 'even' %}{%- endcapture -%}
+                      {%- if cycle == 'odd' -%}
+                        <span>{{ text }}</span>
+                      {%- else -%}
+                        <span class="overlay-theme">{{ text }}</span>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </span>
+                </span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      <p class="link-btn"><a href="{{ routes.account_register_url }}" class="wide{% if settings.button_style == 'inv' %} inv{% endif %}">{{ 'customer.login.create_account_button' | t }}</a></p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:main.account_login.name",
+  "settings": [
+
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "t:main.account_login.blocks.usp.name",
+      "settings": [
+        {
+          "id": "usp",
+          "type": "richtext",
+          "label": "t:main.account_login.blocks.usp.settings.usp.label",
+          "info": "t:global.typography.title.info",
+          "default": "<p>Give your customers more details.</p>"
+        },
+        {
+          "id": "usp_item_icon",
+          "type": "select",
+          "label": "t:global.icon.label",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:global.icon.options__1.label"
+            },
+            {
+              "value": "attention",
+              "label": "t:global.icon.options__2.label"
+            },
+            {
+              "value": "bag",
+              "label": "t:global.icon.options__3.label"
+            },
+            {
+              "value": "basket",
+              "label": "t:global.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:global.icon.options__5.label"
+            },
+            {
+              "value": "cancel",
+              "label": "t:global.icon.options__6.label"
+            },
+            {
+              "value": "cart",
+              "label": "t:global.icon.options__7.label"
+            },
+            {
+              "value": "calendar",
+              "label": "t:global.icon.options__8.label"
+            },
+            {
+              "value": "chat",
+              "label": "t:global.icon.options__9.label"
+            },
+            {
+              "value": "check",
+              "label": "t:global.icon.options__10.label"
+            },
+            {
+              "value": "default",
+              "label": "t:global.icon.options__default_check.label"
+            },
+            {
+              "value": "clock",
+              "label": "t:global.icon.options__11.label"
+            },
+            {
+              "value": "coupon",
+              "label": "t:global.icon.options__12.label"
+            },
+            {
+              "value": "customer_support",
+              "label": "t:global.icon.options__13.label"
+            },
+            {
+              "value": "customize",
+              "label": "t:global.icon.options__14.label"
+            },
+            {
+              "value": "earth",
+              "label": "t:global.icon.options__15.label"
+            },
+            {
+              "value": "exclamation_mark",
+              "label": "t:global.icon.options__16.label"
+            },
+            {
+              "value": "gift",
+              "label": "t:global.icon.options__17.label"
+            },
+            {
+              "value": "happy",
+              "label": "t:global.icon.options__18.label"
+            },
+            {
+              "value": "headphones",
+              "label": "t:global.icon.options__19.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:global.icon.options__20.label"
+            },
+            {
+              "value": "information",
+              "label": "t:global.icon.options__21.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:global.icon.options__22.label"
+            },
+            {
+              "value": "list",
+              "label": "t:global.icon.options__23.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:global.icon.options__24.label"
+            },
+            {
+              "value": "mail",
+              "label": "t:global.icon.options__25.label"
+            },
+            {
+              "value": "mailbox",
+              "label": "t:global.icon.options__26.label"
+            },
+            {
+              "value": "message",
+              "label": "t:global.icon.options__27.label"
+            },
+            {
+              "value": "min",
+              "label": "t:global.icon.options__28.label"
+            },
+            {
+              "value": "mobile_phone",
+              "label": "t:global.icon.options__29.label"
+            },
+            {
+              "value": "payment",
+              "label": "t:global.icon.options__30.label"
+            },
+            {
+              "value": "phone",
+              "label": "t:global.icon.options__31.label"
+            },
+            {
+              "value": "pin",
+              "label": "t:global.icon.options__32.label"
+            },
+            {
+              "value": "plus",
+              "label": "t:global.icon.options__33.label"
+            },
+            {
+              "value": "question",
+              "label": "t:global.icon.options__34.label"
+            },
+            {
+              "value": "return",
+              "label": "t:global.icon.options__35.label"
+            },
+            {
+              "value": "validation",
+              "label": "t:global.icon.options__36.label"
+            },
+            {
+              "value": "sad",
+              "label": "t:global.icon.options__37.label"
+            },
+            {
+              "value": "search",
+              "label": "t:global.icon.options__38.label"
+            },
+            {
+              "value": "secure_profile",
+              "label": "t:global.icon.options__39.label"
+            },
+            {
+              "value": "settings",
+              "label": "t:global.icon.options__40.label"
+            },
+            {
+              "value": "shield",
+              "label": "t:global.icon.options__41.label"
+            },
+            {
+              "value": "star",
+              "label": "t:global.icon.options__42.label"
+            },
+            {
+              "value": "store",
+              "label": "t:global.icon.options__43.label"
+            },
+            {
+              "value": "thunder",
+              "label": "t:global.icon.options__44.label"
+            }
+          ],
+          "default": "default"
+        },
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "t:static_sections.header.blocks.usp.settings.image.label"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "label": "t:static_sections.header.blocks.usp.settings.image_width.label",
+          "min": 5,
+          "max": 180,
+          "step": 5,
+          "unit": "px",
+          "default": 55
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

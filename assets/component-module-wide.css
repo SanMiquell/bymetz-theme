@@ -1,0 +1,44 @@
+.m6wd.overlay-content h1, .m6wd.overlay-content h2, .m6wd.overlay-content h3, .m6wd.overlay-content h4, .m6wd.overlay-content h5, .m6wd.overlay-content h6, .m6wd.overlay-theme h1, .m6wd.overlay-theme h2, .m6wd.overlay-theme h3, .m6wd.overlay-theme h4, .m6wd.overlay-theme h5, .m6wd.overlay-theme h6, .m6wd.overlay-black h1, .m6wd.overlay-black h2, .m6wd.overlay-black h3, .m6wd.overlay-black h4, .m6wd.overlay-black h5, .m6wd.overlay-black h6, .m6wd.overlay-content figure.background ~ .l4cu li > span  { color: inherit; }
+.m6wd .background:before, .m6wd figure.background.overlay:before { content: ""; display: block; overflow: hidden; position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: -1; margin: 0; text-align: left; text-indent: -3000em; direction: ltr; }
+.m6wd .background, .m6wd:before { content: ""; display: block; position: absolute; left: 50%; right: auto; top: 0; bottom: 0; z-index: -1; width: 110vw; margin: 0 0 0 -55vw; }
+.m6wd .background:before, .m6wd figure.background.overlay:before { z-index: 8; }
+#root .m6wd .background img, #root .m6wd .background picture { display: block; width: 100% !important; height: 100% !important; border-radius: 0; object-fit: cover; object-position: center center; }
+#content > .m6wd:first-child, #content > [id*="shopify-section"]:first-child > .m6wd:first-child { margin-top: calc(0px - var(--content_p)); }
+.m6wd:first-child { margin-top: 0; }
+.m6wd .background:before, #root .m6wd.overlay-content .img-overlay { border-radius: 0; background: var(--primary_text); opacity: .7; }
+.m6wd .background.plain:before { display: none; }
+.m6wd.overlay-content .l4cu.box li > span:before, .m6wd.overlay-theme .l4cu.box li > span:before { background: var(--white); }
+.m6wd > .l4ne.featured:last-child { margin-bottom: 16px; }
+.m6wd .l4ts.box li:before, .m6wd .l4ts.box .r6rt .rating > span .fill, .m6wd .l4ts.wide.box.s4wi .swiper-outer { background: var(--primary_bg); }
+.m6wd > .l4ne:last-child, .m6wd > .cols:last-child, .m6wd > form:last-child { margin-bottom: 0; }
+.m6wd .l4ts.box li:before, .m6wd .l4ts.box .r6rt .rating > span .fill, .m6wd .l4ts.wide.box.s4wi .swiper-outer { border-radius: var(--b2r); }
+.m6wd { position: relative; z-index: 3; margin: 50px 0; padding: 50px 0 var(--main_mr); }
+.m6wd:before { z-index: -2; background: var(--sand); }
+.m6wd .r6rt .rating > span .fill { background-color: var(--sand); }
+.m6fr.wide + .m6wd, .m6wd + .m6fr.wide { margin-top: -50px; }
+.m6wd.large { padding-top: 96px; padding-bottom: 62px; }
+.m6wd.overlay-content { color: var(--white); }
+.m6wd.overlay-content:before, .m6wd.overlay-content .r6rt .rating > span .fill { background-color: var(--primary_text); }
+.m6wd.overlay-content .swiper-pagination-bullet:before { background: var(--white); }
+.m6wd.overlay-content .swiper-pagination-bullet-active:before { background: var(--secondary_bg); }
+.m6wd.overlay-black { color: var(--white); }
+.m6wd.overlay-black:before, .m6wd.overlay-black .r6rt .rating > span .fill { background-color: var(--black); }
+.m6wd.overlay-black figure.background:before { background: var(--black); opacity: .22; }
+.m6wd.overlay-black .swiper-pagination-bullet:before { background: var(--white); }
+.m6wd.overlay-black .swiper-pagination-bullet-active:before { background: var(--secondary_bg); }
+.m6wd.overlay-theme { color: var(--white); }
+.m6wd.overlay-theme:before, .m6wd.overlay-theme .r6rt .rating > span .fill { background-color: var(--secondary_bg); }
+.m6wd.overlay-theme figure.background:before { background: var(--secondary_bg); opacity: .22; }
+.m6wd.overlay-theme .swiper-pagination-bullet:before { background: var(--white); }
+
+.m6wd[class^="palette-"]:not(.palette-white):not(.palette-light):not(.palette-light_2) .l4cu.box li > span:before { background: var(--bg_secondary); }
+.m6wd[class^="palette-"].numbers-accent .l4cu li > span { color: var(--accent); }
+
+@media only screen and (min-width: 761px) {
+    .t1as .m6wd:before, .t1as .m6wd .background, .t1as .m6wd:before { left: var(--rpn); right: var(--rpn); width: auto; margin-left: 0; }
+}
+@media only screen and (max-width: 760px) {
+    .m6fr.wide + .m6wd, .m6wd + .m6fr.wide { margin-top: -32px; }
+    .m6wd, .m6wd.large { margin-top: 32px; margin-bottom: 32px; padding-top: 24px; padding-bottom: 4px; }
+    .m6wd > .l4ne.featured:last-child { margin-bottom: 12px; }
+}

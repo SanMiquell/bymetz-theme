@@ -1,0 +1,386 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+        "hide_desktop": false,
+        "text_alignment": "start",
+        "hide_mobile": false,
+        "enable_share_button": true
+      }
+    },
+    "section_custom_liquid_GEheEy": {
+      "type": "section-custom-liquid",
+      "settings": {
+        "custom_liquid": "{%- comment -%}\nByMetz breadcrumb (product) — 1 regel\n- Productnaam: ellipsis (puntjes)\n- Home + categorie: géén puntjes\n- Back-pijl: zelfde kleur als Home-link (thema linkkleur) + dezelfde hoogte/uitlijning\n- Kruimelpad iets omhoog (dichter bij zoekbalk)\n- Geen JSON-LD (Custom Liquid editor blijft stabiel)\n{%- endcomment -%}\n\n{%- assign vendor_handle = product.vendor | handle -%}\n{%- assign category = nil -%}\n\n{%- if collection and collection.handle != vendor_handle -%}\n  {%- assign category = collection -%}\n{%- else -%}\n  {%- for col in product.collections reversed -%}\n    {%- if col.handle != vendor_handle -%}\n      {%- assign category = col -%}\n      {%- break -%}\n    {%- endif -%}\n  {%- endfor -%}\n{%- endif -%}\n\n{%- if category == nil and product.collections.size > 0 -%}\n  {%- assign category = product.collections.first -%}\n{%- endif -%}\n\n{%- assign back_fallback = routes.root_url -%}\n{%- if category -%}{%- assign back_fallback = category.url -%}{%- endif -%}\n\n<nav class=\"bymetz-bc\" aria-label=\"Kruimelpad\">\n  <a class=\"bymetz-bc__back\"\n     href=\"{{ back_fallback }}\"\n     aria-label=\"Vorige pagina\"\n     title=\"Terug\"\n     onclick=\"\n       try{\n         var r=document.referrer;\n         if(r && r.indexOf(location.origin)===0 && r!==location.href){location.href=r;return false;}\n         if(history.length>1){history.back();return false;}\n       }catch(e){}\n       return true;\">\n    <svg class=\"bymetz-bc__backicon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\n      <path d=\"M15 18l-6-6 6-6\" />\n    </svg>\n  </a>\n\n  <ol class=\"bymetz-bc__list\">\n    <li class=\"bymetz-bc__item\">\n      <a class=\"bymetz-bc__link bymetz-bc__link--home\" href=\"{{ routes.root_url }}\">Home</a>\n    </li>\n\n    {%- if category -%}\n      <li class=\"bymetz-bc__item\">\n        <a class=\"bymetz-bc__link bymetz-bc__link--cat\" href=\"{{ category.url }}\" title=\"{{ category.title }}\">\n          {{ category.title }}\n        </a>\n      </li>\n    {%- endif -%}\n\n    <li class=\"bymetz-bc__item bymetz-bc__item--current\" aria-current=\"page\">\n      <span class=\"bymetz-bc__current\" title=\"{{ product.title }}\">{{ product.title }}</span>\n    </li>\n  </ol>\n</nav>\n\n<style>\n  /* 1 regel + iets omhoog */\n  .bymetz-bc{\n    display:flex;\n    align-items:center;\n    gap:10px;\n    width:100%;\n    min-width:0;\n    white-space:nowrap;\n    overflow:hidden;\n    font-size:12px;\n    line-height:1.2;\n    margin-top:-10px; /* dichter bij zoekbalk */\n  }\n\n  /* Back-pijl: zelfde kleur als links (geen eigen kleur instellen) + zelfde hoogte */\n  .bymetz-bc__back{\n    flex:0 0 auto;\n    display:inline-flex;\n    align-items:center;\n    justify-content:center;\n    text-decoration:none;\n    line-height:1.2;\n    padding:0;\n    margin:0;\n  }\n  .bymetz-bc__backicon{\n    width:1em;\n    height:1em;\n    display:block;\n    stroke:currentColor;      /* pakt exact de linkkleur van je theme */\n    stroke-width:2.8;         /* iets dikker */\n    fill:none;\n    stroke-linecap:round;\n    stroke-linejoin:round;\n  }\n\n  .bymetz-bc__list{\n    flex:1 1 auto;\n    min-width:0;\n    display:flex;\n    align-items:center;\n    list-style:none;\n    margin:0;\n    padding:0;\n    overflow:hidden;\n    white-space:nowrap;\n  }\n\n  .bymetz-bc__item{\n    display:flex;\n    align-items:center;\n    min-width:0;\n    flex:0 0 auto;\n  }\n\n  .bymetz-bc__item + .bymetz-bc__item::before{\n    content:\"›\";\n    padding:0 8px;\n    opacity:.65;\n  }\n\n  /* Home + categorie: GEEN puntjes */\n  .bymetz-bc__link{\n    display:inline-block;\n    white-space:nowrap;\n    overflow:visible;\n    text-overflow:clip;\n    text-decoration:none;\n  }\n\n  /* (optioneel) categorie begrenzen ZONDER puntjes (alleen als hij extreem lang is) */\n  .bymetz-bc__link--cat{\n    max-width:260px;\n    overflow:hidden;\n    text-overflow:clip; /* geen ... */\n  }\n\n  /* Product: WEL puntjes */\n  .bymetz-bc__item--current{\n    flex:1 1 auto;\n    min-width:0;\n    overflow:hidden;\n  }\n  .bymetz-bc__current{\n    display:block;\n    width:100%;\n    overflow:hidden;\n    text-overflow:ellipsis;\n    white-space:nowrap;\n    font-weight:700;\n  }\n\n  @media (max-width: 640px){\n    .bymetz-bc{ margin-top:-20px; }\n    .bymetz-bc__link--cat{ max-width:180px; }\n  }\n</style>",
+        "spacing_desktop": 10,
+        "spacing_mobile": 10,
+        "fix_zindex": 0
+      }
+    },
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "vendor_BKxH8a": {
+          "type": "vendor",
+          "settings": {
+            "show_vendor_brand": false,
+            "show_vendor_name": true
+          }
+        },
+        "c7259cb9-7235-4028-b6df-3a68077fed80": {
+          "type": "title",
+          "settings": {
+            "layout": "title-right",
+            "title_font": "primary",
+            "title_size": "h2",
+            "show_product_rating": false,
+            "show_vendor_brand": false,
+            "show_vendor_name": false,
+            "layout_mobile": "title-bottom",
+            "mobile_title_size": "h3"
+          }
+        },
+        "3128ec1d-6aae-4a99-860f-8dc309fb10a2": {
+          "type": "short_description",
+          "disabled": true,
+          "settings": {
+            "show_read_more": true
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_tax": false,
+            "font_size": 20
+          }
+        },
+        "variant_selection": {
+          "type": "variant_selection",
+          "settings": {
+            "selection_type": "buttons",
+            "options": true,
+            "button_options": "Color",
+            "dropdown_options": "",
+            "show_variant_images": true,
+            "show_selected_variant_images": false,
+            "show_unavailable_variants": true,
+            "show_single_options": false,
+            "show_single_options_title": true,
+            "enable_selling_plans": false,
+            "size_name": "Size",
+            "sizechart_alignment": "left",
+            "sizechart_title": "Size chart",
+            "sizechart_text": "",
+            "sizechart_page": "",
+            "sizechart_image_width": 460,
+            "sizechart_liquid": "",
+            "sizechart_html": ""
+          }
+        },
+        "9f06611a-913e-48eb-9352-c0495b0c4d28": {
+          "type": "variant_bulk",
+          "disabled": true,
+          "settings": {
+            "title": "Selecteer aantal",
+            "show_variant_images": true,
+            "shorten_title": false,
+            "show_deliverytime": false
+          }
+        },
+        "inventory": {
+          "type": "inventory",
+          "settings": {}
+        },
+        "text_9aGT8b": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "color_palette": "scheme-4",
+            "text": "<p><strong>🎁 </strong><em><strong>Het is druk bij de bezorgdiensten door de feestdagen, waardoor je pakketje iets langer onderweg kan zijn. We doen ons best – dank je voor je begrip!</strong></em><strong> 💛</strong></p>"
+          }
+        },
+        "buy_button": {
+          "type": "buy_button",
+          "settings": {
+            "button_style": "plain",
+            "show_amount_selection": true,
+            "show_dynamic_buybutton": false,
+            "button_style_dynamic_buybutton": "plain",
+            "show_wishlist_button": false,
+            "preorder_label": "",
+            "preorder_label_color_palette": "light_2",
+            "preorder_show_dynamic_buybutton": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "dba33474-1617-41c1-a099-4253e3fb1a6d": {
+          "type": "spacer",
+          "disabled": true,
+          "settings": {
+            "height": 20,
+            "height_mobile": 20
+          }
+        },
+        "f8ac590a-608a-4ed2-8b0a-b0770e6c4733": {
+          "type": "spacer",
+          "disabled": true,
+          "settings": {
+            "height": 25,
+            "height_mobile": 20
+          }
+        },
+        "ee5e9f1c-a80a-4244-950f-03806a509775": {
+          "type": "shipping_timer",
+          "disabled": true,
+          "settings": {}
+        },
+        "usp_KtP3MT": {
+          "type": "usp",
+          "settings": {
+            "usp": "<p>Grootste Winkel van Nederland in <strong>Eindhoven</strong></p>",
+            "usp_item_icon": "store",
+            "image_width": 55
+          }
+        },
+        "80e67d89-9369-4ddb-8111-2aa1c36fb500": {
+          "type": "usp",
+          "settings": {
+            "usp": "<p>Gratis <strong>PostNL/DHL</strong> Verzending vanaf €29,-</p>",
+            "usp_item_icon": "default",
+            "image_width": 55
+          }
+        },
+        "usp_AEpmpF": {
+          "type": "usp",
+          "settings": {
+            "usp": "<p>Écht Familiebedrijf sinds <strong>1974</strong></p>",
+            "usp_item_icon": "default",
+            "image_width": 55
+          }
+        },
+        "usp_PKcPJF": {
+          "type": "usp",
+          "settings": {
+            "usp": "<p>Gratis Achteraf Betalen met <strong>Klarna</strong></p>",
+            "usp_item_icon": "default",
+            "image_width": 55
+          }
+        },
+        "custom_liquid_c8R8Bh": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "{%- liquid\n  assign bm_locale_raw = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl'\n  assign bm_locale = bm_locale_raw | downcase | replace: '_', '-'\n  assign bm_lang = bm_locale | split: '-' | first\n\n  assign bm_review_url = 'https://www.webwinkelkeur.nl/webshop/ByMetz-Tassen-Koffers_1205113/reviews?page=1'\n  assign bm_review_text = 'Beoordeeld als <strong>9,6</strong> door <strong>1.700+</strong> klanten.'\n\n  if bm_lang == 'en'\n    assign bm_review_url = 'https://www.valuedshops.com/webshop/ByMetz-Tassen-Koffers_1205113/reviews'\n    assign bm_review_text = 'Rated <strong>9.6</strong> by <strong>1,700+</strong> customers.'\n  elsif bm_lang == 'de'\n    assign bm_review_url = 'https://www.valuedshops.de/webshop/ByMetz-Tassen-Koffers_1205113/bewertungen'\n    assign bm_review_text = 'Bewertet mit <strong>9,6</strong> von <strong>1.700+</strong> Kunden.'\n  elsif bm_lang == 'fr'\n    assign bm_review_url = 'https://www.valuedshops.fr/boutique/ByMetz-Tassen-Koffers_1205113/avis'\n    assign bm_review_text = 'Noté <strong>9,6</strong> par <strong>1.700+</strong> clients.'\n  elsif bm_lang == 'es'\n    assign bm_review_url = 'https://www.valuedshops.com/spa/webshop/ByMetz-Tassen-Koffers_1205113/reviews'\n    assign bm_review_text = 'Calificado con <strong>9,6</strong> por <strong>1.700+</strong> clientes.'\n  elsif bm_lang == 'it'\n    assign bm_review_url = 'https://www.valuedshops.com/ita/webshop/ByMetz-Tassen-Koffers_1205113/reviews'\n    assign bm_review_text = 'Valutato <strong>9,6</strong> da <strong>1.700+</strong> clienti.'\n  endif\n-%}\n\n<a\n  class=\"bm-reviewbar\"\n  data-bm-reviewbar\n  href=\"{{ bm_review_url }}\"\n  rel=\"noopener\"\n  aria-label=\"Reviews\"\n>\n  <div class=\"bm-reviewbar__main\">\n    <div class=\"bm-reviewbar__stars\" aria-hidden=\"true\">\n      {%- for i in (1..5) -%}\n        <span class=\"bm-reviewbar__star-box\">\n          <span class=\"bm-reviewbar__star-fill\" data-bm-star-fill></span>\n          <span class=\"bm-reviewbar__star-icon\">\n            <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\">\n              <path d=\"M12 2.2l3.09 6.26 6.91 1-5 4.87 1.18 6.89L12 17.98 5.82 21.22 7 14.33 2 9.46l6.91-1L12 2.2z\" fill=\"currentColor\"></path>\n            </svg>\n          </span>\n        </span>\n      {%- endfor -%}\n    </div>\n\n    <p class=\"bm-reviewbar__text\" data-bm-review-text>\n      {{ bm_review_text }}\n    </p>\n  </div>\n\n  <span class=\"bm-reviewbar__logo-wrap\">\n    <img\n      class=\"bm-reviewbar__logo\"\n      src=\"https://dashboard.webwinkelkeur.nl/img/badges/icon_member.svg?m=1774934019\"\n      alt=\"WebwinkelKeur\"\n      loading=\"lazy\"\n    >\n  </span>\n</a>\n\n<style>\n  .bm-reviewbar {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    flex-wrap: nowrap;\n    gap: 12px;\n    width: 100%;\n    padding: 14px 18px;\n    border: 1px solid #e6e6e6;\n    border-radius: 8px;\n    background: #fff;\n    color: #1f1f1f;\n    text-decoration: none;\n    box-sizing: border-box;\n    overflow: hidden;\n  }\n\n  .bm-reviewbar__main {\n    display: flex;\n    align-items: center;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    gap: 12px;\n    min-width: 0;\n    flex: 1 1 auto;\n  }\n\n  .bm-reviewbar__stars {\n    display: flex;\n    align-items: center;\n    gap: 2px;\n    flex: 0 0 auto;\n  }\n\n  .bm-reviewbar__star-box {\n    position: relative;\n    width: 20px;\n    height: 20px;\n    background: #dcdce6;\n    overflow: hidden;\n    border-radius: 1px;\n    flex: 0 0 auto;\n  }\n\n  .bm-reviewbar__star-fill {\n    position: absolute;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    width: 0%;\n    background: #00b67a;\n    z-index: 1;\n  }\n\n  .bm-reviewbar__star-icon {\n    position: absolute;\n    inset: 0;\n    z-index: 2;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: #ffffff;\n  }\n\n  .bm-reviewbar__star-icon svg {\n    width: 13px;\n    height: 13px;\n    display: block;\n  }\n\n  .bm-reviewbar__text {\n    margin: 0;\n    min-width: 0;\n    font-size: clamp(13px, 1.6vw, 16px);\n    line-height: 1.2;\n    color: #1f1f1f;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  .bm-reviewbar__text strong {\n    font-weight: 700;\n  }\n\n  .bm-reviewbar__logo-wrap {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    flex: 0 0 auto;\n  }\n\n  .bm-reviewbar__logo {\n    display: block;\n    width: clamp(34px, 4vw, 44px);\n    height: clamp(34px, 4vw, 44px);\n    min-width: clamp(34px, 4vw, 44px);\n    object-fit: contain;\n  }\n\n  @media screen and (max-width: 749px) {\n    .bm-reviewbar {\n      padding: 12px 14px;\n      gap: 10px;\n    }\n\n    .bm-reviewbar__main {\n      flex-direction: row !important;\n      align-items: center;\n      gap: 10px;\n    }\n\n    .bm-reviewbar__stars {\n      gap: 2px;\n    }\n\n    .bm-reviewbar__star-box {\n      width: 17px;\n      height: 17px;\n    }\n\n    .bm-reviewbar__star-icon svg {\n      width: 11px;\n      height: 11px;\n    }\n\n    .bm-reviewbar__text {\n      font-size: 13px;\n      line-height: 1.15;\n      white-space: nowrap;\n    }\n\n    .bm-reviewbar__logo {\n      width: 34px;\n      height: 34px;\n      min-width: 34px;\n    }\n  }\n</style>\n\n<script>\n  (function () {\n    var shopId = '1205113';\n    var publicCode = '03e5774fc5bbb511f818d7058ac6f114faf0b8f071780e637442ece7f3958bbd';\n    var themeLang = {{ bm_lang | json }};\n\n    var locale = (themeLang || document.documentElement.lang || navigator.language || 'nl')\n      .toLowerCase()\n      .replace('_', '-')\n      .split('-')[0];\n\n    var config = {\n      nl: {\n        url: 'https://www.webwinkelkeur.nl/webshop/ByMetz-Tassen-Koffers_1205113/reviews?page=1',\n        intl: 'nl-NL',\n        fallbackScore: 9.6,\n        fallbackCount: 1768,\n        text: function (score, count) {\n          return 'Beoordeeld als <strong>' + score + '</strong> door <strong>' + count + '</strong> klanten.';\n        }\n      },\n      en: {\n        url: 'https://www.valuedshops.com/webshop/ByMetz-Tassen-Koffers_1205113/reviews',\n        intl: 'en-US',\n        fallbackScore: 9.6,\n        fallbackCount: 1768,\n        text: function (score, count) {\n          return 'Rated <strong>' + score + '</strong> by <strong>' + count + '</strong> customers.';\n        }\n      },\n      de: {\n        url: 'https://www.valuedshops.de/webshop/ByMetz-Tassen-Koffers_1205113/bewertungen',\n        intl: 'de-DE',\n        fallbackScore: 9.6,\n        fallbackCount: 1768,\n        text: function (score, count) {\n          return 'Bewertet mit <strong>' + score + '</strong> von <strong>' + count + '</strong> Kunden.';\n        }\n      },\n      fr: {\n        url: 'https://www.valuedshops.fr/boutique/ByMetz-Tassen-Koffers_1205113/avis',\n        intl: 'fr-FR',\n        fallbackScore: 9.6,\n        fallbackCount: 1768,\n        text: function (score, count) {\n          return 'Noté <strong>' + score + '</strong> par <strong>' + count + '</strong> clients.';\n        }\n      },\n      es: {\n        url: 'https://www.valuedshops.com/spa/webshop/ByMetz-Tassen-Koffers_1205113/reviews',\n        intl: 'es-ES',\n        fallbackScore: 9.6,\n        fallbackCount: 1768,\n        text: function (score, count) {\n          return 'Calificado con <strong>' + score + '</strong> por <strong>' + count + '</strong> clientes.';\n        }\n      },\n      it: {\n        url: 'https://www.valuedshops.com/ita/webshop/ByMetz-Tassen-Koffers_1205113/reviews',\n        intl: 'it-IT',\n        fallbackScore: 9.6,\n        fallbackCount: 1768,\n        text: function (score, count) {\n          return 'Valutato <strong>' + score + '</strong> da <strong>' + count + '</strong> clienti.';\n        }\n      }\n    };\n\n    var active = config[locale] || config.nl;\n    var bar = document.querySelector('[data-bm-reviewbar]');\n    if (!bar) return;\n\n    function clamp(num, min, max) {\n      return Math.min(Math.max(num, min), max);\n    }\n\n    function formatScore(score, localeCode) {\n      return new Intl.NumberFormat(localeCode, {\n        minimumFractionDigits: 1,\n        maximumFractionDigits: 1\n      }).format(score);\n    }\n\n    function formatCount(count, localeCode) {\n      return new Intl.NumberFormat(localeCode).format(count);\n    }\n\n    function normalizeTo10Scale(rawValue) {\n      var raw = Number(rawValue);\n      if (!isFinite(raw)) return null;\n      if (raw <= 5.05) return raw * 2;\n      return raw;\n    }\n\n    function setTrustpilotStars(scoreOutOf10) {\n      var fills = bar.querySelectorAll('[data-bm-star-fill]');\n      var scoreOutOf5 = clamp((Number(scoreOutOf10) || 0) / 2, 0, 5);\n\n      fills.forEach(function (fillEl, index) {\n        var fillAmount = clamp(scoreOutOf5 - index, 0, 1);\n        fillEl.style.width = (fillAmount * 100) + '%';\n      });\n    }\n\n    function render(scoreOutOf10, reviewCount) {\n      var textEl = bar.querySelector('[data-bm-review-text]');\n      var safeScore = clamp(Number(scoreOutOf10) || 0, 0, 10);\n      var safeCount = Math.max(0, Number(reviewCount) || 0);\n\n      bar.href = active.url;\n      textEl.innerHTML = active.text(\n        formatScore(safeScore, active.intl),\n        formatCount(safeCount, active.intl)\n      );\n      setTrustpilotStars(safeScore);\n      bar.setAttribute('aria-label', textEl.textContent.replace(/\\s+/g, ' ').trim());\n    }\n\n    render(active.fallbackScore, active.fallbackCount);\n\n    if (!publicCode) return;\n\n    var endpoint =\n      'https://dashboard.webwinkelkeur.nl/api/1.0/ratings_summary.json?id=' +\n      encodeURIComponent(shopId) +\n      '&public_code=' +\n      encodeURIComponent(publicCode);\n\n    fetch(endpoint, { method: 'GET' })\n      .then(function (response) {\n        if (!response.ok) throw new Error('HTTP ' + response.status);\n        return response.json();\n      })\n      .then(function (payload) {\n        var rawAverage = Number(payload && payload.data && payload.data.rating_average);\n        var amount = Number(payload && payload.data && payload.data.amount);\n        var liveScore = normalizeTo10Scale(rawAverage);\n\n        if (!isFinite(liveScore) || !isFinite(amount)) {\n          throw new Error('Invalid API response');\n        }\n\n        render(liveScore, amount);\n      })\n      .catch(function (error) {\n        console.warn('ByMetz review bar fallback actief:', error);\n      });\n  })();\n</script>"
+          }
+        },
+        "pickup": {
+          "type": "pickup",
+          "settings": {}
+        },
+        "payments_xpcKBt": {
+          "type": "payments",
+          "settings": {
+            "alignment": "start"
+          }
+        },
+        "codes_TJiVFL": {
+          "type": "codes",
+          "settings": {
+            "show_sku": true,
+            "show_barcode": true
+          }
+        }
+      },
+      "block_order": [
+        "vendor_BKxH8a",
+        "c7259cb9-7235-4028-b6df-3a68077fed80",
+        "3128ec1d-6aae-4a99-860f-8dc309fb10a2",
+        "price",
+        "variant_selection",
+        "9f06611a-913e-48eb-9352-c0495b0c4d28",
+        "inventory",
+        "text_9aGT8b",
+        "buy_button",
+        "dba33474-1617-41c1-a099-4253e3fb1a6d",
+        "f8ac590a-608a-4ed2-8b0a-b0770e6c4733",
+        "ee5e9f1c-a80a-4244-950f-03806a509775",
+        "usp_KtP3MT",
+        "80e67d89-9369-4ddb-8111-2aa1c36fb500",
+        "usp_AEpmpF",
+        "usp_PKcPJF",
+        "custom_liquid_c8R8Bh",
+        "pickup",
+        "payments_xpcKBt",
+        "codes_TJiVFL"
+      ],
+      "settings": {
+        "width": "boxed",
+        "media_layout": "slider",
+        "images_grid_spacing": 8,
+        "custom_product_image_ratio": 100,
+        "fill_images": false,
+        "fill_not_first": false,
+        "images_padding": 0,
+        "images_vertical_position": 0,
+        "show_thumbs_desktop": true,
+        "show_thumbs_mobile": true,
+        "thumbs_layout": "aside",
+        "img_info": "",
+        "img_info_color_palette": "accent",
+        "width_mobile": "wide",
+        "mobile_tabs_title_size": "h5",
+        "multiply_bg_mobile": true
+      }
+    },
+    "tabs": {
+      "type": "product-tabs",
+      "blocks": {
+        "description": {
+          "type": "description",
+          "settings": {
+            "content_position": "left",
+            "text_alignment": "left",
+            "content_width": 1280,
+            "tab_title": "Productomschrijving",
+            "icon": "none",
+            "header_image_width": 20,
+            "title": "",
+            "title_underline_style": "none",
+            "enable_read_more": false,
+            "mobile_collapse": false,
+            "show_heading_mobile": true
+          }
+        },
+        "specs": {
+          "type": "specs",
+          "settings": {
+            "tab_title": "Specificaties",
+            "icon": "none",
+            "header_image_width": 25,
+            "title": "<h3>Technische gegevens {{ product.title }}</h3>",
+            "title_underline_style": "none",
+            "specifications": "{{ product.metafields.custom.specifications | metafield_tag }}",
+            "mobile_collapse": true,
+            "show_heading_mobile": false
+          }
+        },
+        "pros_cons": {
+          "type": "pros_cons",
+          "disabled": true,
+          "settings": {
+            "tab_title": "Pros and cons",
+            "icon": "none",
+            "header_image_width": 25,
+            "title": "<h2>Pros and cons</h2>",
+            "title_underline_style": "none",
+            "pros": "",
+            "cons": "",
+            "mobile_collapse": true,
+            "show_heading_mobile": false
+          }
+        },
+        "product_recommendations": {
+          "type": "product_recommendations",
+          "settings": {
+            "tab_title": "Gerelateerde producten",
+            "icon": "none",
+            "header_image_width": 20,
+            "title": "<h3>Gerelateerde producten</h3>",
+            "title_underline_style": "none",
+            "tab_behaviour": "content_in_tab",
+            "recommended_products_qty": 4,
+            "number_of_items": 4,
+            "mobile_collapse": true,
+            "show_heading_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "specs",
+        "pros_cons",
+        "product_recommendations"
+      ],
+      "custom_css": [],
+      "settings": {
+        "tabs_alignment": "left",
+        "tabs_title_size": "h4",
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "fix_zindex": 0
+      }
+    },
+    "reviews": {
+      "type": "product-reviews",
+      "disabled": true,
+      "settings": {
+        "text_alignment": "start",
+        "title": "<h3>Reviews</h3>",
+        "title_underline_style": "none",
+        "spacing_desktop": 50,
+        "spacing_mobile": 30,
+        "mobile_collapse": false
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "width": "boxed",
+        "recommended_products_qty": 6,
+        "number_of_items": 4,
+        "text_alignment": "start",
+        "title": "<h2>Aanbevolen producten</h2>",
+        "title_underline_style": "none",
+        "spacing_desktop": 50,
+        "spacing_mobile": 0,
+        "mobile_collapse": false
+      }
+    },
+    "section_recently_viewed_products_P8d3UJ": {
+      "type": "section-recently-viewed-products",
+      "settings": {
+        "number_of_items": 4,
+        "image_ratio": 100,
+        "show_in_circle": false,
+        "fill_images": false,
+        "text_alignment": "start",
+        "title": "<h3>Eerder door jou bekeken</h3>",
+        "title_underline_style": "none",
+        "content_alignment": "start",
+        "show_labels": true,
+        "show_title": true,
+        "show_price": true,
+        "show_stock": true,
+        "show_description": false,
+        "show_reviews": false,
+        "show_compare": false,
+        "show_swatches": true,
+        "enable_animations": false,
+        "spacing_desktop": 10,
+        "spacing_mobile": 10,
+        "fix_zindex": 0
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "section_custom_liquid_GEheEy",
+    "main-product",
+    "tabs",
+    "reviews",
+    "recommendations",
+    "section_recently_viewed_products_P8d3UJ"
+  ]
+}

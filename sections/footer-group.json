@@ -1,0 +1,154 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:static_sections.footer.name",
+  "sections": {
+    "section_usp_bar_acANpK": {
+      "type": "section-usp-bar",
+      "blocks": {
+        "usp_Kf77p4": {
+          "type": "usp",
+          "settings": {
+            "usp": "<p>14 dagen bedenktijd – <strong>Zonder zorgen</strong></p>",
+            "usp_item_icon": "default",
+            "image_width": 50
+          }
+        },
+        "usp_tKrPmm": {
+          "type": "usp",
+          "settings": {
+            "usp": "<p><strong>Verzekerd</strong> verzonden met <strong>PostNL/DHL</strong> Express</p>",
+            "usp_item_icon": "default",
+            "image_width": 55
+          }
+        },
+        "usp_hTNxm7": {
+          "type": "usp",
+          "settings": {
+            "usp": "<p><strong>Gratis verzending</strong> vanaf €29 naar <strong>Nederland & België</strong>!</p>",
+            "usp_item_icon": "default",
+            "image_width": 55
+          }
+        }
+      },
+      "block_order": [
+        "usp_Kf77p4",
+        "usp_tKrPmm",
+        "usp_hTNxm7"
+      ],
+      "settings": {
+        "color_palette": "",
+        "overlay_opacity": 100,
+        "width": "boxed",
+        "content_position": "left",
+        "layout": "rows",
+        "autoplay": false,
+        "autoplay_seconds": 3,
+        "show_arrows": false,
+        "font_size": 1,
+        "spacing_desktop": 0,
+        "spacing_mobile": 0,
+        "fix_zindex": 0
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "customer_support_AzxaNT": {
+          "type": "customer_support",
+          "settings": {
+            "title": "",
+            "title_underline_style": "none",
+            "customer_support_img_width": 50,
+            "customer_support_offset_right": 0,
+            "customer_support_offset_bottom": 0,
+            "extra_customer_support": "<p><strong>ByMetz.nl - Tassen & Koffers<br/></strong>Winkelcentrum Woensel 59<br/>5625 AD | Eindhoven<br/>Nederland</p><p>KvK-nummer: <strong>72092343</strong><br/>Btw-nummer: <strong>NL858982869B01</strong></p><p><strong>Tel: </strong><a href=\"https://wa.me/message/NHENYUN3AYQMN1\" target=\"_blank\" title=\"Telefoon & WhatsApp\">040 202 4214<br/></a><strong>E-mail: </strong><a href=\"mailto:info@bymetz.nl\">info@bymetz.nl</a></p>",
+            "show_socials": true,
+            "socials_in_circle": true,
+            "socials_color_palette": "scheme-1",
+            "socials_color_active": "primary",
+            "enable_follow_on_shop": false,
+            "customer_support_img_width_mobile": 100,
+            "customer_support_offset_right_mobile": 0,
+            "customer_support_offset_bottom_mobile": 0
+          }
+        },
+        "text_8VyVdW": {
+          "type": "text",
+          "settings": {
+            "title": "Service Pagina's",
+            "title_underline_style": "none",
+            "text": "<p><a href=\"/pages/payment-methods\" title=\"Betaalmethoden\">Betaalmethoden</a></p><p><a href=\"/pages/shipping-returns\" title=\"Retouren & Verzending\">Retour & Verzending</a></p><p><a href=\"/pages/klachten-en-garantie\" title=\"Garantie & Klachten\">Garantie & Klachten</a></p><p><a href=\"/pages/privacy-policy\" title=\"Privacy Policy\">Privacy Policy</a></p><p><a href=\"/pages/general-terms-conditions\" title=\"Algemene Voorwaarden\">Algemene Voorwaarden</a><a href=\"/pages/payment-methods\" title=\"Betaalmethoden\"><br/></a></p>"
+          }
+        },
+        "text_PB4N8L": {
+          "type": "text",
+          "settings": {
+            "title": "Informatie",
+            "title_underline_style": "none",
+            "text": "<p><a href=\"/pages/b2b-zakelijke-bestelling-koffers-tassen-rugzakken\" title=\"B2B - Zakelijke bestellingen\">Zakelijke Bestellingen - B2B</a></p><p><a href=\"/pages/about\" title=\"Over Metz\">Over Metz</a></p><p><a href=\"/pages/tassenwinkel-eindhoven\" title=\"Tassenwinkel Eindhoven\">Tassenwinkel Eindhoven</a></p><p><a href=\"/blogs/blog\" title=\"Blog\">Blog</a><a href=\"/pages/payment-methods\" title=\"Betaalmethoden\"><br/></a></p>"
+          }
+        },
+        "7b798127-8dcc-42f5-b8a4-e958ce133921": {
+          "type": "menu",
+          "disabled": true,
+          "settings": {
+            "menu": "footer",
+            "split_menu": false,
+            "title_font": "primary"
+          }
+        },
+        "newsletter_9JpqiT": {
+          "type": "newsletter",
+          "settings": {
+            "title": "ByMetz Family Member",
+            "title_underline_style": "none",
+            "newsletter_text": "<p>Word nu lid van de ByMetz Family en krijg altijd de laagste prijs op ons hele assortiment, in de winkel én webshop. Plus extra voordelen! Meld je hier aan.</p>",
+            "footer_button_style": "primary plain",
+            "enable_newsletter_terms_checkbox": false,
+            "newsletter_terms_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "customer_support_AzxaNT",
+        "text_8VyVdW",
+        "text_PB4N8L",
+        "7b798127-8dcc-42f5-b8a4-e958ce133921",
+        "newsletter_9JpqiT"
+      ],
+      "settings": {
+        "footer_color": "scheme-1",
+        "column_text_alignment": "left",
+        "content_position": "left",
+        "title_size_blocks": "h5",
+        "bottom_color": "scheme-3",
+        "bottom_border_opacity": 100,
+        "bottom_border_width": "wide",
+        "bottom_content_alignment": "start",
+        "bottom_img": "shopify://shop_images/by-metz-logo-groot.png",
+        "bottom_img_width": 100,
+        "bottom_img_link": "",
+        "enable_country_selector": false,
+        "enable_language_selector": true,
+        "enable_follow_on_shop": false,
+        "liquid": "",
+        "show_payment_methods": true,
+        "spacing_desktop": 20,
+        "spacing_mobile": 0
+      }
+    }
+  },
+  "order": [
+    "section_usp_bar_acANpK",
+    "footer"
+  ]
+}

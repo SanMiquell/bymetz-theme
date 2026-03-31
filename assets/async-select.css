@@ -1,0 +1,26 @@
+.l4cl [style*=--dh] figure .syk-variant-picker-wrapper .syk-variant-picker { max-height: calc(var(--dh) - 60px); }
+.syk-variant-picker-wrapper.is-open .syk-variant-picker { display: block; }
+.syk-variant-picker-wrapper.up .syk-variant-picker { top: unset; bottom: 100%; border-radius: var(--b2i) var(--b2i) 0 0; border-top-width: 1px; border-bottom-width: 0; }
+.syk-variant-picker-wrapper.is-open.up .syk-variant-picker-button { border-radius: 0 0 var(--b2i) var(--b2i); }
+.syk-variant-picker-wrapper.is-open .syk-variant-picker-button { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.syk-variant-picker-wrapper.is-open .syk-variant-picker-button:before { transform: rotate(180deg); }
+.syk-variant-picker-wrapper .syk-variant-picker-button span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option { position: relative; z-index: 2; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; min-height: calc(var(--main_fz)* 3.1428571429); padding: calc(var(--main_fz)* .3571428571) calc(var(--main_fz)* 1.1428571429); color: var(--custom_input_fg); font-weight: var(--main_fw); text-decoration: none; text-align: var(--text_align_start); cursor: pointer; margin: 0; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option:before { content: ""; display: block; overflow: hidden; position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: -1; text-align: left; text-indent: -3000em; direction: ltr; }
+[data-whatin=mouse] .syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option:hover:before { background: var(--custom_input_fg); opacity: .05; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option input { display: none; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option .img { position: relative; width: 42px; margin: 0 20px 0 0; padding-top: calc(var(--ratio)* 42px); flex-shrink: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option .img img { display: block; position: absolute; left: 0; right: 0; top: 0; bottom: 0; width: 100%!important; height: 100%!important; max-height: none!important; object-fit: contain; object-position: center center; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option span { margin-left: 0; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option .text { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin: 0; }
+.syk-variant-picker-wrapper:not(.dis-click) .syk-variant-picker .syk-variant-option.disabled { cursor: default; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option.disabled-unavailable { opacity: 0.5; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option.disabled .text { text-decoration: line-through!important; opacity: .53; }
+.syk-variant-picker-wrapper .syk-variant-picker .syk-variant-option .text .small { opacity: .5; font-size: .85em; margin: 0; }
+#root .m6pn form:has(.syk-variant-picker-initialized) { position: relative; z-index: 99!important; }
+#root .f8sr .syk-variant-picker-wrapper .syk-variant-picker-button { overflow: hidden; position: relative; top: -1px; min-width: 12px; height: 26px; padding: 0 21px 0 0; border-radius: 0; border-width: 0; background-color: #0000; color: inherit!important; font-weight: var(--main_fw_strong); font-size: 1em; text-overflow: ellipsis; white-space: nowrap; line-height: 26px; }
+#root .f8sr .syk-variant-picker-wrapper .syk-variant-picker-button:before { left: auto; right: 0; width: auto; color: inherit; }
+#root .f8sr .syk-variant-picker-wrapper .syk-variant-picker { left: auto; right: 0; top: 100%; width: auto!important; min-width: calc(100% + 16px); padding: 6px 0; box-shadow: 0 2px 2px #0000000f; border-radius: var(--b2r); border-width: 0; white-space: nowrap; }
+@media only screen and (min-width: 47.5em) { .l4ca.compact.with-form footer:has(select).submit { display: flex!important; }}
+@media only screen and (min-width: 760px) {  html #root .m6pn .l4ca .syk-variant-picker-wrapper + select:is(.mobile-only) { display: none; }  }
+@media only screen and (max-width: 760px) {  .syk-variant-picker-wrapper + select { --main_fz: 13px; font-size: var(--btn_fz) !important; }  }
