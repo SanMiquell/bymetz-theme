@@ -1,7 +1,5 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
-  assign total_stock = current_variant.inventory_quantity
-  assign inventory_tracking = false
 
   assign deliverytime_in_stock = product.metafields.custom.deliverytime_in_stock
   assign deliverytime_not_in_stock = product.metafields.custom.deliverytime_not_in_stock
@@ -12,22 +10,18 @@
     assign deliverytime_not_in_stock = settings.default_product_deliverytime_not_in_stock
   endunless
 
-  if current_variant.inventory_management == 'shopify'
-    assign inventory_tracking = true
-  endif
-
   assign bm_show = false
-  if inventory_tracking
-    if total_stock > 0 or current_variant.inventory_policy == 'continue'
-      assign bm_show = true
-      assign bm_in_stock = true
-    elsif deliverytime_not_in_stock != blank
-      assign bm_show = true
-      assign bm_in_stock = false
-    endif
-  elsif deliverytime_in_stock != blank and settings.show_deliverytime_always
-    assign bm_show = true
+  assign bm_in_stock = false
+
+  if current_variant.available
     assign bm_in_stock = true
+    if deliverytime_in_stock != blank
+      assign bm_show = true
+    endif
+  else
+    if deliverytime_not_in_stock != blank
+      assign bm_show = true
+    endif
   endif
 -%}
 
