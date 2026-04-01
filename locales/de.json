@@ -788,78 +788,78 @@
             "saved_payment_methods_not_allowed": "„Opgeslagen betaalmethoden“ ist nicht zulässig.",
             "saved_payment_methods_not_enabled": "„Opgeslagen betaalmethoden“ ist für diesen Shop nicht aktiviert.",
             "store_credit_not_enabled": "Shop-Guthaben ist für diesen Shop nicht aktiviert.",
-            "store_credit_account_not_found": "Store-Guthabenkonto nicht gefunden.",
-            "store_credit_account_mismatch": "Das Guthabenkonto im Store stimmt nicht mit der Identität des Käufers überein.",
-            "store_credit_mismatched_currency": "Die Währung des Guthabenkontos im Shop stimmt nicht mit der Währung des Bezahlvorgangs überein.",
-            "store_credit_insufficient_funds": "Das Guthabenkonto im Geschäft ist nicht ausreichend gedeckt.",
-            "store_credit_buying_gift_card": "Sie können keinen Geschenkgutschein mit Store-Guthaben erwerben.",
-            "gift_cards_not_allowed_for_b2b": "Geschenkgutscheine sind in B2B-Shops nicht erlaubt.",
-            "method_required": "Es muss eine Zahlungsart vorgeschlagen werden.",
+            "store_credit_account_not_found": "Guthabenkonto für Shop-Guthaben nicht gefunden.",
+            "store_credit_account_mismatch": "Das Shop-Guthabenkonto stimmt nicht mit der Identität des Käufers überein.",
+            "store_credit_mismatched_currency": "Die Währung des Shop-Guthabenkontos stimmt nicht mit der Währung des Checkouts überein.",
+            "store_credit_insufficient_funds": "Im Shop-Guthabenkonto ist nicht genügend Guthaben vorhanden.",
+            "store_credit_buying_gift_card": "Mit Shop-Guthaben kannst du keinen Geschenkgutschein kaufen.",
+            "gift_cards_not_allowed_for_b2b": "Geschenkgutscheine sind in B2B-Shops nicht zulässig.",
+            "method_required": "Es muss eine Zahlungsmethode vorgeschlagen werden.",
             "paypal_express_address_invalid": "PayPal hat eine ungültige Adresse zurückgegeben.",
             "shop_cash_unsupported_currency": "Shop Cash unterstützt diese Währung nicht.",
-            "saved_payment_methods_cvv_verification_disabled": "Die ausgewählte Zahlungsmethode erfordert eine CVV/CVC-Verifizierung, ist für diesen Shop jedoch nicht aktiviert. Verwenden Sie eine andere Zahlungsmethode.",
+            "saved_payment_methods_cvv_verification_disabled": "Für die ausgewählte Zahlungsmethode ist CVV/CVC-Verifizierung erforderlich, aber diese ist für diesen Shop nicht aktiviert. Verwende eine andere Zahlungsmethode.",
             "shop_cash_not_available": "Shop Cash wird bei diesem Checkout nicht unterstützt.",
             "shop_cash_not_found": "Shop-Bargeld wurde nicht gefunden."
           },
           "tip": {
-            "not_accepted_by_shop": "Der Shop akzeptiert kein Trinkgeld.",
-            "only_one_tip_line_allowed": "Regeln für mehrere Trinkgelder werden nicht unterstützt.",
-            "tips_not_allowed_for_b2b": "In B2B-Shops ist das Geben von Trinkgeldern nicht gestattet.",
-            "currency_change_reset": "Das Trinkgeld wurde aufgrund einer Währungsumstellung zurückgesetzt.",
-            "tips_not_allowed_for_deferred_purchase_options": "Trinkgeld wird für aufgeschobene Kaufoptionen noch nicht unterstützt."
+            "not_accepted_by_shop": "Shop akzeptiert keine Trinkgelder.",
+            "only_one_tip_line_allowed": "Mehrere Trinkgeldzeilen werden nicht unterstützt.",
+            "tips_not_allowed_for_b2b": "Trinkgelder sind in B2B-Shops nicht zulässig.",
+            "currency_change_reset": "Trinkgeld wurde aufgrund einer Änderung der Währung zurückgesetzt.",
+            "tips_not_allowed_for_deferred_purchase_options": "Trinkgelder werden für verzögerte Kaufoptionen noch nicht unterstützt."
           },
           "sale_attribution": {
-            "draft_order_not_exist": "Dieser Bestellentwurf ist im aktuellen Shop nicht vorhanden.",
-            "staff_member_not_exist": "Dieser Mitarbeiter ist in der aktuellen Filiale nicht bekannt.",
-            "location_not_exist": "Dieser Standort ist im aktuellen Geschäft nicht vorhanden.",
-            "point_of_sale_device_not_exist": "Dieses Point-of-Sale-Gerät ist im aktuellen Geschäft nicht vorhanden.",
-            "unresolvable_target_merchandise_lines": "Die vorgeschlagenen Umsatzaufteilungen sind im bestehenden Verhandlungskontext nicht lösbar."
+            "draft_order_not_exist": "Diese Entwurf-Bestellung existiert nicht im aktuellen Shop.",
+            "staff_member_not_exist": "Dieser Mitarbeiter ist im aktuellen Shop nicht bekannt.",
+            "location_not_exist": "Dieser Standort existiert im aktuellen Shop nicht.",
+            "point_of_sale_device_not_exist": "Dieses Verkaufsstellen-Gerät existiert im aktuellen Shop nicht.",
+            "unresolvable_target_merchandise_lines": "Die vorgeschlagenen Verkaufszuordnungen lassen sich im vorhandenen Verhandlungskontext nicht auflösen."
           },
           "non_negotiable": {
-            "missing_non_negotiable_terms": "Das Angebot Ihres Käufers muss nicht verhandelbare_Bedingungen enthalten.",
-            "invalid_signature": "Die Signatur für {{target_terms}} ist ungültig."
+            "missing_non_negotiable_terms": "Der Vorschlag deines Käufers muss non-negotiable_terms enthalten.",
+            "invalid_signature": "Die Signatur für {{target_terms}}  ist ungültig."
           },
           "inventory": {
-            "missing_quantity_value": "Das Feld „Menge“ fehlt in den Inventarzeilen des Käufers.",
-            "changing_behavior_not_allowed": "Dieser Kunde ist nicht berechtigt, die Inventarfunktionalität zu ändern.",
-            "only_one_inventory_behavior_allowed": "Derzeit ist pro Kasse nur eine Inventarfunktion zulässig."
+            "missing_quantity_value": "Das Feld „Menge“ fehlt in den Bestandsregeln des Käufers.",
+            "changing_behavior_not_allowed": "Dieser Kunde ist nicht berechtigt, Bestandsfunktionen zu ändern.",
+            "only_one_inventory_behavior_allowed": "Derzeit ist pro Checkout nur eine Bestandsfunktion zulässig."
           },
           "optional_duties": {
-            "optional_duties_not_permitted": "Die Ablehnung von Zöllen ist an dieser Kasse nicht gestattet."
+            "optional_duties_not_permitted": "Bei diesem Checkout ist das Verweigern von Zöllen nicht zulässig."
           },
           "attribution": {
-            "retail_attribution_not_allowed": "Eine Einzelhandelszuteilung ist an dieser Kasse nicht zulässig.",
-            "retail_attribution_required": "An dieser Kasse ist eine Einzelhandelszuordnung erforderlich."
+            "retail_attribution_not_allowed": "Bei diesem Checkout ist die Retail-Zuordnung nicht zulässig.",
+            "retail_attribution_required": "Bei diesem Checkout ist die Retail-Zuordnung erforderlich."
           },
           "captcha": {
-            "metadata_missing": "Das Ausfüllen eines Captchas ist an dieser Kasse obligatorisch.",
-            "metadata_mismatch": "Der angegebene Captcha-Anbieter und -Typ stimmen nicht mit den erwarteten Werten überein.",
-            "token_missing": "Schließen Sie diesen Checkout ab, indem Sie ein Captcha-Token eingeben.",
-            "job_enqueue_failed": "Der Captcha-Validierungsauftrag kann nicht in die Warteschlange gestellt werden.",
-            "job_already_queued": "Die Captcha-Validierung wurde für dieses Token bereits in die Warteschlange gestellt.",
-            "token_expired": "Das eingegebene Captcha-Token ist abgelaufen. Führen Sie ein neues Captcha aus, um mit dem Bezahlen fortzufahren.",
-            "token_invalid": "Das angegebene Captcha-Token war ungültig. Führen Sie ein neues Captcha aus, um mit dem Bezahlen fortzufahren.",
-            "token_not_valid_for_session": "Das angegebene Captcha kann an dieser Kasse nicht verwendet werden."
+            "metadata_missing": "Bei diesem Checkout ist das Ausfüllen eines Captchas verpflichtend.",
+            "metadata_mismatch": "Der angegebene Captcha-Anbieter und der Typ stimmen nicht mit den erwarteten Werten überein.",
+            "token_missing": "Schließe diesen Checkout ab, indem du einen Captcha-Token eingibst.",
+            "job_enqueue_failed": "Die Captcha-Validierungsaufgabe kann nicht in die Warteschlange gestellt werden.",
+            "job_already_queued": "Captcha-Validierung wurde bereits für diesen Token in die Warteschlange gestellt.",
+            "token_expired": "Der eingegebene Captcha-Token ist abgelaufen. Führe ein neues Captcha aus, um mit dem Checkout fortzufahren.",
+            "token_invalid": "Der angegebene Captcha-Token war ungültig. Führe ein neues Captcha aus, um mit dem Checkout fortzufahren.",
+            "token_not_valid_for_session": "Kann das angegebene Captcha bei diesem Checkout nicht verwenden."
           },
           "fx_reconciliation_override": {
-            "shop_currency_mismatch": "Der erhaltene Betrag muss in der Währung des Geschäfts erfolgen."
+            "shop_currency_mismatch": "Der erhaltene Betrag muss in der Währung des Shops sein."
           },
           "checkout_source": {
-            "revoked": "Diese Kasse ist nicht mehr verfügbar."
+            "revoked": "Dieser Checkout ist nicht mehr verfügbar."
           }
         },
         "full_price": "Voller Preis:",
-        "title": "Kasse - {{shopName}}",
-        "full_title": "{{pageTitle}} - {{shopName}} - Kasse",
-        "loading_title": "Kasse - {{shopName}}",
+        "title": "Checkout - {{shopName}}",
+        "full_title": "{{pageTitle}} - {{shopName}} - checkout",
+        "loading_title": "Checkout - {{shopName}}",
         "display_name": "{{firstName}} {{lastName}}",
         "google_map_title": "Google-Karte",
-        "submit_order_button_label": "Bestellung abschicken",
-        "submit_for_review_button_label": "Zur Überprüfung einreichen",
-        "submit_for_review_notice_label": "Die Zahlung erfolgt erst nach Prüfung Ihrer Bestellung",
-        "continue_to_payment_plans_button_label": "Fahren Sie mit den Zahlungsplänen fort",
-        "back_button_label": "Rückgaben",
-        "choose_delivery_strategy": "Wählen Sie eine Versandart",
+        "submit_order_button_label": "Bestellung aufgeben",
+        "submit_for_review_button_label": "Zur Bestätigung aufgeben",
+        "submit_for_review_notice_label": "Die Zahlung ist erst fällig, wenn deine Bestellung geprüft wurde",
+        "continue_to_payment_plans_button_label": "Weiter zu Zahlungsplänen",
+        "back_button_label": "Retouren",
+        "choose_delivery_strategy": "Wähle eine Versandmethode",
         "autocomplete_zero_item": "Keine Artikel verfügbar",
         "autocomplete_powered_by_google": "Ermöglicht durch {{brandName}}",
         "submit": "Senden",
