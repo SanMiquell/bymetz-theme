@@ -288,49 +288,49 @@
     "accessibility": {
       "choose_category": "Choose a category",
       "close": "Close",
-      "enable_javascript_message": "Enable JavaScript to enhance your experience.",
+      "enable_javascript_message": "Enable JavaScript to improve your experience.",
       "go_to_content": "Go to content",
       "go_to_footer": "Go to footer",
       "go_to_homepage": "Go to the homepage",
       "go_to_navigation": "Go to navigation",
-      "go_to_search": "Go to search",
+      "go_to_search": "Go to the search function",
       "hide": "Hide",
       "menu": "Menu",
       "minimize": "Minimize",
       "more": "More",
       "only_you_can_see_this": "Only you can see this",
       "show": "Show",
-      "toggle": "Enable or disable {{ item }} ",
-      "toggle_accessibility_mode": "Enable or disable accessibility mode",
+      "toggle": "Turn {{ item }} in on or off",
+      "toggle_accessibility_mode": "Turn accessibility mode on or off",
       "back_to_top": "Back to top",
       "remove": "Remove"
     },
     "alerts": {
       "error": "Unfortunately...",
-      "info": "Attention",
+      "info": "Note",
       "success": "Success!"
     },
     "breadcrumbs": {
       "back": "Back",
       "home": "Homepage"
     },
-    "choose_option": "Please make a selection",
+    "choose_option": "Make a selection",
     "color_palette": {
       "accent": "Accent",
       "black": "Darkest",
       "dark": "Dark",
-      "dark_gradient": "Gradient dark",
-      "info": "You can always view your color schemes here that you have set in 'color settings', while you are editing the theme. You can disable this bar in 'theme settings' - 'colors'.",
+      "dark_gradient": "Dark color gradient",
+      "info": "You can always view the color scheme you’ve set under 'color scheme' while you’re editing the theme. You can disable this bar in 'theme settings' - 'colors'.",
       "light": "Light",
-      "light_2": "Accent light",
-      "light_gradient": "Gradient light",
+      "light_2": "Light accent",
+      "light_gradient": "Light color gradient",
       "title": "Color scheme",
       "white": "Lightest"
     },
     "read_more": {
       "less": "less",
       "more": "more",
-      "all": "everything",
+      "all": "all",
       "all_2": "all",
       "variants": "variants",
       "read": "Read",
@@ -339,8 +339,8 @@
       "show_more": "Show more"
     },
     "shipping_timer": {
-      "shipped_today": "Shipped today?",
-      "you_have_left_html": "You have: {{ time }} left"
+      "shipped_today": "Sent today?",
+      "you_have_left_html": "You still have: {{ time }}"
     },
     "countdown": {
       "days": "Days",
