@@ -1236,49 +1236,49 @@
         "confirmation_number_label": "Bestätigungsnummer %{confirmation_number}",
         "estimated_taxes_finalization_tooltip_content": "Der gesamte Steuerbetrag wird per E-Mail oder SMS bestätigt, nachdem du deine Bestellung aufgegeben hast.",
         "deferred_payment_info": {
-          "title": "Zahlung von %{amount_due} ist fällig am %{due_at}",
+          "title": "Die Zahlung von %{amount_due} ist bei %{due_at} fällig",
           "description_html": "%{contact_us} für Fragen zu Ihrer Bestellung.",
-          "paid_today": "Gesamtsumme heute bezahlt",
-          "due_on_fulfillment_title": "Die Zahlung von %{amount_due} ist mit der Ausführung der Bestellung fällig.",
+          "paid_today": "Heute bezahlt insgesamt",
+          "due_on_fulfillment_title": "Die Zahlung von %{amount_due} ist bei Erfüllung der Bestellung fällig.",
           "due_on_receipt_title": "%{amount_due} ist bei Erhalt fällig",
           "paid_today_next": "Heute bezahlt"
         },
         "percent_off_shipping": "%{percent}% Rabatt auf den Versand",
         "amount_off_shipping": "%{amount} Rabatt auf den Versand",
         "payment_terms_totals": {
-          "due_today": "Gesamtbetrag heute fällig",
-          "due_later": "Gesamtbetrag fällig am %{due_at}",
-          "due_later_checkout_to_draft": "Gesamtbetrag später fällig",
-          "due_on_fulfillment": "Gesamtbetrag bei Erfüllung fällig",
-          "due_on_receipt": "Gesamtbetrag zahlbar bei Erhalt",
+          "due_today": "Heute insgesamt fällig",
+          "due_later": "Heute insgesamt fällig bei %{due_at}",
+          "due_later_checkout_to_draft": "Später insgesamt fällig",
+          "due_on_fulfillment": "Insgesamt fällig bei Erfüllung",
+          "due_on_receipt": "Gesamtbetrag bei Erhalt",
           "total_paid": "Insgesamt bezahlt",
           "due_today_next": "Heute fällig",
-          "due_on_fulfillment_next": "Zahlbar bei Erfüllung"
+          "due_on_fulfillment_next": "Bei Erfüllung zu zahlen"
         },
-        "higher_value_discount_applied": "<strong style=\"text-transform:uppercase\">%{code}</strong> kann nicht mit Ihren bestehenden Rabatten verwendet werden.",
-        "maximum_discount_code_limit_reached": "Sie haben die maximale Anzahl an Rabattcodes erreicht. Entfernen Sie einen vorhandenen Code zu <strong style=\"text-transform:uppercase\">%{code}</strong> zu verwenden.",
+        "higher_value_discount_applied": "<strong style=\"text-transform:uppercase\">%{code}</strong> kann nicht zusammen mit Ihren bestehenden Rabatten verwendet werden.",
+        "maximum_discount_code_limit_reached": "Sie haben die maximale Anzahl an Gutscheincodes erreicht. Entfernen Sie einen bestehenden Code, um <strong style=\"text-transform:uppercase\">%{code}</strong> zu verwenden.",
         "order_total_label": "Gesamtbestellung",
-        "discount_code_application_failed": "<strong style=\"text-transform:uppercase\">%{code}</strong> Funktioniert im Moment nicht. Bitte kontaktieren Sie uns, wenn Sie Hilfe benötigen.",
-        "due_on_fulfillment": "Fällig bei Erfüllung",
+        "discount_code_application_failed": "<strong style=\"text-transform:uppercase\">%{code}</strong> funktioniert derzeit nicht. Kontaktieren Sie uns, wenn Sie Hilfe benötigen.",
+        "due_on_fulfillment": "Bei Erfüllung fällig",
         "gift_card_masked": "•••• %{last_characters}",
         "subscriptions": "Abonnements",
-        "duties_label": "Zölle",
-        "duties_and_taxes_label": "Zölle und Steuern",
-        "error_duties_tooltip": "Da diese Bestellung aus einem anderen Land verschickt wird, können bei der Lieferung Zölle und Steuern anfallen.",
-        "may_be_charged_on_delivery": "Kann bei Lieferung berechnet werden",
+        "duties_label": "Zollgebühren",
+        "duties_and_taxes_label": "Zollgebühren und Steuern",
+        "error_duties_tooltip": "Diese Bestellung wird aus einem anderen Land versendet. Daher können bei der Lieferung Zollgebühren und Steuern anfallen.",
+        "may_be_charged_on_delivery": "Kann bei Lieferung in Rechnung gestellt werden",
         "total_updated_label_with_price": "Aktualisierter Gesamtpreis: %{totalPrice}",
         "recurring_payments": "Wiederkehrende Zahlungen",
-        "recurring_total_multiple_label": "Für diese Bestellung fallen wiederkehrende Gebühren für mehrere Artikel an.",
-        "deferred_total_due_date_label": "Gesamtbetrag fällig am {{date}}",
-        "full_price": "Voller Preis: %{price}",
-        "custom_discount": "Individueller Rabatt",
+        "recurring_total_multiple_label": "Diese Bestellung hat wiederkehrende Kosten für mehrere Artikel.",
+        "deferred_total_due_date_label": "Gesamtbetrag fällig bei {{date}}",
+        "full_price": "Normalpreis: %{price}",
+        "custom_discount": "Angepasster Rabatt",
         "expand_component_information": {
-          "one": "%{count} Artikel ansehen",
+          "one": "%{count} Artikel anzeigen",
           "other": "%{count} Artikel anzeigen"
         },
         "collapse_component_information": {
           "one": "%{count} Artikel ausblenden",
-          "other": "%{count} Elemente ausblenden"
+          "other": "%{count} Artikel ausblenden"
         },
         "component_quantity_title": "%{quantity} × %{product_title}",
         "discount_discovery": {
@@ -1288,20 +1288,20 @@
             "other": "%{count} Artikel"
           }
         },
-        "alternative_payment_currency_total": "abgeschrieben als %{amount_due}",
-        "calculating": "Berechnen...",
-        "group_title_label": "Teil von '%{group_title}'",
+        "alternative_payment_currency_total": "abgebucht als %{amount_due}",
+        "calculating": "Wird berechnet...",
+        "group_title_label": "Bestandteil von '%{group_title}'",
         "discount_title_stacking": {
           "one": "Rabatt",
           "other": "Rabatte"
         },
         "discount_order_stacking": {
           "one": "Bestellrabatt",
-          "other": "Bestellen Sie Rabatte"
+          "other": "Bestellrabatte"
         },
         "price_per_item": {
           "accessibility_label": "%{price} pro Artikel",
-          "label": "%{price}/st."
+          "label": "%{price}/St."
         },
         "updated_shipping_method": "Aktualisierte Versandart: %{shipping_method}",
         "discount_not_found": "Es kann kein gültiger Rabatt gefunden werden, der dem eingegebenen Code entspricht",
