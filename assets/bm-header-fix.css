@@ -45,42 +45,9 @@
   }
 }
 
-/* 5. Delivery/stock indicator: styled as single-line with checkmark icon.
-      Positioned above buy button via block_order in product.json. */
+/* 5. Hide original inventory/delivery block (replaced by bm-delivery-status snippet) */
 .f8pr-stock {
-  margin-bottom: 6px !important;
-  margin-top: 2px !important;
-}
-.f8pr-stock .stock {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  line-height: 1.3;
-  white-space: nowrap;
-  margin: 0;
-  padding: 0;
-}
-.f8pr-stock .stock .overlay-valid:before {
-  content: "\2713";
-  display: inline-block;
-  margin-right: 3px;
-  color: #02ad02;
-  font-weight: 700;
-}
-.f8pr-stock .stock .overlay-error:before {
-  content: "\25CF";
-  display: inline-block;
-  margin-right: 3px;
-  color: #ea6c44;
-  font-weight: 700;
-  font-size: 10px;
-}
-
-@media screen and (max-width: 749px) {
-  .f8pr-stock .stock {
-    font-size: 12px;
-  }
+  display: none !important;
 }
 
 /* 6. Cart icon badge: prevent clipping on all screens.
