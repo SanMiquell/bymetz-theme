@@ -131,8 +131,8 @@
         "search_mobile_bd": "bd-b",
         "searchbar_height_mobile": 35,
         "menu_font_size_mobile": 15,
-        "spacing_desktop": 25,
-        "spacing_mobile": 20
+        "spacing_desktop": 15,
+        "spacing_mobile": 10
       }
     }
   },
