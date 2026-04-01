@@ -97,7 +97,7 @@
         "show_dropdown_images_subs": true,
         "show_dropdown_images_autofill": true,
         "show_dropdown_images_rounded": true,
-        "menubar_alignment": "left",
+        "menubar_alignment": "center",
         "main_menu_items_clickable": true,
         "menu_show_chevrons": true,
         "menubar_caps": false,
