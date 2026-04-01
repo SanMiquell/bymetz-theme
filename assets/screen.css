@@ -367,7 +367,7 @@ ul, ol, dd, blockquote { padding-left: 40px; }
 .shopify-section-header #header-outer { position: relative; width: 100%; max-width: var(--ghw); margin-left: auto; margin-right: auto; }
 .shopify-section-header #header-outer > .close { display: none; }
 #header, #header-inner { align-items: center; }
-.shopify-section-header #header { position: relative; z-index: 5; width: calc(100% + var(--dist_main)); min-height: var(--header_mih); margin-right: calc(0px - var(--dist_main)); padding-top: 12px; }
+.shopify-section-header #header { position: relative; z-index: 5; width: calc(100% + var(--dist_main)); min-height: var(--header_mih); margin-right: calc(0px - var(--dist_main)); padding-top: 4px; }
 #header > .overlay-close { content: ""; display: block; position: absolute; left: 50%; right: auto; top: 0; bottom: 0; z-index: 98; width: 110vw; margin: 0 0 0 -55vw; visibility: hidden; opacity: 0; }
 #root .shopify-section-header #header-inner { max-width: 100%; margin-right: 0; border-right-width: 0; min-height: var(--header_mih) }
 .shopify-section-header #header > #distance-counter { display: block; position: absolute; left: -10px; right: auto; bottom: auto; top: 100% !important; z-index: -10; margin: 0; padding: 0; border-width: 0; }
