@@ -10,33 +10,23 @@
     assign deliverytime_not_in_stock = settings.default_product_deliverytime_not_in_stock
   endunless
 
-  assign bm_show = false
-  assign bm_in_stock = false
-
-  if current_variant.available
-    assign bm_in_stock = true
-    if deliverytime_in_stock != blank
-      assign bm_show = true
-    endif
-  else
-    if deliverytime_not_in_stock != blank
-      assign bm_show = true
-    endif
+  assign has_any_text = false
+  if deliverytime_in_stock != blank or deliverytime_not_in_stock != blank
+    assign has_any_text = true
   endif
 -%}
 
-{%- if bm_show -%}
-  <div class="bm-delivery">
-    {%- if bm_in_stock -%}
+{%- if has_any_text -%}
+  <div class="bm-delivery" data-bm-delivery
+    data-text-ok="{{ deliverytime_in_stock | escape }}"
+    data-text-warn="{{ deliverytime_not_in_stock | escape }}"
+    data-fallback-ok="{{ 'product.form.in_stock' | t | escape }}">
+    {%- if current_variant.available -%}
       <svg class="bm-delivery__icon bm-delivery__icon--ok" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
         <path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm3.36 5.22a.75.75 0 0 0-1.06.04L9.4 10.6 7.7 8.9a.75.75 0 1 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.08-.02l3.43-3.91a.75.75 0 0 0-.04-1.06z" fill="currentColor"/>
       </svg>
       <span class="bm-delivery__text">
-        {%- if deliverytime_in_stock != blank -%}
-          {{ deliverytime_in_stock }}
-        {%- else -%}
-          {{ 'product.form.in_stock' | t }}
-        {%- endif -%}
+        {%- if deliverytime_in_stock != blank -%}{{ deliverytime_in_stock }}{%- else -%}{{ 'product.form.in_stock' | t }}{%- endif -%}
       </span>
     {%- else -%}
       <svg class="bm-delivery__icon bm-delivery__icon--warn" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
@@ -44,10 +34,55 @@
         <path d="M10 6v5M10 13v1" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
       <span class="bm-delivery__text">
-        {{ deliverytime_not_in_stock }}
+        {%- if deliverytime_not_in_stock != blank -%}{{ deliverytime_not_in_stock }}{%- else -%}{{ 'product.form.not_in_stock' | t }}{%- endif -%}
       </span>
     {%- endif -%}
   </div>
+
+  <script>
+    (function() {
+      var iconOk = '<svg class="bm-delivery__icon bm-delivery__icon--ok" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm3.36 5.22a.75.75 0 0 0-1.06.04L9.4 10.6 7.7 8.9a.75.75 0 1 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.08-.02l3.43-3.91a.75.75 0 0 0-.04-1.06z" fill="currentColor"/></svg>';
+      var iconWarn = '<svg class="bm-delivery__icon bm-delivery__icon--warn" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8" fill="currentColor"/><path d="M10 6v5M10 13v1" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+      var variants = {{ product.variants | json }};
+      var variantMap = {};
+      variants.forEach(function(v) { variantMap[v.id] = v.available; });
+
+      function update(variantId) {
+        var bar = document.querySelector('[data-bm-delivery]');
+        if (!bar) return;
+        var available = variantMap[variantId];
+        if (available === undefined) return;
+
+        var textOk = bar.getAttribute('data-text-ok') || bar.getAttribute('data-fallback-ok') || '';
+        var textWarn = bar.getAttribute('data-text-warn') || '';
+
+        if (available) {
+          bar.innerHTML = iconOk + '<span class="bm-delivery__text">' + textOk + '</span>';
+        } else {
+          bar.innerHTML = iconWarn + '<span class="bm-delivery__text">' + textWarn + '</span>';
+        }
+      }
+
+      /* Listen to the variant select input that the theme uses */
+      var form = document.querySelector('form.f8pr');
+      if (form) {
+        var idInput = form.querySelector('input[name="id"], select[name="id"]');
+        if (idInput) {
+          idInput.addEventListener('change', function() { update(Number(idInput.value)); });
+        }
+      }
+
+      /* Also listen to the theme's custom productVariants event
+         which fires after section re-rendering */
+      window.addEventListener('productVariants', function() {
+        var f = document.querySelector('form.f8pr');
+        if (!f) return;
+        var inp = f.querySelector('input[name="id"], select[name="id"]');
+        if (inp) update(Number(inp.value));
+      });
+    })();
+  </script>
 {%- endif -%}
 
 <style>
