@@ -1948,59 +1948,73 @@
         "simulated_express_checkout": "Digitale Geldbörsen sind im Beispiel des Editors aufgrund deiner Region oder deines Browsers nicht verfügbar",
         "offsite_gateway_redirect_hint_no_button_label": "Du wirst zu %{gateway_label} weitergeleitet, um deinen Einkauf abzuschließen.",
         "swish_label": "Swish",
-        "network_card_persistence_description": "Das ausgewählte Netzwerk wird mit Ihrer Zahlungsmethode für zukünftige Transaktionen gespeichert.",
+        "network_card_persistence_description": "Das ausgewählte Netzwerk wird mit deiner Zahlungsmethode für zukünftige Transaktionen gespeichert.",
         "usdc_label": "USDC",
         "payment_method_incompatible_with_payment_terms": "Die Zahlungsmethode ist mit den Zahlungsbedingungen nicht kompatibel.",
         "payment_option": {
-          "accessibility_label": "Wählen Sie eine Zahlungsoption"
+          "accessibility_label": "Wähle eine Zahlungsoption"
         },
-        "billing_address_rollup_accessibility_label": "Optionen für Rechnungsadressen",
-        "payment_method_rollup_accessibility_label": "Optionen für Zahlungsmethoden",
+        "billing_address_rollup_accessibility_label": "Optionen für die Rechnungsadresse",
+        "payment_method_rollup_accessibility_label": "Optionen für die Zahlungsmethode",
         "crypto_modal": {
-          "header": "Bezahlen %{shop_name} %{total_price} USDC",
+          "header": "Zahle %{shop_name} %{total_price} USDC",
           "error": {
             "refresh": "Aktualisieren",
-            "close": "schließen",
-            "sandbox_error": "Etwas ist schief gelaufen",
+            "close": "Schließen",
+            "sandbox_error": "Etwas ist schiefgelaufen",
             "web_component_error": "Beim Laden dieser Seite ist ein Problem aufgetreten"
           }
         },
         "bank_account_type": {
-          "checking": "Girokonto",
+          "checking": "Zahlungskonto",
           "savings": "Sparkonto"
         },
-        "bank_account_choose": "Wählen Sie ein Konto, um Ihren Einkauf sicher abzuschließen",
-        "bank_account_connect_another": "Verknüpfen Sie ein anderes Bankkonto",
+        "bank_account_choose": "Wähle ein Konto, um deinen Einkauf sicher abzuschließen",
+        "bank_account_connect_another": "Anderes Bankkonto verknüpfen",
         "bank_account_connect": "Bankkonto verknüpfen",
-        "bank_account_missing": "Bankkonto muss verknüpft sein",
+        "bank_account_missing": "Das Bankkonto muss verknüpft sein",
         "crypto_payment_method": {
-          "description": "Verbinden Sie Ihr Wallet sicher mit dem Base-Netzwerk",
-          "tooltip": "Ihr Wallet-Guthaben und Ihre Adresse werden nicht weitergegeben und es kann nur der angeforderte Betrag abgebucht werden"
+          "description": "Verbinde deine Geldbörse sicher im Base-Netzwerk",
+          "tooltip": "Das Guthaben deiner Geldbörse und deine Adresse werden nicht geteilt und es kann nur der angeforderte Betrag abgebucht werden",
+          "cashback_descriptor": {
+            "one": "Dein Cashback erhältst du nach %{count} Tag.",
+            "other": "Dein Cashback erhältst du nach %{count} Tagen."
+          }
         },
-        "usdc_cashback_title": "1 % Cashback",
-        "usdc_cashback_additional_info": "Erhalten Sie sofort 1 % in USDC auf Ihr Guthaben zurück.",
-        "usdc_cashback_terms": "Es gelten die Allgemeinen Geschäftsbedingungen",
+        "usdc_cashback_title": "%{incentive_percentage}% Cashback",
+        "usdc_cashback_additional_info": "Zahle mit USDC auf Base und erhalte innerhalb von 30 Tagen %{incentive_percentage}% zurück in deine digitale Geldbörse, bis zu 100 USDC.",
+        "usdc_cashback_terms": "Es gelten die Bedingungen",
         "discount_show_more_warnings": {
           "one": "%{count} mehr anzeigen",
           "other": "%{count} mehr anzeigen"
         },
-        "separate_payments_label": "Ihre Artikel stammen aus mehr als einem Geschäft. Du musst damit umgehen %{separate_payments_link}.",
-        "separate_payments_text": "getrennte Zahlungen",
+        "separate_payments_label": "Deine Artikel stammen aus mehr als einem Shop. Du musst mit %{separate_payments_link} bezahlen.",
+        "separate_payments_text": "einzelne Zahlungen",
         "payments": "Zahlungen",
-        "business_customer_with_bank_account_vaulting_payment_label": "Speichern und autorisieren Sie diese Zahlungsmethode an der Kasse %{company} um Ihr Konto für alle zukünftigen Käufe zu belasten, die Sie für diesen Standort autorisieren, bis Sie stornieren. Alle diesem Standort zugeordneten Kontakte dürfen die Zahlungsart nutzen.",
-        "new_bank_account_disclaimer": "Mit dem Abschluss Ihrer Bestellung autorisieren Sie %{shop_name} den angegebenen Betrag zum angegebenen Zeitpunkt über ACH vom unten angegebenen Konto abzubuchen.",
-        "bank_account_disclaimer": "Die Bearbeitung von ACH-Zahlungen kann bis zu 4 Werktage dauern.",
+        "business_customer_with_bank_account_vaulting_payment_label": "Speichere diese Zahlungsmethode beim Checkout und erteile %{company} die Erlaubnis, dein Konto für zukünftige Käufe zu belasten, die du für diesen Standort freigibst, bis du es widerrufst. Alle Kontaktpersonen, die diesem Standort zugewiesen sind, dürfen die Zahlungsmethode verwenden.",
+        "new_bank_account_disclaimer": "Indem du deine Bestellung abschließt, ermächtigst du %{shop_name}, den angegebenen Betrag zum angegebenen Zeitpunkt vom unten genannten Konto per ACH abzubuchen.",
+        "bank_account_disclaimer": "Es kann bis zu 4 Werktage dauern, bis ACH-Zahlungen verarbeitet sind.",
         "bank_account_vaulted_company_location": "Bankkonto für diesen Standort gespeichert",
-        "bank_account_generic_error": "Bankkonto kann nicht hinzugefügt werden. Bitte versuchen Sie es später noch einmal.",
+        "bank_account_generic_error": "Kann kein Bankkonto hinzufügen. Bitte versuche es später erneut.",
         "discount_codes_removed_summary": {
-          "one": "%{count} Rabattcode wurde entfernt",
-          "other": "%{count} Rabattcodes wurden entfernt"
+          "one": "Der Rabattcode %{count} wurde entfernt",
+          "other": "Die Rabattcodes %{count} wurden entfernt"
         },
         "saved_addresses": "Gespeicherte Adressen",
         "save_this_address": "Speichern Sie diese Adresse",
         "default": "Standard",
         "continue_to_guest_checkout": "Als Gast zur Kasse",
-        "add_payment_method": "Zahlungsmethode hinzufügen"
+        "add_payment_method": "Zahlungsmethode hinzufügen",
+        "choose_new_payment_method": "Wähle eine neue Zahlungsmethode",
+        "add_new_payment_method": "Eine neue Zahlungsmethode hinzufügen",
+        "discount_codes_modified_summary": {
+          "one": "Der Rabattcode %{count} wurde geändert",
+          "other": "Die Rabattcodes %{count} wurden geändert"
+        },
+        "discount_codes_removed_or_modified_summary": {
+          "one": "Der Rabattcode %{count} wurde entfernt oder geändert",
+          "other": "Die Rabattcodes %{count} wurden entfernt oder geändert"
+        }
       },
       "payment_summary": {
         "gift_card_current_balance_notice": "Aktueller Kontostand %{amount}",
