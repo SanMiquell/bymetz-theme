@@ -1044,32 +1044,33 @@
         "subscription_pickup_information": "Diese Versandmethode gilt für alle Artikel in dieser Bestellung sowie für alle zukünftigen Artikel für dieses Abonnement.",
         "ship_to_address": "Lieferung an Adresse",
         "pick_up_from_store": "Abholung im Laden",
-        "company_location_no_address_banner": "Bestellungen, die an Standorte ohne Adresse versandt werden, werden zur Überprüfung eingereicht."
+        "company_location_no_address_banner": "Bestellungen, die an Standorte ohne Adresse gesendet werden, werden zur Prüfung eingereicht.",
+        "pickup_point_map_title": "Karte mit Abholpunkten"
       },
       "customer_account": {
-        "not_user_label": "Nicht wahr? %{first_name}?",
-        "have_an_account_label": "Haben Sie ein Konto?",
+        "not_user_label": "Bist du nicht %{first_name}?",
+        "have_an_account_label": "Hast du ein Konto?",
         "sign_in_link_label": "Anmelden",
         "sign_out_link_label": "Abmelden",
-        "save_my_information_label": "Speichern Sie diese Informationen für eine schnellere Zahlung in der Zukunft",
-        "invalid_address": "Die ausgewählte Adresse ist ungültig. %{update_address_link} oder wählen Sie eine andere Adresse.",
-        "incomplete_address": "Die ausgewählte Adresse ist unvollständig. %{update_address_link} oder wählen Sie eine andere Adresse.",
+        "save_my_information_label": "Diese Informationen speichern, um beim nächsten Mal schneller bezahlen zu können",
+        "invalid_address": "Die ausgewählte Adresse ist ungültig. %{update_address_link} oder wähle eine andere Adresse.",
+        "incomplete_address": "Die ausgewählte Adresse ist unvollständig. %{update_address_link} oder wähle eine andere Adresse.",
         "rollup_label": "Konto",
-        "invalid_shipping_method_summary": "Wählen Sie eine gültige Lieferadresse aus, um die verfügbaren Versandmethoden anzuzeigen",
-        "saved_address_option_link": "Verwenden Sie eine gespeicherte Adresse",
-        "saved_address_modal_title": "Verwenden Sie meine gespeicherte Adresse",
+        "invalid_shipping_method_summary": "Wähle eine gültige Lieferadresse, um die verfügbaren Versandmethoden zu sehen",
+        "saved_address_option_link": "Eine gespeicherte Adresse verwenden",
+        "saved_address_modal_title": "Meine gespeicherte Adresse verwenden",
         "saved_address_option_description": {
-          "one": "Das hast du {{count}} gespeicherte Adresse.",
-          "other": "Das hast du {{count}} gespeicherte Adressen."
+          "one": "Du hast {{count}} opgespeicherte Adresse gespeichert.",
+          "other": "Du hast {{count}} opgespeicherte Adressen gespeichert."
         },
         "rollup_accessibility_label": "Kontooptionen"
       },
       "stock": {
-        "page_title": "Inventarproblem",
-        "title": "Ausverkauft",
+        "page_title": "Problem mit dem Bestand",
+        "title": "Nicht auf Lager",
         "items_unavailable_notice": "Einige Artikel sind nicht mehr verfügbar.",
         "product_column_header": "Produkte",
-        "quantity_column_header": "Menge",
+        "quantity_column_header": "Anzahl",
         "price_column_header": "Preis",
         "status_column_header": "Status",
         "removed_from_cart_notice": "Aus dem Warenkorb entfernt",
@@ -1078,35 +1079,35 @@
         "reduced_with_quantity_label": "Nur %{quantity_available} auf Lager",
         "remove_from_cart_button_label": "Aus dem Warenkorb entfernen",
         "continue_shopping_button_label": "Weiter",
-        "go_back_to_cart_button_label": "Zurück zu meinem Warenkorb",
-        "remove": "Löschen",
-        "empty_cart_label": "Ihr Warenkorb ist leer",
+        "go_back_to_cart_button_label": "Zurück in meinen Warenkorb",
+        "remove": "Entfernen",
+        "empty_cart_label": "Dein Warenkorb ist leer",
         "quantity_update": {
           "page_title": "Menge aktualisiert",
           "title": "Menge aktualisiert",
-          "description": "Die verfügbaren Mengen für diese Artikel haben sich geändert und Ihr Warenkorb wurde aktualisiert."
+          "description": "Die verfügbaren Mengen für diese Artikel haben sich geändert und dein Warenkorb wurde aktualisiert."
         },
         "unpurchasable_product": {
-          "title": "Produkt kann nicht gekauft werden",
-          "header": "Einige Artikel wurden aus Ihrem Warenkorb entfernt",
-          "message": "Diese Artikel sind für B2B-Bestellungen nicht verfügbar.",
+          "title": "Das Produkt kann nicht gekauft werden",
+          "header": "Einige Artikel wurden aus deinem Warenkorb entfernt",
+          "message": "Diese Artikel sind nicht für B2B-Bestellungen verfügbar.",
           "status_column_header": "Nicht verfügbar"
         },
         "unpurchasable_product_generic": {
-          "title": "Produkt kann nicht gekauft werden",
-          "header": "Einige Artikel wurden aus Ihrem Warenkorb entfernt",
+          "title": "Das Produkt kann nicht gekauft werden",
+          "header": "Einige Artikel wurden aus deinem Warenkorb entfernt",
           "message": "Diese Artikel sind nicht verfügbar.",
           "status_column_header": "Nicht verfügbar"
         },
         "unshippable_product": {
-          "title": "Keine Lieferung möglich",
+          "title": "Keine Lieferung verfügbar",
           "header": {
-            "one": "Keine Lieferung verfügbar für %{count} Artikel",
-            "other": "Keine Lieferung verfügbar für %{count} Artikel"
+            "one": "Für den Artikel %{count} ist keine Lieferung verfügbar",
+            "other": "Für die Artikel %{count} ist keine Lieferung verfügbar"
           },
           "message": {
-            "one": "Dieser Artikel wird aus Ihrem Warenkorb entfernt, da für Ihre Adresse keine Versandmethoden verfügbar sind.",
-            "other": "Dieser Artikel wird aus Ihrem Warenkorb entfernt, da für Ihre Adresse keine Versandmethoden verfügbar sind."
+            "one": "Dieser Artikel wird aus deinem Warenkorb entfernt, weil für deine Adresse keine Versandmethoden verfügbar sind.",
+            "other": "Dieser Artikel wird aus deinem Warenkorb entfernt, weil für deine Adresse keine Versandmethoden verfügbar sind."
           },
           "status_column_header": "Keine Lieferung"
         },
