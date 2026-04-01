@@ -33,8 +33,25 @@
       screen.css hides #nav-user > ul > li.lang on mobile (max-width: 760px).
       Override to show it, and hide the duplicate in the drawer instead. */
 @media screen and (max-width: 760px) {
+  /* Show language selector as a regular flex/block item in #nav-user,
+     matching account and cart icon styling (min-height: 44px, line-height: 44px) */
   #nav-user > ul > li.lang {
-    display: list-item !important;
+    display: block !important;
+    position: relative;
+    z-index: 2;
+    margin: 0 24px 0 0;
+  }
+  #nav-user > ul > li.lang > a {
+    display: flex !important;
+    align-items: center;
+    min-height: 44px;
+    line-height: 44px;
+    padding: 0;
+  }
+  #nav-user > ul > li.lang > a img {
+    width: 20px;
+    height: 14px;
+    object-fit: contain;
   }
 
   /* Hide the language selector duplicate inside the mobile drawer */
