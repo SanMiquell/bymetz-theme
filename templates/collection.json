@@ -29,6 +29,13 @@
             "text_alignment": "left"
           }
         },
+        "brand_slider_t6pRbE": {
+          "type": "brand_slider",
+          "settings": {
+            "multiply": false,
+            "show_border": true
+          }
+        },
         "short_description_iTAmQr": {
           "type": "short_description",
           "disabled": true,
@@ -40,13 +47,6 @@
             "short_description": "description",
             "strip_html": true,
             "short_description_text": ""
-          }
-        },
-        "brand_slider_t6pRbE": {
-          "type": "brand_slider",
-          "settings": {
-            "multiply": false,
-            "show_border": true
           }
         },
         "sorting": {
@@ -69,8 +69,8 @@
       },
       "block_order": [
         "title",
-        "short_description_iTAmQr",
         "brand_slider_t6pRbE",
+        "short_description_iTAmQr",
         "sorting",
         "product_grid",
         "description_HWFJmn"
