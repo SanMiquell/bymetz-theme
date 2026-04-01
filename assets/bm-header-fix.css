@@ -26,6 +26,25 @@
   padding-top: 5px !important;
 }
 
+/* 4. Mobile product gallery: show max 5 dots, then fraction counter.
+      Hide dots beyond the 5th. Show the swiper-custom-fraction (1/8)
+      which theme-xpert.css hides for no-thumbs-mobile. */
+@media screen and (max-width: 760px) {
+  .l4pr.no-thumbs-mobile .swiper-pagination-bullets .swiper-pagination-bullet:nth-child(n+6) {
+    display: none !important;
+  }
+
+  .l4pr.no-thumbs-mobile .swiper-custom-fraction {
+    display: inline-block !important;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray, #8a8a8a);
+    opacity: 0.7;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+}
+
 /* 3. Cart icon badge: prevent clipping on all screens.
       #header and parents can clip the cart count badge. */
 .shopify-section-header,
