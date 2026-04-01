@@ -1320,6 +1320,9 @@
                             {%- endif -%}
                         </ul>
                 {%- endform -%}
+                    <div class="m10">
+                        {%- render 'bm-reviewbar' -%}
+                    </div>
                 {%- when 'usp' -%}
                     {%- liquid
                         assign next_block_is_usp = false

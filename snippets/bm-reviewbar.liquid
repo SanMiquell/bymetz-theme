@@ -1,0 +1,352 @@
+{%- liquid
+  assign bm_locale_raw = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl'
+  assign bm_locale = bm_locale_raw | downcase | replace: '_', '-'
+  assign bm_lang = bm_locale | split: '-' | first
+
+  assign bm_review_url = 'https://www.webwinkelkeur.nl/webshop/ByMetz-Tassen-Koffers_1205113/reviews?page=1'
+  assign bm_review_text = 'Beoordeeld als <strong>9,6</strong> door <strong>1.700+</strong> klanten.'
+
+  if bm_lang == 'en'
+    assign bm_review_url = 'https://www.valuedshops.com/webshop/ByMetz-Tassen-Koffers_1205113/reviews'
+    assign bm_review_text = 'Rated <strong>9.6</strong> by <strong>1,700+</strong> customers.'
+  elsif bm_lang == 'de'
+    assign bm_review_url = 'https://www.valuedshops.de/webshop/ByMetz-Tassen-Koffers_1205113/bewertungen'
+    assign bm_review_text = 'Bewertet mit <strong>9,6</strong> von <strong>1.700+</strong> Kunden.'
+  elsif bm_lang == 'fr'
+    assign bm_review_url = 'https://www.valuedshops.fr/boutique/ByMetz-Tassen-Koffers_1205113/avis'
+    assign bm_review_text = 'Not&eacute; <strong>9,6</strong> par <strong>1.700+</strong> clients.'
+  elsif bm_lang == 'es'
+    assign bm_review_url = 'https://www.valuedshops.com/spa/webshop/ByMetz-Tassen-Koffers_1205113/reviews'
+    assign bm_review_text = 'Calificado con <strong>9,6</strong> por <strong>1.700+</strong> clientes.'
+  elsif bm_lang == 'it'
+    assign bm_review_url = 'https://www.valuedshops.com/ita/webshop/ByMetz-Tassen-Koffers_1205113/reviews'
+    assign bm_review_text = 'Valutato <strong>9,6</strong> da <strong>1.700+</strong> clienti.'
+  endif
+-%}
+
+<a
+  class="bm-reviewbar"
+  data-bm-reviewbar
+  href="{{ bm_review_url }}"
+  rel="noopener"
+  aria-label="Reviews"
+>
+  <div class="bm-reviewbar__main">
+    <div class="bm-reviewbar__stars" aria-hidden="true">
+      {%- for i in (1..5) -%}
+        <span class="bm-reviewbar__star-box">
+          <span class="bm-reviewbar__star-fill" data-bm-star-fill></span>
+          <span class="bm-reviewbar__star-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 2.2l3.09 6.26 6.91 1-5 4.87 1.18 6.89L12 17.98 5.82 21.22 7 14.33 2 9.46l6.91-1L12 2.2z" fill="currentColor"></path>
+            </svg>
+          </span>
+        </span>
+      {%- endfor -%}
+    </div>
+
+    <p class="bm-reviewbar__text" data-bm-review-text>
+      {{ bm_review_text }}
+    </p>
+  </div>
+
+  <span class="bm-reviewbar__logo-wrap">
+    <img
+      class="bm-reviewbar__logo"
+      src="https://dashboard.webwinkelkeur.nl/img/badges/icon_member.svg?m=1774934019"
+      alt="WebwinkelKeur"
+      loading="lazy"
+    >
+  </span>
+</a>
+
+<style>
+  .bm-reviewbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    background: #fff;
+    color: #1f1f1f;
+    text-decoration: none;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .bm-reviewbar__main {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 12px;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .bm-reviewbar__stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 0 0 auto;
+  }
+
+  .bm-reviewbar__star-box {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: #dcdce6;
+    overflow: hidden;
+    border-radius: 1px;
+    flex: 0 0 auto;
+  }
+
+  .bm-reviewbar__star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    background: #00b67a;
+    z-index: 1;
+  }
+
+  .bm-reviewbar__star-icon {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+  }
+
+  .bm-reviewbar__star-icon svg {
+    width: 13px;
+    height: 13px;
+    display: block;
+  }
+
+  .bm-reviewbar__text {
+    margin: 0;
+    min-width: 0;
+    font-size: clamp(13px, 1.6vw, 16px);
+    line-height: 1.2;
+    color: #1f1f1f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bm-reviewbar__text strong {
+    font-weight: 700;
+  }
+
+  .bm-reviewbar__logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .bm-reviewbar__logo {
+    display: block;
+    width: clamp(34px, 4vw, 44px);
+    height: clamp(34px, 4vw, 44px);
+    min-width: clamp(34px, 4vw, 44px);
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 749px) {
+    .bm-reviewbar {
+      padding: 12px 14px;
+      gap: 10px;
+    }
+
+    .bm-reviewbar__main {
+      flex-direction: row !important;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bm-reviewbar__stars {
+      gap: 2px;
+    }
+
+    .bm-reviewbar__star-box {
+      width: 17px;
+      height: 17px;
+    }
+
+    .bm-reviewbar__star-icon svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    .bm-reviewbar__text {
+      font-size: 13px;
+      line-height: 1.15;
+      white-space: nowrap;
+    }
+
+    .bm-reviewbar__logo {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var shopId = '1205113';
+    var publicCode = '03e5774fc5bbb511f818d7058ac6f114faf0b8f071780e637442ece7f3958bbd';
+    var themeLang = {{ bm_lang | json }};
+
+    var locale = (themeLang || document.documentElement.lang || navigator.language || 'nl')
+      .toLowerCase()
+      .replace('_', '-')
+      .split('-')[0];
+
+    var config = {
+      nl: {
+        url: 'https://www.webwinkelkeur.nl/webshop/ByMetz-Tassen-Koffers_1205113/reviews?page=1',
+        intl: 'nl-NL',
+        fallbackScore: 9.6,
+        fallbackCount: 1768,
+        text: function (score, count) {
+          return 'Beoordeeld als <strong>' + score + '</strong> door <strong>' + count + '</strong> klanten.';
+        }
+      },
+      en: {
+        url: 'https://www.valuedshops.com/webshop/ByMetz-Tassen-Koffers_1205113/reviews',
+        intl: 'en-US',
+        fallbackScore: 9.6,
+        fallbackCount: 1768,
+        text: function (score, count) {
+          return 'Rated <strong>' + score + '</strong> by <strong>' + count + '</strong> customers.';
+        }
+      },
+      de: {
+        url: 'https://www.valuedshops.de/webshop/ByMetz-Tassen-Koffers_1205113/bewertungen',
+        intl: 'de-DE',
+        fallbackScore: 9.6,
+        fallbackCount: 1768,
+        text: function (score, count) {
+          return 'Bewertet mit <strong>' + score + '</strong> von <strong>' + count + '</strong> Kunden.';
+        }
+      },
+      fr: {
+        url: 'https://www.valuedshops.fr/boutique/ByMetz-Tassen-Koffers_1205113/avis',
+        intl: 'fr-FR',
+        fallbackScore: 9.6,
+        fallbackCount: 1768,
+        text: function (score, count) {
+          return 'Not\u00e9 <strong>' + score + '</strong> par <strong>' + count + '</strong> clients.';
+        }
+      },
+      es: {
+        url: 'https://www.valuedshops.com/spa/webshop/ByMetz-Tassen-Koffers_1205113/reviews',
+        intl: 'es-ES',
+        fallbackScore: 9.6,
+        fallbackCount: 1768,
+        text: function (score, count) {
+          return 'Calificado con <strong>' + score + '</strong> por <strong>' + count + '</strong> clientes.';
+        }
+      },
+      it: {
+        url: 'https://www.valuedshops.com/ita/webshop/ByMetz-Tassen-Koffers_1205113/reviews',
+        intl: 'it-IT',
+        fallbackScore: 9.6,
+        fallbackCount: 1768,
+        text: function (score, count) {
+          return 'Valutato <strong>' + score + '</strong> da <strong>' + count + '</strong> clienti.';
+        }
+      }
+    };
+
+    var active = config[locale] || config.nl;
+    var bar = document.querySelector('[data-bm-reviewbar]');
+    if (!bar) return;
+
+    function clamp(num, min, max) {
+      return Math.min(Math.max(num, min), max);
+    }
+
+    function formatScore(score, localeCode) {
+      return new Intl.NumberFormat(localeCode, {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1
+      }).format(score);
+    }
+
+    function formatCount(count, localeCode) {
+      return new Intl.NumberFormat(localeCode).format(count);
+    }
+
+    function normalizeTo10Scale(rawValue) {
+      var raw = Number(rawValue);
+      if (!isFinite(raw)) return null;
+      if (raw <= 5.05) return raw * 2;
+      return raw;
+    }
+
+    function setStars(scoreOutOf10) {
+      var fills = bar.querySelectorAll('[data-bm-star-fill]');
+      var scoreOutOf5 = clamp((Number(scoreOutOf10) || 0) / 2, 0, 5);
+
+      fills.forEach(function (fillEl, index) {
+        var fillAmount = clamp(scoreOutOf5 - index, 0, 1);
+        fillEl.style.width = (fillAmount * 100) + '%';
+      });
+    }
+
+    function render(scoreOutOf10, reviewCount) {
+      var textEl = bar.querySelector('[data-bm-review-text]');
+      var safeScore = clamp(Number(scoreOutOf10) || 0, 0, 10);
+      var safeCount = Math.max(0, Number(reviewCount) || 0);
+
+      bar.href = active.url;
+      textEl.innerHTML = active.text(
+        formatScore(safeScore, active.intl),
+        formatCount(safeCount, active.intl)
+      );
+      setStars(safeScore);
+      bar.setAttribute('aria-label', textEl.textContent.replace(/\s+/g, ' ').trim());
+    }
+
+    render(active.fallbackScore, active.fallbackCount);
+
+    if (!publicCode) return;
+
+    var endpoint =
+      'https://dashboard.webwinkelkeur.nl/api/1.0/ratings_summary.json?id=' +
+      encodeURIComponent(shopId) +
+      '&public_code=' +
+      encodeURIComponent(publicCode);
+
+    fetch(endpoint, { method: 'GET' })
+      .then(function (response) {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
+      })
+      .then(function (payload) {
+        var rawAverage = Number(payload && payload.data && payload.data.rating_average);
+        var amount = Number(payload && payload.data && payload.data.amount);
+        var liveScore = normalizeTo10Scale(rawAverage);
+
+        if (!isFinite(liveScore) || !isFinite(amount)) {
+          throw new Error('Invalid API response');
+        }
+
+        render(liveScore, amount);
+      })
+      .catch(function (error) {
+        console.warn('ByMetz review bar fallback actief:', error);
+      });
+  })();
+</script>
