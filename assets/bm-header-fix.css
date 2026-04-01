@@ -28,3 +28,18 @@
   position: relative;
   z-index: 10;
 }
+
+/* 3. Mobile: keep language selector visible in header icons.
+      screen.css hides #nav-user > ul > li.lang on mobile (max-width: 760px).
+      Override to show it, and hide the duplicate in the drawer instead. */
+@media screen and (max-width: 760px) {
+  #nav-user > ul > li.lang {
+    display: list-item !important;
+  }
+
+  /* Hide the language selector duplicate inside the mobile drawer */
+  #nav li.lang.mobile-nav-only,
+  #nav-top li.lang.mobile-nav-only {
+    display: none !important;
+  }
+}
