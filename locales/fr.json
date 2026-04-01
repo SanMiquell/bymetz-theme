@@ -286,68 +286,68 @@
   },
   "general": {
     "accessibility": {
-      "go_to_homepage": "Aller à la page d'accueil",
+      "go_to_homepage": "Aller à la page d’accueil",
       "go_to_navigation": "Aller à la navigation",
-      "go_to_search": "Accédez à la fonction de recherche",
+      "go_to_search": "Aller à la fonction de recherche",
       "go_to_content": "Aller au contenu",
       "go_to_footer": "Aller au pied de page",
       "choose_category": "Choisissez une catégorie",
       "more": "Plus",
-      "menu": "Menus",
+      "menu": "Menu",
       "minimize": "Réduire",
       "close": "Fermer",
       "show": "Afficher",
       "hide": "Masquer",
-      "toggle": "Changer {{ item }} dedans ou dehors",
-      "only_you_can_see_this": "Toi seul peux voir ça",
-      "enable_javascript_message": "Veuillez activer JavaScript pour améliorer votre expérience.",
-      "toggle_accessibility_mode": "Activer ou désactiver le mode accessibilité",
+      "toggle": "Activez {{ item }}  ou désactivez-le",
+      "only_you_can_see_this": "Seuls vous pouvez voir ceci",
+      "enable_javascript_message": "Activez JavaScript pour améliorer votre expérience.",
+      "toggle_accessibility_mode": "Activer ou désactiver le mode d’accessibilité",
       "back_to_top": "Retour en haut",
       "remove": "Supprimer"
     },
     "breadcrumbs": {
-      "home": "Page d'accueil",
+      "home": "Accueil",
       "back": "Retour"
     },
     "alerts": {
       "success": "Succès !",
-      "info": "Veuillez noter",
+      "info": "Attention",
       "error": "Malheureusement..."
     },
     "read_more": {
       "show_more": "Afficher plus",
-      "read_more": "Lire la suite",
+      "read_more": "Lire plus",
       "read": "Lire",
       "show": "Afficher",
       "more": "plus",
       "less": "moins",
       "all": "tout",
-      "all_2": "tout",
+      "all_2": "tous",
       "variants": "variantes"
     },
     "color_palette": {
       "title": "Schéma de couleurs",
-      "info": "Vous pouvez toujours afficher ici les schémas de couleurs que vous avez définis dans les \"paramètres de couleurs\", lorsque vous modifiez le thème. Vous pouvez désactiver cette barre dans \"Paramètres du thème\" - \"Couleurs\".",
-      "white": "Le plus léger",
+      "info": "Vous pouvez toujours consulter ici le schéma de couleurs que vous avez défini sous « schéma de couleurs », pendant que vous modifiez le thème. Vous pouvez désactiver cette barre dans « paramètres du thème » - « couleurs »",
+      "white": "Le plus clair",
       "black": "Le plus sombre",
-      "light": "Lumière",
+      "light": "Clair",
       "dark": "Sombre",
       "accent": "Accent",
-      "light_2": "Lumière d'appoint",
-      "light_gradient": "Lumière dégradée",
+      "light_2": "Accent clair",
+      "light_gradient": "Dégradé clair",
       "dark_gradient": "Dégradé foncé"
     },
     "choose_option": "Faites un choix",
     "shipping_timer": {
-      "shipped_today": "Envoyé aujourd'hui ?",
-      "you_have_left_html": "Il vous reste encore : {{ time }}"
+      "shipped_today": "Envoyé aujourd’hui ?",
+      "you_have_left_html": "Il vous reste : {{ time }}"
     },
     "countdown": {
       "days": "Jours",
       "day": "Jour",
-      "hours": "Horaires",
+      "hours": "Heures",
       "hour": "Heure",
-      "minutes": "Procès-verbal",
+      "minutes": "Minutes",
       "minute": "Minutes",
       "seconds": "Secondes",
       "second": "Deuxième"

@@ -286,71 +286,71 @@
   },
   "general": {
     "accessibility": {
-      "toggle": "Cambiar {{ item }} dentro o fuera",
-      "only_you_can_see_this": "Sólo tú puedes ver esto",
-      "enable_javascript_message": "Habilite JavaScript para mejorar su experiencia.",
-      "toggle_accessibility_mode": "Activar o desactivar el modo de accesibilidad",
+      "toggle": "Activa o desactiva {{ item }} in",
+      "only_you_can_see_this": "Solo tú puedes ver esto",
+      "enable_javascript_message": "Activa JavaScript para mejorar tu experiencia.",
+      "toggle_accessibility_mode": "Activa o desactiva el modo de accesibilidad",
       "go_to_homepage": "Ir a la página de inicio",
-      "go_to_navigation": "Ir a navegación",
+      "go_to_navigation": "Ir a la navegación",
       "go_to_search": "Ir a la función de búsqueda",
       "go_to_content": "Ir al contenido",
       "go_to_footer": "Ir al pie de página",
       "choose_category": "Elige una categoría",
       "more": "Más",
       "menu": "Menú",
-      "minimize": "minimizar",
+      "minimize": "Minimizar",
       "close": "Cerrar",
       "show": "Mostrar",
       "hide": "Ocultar",
       "back_to_top": "Volver arriba",
-      "remove": "Quitar"
+      "remove": "Eliminar"
     },
     "breadcrumbs": {
-      "home": "pagina de inicio",
+      "home": "Página de inicio",
       "back": "Atrás"
     },
     "alerts": {
-      "success": "¡Éxito!",
-      "info": "Por favor tenga en cuenta",
-      "error": "Desafortunadamente..."
+      "success": "¡Listo!",
+      "info": "Ten en cuenta",
+      "error": "Lo sentimos..."
     },
     "read_more": {
       "show_more": "Mostrar más",
       "read_more": "Leer más",
-      "read": "leer",
+      "read": "Leer",
       "show": "Mostrar",
       "more": "más",
       "less": "menos",
       "all": "todo",
-      "all_2": "todos",
+      "all_2": "todas",
       "variants": "variantes"
     },
     "color_palette": {
       "title": "Esquema de colores",
-      "info": "Siempre puedes ver aquí los esquemas de color que has establecido en 'ajustes de color', mientras editas el tema. Puedes desactivar esta barra en 'ajustes del tema' - 'colores'.",
-      "white": "El más ligero",
-      "black": "La más oscura",
-      "light": "Luz",
+      "info": "Aquí siempre puedes ver el esquema de color que has configurado en \"esquema de color\" mientras editas el tema. Puedes desactivar esta barra en \"ajustes del tema\" - \"colores\"",
+      "white": "Más claro",
+      "black": "Más oscuro",
+      "light": "Claro",
       "dark": "Oscuro",
       "accent": "Acento",
-      "light_2": "Luz de acento",
-      "light_gradient": "Luz degradada",
-      "dark_gradient": "Gradiente oscuro"
+      "light_2": "Acento claro",
+      "light_gradient": "Degradado claro",
+      "dark_gradient": "Degradado oscuro"
     },
     "shipping_timer": {
       "shipped_today": "¿Enviado hoy?",
-      "you_have_left_html": "Todavía tienes: {{ time }}"
+      "you_have_left_html": "Te queda: {{ time }}"
     },
-    "choose_option": "hacer una elección",
+    "choose_option": "Haz una elección",
     "countdown": {
-      "days": "dias",
-      "day": "dia",
+      "days": "Días",
+      "day": "Día",
       "hours": "Horas",
       "hour": "Hora",
       "minutes": "Minutos",
       "minute": "Minuto",
       "seconds": "Segundos",
-      "second": "segundo"
+      "second": "Segundo"
     }
   },
   "gift_cards": {
