@@ -21,6 +21,11 @@
   }
 }
 
+/* 3. Sticky menubar: add breathing room at top of viewport */
+.shopify-section-header.fixed {
+  padding-top: 5px !important;
+}
+
 /* 3. Cart icon badge: prevent clipping on all screens.
       #header and parents can clip the cart count badge. */
 .shopify-section-header,
