@@ -68,6 +68,13 @@
             "text_alignment": "left"
           }
         },
+        "brand_slider_4xRQmH": {
+          "type": "brand_slider",
+          "settings": {
+            "multiply": false,
+            "show_border": true
+          }
+        },
         "sorting_WYKBec": {
           "type": "sorting",
           "settings": {}
@@ -101,6 +108,7 @@
       },
       "block_order": [
         "title_zYPxT8",
+        "brand_slider_4xRQmH",
         "sorting_WYKBec",
         "short_description_E3NC3F",
         "product_grid_VHGQNp",
