@@ -367,12 +367,12 @@ ul, ol, dd, blockquote { padding-left: 40px; }
 .shopify-section-header #header-outer { position: relative; width: 100%; max-width: var(--ghw); margin-left: auto; margin-right: auto; }
 .shopify-section-header #header-outer > .close { display: none; }
 #header, #header-inner { align-items: center; }
-.shopify-section-header #header { position: relative; z-index: 5; width: calc(100% + var(--dist_main)); min-height: var(--header_mih); margin-right: calc(0px - var(--dist_main)); padding-top: 4px; }
+.shopify-section-header #header { position: relative; z-index: 5; width: calc(100% + var(--dist_main)); min-height: var(--header_mih); margin-right: calc(0px - var(--dist_main)); padding-top: 2px; }
 #header > .overlay-close { content: ""; display: block; position: absolute; left: 50%; right: auto; top: 0; bottom: 0; z-index: 98; width: 110vw; margin: 0 0 0 -55vw; visibility: hidden; opacity: 0; }
 #root .shopify-section-header #header-inner { max-width: 100%; margin-right: 0; border-right-width: 0; min-height: var(--header_mih) }
 .shopify-section-header #header > #distance-counter { display: block; position: absolute; left: -10px; right: auto; bottom: auto; top: 100% !important; z-index: -10; margin: 0; padding: 0; border-width: 0; }
 .shopify-section-header #header > *, #root .shopify-section-header #header-inner > * { margin-right: 0; border-right: var(--dist_main) solid rgba(0,0,0,0); }
-#logo { min-width: 0; max-width: var(--maw_la); margin: 0 0 12px; color: inherit; font-size: var(--size_22); line-height: var(--main_lh_h); }
+#logo { min-width: 0; max-width: var(--maw_la); margin: 0 0 4px; color: inherit; font-size: var(--size_22); line-height: var(--main_lh_h); }
 #logo .broken-img { max-width: 232px; font-size: var(--size_14_f); }
 #logo img:after { content: attr(alt); display: block; position: absolute; left: 0; right: 0; top: 0; bottom: 0; background: var(--custom_top_main_bg); font-size: var(--size_14_f); line-height: var(--main_lh_h); }
 #logo span { display: block; }
@@ -534,9 +534,9 @@ html:not([dir="rtl"]) #nav > ul > li.text-end, html:not([dir="rtl"]) #nav-bar > 
 #nav-bar { z-index: 3; }
 #nav-bar ~ #nav { display: none; }
 #header-inner #nav-bar:not(.fixed), #header-inner #nav:not(.fixed) { --custom_top_nav_fg: var(--custom_top_main_fg); align-self: center; }
-#header-inner #nav-bar:not(.fixed) > ul > li, #header-inner #nav:not(.fixed) > ul > li { border-bottom: 12px solid rgba(0,0,0,0); }
+#header-inner #nav-bar:not(.fixed) > ul > li, #header-inner #nav:not(.fixed) > ul > li { border-bottom: 4px solid rgba(0,0,0,0); }
 #header-inner #nav-bar:not(.fixed):before, #header-inner #nav:not(.fixed):before { display: none; }
-#nav-user { display: block; position: relative; top: 0; bottom: 0; z-index: 5; float: right; margin: 0 0 12px auto; font-size: var(--main_fz); display: flex; align-items: center; flex-shrink: 0; }
+#nav-user { display: block; position: relative; top: 0; bottom: 0; z-index: 5; float: right; margin: 0 0 4px auto; font-size: var(--main_fz); display: flex; align-items: center; flex-shrink: 0; }
 
 #nav-user > ul { list-style: none; margin: 0 -24px 0 0; padding: 0; }
 #nav-user > ul > li { position: relative; z-index: 2; margin: 0 24px 0 0; }
