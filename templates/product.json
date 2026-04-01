@@ -219,7 +219,7 @@
         "images_padding": 0,
         "images_vertical_position": 0,
         "show_thumbs_desktop": true,
-        "show_thumbs_mobile": true,
+        "show_thumbs_mobile": false,
         "thumbs_layout": "aside",
         "img_info": "",
         "img_info_color_palette": "accent",
