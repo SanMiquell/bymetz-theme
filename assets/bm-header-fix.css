@@ -1,1 +1,30 @@
-/* intentionally empty */
+/* ByMetz header fix — mobile top-bar spacing + cart icon overflow */
+
+/* 1. Mobile: shrink #nav-top (top-bar) which is mostly empty on mobile
+      — BTW toggle is tablet-hide, liquid blocks are desktop-only,
+        language/country selectors are mobile-nav-only (hidden).
+      Only applies below 750px to not affect desktop. */
+@media screen and (max-width: 749px) {
+  #nav-top {
+    min-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+/* 2. Cart icon badge: prevent clipping on all screens.
+      #header and parents can clip the cart count badge. */
+.shopify-section-header,
+.shopify-section-header #header-outer,
+.shopify-section-header #header,
+.shopify-section-header #header-inner {
+  overflow: visible !important;
+}
+#nav-user > ul > li.cart > a,
+#nav-user > ul > li.cart > a i {
+  overflow: visible !important;
+}
+#cart-count {
+  position: relative;
+  z-index: 10;
+}
