@@ -861,16 +861,16 @@
         "back_button_label": "Retouren",
         "choose_delivery_strategy": "Wähle eine Versandmethode",
         "autocomplete_zero_item": "Keine Artikel verfügbar",
-        "autocomplete_powered_by_google": "Ermöglicht durch {{brandName}}",
+        "autocomplete_powered_by_google": "Möglich gemacht durch {{brandName}}",
         "submit": "Senden",
-        "processing": "Verarbeitung...",
+        "processing": "Verarbeiten...",
         "stepper": {
-          "increase": "Erhöhung von {{type}}",
+          "increase": "Zunahme von {{type}}",
           "decrease": "Abnahme von {{type}}",
-          "minimum_reached": "Mindestens {{value}} erreicht",
-          "maximum_reached": "Maximal {{value}} erreicht"
+          "minimum_reached": "Minimum von {{value}} bereicht",
+          "maximum_reached": "Maximum von {{value}} bereicht"
         },
-        "remove_item": "%{label} löschen",
+        "remove_item": "%{label} entfernen",
         "remove_tag": "Tag entfernen",
         "dates": {
           "weekdays": {
@@ -885,11 +885,11 @@
           "weekdays_abbreviation": {
             "monday": "Mo.",
             "tuesday": "Di.",
-            "wednesday": "Heiraten.",
-            "thursday": "Tun.",
+            "wednesday": "Mi.",
+            "thursday": "Do.",
             "friday": "Fr.",
             "saturday": "Sa.",
-            "sunday": "So was."
+            "sunday": "So."
           },
           "months": {
             "january": "Januar",
@@ -907,22 +907,22 @@
           }
         },
         "datepicker": {
-          "show_previous_month": "Letzten Monat ansehen, {{month}} {{year}}",
+          "show_previous_month": "Vorherigen Monat anzeigen, {{month}} {{year}}",
           "show_next_month": "Nächsten Monat anzeigen, {{month}} {{year}}",
-          "range_start": "Startbereich",
-          "in_range": "In Reichweite",
+          "range_start": "Beginn des Bereichs",
+          "in_range": "Innerhalb des Bereichs",
           "range_end": "Ende des Bereichs"
         },
         "list_formatter": {
           "and": {
             "wordConnector": "{{previousWords}}, {{anotherWord}}",
-            "lastWordConnector": "{{previousWords}} und {{lastWord}}",
-            "twoWordConnector": "{{firstWord}} und {{secondWord}}"
+            "lastWordConnector": "{{previousWords}} en {{lastWord}}",
+            "twoWordConnector": "{{firstWord}} en {{secondWord}}"
           },
           "or": {
             "wordConnector": "{{previousWords}}, {{anotherWord}}",
-            "lastWordConnector": "{{previousWords}} oder {{lastWord}}",
-            "twoWordConnector": "{{firstWord}} oder {{secondWord}}"
+            "lastWordConnector": "{{previousWords}} of {{lastWord}}",
+            "twoWordConnector": "{{firstWord}} of {{secondWord}}"
           },
           "narrow": {
             "wordConnector": "{{previousWords}}, {{anotherWord}}",
@@ -932,7 +932,7 @@
         },
         "map": {
           "cluster_title": {
-            "one": "Cluster von {{number}} Markierung",
+            "one": "Cluster von {{number}} markierpunkt",
             "other": "Cluster von {{number}} Markierungen"
           }
         },
