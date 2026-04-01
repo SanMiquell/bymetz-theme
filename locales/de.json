@@ -241,23 +241,23 @@
   },
   "general": {
     "accessibility": {
-      "toggle": "Schalten Sie {{ item }}  ein oder aus",
+      "toggle": "Schalten Sie {{ item }} in aus oder ein",
       "only_you_can_see_this": "Nur Sie können dies sehen",
-      "enable_javascript_message": "Aktivieren Sie JavaScript, um Ihr Einkaufserlebnis zu verbessern.",
-      "toggle_accessibility_mode": "Barrierefreiheitsmodus ein- oder ausschalten",
-      "go_to_homepage": "Zur Startseite",
-      "go_to_navigation": "Zur Navigation",
-      "go_to_search": "Zur Suchfunktion",
-      "go_to_content": "Zum Inhalt springen",
-      "go_to_footer": "Zum Footer springen",
-      "choose_category": "Wählen Sie eine Kategorie",
+      "enable_javascript_message": "Aktivieren Sie JavaScript, um Ihr Erlebnis zu verbessern.",
+      "toggle_accessibility_mode": "Schalten Sie den Barrierefreiheitsmodus ein oder aus",
+      "go_to_homepage": "Zur Startseite gehen",
+      "go_to_navigation": "Zur Navigation gehen",
+      "go_to_search": "Zur Suchfunktion gehen",
+      "go_to_content": "Zum Inhalt gehen",
+      "go_to_footer": "Zum Footer gehen",
+      "choose_category": "Kategorie auswählen",
       "more": "Mehr",
       "menu": "Menü",
       "minimize": "Minimieren",
       "close": "Schließen",
       "show": "Anzeigen",
       "hide": "Ausblenden",
-      "back_to_top": "Zurück nach oben",
+      "back_to_top": "Nach oben",
       "remove": "Entfernen"
     },
     "breadcrumbs": {
@@ -266,12 +266,12 @@
     },
     "alerts": {
       "success": "Erfolgreich!",
-      "info": "Achtung",
+      "info": "Hinweis",
       "error": "Leider..."
     },
     "read_more": {
       "show_more": "Mehr anzeigen",
-      "read_more": "Mehr erfahren",
+      "read_more": "Mehr lesen",
       "read": "Lesen",
       "show": "Anzeigen",
       "more": "mehr",
@@ -282,21 +282,21 @@
     },
     "color_palette": {
       "title": "Farbschema",
-      "info": "Sie können hier immer Ihre Farbschemata sehen, die Sie unter \"Farbeinstellungen\" festgelegt haben, während Sie das Thema bearbeiten. Sie können diese Leiste unter \"Themeneinstellungen\" - \"Farben\" deaktivieren.",
-      "white": "Leichteste",
+      "info": "Hier können Sie das Farbschema, das Sie unter „kleurschema“ festgelegt haben, jederzeit ansehen, während Sie das Theme bearbeiten. Sie können diese Leiste unter „thema-instellingen“ – „kleuren“ deaktivieren.",
+      "white": "Hellste",
       "black": "Dunkelste",
-      "light": "Licht",
+      "light": "Hell",
       "dark": "Dunkel",
       "accent": "Akzent",
-      "light_2": "Akzentbeleuchtung",
-      "light_gradient": "Gradienten licht",
-      "dark_gradient": "Gradienten dunkel"
+      "light_2": "Hell Akzent",
+      "light_gradient": "Heller Farbverlauf",
+      "dark_gradient": "Dunkler Farbverlauf"
     },
     "shipping_timer": {
       "shipped_today": "Heute versendet?",
       "you_have_left_html": "Sie haben noch: {{ time }}"
     },
-    "choose_option": "Bitte wählen Sie aus",
+    "choose_option": "Treffen Sie eine Auswahl",
     "countdown": {
       "days": "Tage",
       "day": "Tag",
