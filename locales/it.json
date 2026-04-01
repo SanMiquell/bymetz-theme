@@ -286,32 +286,32 @@
   },
   "general": {
     "accessibility": {
-      "toggle": "Cambia {{ item }} dentro o fuori",
+      "toggle": "Attiva/disattiva {{ item }} in",
       "only_you_can_see_this": "Solo tu puoi vederlo",
       "enable_javascript_message": "Abilita JavaScript per migliorare la tua esperienza.",
-      "toggle_accessibility_mode": "Attiva o disattiva la modalità di accessibilità",
+      "toggle_accessibility_mode": "Attiva/disattiva la modalità di accessibilità",
       "go_to_homepage": "Vai alla home page",
       "go_to_navigation": "Vai alla navigazione",
       "go_to_search": "Vai alla funzione di ricerca",
       "go_to_content": "Vai al contenuto",
       "go_to_footer": "Vai al piè di pagina",
       "choose_category": "Scegli una categoria",
-      "more": "Di più",
-      "menu": "Menù",
-      "minimize": "Ridurre al minimo",
+      "more": "Altro",
+      "menu": "Menu",
+      "minimize": "Riduci al minimo",
       "close": "Chiudi",
       "show": "Mostra",
-      "hide": "Nasconditi",
-      "back_to_top": "Torna all'inizio",
+      "hide": "Nascondi",
+      "back_to_top": "Torna su",
       "remove": "Rimuovi"
     },
     "breadcrumbs": {
-      "home": "Pagina iniziale",
+      "home": "Home page",
       "back": "Indietro"
     },
     "alerts": {
-      "success": "Successo!",
-      "info": "Si prega di notare",
+      "success": "Operazione riuscita!",
+      "info": "Attenzione",
       "error": "Purtroppo..."
     },
     "read_more": {
@@ -319,27 +319,27 @@
       "read_more": "Leggi di più",
       "read": "Leggi",
       "show": "Mostra",
-      "more": "di più",
+      "more": "più",
       "less": "meno",
-      "all": "tutto",
-      "all_2": "tutto",
+      "all": "tutti",
+      "all_2": "tutte",
       "variants": "varianti"
     },
     "color_palette": {
-      "title": "Schema di colore",
-      "info": "È sempre possibile visualizzare qui gli schemi di colore impostati in \"impostazioni dei colori\", mentre si modifica il tema. È possibile disattivare questa barra in 'impostazioni del tema' - 'colori'.",
-      "white": "Il più leggero",
+      "title": "Schema colori",
+      "info": "Puoi sempre visualizzare qui lo schema colori che hai impostato in 'schema colori', mentre stai modificando il tema. Puoi disattivare questa barra in 'impostazioni del tema' - 'colori'",
+      "white": "Più chiaro",
       "black": "Il più scuro",
-      "light": "Luce",
-      "dark": "Dark",
+      "light": "Chiaro",
+      "dark": "Scuro",
       "accent": "Accento",
-      "light_2": "Luce d'accento",
-      "light_gradient": "Luce graduale",
-      "dark_gradient": "Gradiente scuro"
+      "light_2": "Accento chiaro",
+      "light_gradient": "Sfumatura chiara",
+      "dark_gradient": "Sfumatura scura"
     },
     "shipping_timer": {
-      "shipped_today": "Inviato oggi?",
-      "you_have_left_html": "Hai ancora: {{ time }}"
+      "shipped_today": "Spedito oggi?",
+      "you_have_left_html": "Ti resta ancora: {{ time }}"
     },
     "choose_option": "Fai una scelta",
     "countdown": {
