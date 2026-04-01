@@ -1367,63 +1367,73 @@
         "gift_cards_apply_to_local_shop": "Gutscheine gelten nur für Artikel von %{shop_name}",
         "estimated_taxes_label_short": "Geschätzt",
         "discount_code_removed": "Rabattcode %{code} wurde entfernt",
-        "discount_code_replaced": "Rabattcode %{old_code} wurde entfernt und %{code} angewendet wurde",
-        "discount_code_replaced_multiple": "Mehrere Rabattcodes wurden entfernt und %{code} angewendet wurde",
+        "discount_code_replaced": "Der Gutschein-Code %{old_code} wurde entfernt und %{code} wurde angewendet",
+        "discount_code_replaced_multiple": "Mehrere Gutschein-Codes wurden entfernt und %{code} wurde angewendet",
         "from_multiple_stores_heading": "Aus mehreren Geschäften",
         "discount_applies_to_subscription_items_only": "Der Rabatt gilt nur für Abo-Artikel",
-        "estimated_taxes_finalization_tooltip_content_short": "Steuerrundung nach Zahlung",
+        "estimated_taxes_finalization_tooltip_content_short": "Steuerabrundung nach der Zahlung",
         "pickup_unavailable_banner_title_with_country": {
-          "one": "Keine Geschäfte verfügbar %{country} mit Deinem Artikel",
-          "other": "Keine Geschäfte verfügbar %{country} mit Ihren Artikeln"
+          "one": "Keine Geschäfte verfügbar in %{country} mit Ihrem Artikel",
+          "other": "Keine Geschäfte verfügbar in %{country} mit Ihren Artikeln"
+        },
+        "pay_merchant_label": "%{merchant_name} bezahlen",
+        "compare_at_sale": "Ausverkauf (%{sale_amount})",
+        "tax_line": {
+          "hst": "HST",
+          "gst": "GST",
+          "pst": "PST",
+          "rst": "RST",
+          "qst": "QST",
+          "vpt": "VPT"
         }
       },
       "shipping": {
         "title": "Versand",
         "shipping_method_title": "Versandart",
-        "waiting_on_rate_notice": "Verfügbare Versandkosten abrufen...",
-        "waiting_on_pickup_location_notice": "Verfügbare Abholorte abholen...",
+        "waiting_on_rate_notice": "Verfügbare Versandtarife abrufen...",
+        "waiting_on_pickup_location_notice": "Verfügbare Abholorte abrufen...",
         "no_rates_for_cart_or_destination_notice": "Für Ihren Warenkorb oder Ihre Adresse sind keine Versandmethoden verfügbar",
         "no_pickup_location_notice": "Mindestens eines Ihrer Produkte kann nicht abgeholt werden",
-        "no_rates_for_country_notice": "Für diese Adresse wurden keine Versandkosten gefunden.",
+        "no_rates_for_country_notice": "Keine Versandtarife für diese Adresse gefunden.",
         "no_rates_contact_notice": "Kontaktieren Sie uns für weitere Informationen",
-        "free_rate_label": "Kostenlos",
-        "cheapest_rate_label": "Günstigstes",
+        "free_rate_label": "Gratis",
+        "cheapest_rate_label": "Am günstigsten",
         "please_enter_your_shipping_information_notice": "Geben Sie Ihre Versandinformationen ein.",
         "estimated_delivery_date": {
-          "one": "%{count} Arbeitstag",
-          "other": "%{count} Arbeitstage"
+          "one": "%{count} Werktag",
+          "other": "%{count} Werktage"
         },
-        "estimated_delivery_date_range": "%{minimum} bis %{maximum} Arbeitstage",
-        "shipping_line_phone_label": "Mobiltelefonnummer (erforderlich)",
-        "shipping_line_phone": "Ihr Mobilfunkanbieter kann diese Nummer verwenden, um Sie zu kontaktieren.",
+        "estimated_delivery_date_range": "%{minimum} bis %{maximum} Werktage",
+        "shipping_line_phone_label": "Handynummer (Pflichtfeld)",
+        "shipping_line_phone": "Ihr Kurier kann diese Nummer verwenden, um Sie zu kontaktieren.",
         "other_method": {
           "zero": "Keine anderen Methoden verfügbar",
-          "one": "%{count} Andere Methode verfügbar unter",
-          "other": "%{count} Andere Methoden sind verfügbar unter"
+          "one": "%{count} andere Methode verfügbar ab",
+          "other": "%{count} andere Methoden verfügbar ab"
         },
-        "shipping_rate_discounted_amount": "Waschen: %{original_amount}. Jetzt: %{amount}",
-        "shipping_line_delivery_phone": "Möglicherweise werden Sie mit Updates zu Ihrer Lieferung kontaktiert.",
-        "optional_shipping_line_delivery_instructions_label": "Lieferanweisungen (optional)",
-        "shipping_line_delivery_phone_label": "Mobiltelefonnummer",
-        "shipping_line_delivery_instructions": "Geben Sie die erforderlichen Informationen wie Türcodes und Lieferanweisungen ein.",
-        "local_delivery": "Lieferung vor Ort",
+        "shipping_rate_discounted_amount": "War: %{original_amount}. Jetzt: %{amount}",
+        "shipping_line_delivery_phone": "Es kann sein, dass wir Sie mit Updates zu Ihrer Lieferung kontaktieren.",
+        "optional_shipping_line_delivery_instructions_label": "Zustellanweisungen (optional)",
+        "shipping_line_delivery_phone_label": "Handynummer",
+        "shipping_line_delivery_instructions": "Bitte geben Sie die erforderlichen Informationen ein, wie z. B. Türcodes und Zustellanweisungen.",
+        "local_delivery": "Lokale Zustellung",
         "subscription_shipping": "Abonnement zum Versenden",
         "shipping_method_one_time_purchase_group_title": "Einmaliger Kauf",
         "shipping_method_subscription_group_title": "Abonnement",
-        "one_time_purchase_shipping": "Einmal senden",
+        "one_time_purchase_shipping": "Einmaliger Versand",
         "subscription_delivery_description": {
           "prepaid_delivery_frequency": {
-            "one": "für %{count} Lieferung(en)",
-            "other": "für %{count} Lieferungen"
+            "one": "für %{count} Zustellungen",
+            "other": "für %{count} Sendungen"
           },
           "subscription_delivery_frequency": {
             "day": {
               "one": "jeden Tag",
-              "other": "jeder %{count} Tage"
+              "other": "jeden %{count} Tage"
             },
             "week": {
               "one": "jede Woche",
-              "other": "jeder %{count} Wochen"
+              "other": "jede %{count} Wochen"
             },
             "month": {
               "one": "jeden Monat",
