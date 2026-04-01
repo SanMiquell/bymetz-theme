@@ -1517,68 +1517,68 @@
         "estimated_time_range": "Voraussichtlich %{min_time}–%{max_time}",
         "delivery_date_range": "%{min_time} – %{max_time}",
         "subscription_local_delivery": "Abo für die lokale Zustellung",
-        "subscription_pickup": "Abo-Sammlung",
-        "delivery_today": "Lieferung am selben Tag bei %{time}",
+        "subscription_pickup": "Abonnement Abholung",
+        "delivery_today": "Lieferung am selben Tag um %{time}",
         "delivery_tomorrow": "Lieferung am nächsten Tag um %{time}",
-        "two_day_delivery": "Lieferung innerhalb von 2 Tagen %{time}",
+        "two_day_delivery": "Lieferung innerhalb von 2 Tagen um %{time}",
         "delivery": "Lieferung um %{time}",
-        "duties_and_taxes_title": "Zölle und Steuern",
-        "shipping_information_required_notice": "Versandinformationen sind erforderlich. {{link}}.",
-        "shipping_information_redirect_link": "Geben Sie hier Ihre Daten ein",
+        "duties_and_taxes_title": "Zollgebühren und Steuern",
+        "shipping_information_required_notice": "Versanddaten sind erforderlich. {{link}}.",
+        "shipping_information_redirect_link": "Gib hier deine Daten ein",
         "loading_progressive_rates": "Nach weiteren Tarifen suchen...",
         "no_other_methods_available": "Keine anderen Methoden verfügbar",
         "duties_and_taxes_options": {
-          "ddu_title": "Bezahlen Sie bei Lieferung",
-          "ddu_caption": "Es können zusätzliche Gebühren anfallen",
-          "ddp_title": "Bezahlen Sie jetzt",
-          "ddp_caption": "Keine zusätzlichen Kosten für die Lieferung"
+          "ddu_title": "Zahlung bei Lieferung",
+          "ddu_caption": "Zusätzliche Kosten können anfallen",
+          "ddp_title": "Jetzt bezahlen",
+          "ddp_caption": "Keine zusätzlichen Kosten bei der Lieferung"
         },
         "shipping_method_combinations": {
           "without_separator": "%{firstMethod}, %{secondMethod}",
           "with_separator": "%{rest}, %{current},",
           "combination": "%{rest} und %{current}"
         },
-        "shipping_used_as_billing_notice": "Diese wird auch als Rechnungsadresse für diese Bestellung verwendet.",
+        "shipping_used_as_billing_notice": "Dies wird auch als Rechnungsadresse für diese Bestellung verwendet.",
         "address_update": "Adresse aktualisieren",
         "shipping_address_title": "Senden an",
-        "add_address": "Verwenden Sie eine andere Adresse",
-        "add_delivery_instructions": "Fügen Sie Lieferanweisungen hinzu",
+        "add_address": "Eine andere Adresse verwenden",
+        "add_delivery_instructions": "Lieferhinweise hinzufügen",
         "edit": "Bearbeiten",
-        "delete": "Löschen",
+        "delete": "Entfernen",
         "address_more": "Weitere Aktionen für diese Adresse",
         "address_edit": "Adresse bearbeiten",
         "address_delete": "Adresse entfernen",
-        "address_confirm": "Möchten Sie diese Adresse wirklich aus Ihrem Konto entfernen?",
+        "address_confirm": "Bist du sicher, dass du diese Adresse aus deinem Konto entfernen möchtest?",
         "address_form": {
           "add_address": "Adresse hinzufügen",
           "save": "Speichern",
           "cancel": "Abbrechen",
-          "generic_error": "Beim Speichern Ihrer Adresse ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.",
-          "one_time_address_subtitle": "Verwenden Sie für diese Bestellung eine Einmaladresse",
+          "generic_error": "Beim Speichern deiner Adresse ist ein Problem aufgetreten. Bitte versuche es erneut.",
+          "one_time_address_subtitle": "Eine einmalige Adresse für diese Bestellung verwenden",
           "edit": "Adresse bearbeiten",
           "update": "Änderungen speichern",
           "max_address": "{{max_addresses}}Adresslimit erreicht. Entfernen Sie eine Adresse, um eine neue Adresse hinzuzufügen."
         },
-        "different_shipping_method_summary": "Geben Sie eine andere Lieferadresse ein, um die verfügbaren Versandmethoden anzuzeigen",
-        "invalid_shipping_method_summary": "Bitte geben Sie eine gültige Lieferadresse ein, um die verfügbaren Versandarten anzuzeigen",
+        "different_shipping_method_summary": "Gib eine andere Lieferadresse ein, um die verfügbaren Versandmethoden zu sehen",
+        "invalid_shipping_method_summary": "Gib eine gültige Lieferadresse ein, um die verfügbaren Versandmethoden zu sehen",
         "method_summary": {
-          "incomplete_address_entered": "Geben Sie eine vollständige Lieferadresse ein, um die verfügbaren Versandmethoden anzuzeigen",
-          "incomplete_address_selected": "Wählen Sie eine vollständige Lieferadresse aus, um die verfügbaren Versandmethoden anzuzeigen"
+          "incomplete_address_entered": "Gib eine vollständige Lieferadresse ein, um die verfügbaren Versandmethoden zu sehen",
+          "incomplete_address_selected": "Wähle eine vollständige Lieferadresse, um die verfügbaren Versandmethoden zu sehen"
         },
         "local_pickup": {
-          "search_address": "Adresse finden",
-          "rollup_title": "Abholort",
-          "rollup_accessibility_label": "Optionen für den Abholort"
+          "search_address": "Adresse suchen",
+          "rollup_title": "Abholstandort",
+          "rollup_accessibility_label": "Optionen für den Abholstandort"
         },
         "missing_shipping_address": "Lieferadresse fehlt",
         "delivery_title": "Lieferung",
         "shipping_method_first_shipment_group_title": {
-          "one": "Erste Lieferung",
-          "other": "Erste Lieferungen"
+          "one": "Erste Sendung",
+          "other": "Erste Sendungen"
         },
         "shipping_method_recurring_shipments_group_title": {
-          "one": "Rücksendung",
-          "other": "Rücksendungen"
+          "one": "Wiederkehrende Sendung",
+          "other": "Wiederkehrende Sendungen"
         },
         "address_default": "Als Standard festlegen",
         "split_shipping_merchandise_quantity_label_standard": "%{quantity} Artikel",
