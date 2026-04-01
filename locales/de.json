@@ -1112,70 +1112,70 @@
           "status_column_header": "Keine Lieferung"
         },
         "price_update": {
-          "title": "Preisaktualisierung",
-          "description": "Die Preise dieser Artikel wurden in Ihrem Warenkorb geändert und aktualisiert.",
+          "title": "Preisupdate",
+          "description": "Die Preise dieser Artikel wurden geändert und in deinem Warenkorb aktualisiert.",
           "updated_price": "Aktualisierter Preis"
         },
-        "return_to_store_label": "Zurück zum Laden",
+        "return_to_store_label": "Zurück zum Shop",
         "item_label": {
-          "one": "{{count}} Artikel",
-          "other": "{{count}} Artikel"
+          "one": "{{count}} artikel",
+          "other": "{{count}} artikelen"
         },
-        "continue_cta_label": "Gehen Sie zur Kasse",
+        "continue_cta_label": "Weiter zur Kasse",
         "out_of_stock": {
-          "description": "Diese Artikel sind nicht mehr verfügbar und wurden aus Ihrem Warenkorb entfernt.",
-          "items_unavailable": "Einige Artikel sind nicht mehr verfügbar und wurden aus Ihrem Warenkorb entfernt."
+          "description": "Diese Artikel sind nicht mehr verfügbar und wurden aus deinem Warenkorb entfernt.",
+          "items_unavailable": "Einige Artikel sind nicht mehr verfügbar und wurden aus deinem Warenkorb entfernt."
         },
         "unfulfillable_product": {
-          "title": "Lieferung nicht möglich",
+          "title": "Versand nicht verfügbar",
           "message": {
             "one": "%{delivery_method} ist für diesen Artikel nicht mehr verfügbar.",
             "other": "%{delivery_method} ist für diese Artikel nicht mehr verfügbar."
           },
           "default_message": {
-            "one": "Die gewählte Versandart ist für diesen Artikel nicht mehr verfügbar.",
-            "other": "Die gewählte Versandart ist für diese Artikel nicht mehr verfügbar."
+            "one": "Die ausgewählte Versandmethode ist für diesen Artikel nicht mehr verfügbar.",
+            "other": "Die ausgewählte Versandmethode ist für diese Artikel nicht mehr verfügbar."
           }
         },
         "price_and_quantity_update": {
-          "title": "Preis- und Mengenaktualisierung",
-          "description": "Die Preise und verfügbaren Mengen für diese Artikel haben sich geändert und der Warenkorb wurde aktualisiert."
+          "title": "Update von Preis und Menge",
+          "description": "Die Preise und verfügbaren Mengen für diese Artikel wurden aktualisiert und der Warenkorb wurde aktualisiert."
         },
-        "out_of_stock_in_context_label": "Dieses Produkt ist in Ihrem Land/Ihrer Region nicht verfügbar."
+        "out_of_stock_in_context_label": "Dieses Produkt ist in deinem Land/deiner Region nicht verfügbar."
       },
       "order_summary": {
         "title": "Bestellübersicht",
-        "order_name_label": "Bestellen %{name}",
+        "order_name_label": "Bestellung %{name}",
         "shopping_cart_label": "Warenkorb",
         "discount_title": "Rabatt",
-        "discount_label": "Rabattcode",
-        "discount_placeholder": "Rabattcode",
-        "gift_card_title": "Geschenkgutschein",
-        "gift_card_label": "Geschenkgutschein",
-        "gift_card_placeholder": "Geschenkgutschein",
-        "gift_card_and_discount_title": "Rabattcode oder Geschenkgutschein",
-        "gift_card_and_discount_label": "Rabattcode oder Geschenkgutschein",
-        "gift_card_and_discount_placeholder": "Rabattcode oder Geschenkgutschein",
-        "add_discount_or_gift_card": "Fügen Sie einen Rabattcode oder einen Geschenkgutschein hinzu",
-        "remove_gift_card_label": "Geschenkgutschein entfernen",
+        "discount_label": "Gutscheincode",
+        "discount_placeholder": "Gutscheincode",
+        "gift_card_title": "Gutschein",
+        "gift_card_label": "Gutschein",
+        "gift_card_placeholder": "Gutschein",
+        "gift_card_and_discount_title": "Gutscheincode oder Gutschein",
+        "gift_card_and_discount_label": "Gutscheincode oder Gutschein",
+        "gift_card_and_discount_placeholder": "Gutscheincode oder Gutschein",
+        "add_discount_or_gift_card": "Einen Gutscheincode oder Gutschein hinzufügen",
+        "remove_gift_card_label": "Gutschein entfernen",
         "remove_discount_label": "Rabatt entfernen",
         "free_shipping_discount_label": "Kostenloser Versand",
-        "apply_discount_button_label": "Bewerben",
-        "applied_discount_message": "Es gibt %{amount} Rabatt vom Gesamtpreis abgezogen.",
-        "discount_has_been_applied": "Der Rabatt wurde angewendet",
-        "discount_has_been_removed": "Der Rabatt wurde entfernt",
-        "gift_card_has_been_applied": "Geschenkkarte wurde angewendet",
-        "gift_card_has_been_removed": "Die Geschenkkarte wurde entfernt",
-        "discount_already_applied": "Auf diese Bestellung wurde ein Rabatt gewährt. Sie können keinen weiteren Rabatt hinzufügen.",
-        "cart_does_not_meet_discount_requirements_notice": "Rabattcode <strong style=\"text-transform:uppercase\">%{code}</strong> gilt nicht für die Artikel in Ihrem Warenkorb",
-        "discount_requires_customer_notice": "Geben Sie Ihre Versandinformationen ein, um den Rabattcode zu erhalten <strong style=\"text-transform:uppercase\">%{code}</strong> bewerben",
-        "customer_does_not_meet_discount_requirements_notice": "Rabattcode <strong style=\"text-transform:uppercase\">%{code}</strong> steht Ihnen derzeit nicht zur Verfügung",
-        "shipping_information_does_not_meet_discount_requirements_notice": "Rabattcode <strong style=\"text-transform:uppercase\">%{code}</strong> ist für Ihre Lieferadresse nicht verfügbar",
-        "customer_already_used_once_per_customer_discount_notice": "Der Rabattcode <strong style=\"text-transform:uppercase\">%{code}</strong> wurde bereits verwendet",
+        "apply_discount_button_label": "Anwenden",
+        "applied_discount_message": "Es wurden %{amount} Rabatt vom Gesamtpreis abgezogen.",
+        "discount_has_been_applied": "Rabatt wurde angewendet",
+        "discount_has_been_removed": "Rabatt wurde entfernt",
+        "gift_card_has_been_applied": "Gutschein wurde angewendet",
+        "gift_card_has_been_removed": "Gutschein wurde entfernt",
+        "discount_already_applied": "Auf diese Bestellung wurde ein Rabatt angewendet. Du kannst keinen weiteren Rabatt hinzufügen.",
+        "cart_does_not_meet_discount_requirements_notice": "Der Gutscheincode <strong style=\"text-transform:uppercase\">%{code}</strong> gilt nicht für die Artikel in deinem Warenkorb",
+        "discount_requires_customer_notice": "Gib deine Versanddaten ein, um den Gutscheincode <strong style=\"text-transform:uppercase\">%{code}</strong> anzuwenden",
+        "customer_does_not_meet_discount_requirements_notice": "Der Gutscheincode <strong style=\"text-transform:uppercase\">%{code}</strong> ist derzeit nicht für dich verfügbar",
+        "shipping_information_does_not_meet_discount_requirements_notice": "Der Gutscheincode <strong style=\"text-transform:uppercase\">%{code}</strong> ist für deine Lieferadresse nicht verfügbar",
+        "customer_already_used_once_per_customer_discount_notice": "Der Gutscheincode <strong style=\"text-transform:uppercase\">%{code}</strong> wurde bereits verwendet",
         "subtotal_label": "Zwischensumme",
         "shipping_label": "Versand",
-        "tip_label": "Tipp",
-        "shipping_default_value": "Wird im nächsten Schritt berechnet",
+        "tip_label": "Trinkgeld",
+        "shipping_default_value": "Berechnet im nächsten Schritt",
         "shipping_pending_value": "—",
         "shipping_pending_message": "Noch nicht verfügbar",
         "shipping_policy_link": "Versandkosten",
