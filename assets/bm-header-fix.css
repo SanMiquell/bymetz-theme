@@ -1,10 +1,9 @@
-/* ByMetz header spacing & overflow fix
+/* ByMetz header compact fix
+   Reduces header vertical space on initial load to match scrolled state.
    Loaded via layout/theme.liquid — independent of Shopify JSON sync.
-   Does NOT resize the header — only fixes spacing gaps and overflow. */
+   Desktop only (min-width: 750px) — mobile stays untouched. */
 
-/* === ALL SCREENS === */
-
-/* 1. Eliminate gap between review bar section and header */
+/* 1. Eliminate gap between review bar section and header (all screens) */
 [id*="section_custom_liquid"] {
   margin: 0 !important;
   padding: 0 !important;
@@ -17,71 +16,78 @@
   line-height: initial;
 }
 
-/* 2. Review bar row: remove outer padding */
+/* 2. Review bar row: remove outer padding (all screens) */
 .bm-topreview-row {
   padding: 0 !important;
   margin: 0 !important;
 }
 
-/* 3. Header group container: no gaps between children */
+/* 3. Header group container: no gaps between children (all screens) */
 .shopify-section-group-header-group {
   gap: 0 !important;
 }
 
-/* 4. Header section: no extra top margin/border */
-.shopify-section-header {
-  margin-top: 0 !important;
-  border-top: 0 !important;
-}
-
-/* 5. FIX: Gap ABOVE menubar —
-   The inline nav-bar gets border-bottom: 4px transparent for hover underline.
-   This pushes the menubar down. Remove it and use box-shadow instead. */
-#header-inner #nav-bar:not(.fixed) > ul > li,
-#header-inner #nav:not(.fixed) > ul > li {
-  border-bottom-width: 0 !important;
-}
-
-/* 6. FIX: Gap BELOW menubar —
-   #content has padding-top: var(--content_p) = 25px desktop / 20px mobile.
-   Reduce this so breadcrumb/content sits closer to the menu. */
-#content {
-  padding-top: 12px !important;
-}
-
-/* 7. FIX: Cart icon badge clipped —
-   Ensure cart icon and its count badge are never clipped.
-   The header, header-outer, and header-inner must allow overflow. */
+/* 4. Cart icon overflow fix (all screens) */
 .shopify-section-header,
 .shopify-section-header #header-outer,
 .shopify-section-header #header,
 .shopify-section-header #header-inner {
   overflow: visible !important;
 }
-
-#nav-user > ul > li.cart > a {
-  overflow: visible !important;
-}
-
+#nav-user > ul > li.cart > a,
 #nav-user > ul > li.cart > a i {
   overflow: visible !important;
 }
-
-/* Cart count badge: ensure it's visible above everything */
 #cart-count {
   position: relative;
   z-index: 10;
-  overflow: visible !important;
+}
+
+/* === DESKTOP ONLY: compact header on initial load === */
+@media screen and (min-width: 750px) {
+  /* 5. Header section: no extra top spacing */
+  .shopify-section-header {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: 0 !important;
+  }
+
+  /* 6. Compact top-bar: reduce height and padding */
+  #nav-top {
+    min-height: 0 !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+
+  /* 7. Main header: reduce top padding */
+  .shopify-section-header #header {
+    padding-top: 0 !important;
+  }
+
+  /* 8. Menubar: tighten vertical space */
+  #nav-bar:not(.fixed),
+  #nav:not(.fixed) {
+    min-height: 38px;
+  }
+  #nav-bar:not(.fixed) > ul > li,
+  #nav:not(.fixed) > ul > li {
+    border-bottom-width: 0 !important;
+  }
+
+  /* 9. Desktop: slightly more space between menubar and breadcrumb */
+  #content {
+    padding-top: 18px !important;
+  }
 }
 
 /* === MOBILE === */
 @media screen and (max-width: 749px) {
-  /* Smaller content gap on mobile */
+  /* 10. Mobile: less space between menubar and breadcrumb */
   #content {
-    padding-top: 8px !important;
+    padding-top: 10px !important;
   }
 
-  /* Prevent breadcrumb from hiding behind sticky header */
+  /* 11. Prevent breadcrumb from sliding behind sticky header */
   .bymetz-bc {
     margin-top: 0 !important;
     padding-top: 4px;
