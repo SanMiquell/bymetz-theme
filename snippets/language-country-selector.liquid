@@ -29,19 +29,55 @@
     {%- endif -%}
       {%- form 'localization', class: 'localization-form' -%}
     <ul>
+      {%- comment -%}
+        Sort languages: current language first, then preferred order (en,nl,de,fr,es,it),
+        then any remaining languages not in the preferred list.
+      {%- endcomment -%}
+      {%- assign preferred_order = 'en,nl,de,fr,es,it' | split: ',' -%}
+      {%- assign current_iso = localization.language.iso_code | downcase -%}
+
+      {%- comment -%} 1. Render current language first {%- endcomment -%}
       {%- for language in localization.available_languages -%}
-        {% assign iso_code_downcase = language.iso_code | downcase %}
+        {%- assign lang_lower = language.iso_code | downcase -%}
+        {%- if lang_lower == current_iso -%}
+          {%- assign iso_code_downcase = lang_lower -%}
+          <li>
+            {%- if supported_language_flags contains iso_code_downcase -%}
+              <img src="{{ 'flag-' | append: iso_code_downcase | append: '.svg' | asset_url }}" alt="{{ 'header.flag_of' | t: country: language.endonym_name }}" width="17" height="12" loading="lazy">
+            {%- endif -%}
+            <a href="{{ language.root_url }}" hreflang="{{ language.iso_code }}" data-value="{{ language.iso_code }}" lang="{{ language.iso_code }}" aria-current="true" class="active">{{ language.endonym_name }}</a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- comment -%} 2. Render preferred languages in order, skipping current {%- endcomment -%}
+      {%- for pref_code in preferred_order -%}
+        {%- if pref_code == current_iso -%}{%- continue -%}{%- endif -%}
+        {%- for language in localization.available_languages -%}
+          {%- assign lang_lower = language.iso_code | downcase -%}
+          {%- if lang_lower == pref_code -%}
+            {%- assign iso_code_downcase = lang_lower -%}
+            <li>
+              {%- if supported_language_flags contains iso_code_downcase -%}
+                <img src="{{ 'flag-' | append: iso_code_downcase | append: '.svg' | asset_url }}" alt="{{ 'header.flag_of' | t: country: language.endonym_name }}" width="17" height="12" loading="lazy">
+              {%- endif -%}
+              <a href="{{ language.root_url }}" hreflang="{{ language.iso_code }}" data-value="{{ language.iso_code }}" lang="{{ language.iso_code }}">{{ language.endonym_name }}</a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+
+      {%- comment -%} 3. Render any remaining languages not in preferred list {%- endcomment -%}
+      {%- for language in localization.available_languages -%}
+        {%- assign lang_lower = language.iso_code | downcase -%}
+        {%- if lang_lower == current_iso -%}{%- continue -%}{%- endif -%}
+        {%- if preferred_order contains lang_lower -%}{%- continue -%}{%- endif -%}
+        {%- assign iso_code_downcase = lang_lower -%}
         <li>
           {%- if supported_language_flags contains iso_code_downcase -%}
-            <img
-              src="{{ 'flag-' | append: iso_code_downcase | append: '.svg' | asset_url }}"
-              alt="{{ 'header.flag_of' | t: country: language.endonym_name }}"
-              width="17"
-              height="12"
-              loading="lazy"
-            >
+            <img src="{{ 'flag-' | append: iso_code_downcase | append: '.svg' | asset_url }}" alt="{{ 'header.flag_of' | t: country: language.endonym_name }}" width="17" height="12" loading="lazy">
           {%- endif -%}
-          <a href="{{ language.root_url }}" hreflang="{{ language.iso_code }}" data-value="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} aria-current="true" class="active"{% endif %}>{{ language.endonym_name }}</a>
+          <a href="{{ language.root_url }}" hreflang="{{ language.iso_code }}" data-value="{{ language.iso_code }}" lang="{{ language.iso_code }}">{{ language.endonym_name }}</a>
         </li>
       {%- endfor -%}
     </ul>
