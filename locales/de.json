@@ -1750,74 +1750,74 @@
           "error_authorizing": "Fehler bei der Autorisierung der Zahlung"
         },
         "klarna_label": "Klarna",
-        "mor_disclaimer_html": "Indem Sie unten klicken und Ihre Bestellung abschließen, erklären Sie sich damit einverstanden, Ihre Artikel bei Global-e als registrierter Händler zu kaufen\nfür diese Transaktion, laut der <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{mor_terms}\" href=\"%{terms_href}\">Allgemeine Geschäftsbedingungen</a>\nund es <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{privacy_policy}\" href=\"%{policy_href}\">Datenschutzrichtlinie</a> von Global-e. Global-e ist ein internationales Unternehmen\nFulfillment-Dienstleister für %{shop_name}\n",
-        "purchase_options_card_update_agreement_label_html": "Wenn Sie die Zahlungsmethode aktualisieren, autorisieren Sie Zahlungen für alle wiederkehrenden oder aufgeschobenen Käufe gemäß der <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{cancellation_policy}\" href=\"%{policy_href}\">Stornierungsbedingungen</a> dieses Ladens.",
-        "multibanco_label": "Multibank",
-        "receiver_payment_experience_hint": "Nach Ihrer Bestellung erhalten Sie die Zahlungsdetails. Geben Sie die Zahlung ein %{due_days} Tagesausflüge bei Multibanco oder online.",
+        "mor_disclaimer_html": "Wenn du unten klickst und deine Bestellung abschließt, stimmst du zu, dass du dein(e) Produkt(e) bei Global-e als registrierter Merchant\nfür diese Transaktion gemäß den <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{mor_terms}\" href=\"%{terms_href}\">Allgemeinen Geschäftsbedingungen</a>\nund der <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{privacy_policy}\" href=\"%{policy_href}\">Datenschutzerklärung</a> von Global-e kaufst. Global-e ist ein\ninternationaler Fulfillment-Dienstanbieter für %{shop_name}\n",
+        "purchase_options_card_update_agreement_label_html": "Wenn du die Zahlungsmethode aktualisierst, autorisierst du Zahlungen für jeden wiederkehrenden oder aufgeschobenen Kauf gemäß dem <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{cancellation_policy}\" href=\"%{policy_href}\">Stornierungsrichtlinie</a> dieses Shops.",
+        "multibanco_label": "Multibanco",
+        "receiver_payment_experience_hint": "Nach dem Absenden deiner Bestellung erhältst du die Zahlungsinformationen. Führe die Zahlung innerhalb von %{due_days} Tagen bei Multibanco oder online durch.",
         "pending_payment": {
-          "due_notice": "Ihre Zahlung von %{amount_due} ist fällig am %{due_date}.",
+          "due_notice": "Für deine Zahlung von %{amount_due} ist fällig am %{due_date}.",
           "multibanco": {
-            "instruction_html": "Nehmen Sie Ihre Zahlung bei Multibanco oder online mit den untenstehenden Angaben vor. %{contact_us} für Fragen oder um Zahlungsinformationen zu aktualisieren.",
+            "instruction_html": "Führe deine Zahlung bei Multibanco oder online mithilfe der untenstehenden Angaben durch. %{contact_us} bei Fragen oder zum Aktualisieren der Zahlungsinformationen.",
             "entity": "Einheit",
             "reference": "Referenz",
             "amount": "Betrag",
-            "find_nearest_atm": "Finden Sie den nächstgelegenen Geldautomaten",
-            "buyer_action_info": "Ihre Zahlung von %{amount_due} ist offen."
+            "find_nearest_atm": "Nächstgelegenen Geldautomaten finden",
+            "buyer_action_info": "Deine Zahlung von %{amount_due} ist noch offen."
           }
         },
-        "purchase_options_agreement_label": "Ein oder mehrere Artikel im Warenkorb stellen einen aufgeschobenen oder wiederkehrenden Kauf dar. Indem Sie mit der Zahlung fortfahren, erklären Sie sich damit einverstanden, dass wir Ihre Zahlungsmethode automatisch mit den Kaufbeträgen zu dem auf dieser Seite angegebenen Preis und in der Häufigkeit belasten, bis das Abonnement abläuft oder Sie es selbst kündigen. Dies gilt für alle Stornierungen %{cancellation_policy_label}.",
+        "purchase_options_agreement_label": "Einer oder mehrere Artikel in deinem Warenkorb sind ein aufgeschobener Kauf, ein Abonnement oder ein wiederkehrender Kauf. Wenn du mit der Zahlung fortfährst, stimmst du zu, dass deine Zahlungsmethode automatisch mit dem Preis und der Häufigkeit belastet wird, die auf dieser Seite angegeben sind, bis sie abläuft oder du sie stornierst. Für alle Stornierungen gilt das  %{cancellation_policy_label}.",
         "update_payment_method": "Zahlungsmethode aktualisieren",
         "paypal_modal": {
           "order_contains_subscriptions": "Abonnement",
-          "order_contains_fixed_selling_plans": "Im Gesamtbetrag sind möglicherweise Steuern, Versandkosten, aufgeschobene Gebühren und einige Rabatte nicht enthalten. Gehen Sie zur Kasse für den heute fälligen Betrag."
+          "order_contains_fixed_selling_plans": "Der Gesamtbetrag ist ggf. ausschließlich Steuern, Versand, aufgeschobene Kosten und bestimmter Rabatte. Gehe zur Kasse für den heute fälligen Betrag."
         },
-        "purchase_options_agreement_label_html": "Mir ist bewusst, dass es sich bei einem oder mehreren Artikeln in meinem Warenkorb um einen aufgeschobenen oder wiederkehrenden Kauf handelt. Wenn ich fortfahre, stimme ich dem zu\n<a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{subscription_policy}\" href=\"%{policy_href}\">Stornierungsbedingungen</a>\nund ich ermächtige Sie außerdem, die angegebenen Preise in der angegebenen Häufigkeit und zu den angegebenen Terminen bis zu meiner Zahlungsart über meine Zahlungsmethode abzubuchen\nbis zur Ausführung der Bestellung oder bis ich sie storniere, sofern dies zulässig ist.\n",
-        "payment_method_saved": "Zahlungsart gespeichert",
+        "purchase_options_agreement_label_html": "Ich verstehe, dass einer oder mehrere Artikel in meinem Warenkorb ein aufgeschobener Kauf, ein Abonnement oder ein wiederkehrender Kauf sind. Wenn ich mit der Zahlung fortfahre, stimme ich zu, dass\n<a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{subscription_policy}\" href=\"%{policy_href}\">Stornierungsrichtlinie</a>\ndamit die Belastung meiner Zahlungsmethode für die auf dieser Seite genannten Preise, die Häufigkeit und die Daten erfolgt, bis meine\nBestellung abgeschlossen ist oder ich storniere, sofern zulässig.\n",
+        "payment_method_saved": "Zahlungsmethode gespeichert",
         "card_vaulted_company_location": "Karte für diesen Standort gespeichert",
-        "order_covered_by_store_credit_notice": "Die Bestellung wird mit Ihrem Shop-Guthaben bezahlt.",
-        "order_covered_by_redeemables_notice": "Die Bestellung ist bezahlt.",
+        "order_covered_by_store_credit_notice": "Die Bestellung wird mit deinem Guthaben bezahlt.",
+        "order_covered_by_redeemables_notice": "Die Bestellung wird bezahlt.",
         "store_credit": {
-          "label": "Guthaben speichern",
-          "apply_label": "Laden Sie eine Gutschrift ein",
-          "add_label": "Fügen Sie Store-Guthaben hinzu",
-          "manage_label": "Shop-Guthaben verwalten",
-          "buying_gift_card": "Sie können keinen Geschenkgutschein mit Store-Guthaben erwerben",
-          "no_fixed_selling_plans": "Sie können das Shop-Guthaben nicht in Kombination mit aufgeschobenen Kaufoptionen verwenden"
+          "label": "Guthaben",
+          "apply_label": "Guthaben anwenden",
+          "add_label": "Guthaben hinzufügen",
+          "manage_label": "Guthaben verwalten",
+          "buying_gift_card": "Mit deinem Guthaben kannst du keinen Geschenkgutschein kaufen",
+          "no_fixed_selling_plans": "Du kannst Guthaben nicht in Kombination mit Optionen für aufgeschobenen Kauf verwenden"
         },
-        "clear": "Klar",
-        "billing_must_match_shipping_notice": "Die Rechnungsadresse Ihrer Zahlungsmethode muss mit der Lieferadresse übereinstimmen.",
+        "clear": "Löschen",
+        "billing_must_match_shipping_notice": "Die Rechnungsadresse deiner Zahlungsmethode muss mit der Lieferadresse übereinstimmen.",
         "same_billing_address_checkbox_label": "Lieferadresse und Rechnungsadresse sind identisch",
-        "location_billing_address_label": "Standort der Rechnungsadresse",
+        "location_billing_address_label": "Rechnungsadresse des Standorts",
         "fact_billing_address_label": "Rechnungsadresse",
         "location_shipping_address_label": "Lieferadresse des Standorts",
-        "no_working_method_error": "Dieser Shop kann derzeit keine Zahlungen akzeptieren. Aktualisieren Sie die Seite oder kommen Sie später wieder.",
-        "brand_not_available": "Dieser Shop akzeptiert keine {{brand}}. Verwenden Sie zum Bezahlen eine andere Karte.",
-        "shipping_rate_updated": "Die verfügbaren Versandmethoden wurden aktualisiert. Bestätigen Sie Ihre Auswahl, bevor Sie bezahlen.",
-        "billing_address_invalid_phone": "Aktualisieren Sie die Telefonnummer für die Rechnungsadresse {{label}} {{last_digits}} weitermachen.",
-        "billing_address_invalid_phone_no_card": "Bitte aktualisieren Sie die Telefonnummer der Rechnungsadresse, um fortzufahren.",
+        "no_working_method_error": "Dieser Shop kann derzeit keine Zahlungen annehmen. Lade die Seite neu oder komm später wieder.",
+        "brand_not_available": "Dieser Shop akzeptiert keine {{brand}}. . Verwende eine andere Karte, um zu bezahlen.",
+        "shipping_rate_updated": "Verfügbare Versandmethoden wurden aktualisiert. Bestätige deine Auswahl, bevor du zur Kasse gehst.",
+        "billing_address_invalid_phone": "Aktualisiere die Telefonnummer in der Rechnungsadresse für {{label}} {{last_digits}} , um fortzufahren.",
+        "billing_address_invalid_phone_no_card": "Aktualisiere die Telefonnummer in der Rechnungsadresse, um fortzufahren.",
         "preview_not_available": {
-          "title": "Vorschau nicht verfügbar",
-          "content": "Machen Sie sich keine Sorgen, dieser schnelle Checkout funktioniert für Ihre Kunden.",
-          "button": "Okay"
+          "title": "Beispiel nicht verfügbar",
+          "content": "Keine Sorge, diese schnelle Kasse funktioniert für deine Kunden.",
+          "button": "OK"
         },
         "card_fields": {
           "errors": {
             "required": {
-              "issue_date": "Geben Sie ein gültiges Ausstellungsdatum ein",
-              "issue_number": "Geben Sie eine gültige Ausgabenummer ein"
+              "issue_date": "Bitte ein gültiges Ausstellungsdatum eingeben",
+              "issue_number": "Bitte eine gültige Ausstellungsnummer eingeben"
             },
             "invalid": {
-              "verification_value": "Geben Sie einen gültigen CVV/CVC oder Sicherheitscode ein"
+              "verification_value": "Bitte eine gültige CVV/CVC oder Sicherheitscode eingeben"
             }
           }
         },
-        "simulated_checkout": "Die Vorschau erscheint bald",
-        "vaulting_agreement_label": "Speichern Sie meine Zahlungsdaten mit %{company} für eine schnellere Kaufabwicklung.",
-        "business_customer_vaulting_payment_label": "Speichern und autorisieren Sie diese Zahlungsmethode an der Kasse %{company} um diese Karte für zukünftige Einkäufe an diesem Standort aufzuladen. Alle diesem Standort zugeordneten Kontakte dürfen die Zahlungsart nutzen.",
-        "purchase_options_and_vaulting_agreement_label": "Bei einem oder mehreren Artikeln im Warenkorb handelt es sich um einen aufgeschobenen Kauf oder einen Abonnementkauf. Indem Sie mit der Zahlung fortfahren, erklären Sie sich damit einverstanden, dass wir Ihre Zahlungsmethode automatisch mit den Kaufbeträgen zu dem auf dieser Seite angezeigten Preis und in der Häufigkeit belasten, bis die Frist abläuft oder Sie stornieren. Dies gilt für alle Stornierungen %{cancellation_policy_label}.",
+        "simulated_checkout": "Beispiel erscheint in Kürze",
+        "vaulting_agreement_label": "Speichere meine Zahlungsdaten bei %{company} für eine schnellere Kasse.",
+        "business_customer_vaulting_payment_label": "Aktiviere diese Zahlungsmethode an der Kasse und ermächtige %{company}, über diese Karte Geld für künftige Einkäufe an diesem Standort abzubuchen. Alle Kontaktpersonen, die diesem Standort zugewiesen sind, dürfen die Zahlungsmethode verwenden.",
+        "purchase_options_and_vaulting_agreement_label": "Eines oder mehrere Artikel im Warenkorb sind ein zeitlich versetzter oder ein Abonnementskauf. Wenn du mit der Zahlung fortfährst, stimmst du zu, dass wir die Kaufbeträge automatisch über deine Zahlungsmethode zu dem auf dieser Seite angegebenen Preis und der angegebenen Häufigkeit abrechnen, bis er endet oder du ihn selbst kündigst. Für alle Kündigungen gilt das %{cancellation_policy_label}.",
         "purchase_options_cancellation_policy_label": "Stornierungsbedingungen",
-        "use_different_credit_card_label": "Verwenden Sie eine andere Karte",
-        "saved_credit_card": "Ihre gespeicherte Kreditkarte",
+        "use_different_credit_card_label": "Verwende eine andere Karte",
+        "saved_credit_card": "Deine gespeicherte Kreditkarte",
         "saved_credit_card_info": "Letzte vier Ziffern",
         "saved_credit_cards_modal": {
           "view_all_label": "Alle gespeicherten Karten anzeigen",
