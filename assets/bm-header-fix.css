@@ -1,8 +1,9 @@
 /* ByMetz header compact fix
    Reduces header vertical space on initial load to match scrolled state.
-   Loaded via layout/theme.liquid — independent of Shopify JSON sync. */
+   Loaded via layout/theme.liquid — independent of Shopify JSON sync.
+   Desktop only (min-width: 750px) — mobile stays untouched. */
 
-/* 1. Eliminate gap between review bar section and header */
+/* 1. Eliminate gap between review bar section and header (all screens) */
 [id*="section_custom_liquid"] {
   margin: 0 !important;
   padding: 0 !important;
@@ -15,60 +16,59 @@
   line-height: initial;
 }
 
-/* 2. Review bar row: remove outer padding, keep minimal anchor padding */
+/* 2. Review bar row: remove outer padding (all screens) */
 .bm-topreview-row {
   padding: 0 !important;
   margin: 0 !important;
 }
 
-/* 3. Header group container: no gaps between children */
+/* 3. Header group container: no gaps between children (all screens) */
 .shopify-section-group-header-group {
   gap: 0 !important;
 }
 
-/* 4. Header section: no extra top spacing */
-.shopify-section-header {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  border-top: 0 !important;
-}
-
-/* 5. Compact top-bar: reduce height and padding on initial load */
-#nav-top {
-  min-height: 0 !important;
-  padding-top: 2px !important;
-  padding-bottom: 2px !important;
-}
-
-/* 6. Main header: reduce top padding */
-.shopify-section-header #header {
-  padding-top: 0 !important;
-}
-
-/* 7. Menubar: tighten vertical space */
-#nav-bar:not(.fixed),
-#nav:not(.fixed) {
-  min-height: 38px;
-}
-#nav-bar:not(.fixed) > ul > li,
-#nav:not(.fixed) > ul > li {
-  border-bottom-width: 0 !important;
-}
-
-/* 8. Content area: reduce top padding pushed down by header */
-#content {
-  padding-top: 15px !important;
-}
-
-@media screen and (max-width: 760px) {
-  /* Mobile: further reduce top-bar */
-  #nav-top {
-    padding-top: 1px !important;
-    padding-bottom: 1px !important;
+/* === DESKTOP ONLY: compact header on initial load === */
+@media screen and (min-width: 750px) {
+  /* 4. Header section: no extra top spacing */
+  .shopify-section-header {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: 0 !important;
   }
 
-  /* Mobile: smaller content padding */
+  /* 5. Compact top-bar: reduce height and padding */
+  #nav-top {
+    min-height: 0 !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+
+  /* 6. Main header: reduce top padding */
+  .shopify-section-header #header {
+    padding-top: 0 !important;
+  }
+
+  /* 7. Menubar: tighten vertical space */
+  #nav-bar:not(.fixed),
+  #nav:not(.fixed) {
+    min-height: 38px;
+  }
+  #nav-bar:not(.fixed) > ul > li,
+  #nav:not(.fixed) > ul > li {
+    border-bottom-width: 0 !important;
+  }
+
+  /* 8. Content area: reduce top padding */
   #content {
-    padding-top: 10px !important;
+    padding-top: 15px !important;
+  }
+}
+
+/* === MOBILE: breadcrumb fix only === */
+@media screen and (max-width: 749px) {
+  /* Prevent breadcrumb from sliding behind sticky header */
+  .bymetz-bc {
+    margin-top: 0 !important;
+    padding-top: 4px;
   }
 }
