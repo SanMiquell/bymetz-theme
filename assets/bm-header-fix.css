@@ -12,7 +12,17 @@
   }
 }
 
-/* 2. Cart icon badge: prevent clipping on all screens.
+/* 2. Desktop: compact top-bar (#nav-top) to reduce gap between
+      review bar and menubar. Default is min-height 35px + ~8px padding. */
+@media screen and (min-width: 990px) {
+  #nav-top {
+    min-height: 0 !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+}
+
+/* 3. Cart icon badge: prevent clipping on all screens.
       #header and parents can clip the cart count badge. */
 .shopify-section-header,
 .shopify-section-header #header-outer,
