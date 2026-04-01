@@ -1820,48 +1820,48 @@
         "saved_credit_card": "Deine gespeicherte Kreditkarte",
         "saved_credit_card_info": "Letzte vier Ziffern",
         "saved_credit_cards_modal": {
-          "view_all_label": "Alle gespeicherten Karten anzeigen",
+          "view_all_label": "Alle gespeicherten Karten ansehen",
           "done": "Fertig",
           "cancel": "Abbrechen"
         },
         "expired_cards_info": {
-          "one": "Es gibt %{count} abgelaufene Karte. Diese können Sie in Ihrem Konto einsehen und anpassen.",
-          "other": "Es gibt %{count} abgelaufene Karten. Diese können Sie in Ihrem Konto einsehen und anpassen."
+          "one": "Die Karte mit %{count} ist abgelaufen. Du kannst sie ansehen und in deinem Konto anpassen.",
+          "other": "Es gibt abgelaufene Karten mit %{count}. Du kannst sie ansehen und in deinem Konto anpassen."
         },
-        "local_payment_method_receiver_notice": "Nach Ihrer Bestellung erhalten Sie die Zahlungsdetails. Geben Sie die Zahlung ein {{dueDays}} Tage am Geldautomaten oder online.",
-        "order_edit_banner_title": "Zahlung von {{amount_owed}} ist erforderlich",
-        "order_edit_banner_subtitle": "Ihre Bestellung {{order_number}} wurde aktualisiert. Überprüfen Sie diese Änderungen und zahlen Sie, um Ihre Bestellung zu bestätigen.",
+        "local_payment_method_receiver_notice": "Nach dem Absenden deiner Bestellung erhältst du die Zahlungsinformationen. Führe die Zahlung innerhalb von {{dueDays}} dagen an einem Geldautomaten oder online durch.",
+        "order_edit_banner_title": "Zahlung mit {{amount_owed}} is erforderlich",
+        "order_edit_banner_subtitle": "Deine Bestellung {{order_number}} is wurde aktualisiert. Überprüfe diese Änderungen und bezahle, um deine Bestellung zu bestätigen.",
         "order_edit_banner_single_item_added": "Hinzugefügt",
-        "order_edit_banner_multiple_items_added": "{{amount}} hinzugefügt",
+        "order_edit_banner_multiple_items_added": "{{amount}}  hinzugefügt",
         "order_edit_banner_single_item_removed": "Entfernt",
-        "order_edit_banner_multiple_items_removed": "{{amount}} entfernt",
+        "order_edit_banner_multiple_items_removed": "{{amount}}  entfernt",
         "gift_card_wrapper": {
-          "heading": "Geschenkgutschein",
-          "apply_gift_card_label": "Beantragen Sie eine Geschenkkarte",
-          "payment_tag": "Geschenkgutschein",
-          "apply_another_gift_card_label": "Beantragen Sie einen weiteren Geschenkgutschein",
-          "gift_card_label": "Geschenkgutschein %{identifier}",
-          "add_label": "Fügen Sie eine Geschenkkarte hinzu",
-          "manage_label": "Geschenkkarten verwalten"
+          "heading": "Gutschein",
+          "apply_gift_card_label": "Gutschein anwenden",
+          "payment_tag": "Gutschein",
+          "apply_another_gift_card_label": "Einen anderen Gutschein anwenden",
+          "gift_card_label": "Gutschein %{identifier}",
+          "add_label": "Einen Gutschein hinzufügen",
+          "manage_label": "Gutscheine verwalten"
         },
         "custom_onsite_payment_method_modal": {
-          "title": "Bestätigung für individuelle Zahlungen vor Ort"
+          "title": "Bestätigung für angepasste Onsite-Zahlungen"
         },
-        "markets_pro_disclaimer_label": "Indem Sie Ihre Bestellung aufgeben, erklären Sie sich damit einverstanden, bei Global-e als eingetragener Händler einzukaufen, vorbehaltlich der %{markets_pro_terms} und %{privacy_policy} von Global-e und teilen Sie Ihre Daten mit %{shop_name}.",
+        "markets_pro_disclaimer_label": "Indem du deine Bestellung aufgibst, stimmst du dem Kauf bei Global-e als registriertem Händler zu, der den %{markets_pro_terms} und %{privacy_policy} von Global-e unterliegt, und teilst deine Daten mit %{shop_name}.",
         "markets_pro_disclaimer_terms_and_conditions": "Allgemeine Geschäftsbedingungen",
         "markets_pro_disclaimer_privacy_policy": "Datenschutzrichtlinie",
-        "markets_pro_disclaimer_terms_and_conditions_title": "Allgemeine Geschäftsbedingungen für eingetragene Händler",
-        "markets_pro_disclaimer_privacy_policy_title": "Datenschutzrichtlinie für eingetragene Händler",
+        "markets_pro_disclaimer_terms_and_conditions_title": "Allgemeine Geschäftsbedingungen für Merchants of Record",
+        "markets_pro_disclaimer_privacy_policy_title": "Datenschutzrichtlinie für Merchants of Record",
         "purchase_order_number": {
           "title": "Bestellnummer",
           "label": "Bestellnummer (optional)"
         },
-        "alternative_payment_currency_total_notice": "Hinweis: Es gibt %{amount_due} abgeschrieben.",
-        "waiting_on_taxes_message": "Aktualisieren Sie die Seite, wenn die Steuern nicht innerhalb weniger Sekunden berechnet werden.",
+        "alternative_payment_currency_total_notice": "Hinweis: Es wurde ein Betrag von %{amount_due} abgebucht.",
+        "waiting_on_taxes_message": "Seite aktualisieren, wenn die Steuern nicht innerhalb von ein paar Sekunden berechnet werden.",
         "waiting_on_taxes_notice": "Steuern berechnen",
-        "order_edit_banner_single_item_returned": "Zurückgegeben",
-        "order_edit_banner_multiple_items_returned": "{{amount}} zurückgegeben",
-        "shop_pay_installments_label": "Shop Bezahlen Sie Ratenzahlungen",
+        "order_edit_banner_single_item_returned": "Zurückgesendet",
+        "order_edit_banner_multiple_items_returned": "{{amount}}  zurückgesendet",
+        "shop_pay_installments_label": "Shop Pay-Ratenzahlungen",
         "add_credit_card_modal": {
           "title": "Karte hinzufügen",
           "cancel": "Abbrechen",
@@ -1869,9 +1869,9 @@
         },
         "delete_credit_card_modal": {
           "title": "Karte entfernen",
-          "confirmation": "Bist du dir sicher? {{brandName}} endet in {{lastDigits}} Möchten Sie löschen?",
+          "confirmation": "Bist du sicher, dass du {{brandName}} e endgültig aus {{lastDigits}}  entfernen möchtest?",
           "cancel": "Abbrechen",
-          "delete": "Löschen"
+          "delete": "Entfernen"
         },
         "order_edit_banner_items_added": {
           "one": "Hinzugefügt",
@@ -1879,15 +1879,15 @@
         },
         "order_edit_banner_items_removed": {
           "in_full": "Entfernt",
-          "with_quantities": "{{delta}} von {{quantity}} entfernt"
+          "with_quantities": "{{delta}}  von {{quantity}}  entfernt"
         },
         "order_edit_banner_items_returned": {
-          "in_full": "{{quantity}} zurückgegeben",
-          "with_quantities": "{{delta}} von {{quantity}} zurückgegeben"
+          "in_full": "{{quantity}}  zurückgesendet",
+          "with_quantities": "{{delta}}  von {{quantity}}  zurückgesendet"
         },
         "saved_credit_card_actions": {
           "edit": "Bearbeiten",
-          "delete": "Löschen"
+          "delete": "Entfernen"
         },
         "edit_credit_card_modal": {
           "title": "Karte bearbeiten",
