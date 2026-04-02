@@ -86,7 +86,7 @@
   }
 
   /* Reduce gap between product info and product tabs */
-  .shopify-section--product-tabs .m6tb {
+  #shopify-section-tabs .m6tb {
     margin-top: 8px !important;
   }
 }
