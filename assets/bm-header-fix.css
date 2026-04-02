@@ -69,6 +69,9 @@
   .f8pr .l4us {
     margin-bottom: 8px !important;
   }
+  .f8pr .l4us + .l4us {
+    margin-top: 0 !important;
+  }
   .f8pr .l4us.margin-content {
     margin-bottom: 14px !important;
   }
