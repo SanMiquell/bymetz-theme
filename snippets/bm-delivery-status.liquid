@@ -36,55 +36,47 @@
 
 <div class="bm-delivery-wrap">
   {%- if current_variant.available -%}
-    <div class="bm-delivery bm-delivery--line1">
+    <div class="bm-delivery">
       <svg class="bm-delivery__icon bm-delivery__icon--ok" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
         <path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm3.36 5.22a.75.75 0 0 0-1.06.04L9.4 10.6 7.7 8.9a.75.75 0 1 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.08-.02l3.43-3.91a.75.75 0 0 0-.04-1.06z" fill="currentColor"/>
       </svg>
-      <span class="bm-delivery__label bm-delivery__label--ok">{{ stock_label }}</span>
-    </div>
-    {%- if deliverytime_in_stock != blank -%}
-      <div class="bm-delivery bm-delivery--line2">
-        <span class="bm-delivery__detail">{{ deliverytime_in_stock }}</span>
+      <div class="bm-delivery__text">
+        <span class="bm-delivery__label bm-delivery__label--ok">{{ stock_label }}</span>
+        {%- if deliverytime_in_stock != blank -%}
+          <span class="bm-delivery__detail">{{ deliverytime_in_stock }}</span>
+        {%- endif -%}
       </div>
-    {%- endif -%}
+    </div>
   {%- else -%}
-    <div class="bm-delivery bm-delivery--line1">
+    <div class="bm-delivery">
       <svg class="bm-delivery__icon bm-delivery__icon--warn" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
         <circle cx="10" cy="10" r="8" fill="currentColor"/>
         <path d="M10 6v5M10 13v1" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
-      <span class="bm-delivery__label bm-delivery__label--warn">{{ nostock_label }}</span>
-    </div>
-    {%- if deliverytime_not_in_stock != blank -%}
-      <div class="bm-delivery bm-delivery--line2">
-        <span class="bm-delivery__detail">{{ deliverytime_not_in_stock }}</span>
+      <div class="bm-delivery__text">
+        <span class="bm-delivery__label bm-delivery__label--warn">{{ nostock_label }}</span>
+        {%- if deliverytime_not_in_stock != blank -%}
+          <span class="bm-delivery__detail">{{ deliverytime_not_in_stock }}</span>
+        {%- endif -%}
       </div>
-    {%- endif -%}
+    </div>
   {%- endif -%}
 </div>
 
 <style>
   .bm-delivery {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 5px;
-    white-space: nowrap;
+    margin: 4px 0 6px;
     line-height: 1.3;
   }
-  .bm-delivery--line1 {
-    font-size: 14px;
-    margin: 4px 0 0;
-  }
-  .bm-delivery--line2 {
-    font-size: 12px;
-    margin: 1px 0 6px;
-    padding-left: calc(1.2em + 5px);
-  }
   .bm-delivery__icon {
-    width: 1.2em;
-    height: 1.2em;
-    min-width: 1.2em;
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
     flex: 0 0 auto;
+    margin-top: 1px;
   }
   .bm-delivery__icon--ok {
     color: #02ad02;
@@ -92,15 +84,25 @@
   .bm-delivery__icon--warn {
     color: #ea6c44;
   }
+  .bm-delivery__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .bm-delivery__label {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
   .bm-delivery__label--ok {
     color: #02ad02;
-    font-weight: 600;
   }
   .bm-delivery__label--warn {
     color: #ea6c44;
-    font-weight: 600;
   }
   .bm-delivery__detail {
+    font-size: 12px;
     color: #1f1f1f;
+    white-space: nowrap;
   }
 </style>
