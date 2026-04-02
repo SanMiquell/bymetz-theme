@@ -17,6 +17,7 @@
 -%}
 
 {%- if has_any_text -%}
+  <div class="bm-delivery-wrap">
   <div class="bm-delivery">
     {%- if current_variant.available -%}
       <svg class="bm-delivery__icon bm-delivery__icon--ok" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
@@ -34,6 +35,7 @@
         {%- if deliverytime_not_in_stock != blank -%}{{ deliverytime_not_in_stock }}{%- else -%}{{ 'product.form.not_in_stock' | t }}{%- endif -%}
       </span>
     {%- endif -%}
+  </div>
   </div>
 {%- endif -%}
 

@@ -5992,6 +5992,11 @@ window.addEventListener("productVariants", function (evt) {
 									el.parentNode.replaceChild(resultsMarkupForm.querySelector('.f8pr-stock'), el);
 								});
 							}
+							if (resultsMarkupForm.querySelector('.bm-delivery-wrap') != null) {
+								Array.from(productFormSection.getElementsByClassName('bm-delivery-wrap')).forEach(function (el) {
+									el.parentNode.replaceChild(resultsMarkupForm.querySelector('.bm-delivery-wrap'), el);
+								});
+							}
 							if (resultsMarkupForm.querySelector('.f8pr-selling-plan') != null) {
 								Array.from(productFormSection.getElementsByClassName('f8pr-selling-plan')).forEach(function (el) {
 									var newSellingPlanEl = resultsMarkupForm.querySelector('.f8pr-selling-plan[data-element="' + el.getAttribute('data-element') + '"]');
