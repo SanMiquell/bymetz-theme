@@ -45,12 +45,19 @@
   }
 }
 
-/* 5. Hide original inventory/delivery block (replaced by bm-delivery-status) */
+/* 5. Mobile: reduce gap between price and variant selector */
+@media screen and (max-width: 760px) {
+  .f8pr .s1pr {
+    margin-bottom: 8px !important;
+  }
+}
+
+/* 6. Hide original inventory/delivery block (replaced by bm-delivery-status) */
 .f8pr-stock {
   display: none !important;
 }
 
-/* 6. Cart icon badge: prevent clipping on all screens.
+/* 7. Cart icon badge: prevent clipping on all screens.
       #header and parents can clip the cart count badge. */
 .shopify-section-header,
 .shopify-section-header #header-outer,
@@ -67,7 +74,7 @@
   z-index: 10;
 }
 
-/* 3. Mobile: keep language selector visible in header icons.
+/* 8. Mobile: keep language selector visible in header icons.
       screen.css hides #nav-user > ul > li.lang on mobile (max-width: 760px).
       Override to show it, and hide the duplicate in the drawer instead. */
 @media screen and (max-width: 760px) {
