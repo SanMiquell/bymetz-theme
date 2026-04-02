@@ -1,6 +1,9 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
 
+  assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl'
+  assign bm_lang = bm_lang | downcase | split: '-' | first
+
   assign deliverytime_in_stock = product.metafields.custom.deliverytime_in_stock
   assign deliverytime_not_in_stock = product.metafields.custom.deliverytime_not_in_stock
   unless deliverytime_in_stock
@@ -10,44 +13,72 @@
     assign deliverytime_not_in_stock = settings.default_product_deliverytime_not_in_stock
   endunless
 
-  assign has_any_text = false
-  if deliverytime_in_stock != blank or deliverytime_not_in_stock != blank
-    assign has_any_text = true
+  if bm_lang == 'en'
+    assign stock_label = 'In stock in the webshop & store'
+    assign nostock_label = 'Out of stock'
+  elsif bm_lang == 'de'
+    assign stock_label = 'Auf Lager'
+    assign nostock_label = 'Nicht auf Lager'
+  elsif bm_lang == 'fr'
+    assign stock_label = 'En stock'
+    assign nostock_label = 'Rupture de stock'
+  elsif bm_lang == 'es'
+    assign stock_label = 'En stock'
+    assign nostock_label = 'Agotado'
+  elsif bm_lang == 'it'
+    assign stock_label = 'Disponibile'
+    assign nostock_label = 'Non disponibile'
+  else
+    assign stock_label = 'Op voorraad in de webshop & winkel'
+    assign nostock_label = 'Niet op voorraad'
   endif
 -%}
 
-{%- if has_any_text -%}
-  <div class="bm-delivery-wrap">
-  <div class="bm-delivery">
-    {%- if current_variant.available -%}
+<div class="bm-delivery-wrap">
+  {%- if current_variant.available -%}
+    <div class="bm-delivery bm-delivery--line1">
       <svg class="bm-delivery__icon bm-delivery__icon--ok" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
         <path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm3.36 5.22a.75.75 0 0 0-1.06.04L9.4 10.6 7.7 8.9a.75.75 0 1 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.08-.02l3.43-3.91a.75.75 0 0 0-.04-1.06z" fill="currentColor"/>
       </svg>
-      <span class="bm-delivery__text">
-        {%- if deliverytime_in_stock != blank -%}{{ deliverytime_in_stock }}{%- else -%}{{ 'product.form.in_stock' | t }}{%- endif -%}
-      </span>
-    {%- else -%}
+      <span class="bm-delivery__label bm-delivery__label--ok">{{ stock_label }}</span>
+    </div>
+    {%- if deliverytime_in_stock != blank -%}
+      <div class="bm-delivery bm-delivery--line2">
+        <span class="bm-delivery__detail">{{ deliverytime_in_stock }}</span>
+      </div>
+    {%- endif -%}
+  {%- else -%}
+    <div class="bm-delivery bm-delivery--line1">
       <svg class="bm-delivery__icon bm-delivery__icon--warn" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
         <circle cx="10" cy="10" r="8" fill="currentColor"/>
         <path d="M10 6v5M10 13v1" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
-      <span class="bm-delivery__text">
-        {%- if deliverytime_not_in_stock != blank -%}{{ deliverytime_not_in_stock }}{%- else -%}{{ 'product.form.not_in_stock' | t }}{%- endif -%}
-      </span>
+      <span class="bm-delivery__label bm-delivery__label--warn">{{ nostock_label }}</span>
+    </div>
+    {%- if deliverytime_not_in_stock != blank -%}
+      <div class="bm-delivery bm-delivery--line2">
+        <span class="bm-delivery__detail">{{ deliverytime_not_in_stock }}</span>
+      </div>
     {%- endif -%}
-  </div>
-  </div>
-{%- endif -%}
+  {%- endif -%}
+</div>
 
 <style>
   .bm-delivery {
     display: flex;
     align-items: center;
     gap: 5px;
-    margin: 4px 0 8px;
-    font-size: clamp(11px, 3.2vw, 15px);
-    line-height: 1.3;
     white-space: nowrap;
+    line-height: 1.3;
+  }
+  .bm-delivery--line1 {
+    font-size: 14px;
+    margin: 4px 0 0;
+  }
+  .bm-delivery--line2 {
+    font-size: 12px;
+    margin: 1px 0 6px;
+    padding-left: calc(1.2em + 5px);
   }
   .bm-delivery__icon {
     width: 1.2em;
@@ -61,7 +92,15 @@
   .bm-delivery__icon--warn {
     color: #ea6c44;
   }
-  .bm-delivery__text {
-    min-width: 0;
+  .bm-delivery__label--ok {
+    color: #02ad02;
+    font-weight: 600;
+  }
+  .bm-delivery__label--warn {
+    color: #ea6c44;
+    font-weight: 600;
+  }
+  .bm-delivery__detail {
+    color: #1f1f1f;
   }
 </style>
