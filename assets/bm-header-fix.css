@@ -45,59 +45,41 @@
   }
 }
 
-/* 5. Mobile product page: uniform 12px vertical spacing between all elements */
+/* 5. Mobile product page: consistent vertical spacing
+      14px between major blocks, 8px between USP items */
 @media screen and (max-width: 760px) {
-  /* Price */
   .f8pr .s1pr {
-    margin-top: 0 !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
   }
-
-  /* Variant selector */
   .f8pr .f8pr-variant-selection {
-    margin-bottom: 12px !important;
-  }
-
-  /* Delivery status */
-  .f8pr .bm-delivery-wrap .bm-delivery {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+    margin-bottom: 14px !important;
   }
   .f8pr .bm-delivery-wrap {
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
   }
-
-  /* Buy button (quantity + add to cart) */
+  .f8pr .bm-delivery-wrap .bm-delivery {
+    margin: 0 !important;
+  }
   .f8pr .submit {
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
   }
-
-  /* Spacer blocks: override inline 20px from block settings */
   .f8pr .module-spacer {
     margin-bottom: 0 !important;
   }
-
-  /* USP list items — each .l4us is one USP row */
   .f8pr .l4us {
-    margin-bottom: 4px !important;
+    margin-bottom: 8px !important;
   }
   .f8pr .l4us.margin-content {
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
   }
-
-  /* Pickup availability */
   .f8pr .f8pr-pickup {
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
   }
-
-  /* Payment icons */
   .f8pr .l4pm {
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
   }
-
-  /* SKU/Barcode codes */
   .f8pr .f8pr-codes {
-    margin-bottom: 12px !important;
+    margin-bottom: 14px !important;
   }
 }
 
