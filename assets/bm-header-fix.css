@@ -45,10 +45,7 @@
   }
 }
 
-/* 5. Hide original inventory/delivery block (replaced by bm-delivery-status snippet) */
-.f8pr-stock {
-  display: none !important;
-}
+/* 5. Inventory block now renders bm-delivery-status snippet directly */
 
 /* 6. Cart icon badge: prevent clipping on all screens.
       #header and parents can clip the cart count badge. */
