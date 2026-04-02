@@ -1132,7 +1132,14 @@
                                 assign no_margin = true
                             endif
                         -%}
-                        {%- render 'bm-delivery-status', product: product -%}
+                        {%- render 'product-deliverytime',
+                                product: product,
+                                current_variant: current_variant,
+                        container: "p",
+                                origin: 'productpage',
+                                no_margin: no_margin,
+                                shopify_attributes: block.shopify_attributes
+                        -%}
                     </div>
                {% when 'free_shipping' %}
                    {% assign free_shipping_amount = settings.free_shipping_amount | times: 1 | times: 100 %}
@@ -1214,6 +1221,7 @@
                         <div class="shopify-installments-container">{{ form | payment_terms }}</div>
                     {%- endform -%}
                 {%- when 'buy_button' -%}
+                    {%- render 'bm-delivery-status', product: product -%}
                     {%- liquid
                         assign gift_card_recipient_feature_active = false
                         if block.settings.show_gift_card_recipient and product.gift_card?
