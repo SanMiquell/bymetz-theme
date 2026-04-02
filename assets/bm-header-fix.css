@@ -86,8 +86,25 @@
   }
 
   /* Reduce gap between product info and product tabs */
+  #shopify-section-main-product {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  #main-product {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .m6pr {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  #shopify-section-tabs {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
   #shopify-section-tabs .m6tb {
     margin-top: 8px !important;
+    padding-top: 0 !important;
   }
 }
 
