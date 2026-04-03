@@ -1192,34 +1192,22 @@
     (function(){
       if(window._bmSwatchFix)return;window._bmSwatchFix=true;
 
-      function calcLimit(ul){
-        var items=ul.querySelectorAll('li:not(.limit):not(.hidden-check):not(.bm-swatch-more)');
-        if(items.length===0)return items.length;
-        var ow=ul.style.flexWrap,oo=ul.style.overflow;
-        ul.style.flexWrap='wrap';ul.style.overflow='visible';
-        var cw=ul.getBoundingClientRect().width;
-        var iw=items[0].getBoundingClientRect().width;
-        var gap=parseFloat(getComputedStyle(ul).gap)||parseFloat(getComputedStyle(ul).columnGap)||4;
-        ul.style.flexWrap=ow;ul.style.overflow=oo;
-        var step=iw+gap;
-        if(step<=0)return items.length;
-        var plusW=30;
-        var fit=Math.floor((cw-plusW)/step);
-        return Math.max(1,Math.min(fit,items.length));
+      function getLimit(){
+        var w=window.innerWidth,cw;
+        if(w<=749){cw=(w/2)-20;}
+        else if(w<=999){cw=(w/3)-24;}
+        else{cw=(w/4)-30;}
+        var fit=Math.floor((cw-28)/34);
+        return Math.max(2,fit);
       }
 
-      function setLimits(){
-        document.querySelectorAll('.l4cl:not(.list) .product-card .check.color[data-limit]').forEach(function(ul){
-          if(!ul.classList.contains('check-limit-initialized')){
-            ul.setAttribute('data-limit',calcLimit(ul));
-          }
-        });
-      }
+      /* Set data-limit before theme JS initializes */
+      var lim=getLimit();
+      document.querySelectorAll('.check.color[data-limit]').forEach(function(ul){
+        ul.setAttribute('data-limit',lim);
+      });
 
-      /* Set dynamic limits before theme JS runs */
-      setLimits();
-
-      /* Monkey-patch theme's check_limit_event to run our fix after it */
+      /* Monkey-patch theme's check_limit_event */
       var origFn=window.check_limit_event;
       if(origFn){
         window.check_limit_event=function(){
@@ -1230,14 +1218,13 @@
 
       function fixLimits(){
         document.querySelectorAll('.l4cl:not(.list) .product-card .check.color.check-limit-initialized').forEach(function(ul){
-          var lim=ul.querySelector('li.limit');
-          if(!lim)return;
-          if(lim.dataset.bmFixed)return;
-          lim.dataset.bmFixed='1';
-          var a=lim.querySelector('a');
+          var li=ul.querySelector('li.limit');
+          if(!li||li.dataset.bmFixed)return;
+          li.dataset.bmFixed='1';
+          var a=li.querySelector('a');
           if(!a)return;
-          var num=parseInt(a.textContent.replace('+',''),10);
-          if(num===0||isNaN(num)){lim.classList.add('bm-hide');return;}
+          var n=parseInt(a.textContent.replace('+',''),10);
+          if(!n||n<=0){li.classList.add('bm-hide');return;}
           a.addEventListener('click',function(e){
             e.preventDefault();e.stopPropagation();
             ul.classList.toggle('bm-swatches--expanded');
@@ -1245,10 +1232,9 @@
         });
       }
 
-      function init(){setLimits();fixLimits();}
       if(document.readyState==='loading'){
-        document.addEventListener('DOMContentLoaded',function(){setTimeout(init,50);});
-      }else{setTimeout(init,50);}
+        document.addEventListener('DOMContentLoaded',function(){setTimeout(fixLimits,50);});
+      }else{setTimeout(fixLimits,50);}
     })();
   </script>
 {%- endunless -%}
