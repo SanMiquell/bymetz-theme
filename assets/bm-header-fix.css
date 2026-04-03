@@ -175,14 +175,34 @@
   }
 }
 
-/* 10. Product card vertical alignment: align price + swatches across cards in a row */
+/* 10. Product card vertical alignment: align delivery + price across cards */
 .l4cl:not(.list) li.product-card > section,
-.l4cl:not(.list) li.product-card > div {
+.l4cl:not(.list) li.product-card > div:not(.static) {
   flex: 1 1 auto;
   display: flex !important;
   flex-direction: column !important;
 }
+
+/* Reserve 2 lines for product title so delivery/price align across cards */
+.l4cl:not(.list) li.product-card > section > h3,
+.l4cl:not(.list) li.product-card > div:not(.static) > h3 {
+  min-height: 2.6em;
+}
+
+/* Tight spacing: delivery directly after title, price directly after delivery */
+.l4cl:not(.list) li.product-card .bm-delivery-card {
+  margin-top: 0;
+  margin-bottom: 2px;
+}
 .l4cl:not(.list) li.product-card > section > .s1pr,
-.l4cl:not(.list) li.product-card > div > .s1pr {
-  margin-top: auto !important;
+.l4cl:not(.list) li.product-card > div:not(.static) > .s1pr {
+  margin-top: 0 !important;
+  margin-bottom: 4px;
+}
+
+@media screen and (max-width: 749px) {
+  .l4cl:not(.list) li.product-card > section > h3,
+  .l4cl:not(.list) li.product-card > div:not(.static) > h3 {
+    min-height: 2.4em;
+  }
 }
