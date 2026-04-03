@@ -148,16 +148,20 @@
       filterBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        var original = document.querySelector('.f8sr a[data-panel="filters-aside"]')
-                    || document.querySelector('a[data-panel="filters-aside"]');
-        if (original) {
-          original.click();
-          return;
+        /* Fresh querySelectorAll every click — AJAX replaces DOM elements */
+        var allTriggers = document.querySelectorAll('a[data-panel="filters-aside"]');
+        for (var i = 0; i < allTriggers.length; i++) {
+          if (!allTriggers[i].closest('.bm-sticky-filter')) {
+            allTriggers[i].click();
+            return;
+          }
         }
-        var staticLink = document.querySelector('.f8sr a[href="#filter"]')
-                      || document.querySelector('a[href="#filter"]');
-        if (staticLink) {
-          staticLink.click();
+        var staticLinks = document.querySelectorAll('a[href="#filter"]');
+        for (var j = 0; j < staticLinks.length; j++) {
+          if (!staticLinks[j].closest('.bm-sticky-filter')) {
+            staticLinks[j].click();
+            return;
+          }
         }
       });
     }
