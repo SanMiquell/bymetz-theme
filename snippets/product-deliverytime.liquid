@@ -106,12 +106,7 @@
         <svg class="bm-delivery-card__icon bm-delivery-card__icon--ok" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
           <path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm3.36 5.22a.75.75 0 0 0-1.06.04L9.4 10.6 7.7 8.9a.75.75 0 1 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.08-.02l3.43-3.91a.75.75 0 0 0-.04-1.06z" fill="currentColor"/>
         </svg>
-        <div class="bm-delivery-card__text">
-          <span class="bm-delivery-card__label bm-delivery-card__label--ok">{{ bm_stock_label }}</span>
-          {%- if deliverytime_in_stock != empty -%}
-            <span class="bm-delivery-card__detail">{{ deliverytime_in_stock }}</span>
-          {%- endif -%}
-        </div>
+        <span class="bm-delivery-card__label bm-delivery-card__label--ok">{{ bm_stock_label }}</span>
       </div>
     {%- elsif inventory_tracking -%}
       <div class="bm-delivery-card {{ extra_class }}">
@@ -119,12 +114,7 @@
           <circle cx="10" cy="10" r="8" fill="currentColor"/>
           <path d="M10 6v5M10 13v1" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <div class="bm-delivery-card__text">
-          <span class="bm-delivery-card__label bm-delivery-card__label--warn">{{ bm_nostock_label }}</span>
-          {%- if deliverytime_not_in_stock != empty -%}
-            <span class="bm-delivery-card__detail">{{ deliverytime_not_in_stock }}</span>
-          {%- endif -%}
-        </div>
+        <span class="bm-delivery-card__label bm-delivery-card__label--warn">{{ bm_nostock_label }}</span>
       </div>
     {%- endif -%}
   {%- else -%}
@@ -168,7 +158,7 @@
   .bm-delivery-card {
     display: flex;
     align-items: flex-start;
-    gap: 5px;
+    gap: 4px;
     margin: 4px 0 6px;
     line-height: 1.3;
   }
@@ -179,12 +169,12 @@
     right: auto !important;
     top: auto !important;
     bottom: auto !important;
-    width: 17px !important;
-    height: 17px !important;
-    min-width: 17px !important;
-    max-width: 17px !important;
-    max-height: 17px !important;
-    flex: 0 0 17px !important;
+    width: 15px !important;
+    height: 15px !important;
+    min-width: 15px !important;
+    max-width: 15px !important;
+    max-height: 15px !important;
+    flex: 0 0 15px !important;
     margin-top: 1px;
     object-fit: initial !important;
     border-radius: 0 !important;
@@ -195,14 +185,13 @@
   .bm-delivery-card__icon--warn {
     color: #ea6c44;
   }
-  .bm-delivery-card__text {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
   .bm-delivery-card__label {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .bm-delivery-card__label--ok {
     color: #008000;
@@ -210,9 +199,18 @@
   .bm-delivery-card__label--warn {
     color: #ea6c44;
   }
-  .bm-delivery-card__detail {
-    font-size: 12px;
-    color: #1f1f1f;
+  @media screen and (max-width: 749px) {
+    .bm-delivery-card__icon {
+      width: 13px !important;
+      height: 13px !important;
+      min-width: 13px !important;
+      max-width: 13px !important;
+      max-height: 13px !important;
+      flex: 0 0 13px !important;
+    }
+    .bm-delivery-card__label {
+      font-size: 11px;
+    }
   }
 </style>
 {%- endif -%}
