@@ -183,26 +183,28 @@
   flex-direction: column !important;
 }
 
-/* Reserve 2 lines for product title so delivery/price align across cards */
-.l4cl:not(.list) li.product-card > section > h3,
-.l4cl:not(.list) li.product-card > div:not(.static) > h3 {
-  min-height: 2.6em;
+/* Clamp product title to 2 lines so all cards reserve equal title height */
+.l4cl:not(.list) li.product-card > section > h3 > a.fz-heading-productcard,
+.l4cl:not(.list) li.product-card > div:not(.static) > h3 > a.fz-heading-productcard {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Tight spacing: delivery directly after title, price directly after delivery */
+/* Tight spacing: delivery → price → swatches, no extra gaps */
 .l4cl:not(.list) li.product-card .bm-delivery-card {
   margin-top: 0;
   margin-bottom: 2px;
 }
-.l4cl:not(.list) li.product-card > section > .s1pr,
-.l4cl:not(.list) li.product-card > div:not(.static) > .s1pr {
+.l4cl:not(.list) li.product-card > section > p.s1pr,
+.l4cl:not(.list) li.product-card > div:not(.static) > p.s1pr {
   margin-top: 0 !important;
-  margin-bottom: 4px;
+  margin-bottom: 4px !important;
 }
 
-@media screen and (max-width: 749px) {
-  .l4cl:not(.list) li.product-card > section > h3,
-  .l4cl:not(.list) li.product-card > div:not(.static) > h3 {
-    min-height: 2.4em;
-  }
+/* Push swatches to the bottom of the card */
+.l4cl:not(.list) li.product-card > section > ul.check.color,
+.l4cl:not(.list) li.product-card > div:not(.static) > ul.check.color {
+  margin-top: auto !important;
 }
