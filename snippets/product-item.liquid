@@ -1190,34 +1190,65 @@
   {%- assign bm_swatch_toggle_loaded = true -%}
   <script>
     (function(){
-      if(window._bmSwatchToggle)return;window._bmSwatchToggle=true;
-      function init(){
-        document.querySelectorAll('.l4cl:not(.list) .product-card .check.color.check-limit-initialized').forEach(function(ul){
-          if(ul.dataset.bmSwatchDone)return;ul.dataset.bmSwatchDone='1';
-          var lim=ul.querySelector('li.limit');if(!lim)return;
-          var a=lim.querySelector('a');if(!a)return;
-          var count=parseInt(a.textContent.replace('+',''),10);
-          if(count===0||isNaN(count)){lim.style.display='none';return;}
-          var origText=a.textContent;
-          a.removeAttribute('href');
-          a.addEventListener('click',function(e){
+      if(window._bmSwatchOverflow)return;window._bmSwatchOverflow=true;
+
+      function processSwatches(){
+        document.querySelectorAll('.l4cl:not(.list) .product-card .check.color').forEach(function(ul){
+          if(ul.dataset.bmDone)return;
+          ul.dataset.bmDone='1';
+
+          /* Hide theme's own "+N" limit element if present */
+          var themeLim=ul.querySelector('li.limit');
+          if(themeLim)themeLim.style.display='none';
+
+          /* Count real swatch <li> items (not .hidden, not .limit, not our indicator) */
+          var items=ul.querySelectorAll('li:not(.hidden):not(.limit):not(.bm-swatch-more)');
+          if(items.length<=1)return;
+
+          /* Measure: which items overflow the first row? */
+          var containerTop=ul.getBoundingClientRect().top;
+          var firstTop=items[0].getBoundingClientRect().top;
+          var overflowCount=0;
+          for(var i=0;i<items.length;i++){
+            if(items[i].getBoundingClientRect().top > firstTop + 2){
+              overflowCount=items.length - i;
+              break;
+            }
+          }
+
+          if(overflowCount===0)return;
+
+          /* Create our own "+N" indicator */
+          var more=document.createElement('li');
+          more.className='bm-swatch-more';
+          more.textContent='+'+overflowCount;
+          ul.appendChild(more);
+
+          more.addEventListener('click',function(e){
             e.preventDefault();e.stopPropagation();
             if(ul.classList.contains('bm-swatches--expanded')){
               ul.classList.remove('bm-swatches--expanded');
               ul.classList.remove('limit-clicked');
-              a.textContent=origText;
             }else{
               ul.classList.add('bm-swatches--expanded');
               ul.classList.add('limit-clicked');
-              a.textContent='\u2212';
             }
           });
         });
       }
-      if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(init,100)});}
-      else{setTimeout(init,100);}
-      var obs=new MutationObserver(function(){setTimeout(init,50);});
-      obs.observe(document.body,{childList:true,subtree:true});
+
+      /* Run after theme JS and layout are done */
+      function start(){setTimeout(processSwatches,200);}
+      if(document.readyState==='loading'){
+        document.addEventListener('DOMContentLoaded',start);
+      }else{start();}
+
+      /* Re-run for dynamically loaded cards */
+      var debounce;
+      new MutationObserver(function(){
+        clearTimeout(debounce);
+        debounce=setTimeout(processSwatches,150);
+      }).observe(document.body,{childList:true,subtree:true});
     })();
   </script>
 {%- endunless -%}
