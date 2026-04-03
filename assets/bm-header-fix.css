@@ -203,9 +203,33 @@
   margin-bottom: 2px !important;
 }
 
-/* Price: tight after delivery */
+/* Price: tight after delivery, always 1 line */
 .l4cl:not(.list) li.product-card > section > p.s1pr,
 .l4cl:not(.list) li.product-card > div:not(.static) > p.s1pr {
   margin-top: 0 !important;
   margin-bottom: 4px !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+  white-space: nowrap !important;
+}
+/* Hide the <br> between discount badge and current price */
+.l4cl:not(.list) li.product-card p.s1pr > br {
+  display: none !important;
+}
+@media screen and (max-width: 749px) {
+  .l4cl:not(.list) li.product-card p.s1pr .old-price {
+    font-size: 11px !important;
+  }
+  .l4cl:not(.list) li.product-card p.s1pr .discount.s1bx {
+    font-size: 10px !important;
+    padding: 1px 4px !important;
+  }
+}
+
+/* Swatches: push to bottom */
+.l4cl:not(.list) li.product-card > section > ul.check.color,
+.l4cl:not(.list) li.product-card > div:not(.static) > ul.check.color {
+  margin-top: auto !important;
 }
