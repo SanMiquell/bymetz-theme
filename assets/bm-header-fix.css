@@ -203,8 +203,17 @@
   margin-bottom: 4px !important;
 }
 
-/* Push swatches to the bottom of the card */
+/* Push swatches to the bottom of the card, single row only */
 .l4cl:not(.list) li.product-card > section > ul.check.color,
 .l4cl:not(.list) li.product-card > div:not(.static) > ul.check.color {
   margin-top: auto !important;
+  flex-wrap: nowrap !important;
+  overflow: hidden !important;
+  max-height: calc(var(--check_color_size) + var(--check_color_dist) * 2 + var(--check_color_space)) !important;
+}
+/* Keep "+N" indicator always visible at the end */
+.l4cl:not(.list) li.product-card .check.color > li.limit {
+  flex: 0 0 auto !important;
+  display: list-item !important;
+  margin-left: 2px;
 }
