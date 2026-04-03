@@ -203,17 +203,24 @@
   margin-bottom: 4px !important;
 }
 
-/* Push swatches to the bottom of the card, single row only */
+/* Push swatches to bottom, single row by default */
 .l4cl:not(.list) li.product-card > section > ul.check.color,
 .l4cl:not(.list) li.product-card > div:not(.static) > ul.check.color {
   margin-top: auto !important;
   flex-wrap: nowrap !important;
   overflow: hidden !important;
-  max-height: calc(var(--check_color_size) + var(--check_color_dist) * 2 + var(--check_color_space)) !important;
 }
-/* Keep "+N" indicator always visible at the end */
+/* Expanded state: allow wrapping */
+.l4cl:not(.list) li.product-card .check.color.bm-swatches--expanded {
+  flex-wrap: wrap !important;
+  overflow: visible !important;
+}
+/* "+N" counter: always visible, hide when "+0" via JS */
 .l4cl:not(.list) li.product-card .check.color > li.limit {
   flex: 0 0 auto !important;
   display: list-item !important;
-  margin-left: 2px;
+}
+.l4cl:not(.list) li.product-card .check.color > li.limit a {
+  text-decoration: none;
+  cursor: pointer;
 }

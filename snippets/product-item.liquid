@@ -1186,5 +1186,40 @@
 {% endif %}
 {% if extra_style contains '--vertical' %}</div>{% endif %}
 
+{%- unless bm_swatch_toggle_loaded -%}
+  {%- assign bm_swatch_toggle_loaded = true -%}
+  <script>
+    (function(){
+      if(window._bmSwatchToggle)return;window._bmSwatchToggle=true;
+      function init(){
+        document.querySelectorAll('.l4cl:not(.list) .product-card .check.color.check-limit-initialized').forEach(function(ul){
+          if(ul.dataset.bmSwatchDone)return;ul.dataset.bmSwatchDone='1';
+          var lim=ul.querySelector('li.limit');if(!lim)return;
+          var a=lim.querySelector('a');if(!a)return;
+          var count=parseInt(a.textContent.replace('+',''),10);
+          if(count===0||isNaN(count)){lim.style.display='none';return;}
+          var origText=a.textContent;
+          a.removeAttribute('href');
+          a.addEventListener('click',function(e){
+            e.preventDefault();e.stopPropagation();
+            if(ul.classList.contains('bm-swatches--expanded')){
+              ul.classList.remove('bm-swatches--expanded');
+              ul.classList.remove('limit-clicked');
+              a.textContent=origText;
+            }else{
+              ul.classList.add('bm-swatches--expanded');
+              ul.classList.add('limit-clicked');
+              a.textContent='\u2212';
+            }
+          });
+        });
+      }
+      if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(init,100)});}
+      else{setTimeout(init,100);}
+      var obs=new MutationObserver(function(){setTimeout(init,50);});
+      obs.observe(document.body,{childList:true,subtree:true});
+    })();
+  </script>
+{%- endunless -%}
 
 </{{ container }}>
