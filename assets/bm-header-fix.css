@@ -211,20 +211,58 @@
   display: flex !important;
   flex-wrap: nowrap !important;
   align-items: baseline !important;
-  gap: 4px !important;
+  gap: 5px !important;
   white-space: nowrap !important;
 }
+
 /* Hide the <br> between discount badge and current price */
 .l4cl:not(.list) li.product-card p.s1pr > br {
   display: none !important;
 }
+
+/* Current price: show FIRST via order, large and prominent */
+.l4cl:not(.list) li.product-card p.s1pr .curr-price {
+  order: -1 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--price_color, #1a1a1a) !important;
+  line-height: 1.2 !important;
+}
+
+/* Old price: smaller, muted, strikethrough */
+.l4cl:not(.list) li.product-card p.s1pr .old-price {
+  font-size: 12px !important;
+  color: #999 !important;
+  text-decoration: line-through !important;
+  font-weight: 400 !important;
+  opacity: 0.85;
+  line-height: 1.2 !important;
+}
+
+/* Discount badge: compact pill, accent color */
+.l4cl:not(.list) li.product-card p.s1pr .discount.s1bx {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 1px 5px !important;
+  border-radius: 3px !important;
+  line-height: 1.4 !important;
+  white-space: nowrap !important;
+}
+
+/* Mobile: scale down to fit 2-column grid on 375px */
 @media screen and (max-width: 749px) {
+  .l4cl:not(.list) li.product-card p.s1pr {
+    gap: 3px !important;
+  }
+  .l4cl:not(.list) li.product-card p.s1pr .curr-price {
+    font-size: 14px !important;
+  }
   .l4cl:not(.list) li.product-card p.s1pr .old-price {
-    font-size: 11px !important;
+    font-size: 10px !important;
   }
   .l4cl:not(.list) li.product-card p.s1pr .discount.s1bx {
-    font-size: 10px !important;
-    padding: 1px 4px !important;
+    font-size: 9px !important;
+    padding: 1px 3px !important;
   }
 }
 
