@@ -32,7 +32,8 @@
             "show_second_link": false,
             "second_link_text": "Button",
             "second_link_url": "/",
-            "second_button_style": "secondary plain"
+            "second_button_style": "secondary plain",
+            "image_mobile": "shopify://shop_images/20230315-114447-min_2.webp"
           }
         },
         "slide_hPHBEe": {
@@ -55,7 +56,8 @@
             "show_second_link": false,
             "second_link_text": "Button",
             "second_link_url": "/",
-            "second_button_style": "secondary plain"
+            "second_button_style": "secondary plain",
+            "image_mobile": "shopify://shop_images/Afbeelding_van_WhatsApp_op_2025-04-06_om_21.53.13_36010eca-min_1.webp"
           }
         }
       },
