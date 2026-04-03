@@ -202,11 +202,3 @@
   margin-top: 0 !important;
   margin-bottom: 4px !important;
 }
-
-/* Swatches: 1 row on mobile product cards */
-@media screen and (max-width: 749px) {
-  .l4cl:not(.list) li.product-card .check.color {
-    flex-wrap: nowrap !important;
-    overflow: hidden !important;
-  }
-}
