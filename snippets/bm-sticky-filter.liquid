@@ -17,7 +17,7 @@
 
 <!-- Scroll-to-top FAB (separate from sticky bar) -->
 <button type="button" class="bm-scroll-top" id="bm-scroll-top" aria-label="Scroll naar boven">
-  <span style="font-size:24px;color:#fff;line-height:1;display:block;">&#8593;</span>
+  <span style="font-size:32px;color:#fff;line-height:1;display:block;">&#8593;</span>
 </button>
 
 <style>
@@ -127,15 +127,24 @@
     .bm-scroll-top:active {
       background: #333;
     }
-    /* --- Hide original mobile filter buttons (visually, keep in DOM) --- */
+    /* --- Hide original mobile filter buttons --- */
+    /* Use opacity:0 + position:absolute so they stay in DOM and clickable via JS */
     .f8sr .link-btn a[data-panel="filters-aside"],
-    .f8sr .link-btn a[href="#filter"],
-    .f8sr ul.l4vw.mobile-only {
-      visibility: hidden !important;
-      height: 0 !important;
+    .f8sr .link-btn a[href="#filter"] {
+      opacity: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      width: 1px !important;
+      height: 1px !important;
       overflow: hidden !important;
-      padding: 0 !important;
-      margin: 0 !important;
+    }
+    .f8sr ul.l4vw.mobile-only {
+      opacity: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
     }
 
     /* --- Bottom padding so content isn't hidden behind bar --- */
@@ -147,60 +156,32 @@
 
 <script>
   (function() {
-    /* --- Filter button: replicate openPanel('filters-aside') directly --- */
+    /* --- Filter button: click the original theme trigger --- */
     var filterBtn = document.getElementById('bm-filter-btn');
     if (filterBtn) {
       filterBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
 
-        var html = document.documentElement;
-        var panel = document.querySelector('.m6pn[id="filters-aside"]');
-
-        /* DEBUG — temporary alert to confirm handler fires and panel exists */
-        alert('Filter clicked! Panel found: ' + !!panel + ' | filepaths: ' + !!window.filepaths + ' | All .m6pn: ' + document.querySelectorAll('.m6pn').length);
-
-        if (!panel) return;
-
-        /* Load async panel + filter CSS (same as theme does) */
-        if (window.filepaths) {
-          if (window.filepaths['async_panels_css'] && !document.getElementById('css-panels')) {
-            var lnk = document.createElement('link');
-            lnk.id = 'css-panels';
-            lnk.rel = 'stylesheet';
-            lnk.href = window.filepaths['async_panels_css'];
-            document.head.appendChild(lnk);
-          }
-          if (window.filepaths['async_filters_css'] && !document.getElementById('css-filters')) {
-            var lnk2 = document.createElement('link');
-            lnk2.id = 'css-filters';
-            lnk2.rel = 'stylesheet';
-            lnk2.href = window.filepaths['async_filters_css'];
-            document.head.appendChild(lnk2);
-          }
+        /*
+         * The original filter links are hidden with opacity:0 + position:absolute
+         * but remain in the DOM and clickable via JS. The theme's lazy-loading
+         * panel system handles everything when the original link is clicked.
+         */
+        var original = document.querySelector('.f8sr a[data-panel="filters-aside"]')
+                    || document.querySelector('a[data-panel="filters-aside"]');
+        if (original) {
+          original.click();
+          return;
         }
 
-        /* Close anything else that's open */
-        html.classList.remove('search-compact-active', 'search-full', 'search-full-mode', 'user-form-active', 'm2a', 'nav-hover', 'f8fl-open');
-
-        /* Mark html as having open panel */
-        html.classList.add('has-panels', 'm6pn-open');
-
-        /* Hide all panels */
-        document.querySelectorAll('.m6pn').forEach(function(el) {
-          el.setAttribute('aria-hidden', 'true');
-          el.classList.remove('toggle');
-        });
-
-        /* Show filter panel */
-        panel.classList.add('toggle');
-        panel.setAttribute('aria-hidden', 'false');
-
-        /* Focus first interactive element inside panel */
-        setTimeout(function() {
-          var focusable = panel.querySelector('a, input, button, select, textarea, [role="button"]');
-          if (focusable) focusable.focus();
-        }, 150);
+        /* Fallback for static filter layout */
+        var staticLink = document.querySelector('.f8sr a[href="#filter"]')
+                      || document.querySelector('a[href="#filter"]');
+        if (staticLink) {
+          staticLink.click();
+          return;
+        }
       });
     }
 
