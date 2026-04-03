@@ -203,31 +203,30 @@
   margin-bottom: 4px !important;
 }
 
-/* Push swatches to bottom, single row by default */
+/* Push swatches to bottom; theme JS handles data-limit hiding */
 .l4cl:not(.list) li.product-card .check.color {
   margin-top: auto !important;
-  flex-wrap: nowrap !important;
-  overflow: hidden !important;
 }
-/* Expanded: allow wrapping, show all */
-.l4cl:not(.list) li.product-card .check.color.bm-swatches--expanded {
-  flex-wrap: wrap !important;
-  overflow: visible !important;
-}
-/* "+N" counter styling */
-.l4cl:not(.list) li.product-card .check.color > .bm-swatch-more {
+/* Theme's "+N" li.limit: keep visible, style as inline indicator */
+.l4cl:not(.list) li.product-card .check.color > li.limit {
+  display: list-item !important;
   flex: 0 0 auto;
-  display: flex !important;
-  align-items: center;
-  padding: 0 2px;
-  font-size: var(--main_fz_small, 12px);
-  color: var(--primary_text, #1f1f1f);
-  cursor: pointer;
-  opacity: .7;
   position: relative !important;
   left: auto !important;
   top: auto !important;
 }
-.l4cl:not(.list) li.product-card .check.color.bm-swatches--expanded > .bm-swatch-more {
+.l4cl:not(.list) li.product-card .check.color > li.limit a {
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Hide "+0" indicators */
+.l4cl:not(.list) li.product-card .check.color > li.limit.bm-hide {
+  display: none !important;
+}
+/* Expanded: show hidden swatches */
+.l4cl:not(.list) li.product-card .check.color.bm-swatches--expanded > li.hidden-check {
+  display: list-item !important;
+}
+.l4cl:not(.list) li.product-card .check.color.bm-swatches--expanded > li.limit {
   display: none !important;
 }

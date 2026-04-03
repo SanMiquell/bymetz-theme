@@ -1190,65 +1190,62 @@
   {%- assign bm_swatch_toggle_loaded = true -%}
   <script>
     (function(){
-      if(window._bmSwatchOverflow)return;window._bmSwatchOverflow=true;
+      if(window._bmSwatchFix)return;window._bmSwatchFix=true;
 
-      function processSwatches(){
-        document.querySelectorAll('.l4cl:not(.list) .product-card .check.color').forEach(function(ul){
-          if(ul.dataset.bmDone)return;
-          ul.dataset.bmDone='1';
+      /* Before theme JS runs: set data-limit to 4 on mobile */
+      if(window.innerWidth<=749){
+        document.querySelectorAll('.check.color[data-limit]').forEach(function(ul){
+          ul.setAttribute('data-limit','4');
+        });
+      }
 
-          /* Hide theme's own "+N" limit element if present */
-          var themeLim=ul.querySelector('li.limit');
-          if(themeLim)themeLim.style.display='none';
+      /* Monkey-patch theme's check_limit_event to run our fix after it */
+      var origFn=window.check_limit_event;
+      if(origFn){
+        window.check_limit_event=function(){
+          origFn();
+          fixLimits();
+        };
+      }
 
-          /* Count real swatch <li> items (not .hidden, not .limit, not our indicator) */
-          var items=ul.querySelectorAll('li:not(.hidden):not(.limit):not(.bm-swatch-more)');
-          if(items.length<=1)return;
+      function fixLimits(){
+        document.querySelectorAll('.l4cl:not(.list) .product-card .check.color.check-limit-initialized').forEach(function(ul){
+          var lim=ul.querySelector('li.limit');
+          if(!lim)return;
+          if(lim.dataset.bmFixed)return;
+          lim.dataset.bmFixed='1';
 
-          /* Measure: which items overflow the first row? */
-          var containerTop=ul.getBoundingClientRect().top;
-          var firstTop=items[0].getBoundingClientRect().top;
-          var overflowCount=0;
-          for(var i=0;i<items.length;i++){
-            if(items[i].getBoundingClientRect().top > firstTop + 2){
-              overflowCount=items.length - i;
-              break;
-            }
+          /* Hide "+0" */
+          var a=lim.querySelector('a');
+          if(!a)return;
+          var num=parseInt(a.textContent.replace('+',''),10);
+          if(num===0||isNaN(num)){
+            lim.classList.add('bm-hide');
+            return;
           }
 
-          if(overflowCount===0)return;
-
-          /* Create our own "+N" indicator */
-          var more=document.createElement('li');
-          more.className='bm-swatch-more';
-          more.textContent='+'+overflowCount;
-          ul.appendChild(more);
-
-          more.addEventListener('click',function(e){
+          /* Toggle expand/collapse on click */
+          a.addEventListener('click',function(e){
             e.preventDefault();e.stopPropagation();
-            if(ul.classList.contains('bm-swatches--expanded')){
-              ul.classList.remove('bm-swatches--expanded');
-              ul.classList.remove('limit-clicked');
-            }else{
-              ul.classList.add('bm-swatches--expanded');
-              ul.classList.add('limit-clicked');
-            }
+            ul.classList.toggle('bm-swatches--expanded');
           });
         });
       }
 
-      /* Run after theme JS and layout are done */
-      function start(){setTimeout(processSwatches,200);}
+      /* Also run standalone for initial page load (theme JS may have already run) */
+      function init(){
+        if(window.innerWidth<=749){
+          document.querySelectorAll('.check.color[data-limit]').forEach(function(ul){
+            if(!ul.classList.contains('check-limit-initialized')){
+              ul.setAttribute('data-limit','4');
+            }
+          });
+        }
+        fixLimits();
+      }
       if(document.readyState==='loading'){
-        document.addEventListener('DOMContentLoaded',start);
-      }else{start();}
-
-      /* Re-run for dynamically loaded cards */
-      var debounce;
-      new MutationObserver(function(){
-        clearTimeout(debounce);
-        debounce=setTimeout(processSwatches,150);
-      }).observe(document.body,{childList:true,subtree:true});
+        document.addEventListener('DOMContentLoaded',function(){setTimeout(init,50);});
+      }else{setTimeout(init,50);}
     })();
   </script>
 {%- endunless -%}
