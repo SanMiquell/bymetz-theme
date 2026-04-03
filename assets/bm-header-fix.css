@@ -108,12 +108,25 @@
   }
 }
 
-/* 6. Hide original inventory/delivery block (replaced by bm-delivery-status) */
+/* 6. WCAG AA contrast fixes (4.5:1 minimum) */
+.overlay-valid,
+.strong .icon-check {
+  color: #008000 !important;  /* was #02ad02 (2.9:1) → #008000 (4.7:1) */
+}
+
+/* Product labels: darken #EA6C44 orange labels for AA contrast with white text */
+#root .s1lb > span[style*="EA6C44"] {
+  --product_label_bg: #C4512B !important;
+  --product_label_bg_dark: #A8431F !important;
+}
+
+/* 7. Hide original inventory/delivery block (replaced by bm-delivery-status) */
+
 .f8pr-stock {
   display: none !important;
 }
 
-/* 7. Cart icon badge: prevent clipping on all screens.
+/* 8. Cart icon badge: prevent clipping on all screens.
       #header and parents can clip the cart count badge. */
 .shopify-section-header,
 .shopify-section-header #header-outer,
@@ -130,7 +143,7 @@
   z-index: 10;
 }
 
-/* 8. Mobile: keep language selector visible in header icons.
+/* 9. Mobile: keep language selector visible in header icons.
       screen.css hides #nav-user > ul > li.lang on mobile (max-width: 760px).
       Override to show it, and hide the duplicate in the drawer instead. */
 @media screen and (max-width: 760px) {

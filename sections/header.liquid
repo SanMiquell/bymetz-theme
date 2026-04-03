@@ -591,12 +591,12 @@
       {%- endfor -%}
       {% if section.settings.navbar_menu_item_text %}
         <li>
-          <a href="{{ section.settings.navbar_menu_item_link }}"{% unless section.settings.navbar_menu_item_link %} role="none" style="pointer-events: none"{% endunless %}>
+          {%- if section.settings.navbar_menu_item_link -%}<a href="{{ section.settings.navbar_menu_item_link }}">{%- else -%}<span style="pointer-events: none; cursor: default">{%- endif -%}
             {% if section.settings.navbar_menu_item_icon != 'none' %}
               {%- render 'icons', icon: section.settings.navbar_menu_item_icon -%}
             {% endif %}
             <span>{{ section.settings.navbar_menu_item_text }}</span>
-          </a>
+          {%- if section.settings.navbar_menu_item_link -%}</a>{%- else -%}</span>{%- endif -%}
         </li>
       {% endif %}
       {%- liquid
@@ -622,12 +622,12 @@
       {% comment %} <li class="size-12"><span data-syncer-addon="vat-switch" data-syncer-vat-included="true"><span class="check inside"><input type="checkbox" {% if shop.taxes_included %}checked="checked"{% endif %}  id="fgp" name="fgp"> <label for="fgp" class="strong"><span><span>{{ 'product.excl.' | t }}</span> <span class="hidden">{{ 'product.incl' | t }}</span></span> {{ 'product.vat' | t }}</label></span></span></li> {% endcomment %}
      {% if section.settings.navbar_menu_item_text %}
         <li>
-          <a href="{{ section.settings.navbar_menu_item_link }}"{% unless section.settings.navbar_menu_item_link %} role="none" style="pointer-events: none"{% endunless %}>
+          {%- if section.settings.navbar_menu_item_link -%}<a href="{{ section.settings.navbar_menu_item_link }}">{%- else -%}<span style="pointer-events: none; cursor: default">{%- endif -%}
             {% if section.settings.navbar_menu_item_icon != 'none' %}
               {%- render 'icons', icon: section.settings.navbar_menu_item_icon -%}
             {% endif %}
             {{ section.settings.navbar_menu_item_text }}
-          </a>
+          {%- if section.settings.navbar_menu_item_link -%}</a>{%- else -%}</span>{%- endif -%}
         </li>
       {% endif %}
       {%- liquid
@@ -707,12 +707,12 @@
           {% endif %}
           {% if section.settings.navbar_menu_item_text %}
             <li class="mobile-only">
-              <a href="{{ section.settings.navbar_menu_item_link }}"{% unless section.settings.navbar_menu_item_link %} role="none" style="pointer-events: none"{% endunless %}>
+              {%- if section.settings.navbar_menu_item_link -%}<a href="{{ section.settings.navbar_menu_item_link }}">{%- else -%}<span style="pointer-events: none; cursor: default">{%- endif -%}
                 {% if section.settings.navbar_menu_item_icon != 'none' %}
                   {%- render 'icons', icon: section.settings.navbar_menu_item_icon -%}
                 {% endif %}
                 {{ section.settings.navbar_menu_item_text }}
-              </a>
+              {%- if section.settings.navbar_menu_item_link -%}</a>{%- else -%}</span>{%- endif -%}
             </li>
           {% endif %}
           {%- if section.settings.extra_image -%}
@@ -975,12 +975,12 @@
           {% comment %} <li data-syncer-addon="vat-switch" data-syncer-vat-included="{{ shop.taxes_included }}" class="size-12"><span class="check inside"><input type="checkbox" {% if shop.taxes_included %}checked="checked"{% endif %}  id="fgp" name="fgp"> <label for="fgp" class="strong"><span><span>{{ 'product.excl.' | t }}</span> <span class="hidden">{{ 'product.incl' | t }}</span></span> {{ 'product.vat' | t }}</label></span></li> {% endcomment %}
           {% if section.settings.navbar_menu_item_text %}
             <li>
-              <a href="{{ section.settings.navbar_menu_item_link }}"{% unless section.settings.navbar_menu_item_link %} role="none" style="pointer-events: none"{% endunless %}>
+              {%- if section.settings.navbar_menu_item_link -%}<a href="{{ section.settings.navbar_menu_item_link }}">{%- else -%}<span style="pointer-events: none; cursor: default">{%- endif -%}
                 {% if section.settings.navbar_menu_item_icon != 'none' %}
                   {%- render 'icons', icon: section.settings.navbar_menu_item_icon -%}
                 {% endif %}
                 {{ section.settings.navbar_menu_item_text }}
-              </a>
+              {%- if section.settings.navbar_menu_item_link -%}</a>{%- else -%}</span>{%- endif -%}
             </li>
           {% endif %}
           {%- liquid

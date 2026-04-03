@@ -74,7 +74,7 @@ endif
     {% capture mobile_image %}
       <picture class="mobile-only">
         {% capture srcset %}
-          {% render 'image-srcset', image: block.settings.image_mobile, max_width: 940 %}
+          {% render 'image-srcset', image: block.settings.image_mobile, max_width: 720 %}
         {% endcapture %}
         {% capture sizes %}
           (min-width: 768px) 0,
@@ -82,9 +82,9 @@ endif
         {% endcapture %}
         {% assign alt = block.settings.image_mobile.alt | default: block.settings.title | escape %}
         {%- if section.index > 1 or forloop.first == false -%}
-          {{ block.settings.image_mobile | image_url: width: 700, height: 530, crop: 'center' | image_tag: srcset: srcset, sizes: sizes, loading: 'lazy', alt: alt }}
+          {{ block.settings.image_mobile | image_url: width: 400, height: 300, crop: 'center' | image_tag: srcset: srcset, sizes: sizes, loading: 'lazy', alt: alt }}
         {%- else %}
-          {{ block.settings.image_mobile | image_url: width: 700, height: 530, crop: 'center' | image_tag: srcset: srcset, sizes: sizes, preload: true, alt: alt }}
+          {{ block.settings.image_mobile | image_url: width: 400, height: 300, crop: 'center' | image_tag: srcset: srcset, sizes: sizes, preload: true, fetchpriority: 'high', alt: alt }}
         {%- endif -%}
       </picture>
     {% endcapture %}
@@ -139,7 +139,7 @@ endif
         {%- elsif block.settings.image -%}
           <picture{% if block.settings.image_mobile %} class="mobile-hide"{% endif %}>
             {% capture srcset %}
-              {% render 'image-srcset', image: block.settings.image, max_width: 2900 %}
+              {% render 'image-srcset', image: block.settings.image, max_width: 1700 %}
             {% endcapture %}
             {% capture sizes %}
               {% if section.settings.width == 'boxed' or settings.width < 2000 %}
@@ -150,9 +150,9 @@ endif
             {% endcapture %}
             {% assign alt = block.settings.image.alt | default: block.settings.title | escape %}
             {%- if section.index > 1 or forloop.first == false -%}
-              {{ block.settings.image | image_url: width: 700, height: 530, crop: 'center' | image_tag: srcset: srcset, sizes: sizes, loading: 'lazy', alt: alt }}
+              {{ block.settings.image | image_url: width: 1200, height: 675, crop: 'center' | image_tag: srcset: srcset, sizes: sizes, loading: 'lazy', alt: alt }}
             {%- else %}
-              {{ block.settings.image | image_url: width: 700, height: 530, crop: 'center' | image_tag: srcset: srcset, sizes: sizes, preload: true, alt: alt }}
+              {{ block.settings.image | image_url: width: 1200, height: 675, crop: 'center' | image_tag: srcset: srcset, sizes: sizes, preload: true, fetchpriority: 'high', alt: alt }}
             {%- endif -%}
           </picture>
           {% if mobile_image %}{{ mobile_image }}{% endif %}

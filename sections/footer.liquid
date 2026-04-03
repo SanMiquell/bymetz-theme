@@ -2,6 +2,8 @@
   assign newsletter_block = section.blocks | where: 'type', 'newsletter' | first
   assign customer_service_block = section.blocks | where: 'type', 'customer_support' | first
   assign menu_block = section.blocks | where: 'type', 'menu' | first
+  assign footer_heading_size = section.settings.title_size_blocks | default: 'h5'
+  assign footer_heading_tag = 'p'
   if menu_block and menu_block.settings.split_menu
     assign split_menu = true
   endif
@@ -29,10 +31,10 @@
                 title-underline-secondary-font
               {% endif %}
             {% endif %}
-          " style="--main_h_small:var(--main_{{ section.settings.title_size_blocks }});" {{ block.shopify_attributes }}>
-            <{{ section.settings.title_size_blocks }}>
+          " style="--main_h_small:var(--main_{{ footer_heading_size }});" {{ block.shopify_attributes }}>
+            <{{ footer_heading_tag }} class="{{ footer_heading_size }}">
               {{ block.settings.title }}
-            </{{ section.settings.title_size_blocks }}>
+            </{{ footer_heading_tag }}>
             {{ block.settings.text }}
           </div>
         {%- endif -%}
@@ -49,7 +51,7 @@
           </div>
         {%- endif -%}
       {%- when 'customer_support' -%}
-        <div class="w25 m6cn{% unless block.settings.customer_support_img %} mobile-no-img{% endunless %}" style="--main_h_small:var(--main_{{ section.settings.title_size_blocks }});" {{ block.shopify_attributes }}>
+        <div class="w25 m6cn{% unless block.settings.customer_support_img %} mobile-no-img{% endunless %}" style="--main_h_small:var(--main_{{ footer_heading_size }});" {{ block.shopify_attributes }}>
           {%- if block.settings.title != empty -%}
             <div class="
               {% if block.settings.title_underline_style != 'none' %}
@@ -64,9 +66,9 @@
                 {% endif %}
               {% endif %}
             ">
-              <{{ section.settings.title_size_blocks }}>
+              <{{ footer_heading_tag }} class="{{ footer_heading_size }}">
                 {{ block.settings.title }}
-              </{{ section.settings.title_size_blocks }}>
+              </{{ footer_heading_tag }}>
             </div>
           {%- endif -%}
           {{ block.settings.extra_customer_support }}
@@ -133,7 +135,7 @@
           {%- endif -%}
         </div>
       {%- when 'newsletter' -%}
-        <div class="w25 strong" style="--main_h_small:var(--main_{{ section.settings.title_size_blocks }});" {{ block.shopify_attributes }} >
+        <div class="w25 strong" style="--main_h_small:var(--main_{{ footer_heading_size }});" {{ block.shopify_attributes }} >
           {%- if block.settings.title != empty -%}
             <div class="
               {% if block.settings.title_underline_style != 'none' %}
@@ -148,9 +150,9 @@
                 {% endif %}
               {% endif %}
             ">
-              <{{ section.settings.title_size_blocks }} style="font-size: var(--main_{{ section.settings.title_size_blocks }});">
+              <{{ footer_heading_tag }} class="{{ footer_heading_size }}" style="font-size: var(--main_{{ footer_heading_size }});">
                 {{ block.settings.title }}
-              </{{ section.settings.title_size_blocks }}>
+              </{{ footer_heading_tag }}>
             </div>
           {%- endif -%}
           {%- if block.settings.newsletter_text -%}{{ block.settings.newsletter_text }}{%- endif -%}
@@ -199,8 +201,8 @@
           -%}
           {%- capture menu_blocks -%}
             {%- for link in linklists[block.settings.menu].links limit: first_menu_items_limit -%}
-              <div class="{% if linklists[block.settings.menu].links.size > first_menu_items_limit %} mobile-hide{% endif %}{% if first_menu_items_limit == 6 %} w16{% endif %}" style="--main_h_small:var(--main_{{ section.settings.title_size_blocks }});" {{ block.shopify_attributes }}>
-                <{{ section.settings.title_size_blocks }} class="ff-{{ block.settings.title_font }}"><a href="{{ link.url }}">{{ link.title }}</a></{{ section.settings.title_size_blocks }}>
+              <div class="{% if linklists[block.settings.menu].links.size > first_menu_items_limit %} mobile-hide{% endif %}{% if first_menu_items_limit == 6 %} w16{% endif %}" style="--main_h_small:var(--main_{{ footer_heading_size }});" {{ block.shopify_attributes }}>
+                <{{ footer_heading_tag }} class="{{ footer_heading_size }} ff-{{ block.settings.title_font }}"><a href="{{ link.url }}">{{ link.title }}</a></{{ footer_heading_tag }}>
                 {%- if link.links != blank -%}
                   <ul>
                     {%- for sub in link.links -%}
@@ -222,8 +224,8 @@
           {{ menu_blocks }}
         {%- else -%}
           {%- for link in linklists[block.settings.menu].links -%}
-            <div style="--main_h_small:var(--main_{{ section.settings.title_size_blocks }});" {{ block.shopify_attributes }}>
-              <{{ section.settings.title_size_blocks }} class="ff-{{ block.settings.title_font }}"><a href="{{ link.url }}">{{ link.title }}</a></{{ section.settings.title_size_blocks }}>
+            <div style="--main_h_small:var(--main_{{ footer_heading_size }});" {{ block.shopify_attributes }}>
+              <{{ footer_heading_tag }} class="{{ footer_heading_size }} ff-{{ block.settings.title_font }}"><a href="{{ link.url }}">{{ link.title }}</a></{{ footer_heading_tag }}>
               {%- if link.links != blank -%}
                 <ul>
                   {%- for sub in link.links -%}
@@ -267,11 +269,11 @@
           assign width_class = 'w16'
       endcase
     -%}
-  <nav class=" {{ width_class }}{% if section.settings.content_position == 'center' %} align-center{% endif %}{% if section.settings.column_text_alignment == 'center' %} text-center{% endif %}" style="--main_h_small:var(--main_{{ section.settings.title_size_blocks }});">
+  <nav class=" {{ width_class }}{% if section.settings.content_position == 'center' %} align-center{% endif %}{% if section.settings.column_text_alignment == 'center' %} text-center{% endif %}" style="--main_h_small:var(--main_{{ footer_heading_size }});">
     {{ menu_blocks | replace: 'mobile-hide', 'mobile-only' }}
     {%- for link in linklists[menu_block.settings.menu].links offset: first_menu_items_limit -%}
       <div>
-        <{{ section.settings.title_size_blocks }} class="ff-{{ menu_block.settings.title_font }}"><a href="{{ link.url }}">{{ link.title }}</a></{{ section.settings.title_size_blocks }}>
+        <{{ footer_heading_tag }} class="{{ footer_heading_size }} ff-{{ menu_block.settings.title_font }}"><a href="{{ link.url }}">{{ link.title }}</a></{{ footer_heading_tag }}>
         {%- if link.links != blank -%}
           <ul>
             {%- for sub in link.links -%}

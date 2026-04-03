@@ -522,7 +522,7 @@
           -%}
           {% capture swatch %}
             {% if color_variant and color_variant.featured_media and settings.color_swatches_variant_image %}
-              <img src="{{ color_variant.featured_media | image_url: width: image_width_small, height: image_height_small, crop: 'center' }}" alt="{{ color }}" width="30" height="23" loading="lazy" class="color-variant-img filled">
+              <img src="{{ color_variant.featured_media | image_url: width: 48, height: 48, crop: 'center' }}" alt="{{ color }}" width="30" height="23" loading="lazy" class="color-variant-img filled">
             {% elsif color.swatch.image %}
               <i aria-hidden="true" class="icon-circle" style="background-image: url('{{ color.swatch.image | image_url }}');"></i>
             {% elsif color.swatch.color %}
@@ -589,7 +589,7 @@
             {% else %}
               <input type="radio" id="color-{{ section.id }}-{{ product.id }}-{{ variant.id }}-{{ forloop.index }}" name="color-{{ product.id }}-{{ variant.id }}-{{ forloop.index }}"{% if forloop.index0 == 0 %} checked{% endif %}>
               <label for="color-{{ section.id }}-{{ product.id }}-{{ variant.id }}-{{ forloop.index }}">
-                <a href="{% if color_variant %}{{ color_variant.url }}{% else %}{{ product.url }}{% endif %}" aria-label="{{ color }}">
+                <a href="{% if color_variant %}{{ color_variant.url }}{% else %}{{ product.url }}{% endif %}" aria-label="{{ color }} - {{ product.title }}">
                   {{ swatch }}
                 </a>
               </label>
