@@ -1186,58 +1186,5 @@
 {% endif %}
 {% if extra_style contains '--vertical' %}</div>{% endif %}
 
-{%- unless bm_swatch_toggle_loaded -%}
-  {%- assign bm_swatch_toggle_loaded = true -%}
-  <script>
-    (function(){
-      if(window._bmSwatchFix)return;window._bmSwatchFix=true;
-
-      function getLimit(){
-        var w=window.innerWidth,cw;
-        if(w<=749){cw=(w/2)-20;}
-        else if(w<=999){cw=(w/3)-24;}
-        else{cw=(w/4)-30;}
-        return Math.max(2,Math.floor((cw-30)/42));
-      }
-
-      function fixLimits(){
-        document.querySelectorAll('.l4cl:not(.list) .product-card .check.color.check-limit-initialized').forEach(function(ul){
-          try{
-            if(ul.dataset.bmFixed)return;
-            ul.dataset.bmFixed='1';
-            var li=ul.querySelector('li.limit');
-            if(!li)return;
-            /* Move li.limit to end so order:9999 + DOM order both work */
-            ul.appendChild(li);
-            var a=li.querySelector('a');
-            if(!a)return;
-            var n=parseInt(a.textContent.replace('+',''),10);
-            if(!n||n<=0){li.classList.add('bm-hide');return;}
-            a.addEventListener('click',function(e){
-              e.preventDefault();e.stopPropagation();
-              ul.classList.toggle('bm-swatches--expanded');
-            });
-          }catch(e){}
-        });
-      }
-
-      var origFn=window.check_limit_event;
-      if(origFn){
-        window.check_limit_event=function(){
-          var lim=getLimit();
-          document.querySelectorAll('.check.color[data-limit]:not(.check-limit-initialized)').forEach(function(ul){
-            ul.setAttribute('data-limit',lim);
-          });
-          origFn();
-          fixLimits();
-        };
-      }
-
-      if(document.readyState==='loading'){
-        document.addEventListener('DOMContentLoaded',function(){setTimeout(fixLimits,50);});
-      }else{setTimeout(fixLimits,50);}
-    })();
-  </script>
-{%- endunless -%}
 
 </{{ container }}>

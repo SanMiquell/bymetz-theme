@@ -203,40 +203,10 @@
   margin-bottom: 4px !important;
 }
 
-/* Swatches: 1 row, hidden-check items stay hidden */
-.l4cl:not(.list) li.product-card .check.color {
-  margin-top: auto !important;
-  flex-wrap: nowrap !important;
-  overflow: hidden !important;
-  align-items: center !important;
-}
-.l4cl:not(.list) li.product-card .check.color > li.hidden-check {
-  display: none !important;
-}
-/* li.limit inside the ul: always visible, last in order */
-.l4cl:not(.list) li.product-card .check.color > li.limit {
-  display: list-item !important;
-  flex: 0 0 auto !important;
-  order: 9999 !important;
-  position: relative !important;
-  left: auto !important;
-  top: auto !important;
-}
-.l4cl:not(.list) li.product-card .check.color > li.limit a {
-  text-decoration: none;
-  cursor: pointer;
-}
-.l4cl:not(.list) li.product-card .check.color > li.limit.bm-hide {
-  display: none !important;
-}
-/* Expanded: wrap + show all */
-.l4cl:not(.list) li.product-card .check.color.bm-swatches--expanded {
-  flex-wrap: wrap !important;
-  overflow: visible !important;
-}
-.l4cl:not(.list) li.product-card .check.color.bm-swatches--expanded > li.hidden-check {
-  display: list-item !important;
-}
-.l4cl:not(.list) li.product-card .check.color.bm-swatches--expanded > li.limit {
-  display: none !important;
+/* Swatches: 1 row on mobile product cards */
+@media screen and (max-width: 749px) {
+  .l4cl:not(.list) li.product-card .check.color {
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+  }
 }
