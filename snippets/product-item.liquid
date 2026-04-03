@@ -1200,7 +1200,31 @@
         return Math.max(2,Math.floor((cw-28)/34));
       }
 
-      /* Monkey-patch: set data-limit on uninitialised cards, then let theme run */
+      function fixLimits(){
+        document.querySelectorAll('.l4cl:not(.list) .product-card .check.color.check-limit-initialized').forEach(function(ul){
+          try{
+            if(ul.dataset.bmFixed)return;
+            ul.dataset.bmFixed='1';
+            var li=ul.querySelector('li.limit');
+            if(!li)return;
+            var a=li.querySelector('a');
+            if(!a)return;
+            var n=parseInt(a.textContent.replace('+',''),10);
+            if(!n||n<=0)return;
+            /* Create external "+N" span as sibling after the ul */
+            var plus=document.createElement('span');
+            plus.className='bm-swatch-plus';
+            plus.textContent=a.textContent;
+            ul.parentNode.insertBefore(plus,ul.nextSibling);
+            plus.addEventListener('click',function(e){
+              e.preventDefault();e.stopPropagation();
+              ul.classList.toggle('bm-swatches--expanded');
+            });
+          }catch(e){}
+        });
+      }
+
+      /* Monkey-patch: set data-limit on new cards, then run theme + our fix */
       var origFn=window.check_limit_event;
       if(origFn){
         window.check_limit_event=function(){
@@ -1213,29 +1237,10 @@
         };
       }
 
-      function fixLimits(){
-        document.querySelectorAll('.l4cl:not(.list) .product-card .check.color.check-limit-initialized').forEach(function(ul){
-          var li=ul.querySelector('li.limit');
-          if(!li||li.dataset.bmFixed)return;
-          li.dataset.bmFixed='1';
-          var a=li.querySelector('a');
-          if(!a)return;
-          var n=parseInt(a.textContent.replace('+',''),10);
-          if(!n||n<=0){li.classList.add('bm-hide');return;}
-          a.addEventListener('click',function(e){
-            e.preventDefault();e.stopPropagation();
-            ul.classList.toggle('bm-swatches--expanded');
-          });
-        });
-      }
-
-      /* Handle cards that theme JS already initialised before our patch */
-      function initExisting(){
-        fixLimits();
-      }
+      /* Handle cards already initialised before our patch */
       if(document.readyState==='loading'){
-        document.addEventListener('DOMContentLoaded',function(){setTimeout(initExisting,50);});
-      }else{setTimeout(initExisting,50);}
+        document.addEventListener('DOMContentLoaded',function(){setTimeout(fixLimits,50);});
+      }else{setTimeout(fixLimits,50);}
     })();
   </script>
 {%- endunless -%}
