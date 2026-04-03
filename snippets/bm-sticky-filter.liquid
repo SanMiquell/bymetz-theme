@@ -17,9 +17,9 @@
 
 <!-- Scroll-to-top FAB (separate from sticky bar) -->
 <button type="button" class="bm-scroll-top" id="bm-scroll-top" aria-label="Scroll naar boven">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M12 19V5"/>
-    <path d="M5 12l7-7 7 7"/>
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 20V4"/>
+    <path d="M5 11l7-7 7 7"/>
   </svg>
 </button>
 
@@ -131,8 +131,8 @@
       background: #333;
     }
     .bm-scroll-top svg {
-      width: 22px;
-      height: 22px;
+      width: 28px;
+      height: 28px;
     }
 
     /* --- Hide original mobile filter buttons (visually, keep in DOM) --- */
@@ -155,28 +155,26 @@
 
 <script>
   (function() {
-    /* --- Filter button: click the original theme trigger --- */
+    /* --- Filter button: trigger theme panel system --- */
     var filterBtn = document.getElementById('bm-filter-btn');
     if (filterBtn) {
       filterBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        /* Find the original filter link and click it */
-        var original = document.querySelector('.f8sr a[data-panel="filters-aside"]');
-        if (original) {
-          original.style.visibility = 'visible';
-          original.click();
-          original.style.visibility = '';
-          return;
-        }
-        /* Fallback: try any data-panel trigger outside sticky bar */
-        var any = document.querySelector('a[data-panel="filters-aside"]:not(.bm-sticky-filter__btn)');
-        if (any) {
-          any.click();
-          return;
-        }
-        /* Last fallback: scroll to static filter form */
-        var filterEl = document.getElementById('filter');
-        if (filterEl) filterEl.scrollIntoView({ behavior: 'smooth' });
+        /*
+         * The theme's handlePanelEvents (document click listener) catches
+         * clicks on <a data-panel="..."> and calls openPanel(id).
+         * openPanel is scoped/private so we can't call it directly.
+         * Create a temporary <a> in the DOM, click it, then remove it.
+         */
+        var tmp = document.createElement('a');
+        tmp.setAttribute('data-panel', 'filters-aside');
+        tmp.setAttribute('href', '#');
+        tmp.style.position = 'fixed';
+        tmp.style.opacity = '0';
+        tmp.style.pointerEvents = 'none';
+        document.body.appendChild(tmp);
+        tmp.click();
+        document.body.removeChild(tmp);
       });
     }
 
