@@ -34,11 +34,10 @@
       <path d="M5.25 0c-.7 0-1.13-.03-1.61.17A2.25 2.25 0 0 0 2.42 1.39c-.1.26-.08.58-.09.86H.75a.75.75 0 0 0 0 1.5h1.58c.02.28-.01.6.09.86a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.2-.48.17-.91.17-1.61s.03-1.13-.17-1.61A2.25 2.25 0 0 0 6.86.17C6.38-.03 5.95 0 5.25 0zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4C3.78 3.97 3.75 3.7 3.75 3s.03-.97.06-1.04a.75.75 0 0 1 .4-.4C4.28 1.53 4.55 1.5 5.25 1.5zm4.5.75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5zm0 5.25c-.7 0-1.13-.03-1.61.17a2.25 2.25 0 0 0-1.22 1.22c-.2.48-.17.91-.17 1.61s-.03 1.13.17 1.61a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.1-.26.08-.58.09-.86h1.58a.75.75 0 0 0 0-1.5h-1.58c-.02-.28.01-.6-.09-.86a2.25 2.25 0 0 0-1.22-1.22c-.48-.2-.91-.17-1.61-.17zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4c-.03-.07-.06-.34-.06-1.04s.03-.97.06-1.04a.75.75 0 0 1 .4-.4c.07-.03.34-.06 1.04-.06zm-9 .75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5z"/>
     </svg>
     <span class="bm-sticky-filter__label">{{ filter_label }}</span>
-    <span class="bm-sticky-filter__count" id="bm-sticky-filter-count" style="display:none;"></span>
   </button>
 </div>
 
-<!-- Scroll-to-top FAB (separate from sticky bar) -->
+<!-- Scroll-to-top FAB -->
 <button type="button" class="bm-scroll-top" id="bm-scroll-top" aria-label="{{ scroll_top_label }}">
   <span style="font-size:32px;color:#fff;line-height:1;display:block;">&#8593;</span>
 </button>
@@ -49,7 +48,6 @@
     display: none;
   }
   @media screen and (max-width: 749px) {
-    /* --- Sticky bar --- */
     .bm-sticky-filter {
       display: block;
       position: fixed;
@@ -62,7 +60,6 @@
       z-index: 100;
     }
 
-    /* Hide when mobile menu, filter drawer, or any panel is open */
     html.m2a .bm-sticky-filter,
     html.m6pn-open .bm-sticky-filter,
     html.f8fl-open .bm-sticky-filter {
@@ -75,7 +72,6 @@
       pointer-events: none !important;
     }
 
-    /* --- Full-width filter button --- */
     .bm-sticky-filter__btn {
       display: flex;
       align-items: center;
@@ -110,18 +106,6 @@
       line-height: 1;
     }
 
-    .bm-sticky-filter__count {
-      background: #e53e3e;
-      color: #fff;
-      font-size: 10px;
-      font-weight: 600;
-      border-radius: 3px;
-      padding: 2px 5px;
-      margin-left: 8px;
-      line-height: 1;
-    }
-
-    /* --- Scroll-to-top FAB --- */
     .bm-scroll-top {
       display: flex;
       align-items: center;
@@ -151,28 +135,6 @@
       background: #333;
     }
 
-    /* --- Hide original mobile filter toggle links only --- */
-    .f8sr .link-btn > a[data-panel="filters-aside"],
-    .f8sr .link-btn > a[href="#filter"] {
-      clip: rect(0 0 0 0) !important;
-      clip-path: inset(50%) !important;
-      width: 1px !important;
-      height: 1px !important;
-      overflow: hidden !important;
-      position: absolute !important;
-      white-space: nowrap !important;
-    }
-    .f8sr ul.l4vw.mobile-only {
-      clip: rect(0 0 0 0) !important;
-      clip-path: inset(50%) !important;
-      width: 1px !important;
-      height: 1px !important;
-      overflow: hidden !important;
-      position: absolute !important;
-      white-space: nowrap !important;
-    }
-
-    /* --- Bottom padding so content isn't hidden behind bar --- */
     #root {
       padding-bottom: 58px !important;
     }
@@ -181,85 +143,46 @@
 
 <script>
   (function() {
-    /* --- Filter button: click the original theme trigger --- */
     var filterBtn = document.getElementById('bm-filter-btn');
     if (filterBtn) {
       filterBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-
-        /*
-         * The filter panel is lazy-loaded by the theme — it doesn't exist
-         * in the DOM until the original trigger is clicked. We find the
-         * original link (hidden with opacity:0) and programmatically click it.
-         * The theme's handlePanelEvents document listener picks up the click.
-         */
         var original = document.querySelector('.f8sr a[data-panel="filters-aside"]')
                     || document.querySelector('a[data-panel="filters-aside"]');
         if (original) {
           original.click();
           return;
         }
-
-        /* Fallback for static filter layout */
         var staticLink = document.querySelector('.f8sr a[href="#filter"]')
                       || document.querySelector('a[href="#filter"]');
         if (staticLink) {
           staticLink.click();
-          return;
         }
       });
     }
 
-    /* --- Scroll to top --- */
     var scrollBtn = document.getElementById('bm-scroll-top');
     if (scrollBtn) {
       scrollBtn.addEventListener('click', function(e) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
-    }
 
-    /* --- Show/hide scroll button on scroll --- */
-    var ticking = false;
-    function onScroll() {
-      if (!ticking) {
-        requestAnimationFrame(function() {
-          if (scrollBtn) {
+      var ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
             if (window.scrollY > 300) {
               scrollBtn.classList.add('visible');
             } else {
               scrollBtn.classList.remove('visible');
             }
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    /* --- Sync active filter count --- */
-    var syncing = false;
-    function syncCount() {
-      if (syncing) return;
-      syncing = true;
-      var source = document.querySelector('.f8sr .filters-count');
-      var badge = document.getElementById('bm-sticky-filter-count');
-      if (badge) {
-        if (source && source.textContent.trim() !== '0' && source.textContent.trim() !== '') {
-          badge.textContent = source.textContent.trim();
-          badge.style.display = '';
-        } else {
-          badge.style.display = 'none';
+            ticking = false;
+          });
+          ticking = true;
         }
-      }
-      syncing = false;
+      }, { passive: true });
     }
-    syncCount();
-    var observer = new MutationObserver(syncCount);
-    var root = document.getElementById('root');
-    if (root) observer.observe(root, { childList: true, subtree: true });
   })();
 </script>
