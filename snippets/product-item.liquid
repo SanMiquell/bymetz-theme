@@ -1197,20 +1197,17 @@
         if(w<=749){cw=(w/2)-20;}
         else if(w<=999){cw=(w/3)-24;}
         else{cw=(w/4)-30;}
-        var fit=Math.floor((cw-28)/34);
-        return Math.max(2,fit);
+        return Math.max(2,Math.floor((cw-28)/34));
       }
 
-      /* Set data-limit before theme JS initializes */
-      var lim=getLimit();
-      document.querySelectorAll('.check.color[data-limit]').forEach(function(ul){
-        ul.setAttribute('data-limit',lim);
-      });
-
-      /* Monkey-patch theme's check_limit_event */
+      /* Monkey-patch: set data-limit on uninitialised cards, then let theme run */
       var origFn=window.check_limit_event;
       if(origFn){
         window.check_limit_event=function(){
+          var lim=getLimit();
+          document.querySelectorAll('.check.color[data-limit]:not(.check-limit-initialized)').forEach(function(ul){
+            ul.setAttribute('data-limit',lim);
+          });
           origFn();
           fixLimits();
         };
@@ -1232,9 +1229,13 @@
         });
       }
 
+      /* Handle cards that theme JS already initialised before our patch */
+      function initExisting(){
+        fixLimits();
+      }
       if(document.readyState==='loading'){
-        document.addEventListener('DOMContentLoaded',function(){setTimeout(fixLimits,50);});
-      }else{setTimeout(fixLimits,50);}
+        document.addEventListener('DOMContentLoaded',function(){setTimeout(initExisting,50);});
+      }else{setTimeout(initExisting,50);}
     })();
   </script>
 {%- endunless -%}
