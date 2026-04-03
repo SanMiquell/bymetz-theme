@@ -1197,7 +1197,7 @@
         if(w<=749){cw=(w/2)-20;}
         else if(w<=999){cw=(w/3)-24;}
         else{cw=(w/4)-30;}
-        return Math.max(2,Math.floor((cw-28)/34));
+        return Math.max(2,Math.floor((cw-30)/42));
       }
 
       function fixLimits(){
@@ -1207,16 +1207,13 @@
             ul.dataset.bmFixed='1';
             var li=ul.querySelector('li.limit');
             if(!li)return;
+            /* Move li.limit to end so order:9999 + DOM order both work */
+            ul.appendChild(li);
             var a=li.querySelector('a');
             if(!a)return;
             var n=parseInt(a.textContent.replace('+',''),10);
-            if(!n||n<=0)return;
-            /* Create external "+N" span as sibling after the ul */
-            var plus=document.createElement('span');
-            plus.className='bm-swatch-plus';
-            plus.textContent=a.textContent;
-            ul.parentNode.insertBefore(plus,ul.nextSibling);
-            plus.addEventListener('click',function(e){
+            if(!n||n<=0){li.classList.add('bm-hide');return;}
+            a.addEventListener('click',function(e){
               e.preventDefault();e.stopPropagation();
               ul.classList.toggle('bm-swatches--expanded');
             });
@@ -1224,7 +1221,6 @@
         });
       }
 
-      /* Monkey-patch: set data-limit on new cards, then run theme + our fix */
       var origFn=window.check_limit_event;
       if(origFn){
         window.check_limit_event=function(){
@@ -1237,7 +1233,6 @@
         };
       }
 
-      /* Handle cards already initialised before our patch */
       if(document.readyState==='loading'){
         document.addEventListener('DOMContentLoaded',function(){setTimeout(fixLimits,50);});
       }else{setTimeout(fixLimits,50);}
