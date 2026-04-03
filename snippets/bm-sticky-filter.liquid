@@ -60,18 +60,6 @@
       z-index: 100;
     }
 
-    html.m2a .bm-sticky-filter,
-    html.m6pn-open .bm-sticky-filter,
-    html.f8fl-open .bm-sticky-filter {
-      display: none !important;
-    }
-    html.m2a .bm-scroll-top,
-    html.m6pn-open .bm-scroll-top,
-    html.f8fl-open .bm-scroll-top {
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
-
     .bm-sticky-filter__btn {
       display: flex;
       align-items: center;
@@ -148,6 +136,7 @@
       filterBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+        console.log('[bm-sticky-filter] click fired, html classes:', document.documentElement.className);
         /* Fresh querySelectorAll every click — AJAX replaces DOM elements */
         var allTriggers = document.querySelectorAll('a[data-panel="filters-aside"]');
         for (var i = 0; i < allTriggers.length; i++) {
