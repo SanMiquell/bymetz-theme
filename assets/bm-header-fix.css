@@ -174,3 +174,15 @@
     display: none !important;
   }
 }
+
+/* 10. Product card vertical alignment: align price + swatches across cards in a row */
+.l4cl:not(.list) li.product-card > section,
+.l4cl:not(.list) li.product-card > div {
+  flex: 1 1 auto;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.l4cl:not(.list) li.product-card > section > .s1pr,
+.l4cl:not(.list) li.product-card > div > .s1pr {
+  margin-top: auto !important;
+}
