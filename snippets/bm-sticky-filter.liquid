@@ -17,10 +17,7 @@
 
 <!-- Scroll-to-top FAB (separate from sticky bar) -->
 <button type="button" class="bm-scroll-top" id="bm-scroll-top" aria-label="Scroll naar boven">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:28px!important;height:28px!important;display:block!important;fill:none!important;" aria-hidden="true">
-    <path d="M12 20V4" style="stroke:#fff!important;stroke-width:3!important;stroke-linecap:round!important;"/>
-    <path d="M5 11l7-7 7 7" style="stroke:#fff!important;stroke-width:3!important;stroke-linecap:round!important;stroke-linejoin:round!important;"/>
-  </svg>
+  <span style="font-size:24px;color:#fff;line-height:1;display:block;">&#8593;</span>
 </button>
 
 <style>
@@ -130,11 +127,6 @@
     .bm-scroll-top:active {
       background: #333;
     }
-    .bm-scroll-top svg {
-      width: 28px;
-      height: 28px;
-    }
-
     /* --- Hide original mobile filter buttons (visually, keep in DOM) --- */
     .f8sr .link-btn a[data-panel="filters-aside"],
     .f8sr .link-btn a[href="#filter"],
@@ -161,16 +153,13 @@
       filterBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        /*
-         * openPanel() is scoped inside custom-async.js and not callable.
-         * We replicate its exact DOM operations (lines 2183-2224):
-         * 1. Add 'has-panels' + 'm6pn-open' to <html>
-         * 2. Hide all .m6pn panels (remove .toggle)
-         * 3. Show #filters-aside (add .toggle)
-         * 4. Load the async panels CSS if not yet loaded
-         */
+
         var html = document.documentElement;
         var panel = document.querySelector('.m6pn[id="filters-aside"]');
+
+        /* DEBUG — temporary alert to confirm handler fires and panel exists */
+        alert('Filter clicked! Panel found: ' + !!panel + ' | filepaths: ' + !!window.filepaths + ' | All .m6pn: ' + document.querySelectorAll('.m6pn').length);
+
         if (!panel) return;
 
         /* Load async panel + filter CSS (same as theme does) */
