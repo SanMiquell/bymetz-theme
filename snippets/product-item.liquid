@@ -1035,7 +1035,7 @@
     {%- if color_picker and static_color_picker -%}
       {{ color_picker }}
     {%- elsif color_picker and static_color_picker == false and settings.layout_productcard == 'standard' and layout != 'list-compact' and layout != 'hotspot' -%}
-      {{ color_picker | replace: 'class-x', 'mobile-only' }}
+      {{ color_picker | replace: 'class-x', 'mobile-only' | replace: 'data-limit="6"', 'data-limit="3"' }}
     {% elsif color_picker and layout == 'list' %}
       {{ color_picker }}
     {%- endif -%}

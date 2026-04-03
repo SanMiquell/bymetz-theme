@@ -175,7 +175,7 @@
   }
 }
 
-/* 10. Product card vertical alignment: align delivery + price across cards */
+/* 10. Product card vertical alignment */
 .l4cl:not(.list) li.product-card > section,
 .l4cl:not(.list) li.product-card > div:not(.static) {
   flex: 1 1 auto;
@@ -183,7 +183,12 @@
   flex-direction: column !important;
 }
 
-/* Clamp product title to 2 lines so all cards reserve equal title height */
+/* Title: fixed height for 2 lines, clamp overflow */
+.l4cl:not(.list) li.product-card > section > h3,
+.l4cl:not(.list) li.product-card > div:not(.static) > h3 {
+  min-height: 2.8em;
+  margin-bottom: 2px !important;
+}
 .l4cl:not(.list) li.product-card > section > h3 > a.fz-heading-productcard,
 .l4cl:not(.list) li.product-card > div:not(.static) > h3 > a.fz-heading-productcard {
   display: -webkit-box !important;
@@ -192,13 +197,21 @@
   overflow: hidden;
 }
 
-/* Tight spacing: delivery → price → swatches, no extra gaps */
+/* Delivery: tight after title */
 .l4cl:not(.list) li.product-card .bm-delivery-card {
-  margin-top: 0;
-  margin-bottom: 2px;
+  margin-top: 0 !important;
+  margin-bottom: 2px !important;
 }
+
+/* Price: tight after delivery */
 .l4cl:not(.list) li.product-card > section > p.s1pr,
 .l4cl:not(.list) li.product-card > div:not(.static) > p.s1pr {
   margin-top: 0 !important;
   margin-bottom: 4px !important;
+}
+
+/* Swatches: push to bottom */
+.l4cl:not(.list) li.product-card > section > ul.check.color,
+.l4cl:not(.list) li.product-card > div:not(.static) > ul.check.color {
+  margin-top: auto !important;
 }
