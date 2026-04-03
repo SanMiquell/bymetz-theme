@@ -4,19 +4,42 @@
   Scroll-to-top FAB floats above the bar.
 {%- endcomment -%}
 
+{%- assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl' | downcase | split: '-' | first -%}
+
+{%- case bm_lang -%}
+  {%- when 'en' -%}
+    {%- assign filter_label = 'Filter & Sort' -%}
+    {%- assign scroll_top_label = 'Scroll to top' -%}
+  {%- when 'de' -%}
+    {%- assign filter_label = 'Filtern & Sortieren' -%}
+    {%- assign scroll_top_label = 'Nach oben scrollen' -%}
+  {%- when 'fr' -%}
+    {%- assign filter_label = 'Filtrer & Trier' -%}
+    {%- assign scroll_top_label = 'Retour en haut' -%}
+  {%- when 'es' -%}
+    {%- assign filter_label = 'Filtrar & Ordenar' -%}
+    {%- assign scroll_top_label = 'Volver arriba' -%}
+  {%- when 'it' -%}
+    {%- assign filter_label = 'Filtra & Ordina' -%}
+    {%- assign scroll_top_label = 'Torna su' -%}
+  {%- else -%}
+    {%- assign filter_label = 'Filter & Sorteer' -%}
+    {%- assign scroll_top_label = 'Scroll naar boven' -%}
+{%- endcase -%}
+
 <!-- Sticky filter bar -->
 <div class="bm-sticky-filter" id="bm-sticky-filter">
-  <button type="button" class="bm-sticky-filter__btn" id="bm-filter-btn" aria-label="Filter & Sorteer">
+  <button type="button" class="bm-sticky-filter__btn" id="bm-filter-btn" aria-label="{{ filter_label }}">
     <svg class="bm-sticky-filter__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 13.5" fill="currentColor" aria-hidden="true">
       <path d="M5.25 0c-.7 0-1.13-.03-1.61.17A2.25 2.25 0 0 0 2.42 1.39c-.1.26-.08.58-.09.86H.75a.75.75 0 0 0 0 1.5h1.58c.02.28-.01.6.09.86a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.2-.48.17-.91.17-1.61s.03-1.13-.17-1.61A2.25 2.25 0 0 0 6.86.17C6.38-.03 5.95 0 5.25 0zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4C3.78 3.97 3.75 3.7 3.75 3s.03-.97.06-1.04a.75.75 0 0 1 .4-.4C4.28 1.53 4.55 1.5 5.25 1.5zm4.5.75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5zm0 5.25c-.7 0-1.13-.03-1.61.17a2.25 2.25 0 0 0-1.22 1.22c-.2.48-.17.91-.17 1.61s-.03 1.13.17 1.61a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.1-.26.08-.58.09-.86h1.58a.75.75 0 0 0 0-1.5h-1.58c-.02-.28.01-.6-.09-.86a2.25 2.25 0 0 0-1.22-1.22c-.48-.2-.91-.17-1.61-.17zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4c-.03-.07-.06-.34-.06-1.04s.03-.97.06-1.04a.75.75 0 0 1 .4-.4c.07-.03.34-.06 1.04-.06zm-9 .75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5z"/>
     </svg>
-    <span class="bm-sticky-filter__label">Filter & Sorteer</span>
+    <span class="bm-sticky-filter__label">{{ filter_label }}</span>
     <span class="bm-sticky-filter__count" id="bm-sticky-filter-count" style="display:none;"></span>
   </button>
 </div>
 
 <!-- Scroll-to-top FAB (separate from sticky bar) -->
-<button type="button" class="bm-scroll-top" id="bm-scroll-top" aria-label="Scroll naar boven">
+<button type="button" class="bm-scroll-top" id="bm-scroll-top" aria-label="{{ scroll_top_label }}">
   <span style="font-size:32px;color:#fff;line-height:1;display:block;">&#8593;</span>
 </button>
 
