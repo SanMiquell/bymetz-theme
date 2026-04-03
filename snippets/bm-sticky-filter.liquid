@@ -151,17 +151,25 @@
       background: #333;
     }
 
-    /* --- Hide original mobile filter buttons --- */
-    /* opacity:0 + position:absolute keeps them in DOM and clickable via JS */
-    .f8sr .link-btn a[data-panel="filters-aside"],
-    .f8sr .link-btn a[href="#filter"],
-    .f8sr ul.l4vw.mobile-only {
-      opacity: 0 !important;
-      position: absolute !important;
-      pointer-events: none !important;
+    /* --- Hide original mobile filter toggle links only --- */
+    .f8sr .link-btn > a[data-panel="filters-aside"],
+    .f8sr .link-btn > a[href="#filter"] {
+      clip: rect(0 0 0 0) !important;
+      clip-path: inset(50%) !important;
       width: 1px !important;
       height: 1px !important;
       overflow: hidden !important;
+      position: absolute !important;
+      white-space: nowrap !important;
+    }
+    .f8sr ul.l4vw.mobile-only {
+      clip: rect(0 0 0 0) !important;
+      clip-path: inset(50%) !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+      position: absolute !important;
+      white-space: nowrap !important;
     }
 
     /* --- Bottom padding so content isn't hidden behind bar --- */
@@ -233,16 +241,21 @@
     onScroll();
 
     /* --- Sync active filter count --- */
+    var syncing = false;
     function syncCount() {
+      if (syncing) return;
+      syncing = true;
       var source = document.querySelector('.f8sr .filters-count');
       var badge = document.getElementById('bm-sticky-filter-count');
-      if (!badge) return;
-      if (source && source.textContent.trim() !== '0' && source.textContent.trim() !== '') {
-        badge.textContent = source.textContent.trim();
-        badge.style.display = '';
-      } else {
-        badge.style.display = 'none';
+      if (badge) {
+        if (source && source.textContent.trim() !== '0' && source.textContent.trim() !== '') {
+          badge.textContent = source.textContent.trim();
+          badge.style.display = '';
+        } else {
+          badge.style.display = 'none';
+        }
       }
+      syncing = false;
     }
     syncCount();
     var observer = new MutationObserver(syncCount);
