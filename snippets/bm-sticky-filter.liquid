@@ -1,44 +1,57 @@
 {%- comment -%}
   Sticky mobile filter bar — fixed to bottom of viewport on mobile.
-  Opens the existing filter drawer (filters-aside panel).
+  Opens the existing filter drawer via theme's native data-panel system.
 {%- endcomment -%}
 
 <div class="bm-sticky-filter" id="bm-sticky-filter">
-  <button type="button" class="bm-sticky-filter__btn" data-open-filters aria-label="Filter & Sorteer">
+  <a href="./" data-panel="filters-aside" class="bm-sticky-filter__btn" aria-label="Filter & Sorteer">
     <svg class="bm-sticky-filter__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 13.5" fill="currentColor" aria-hidden="true">
       <path d="M5.25 0c-.7 0-1.13-.03-1.61.17A2.25 2.25 0 0 0 2.42 1.39c-.1.26-.08.58-.09.86H.75a.75.75 0 0 0 0 1.5h1.58c.02.28-.01.6.09.86a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.2-.48.17-.91.17-1.61s.03-1.13-.17-1.61A2.25 2.25 0 0 0 6.86.17C6.38-.03 5.95 0 5.25 0zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4C3.78 3.97 3.75 3.7 3.75 3s.03-.97.06-1.04a.75.75 0 0 1 .4-.4C4.28 1.53 4.55 1.5 5.25 1.5zm4.5.75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5zm0 5.25c-.7 0-1.13-.03-1.61.17a2.25 2.25 0 0 0-1.22 1.22c-.2.48-.17.91-.17 1.61s-.03 1.13.17 1.61a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.1-.26.08-.58.09-.86h1.58a.75.75 0 0 0 0-1.5h-1.58c-.02-.28.01-.6-.09-.86a2.25 2.25 0 0 0-1.22-1.22c-.48-.2-.91-.17-1.61-.17zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4c-.03-.07-.06-.34-.06-1.04s.03-.97.06-1.04a.75.75 0 0 1 .4-.4c.07-.03.34-.06 1.04-.06zm-9 .75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5z"/>
     </svg>
     <span class="bm-sticky-filter__label">Filter & Sorteer</span>
     <span class="bm-sticky-filter__count" id="bm-sticky-filter-count" style="display:none;"></span>
+  </a>
+  <button type="button" class="bm-sticky-filter__top" id="bm-scroll-top" aria-label="Scroll naar boven">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
   </button>
 </div>
 
 <style>
-  /* Sticky bar: fixed bottom, mobile only */
   .bm-sticky-filter {
     display: none;
   }
   @media screen and (max-width: 749px) {
+    /* --- Bar container --- */
     .bm-sticky-filter {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      padding: 10px 16px;
-      padding-bottom: max(10px, env(safe-area-inset-bottom));
+      padding: 8px 12px;
       background: #fff;
       box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
       z-index: 100;
     }
 
-    /* Full-width CTA button */
+    /* --- Hide when mobile menu, filter drawer, or any panel is open --- */
+    html.m2a .bm-sticky-filter,
+    html.m6pn-open .bm-sticky-filter,
+    html.f8fl-open .bm-sticky-filter {
+      display: none !important;
+    }
+
+    /* --- Filter button (native <a data-panel>) --- */
     .bm-sticky-filter__btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      height: 44px;
+      flex: 1 1 0%;
+      height: 42px;
       padding: 0 16px;
       background: #1a1a1a;
       color: #fff;
@@ -48,6 +61,7 @@
       font-size: 14px;
       font-weight: 600;
       letter-spacing: 0.02em;
+      text-decoration: none;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       transition: background 0.15s ease;
@@ -64,7 +78,6 @@
       flex-shrink: 0;
     }
 
-    /* Label */
     .bm-sticky-filter__label {
       line-height: 1;
     }
@@ -81,48 +94,82 @@
       line-height: 1;
     }
 
-    /* Hide original mobile filter button */
+    /* --- Scroll to top button --- */
+    .bm-sticky-filter__top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .bm-sticky-filter__top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .bm-sticky-filter__top:active {
+      background: #333;
+    }
+    .bm-sticky-filter__top svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* --- Hide original mobile filter buttons --- */
     .f8sr .link-btn a[data-panel="filters-aside"],
     .f8sr .link-btn a[href="#filter"],
     .f8sr ul.l4vw.mobile-only {
       display: none !important;
     }
 
-    /* Prevent content from hiding behind the sticky bar */
+    /* --- Bottom padding so content isn't hidden behind bar --- */
     #root {
-      padding-bottom: 64px !important;
+      padding-bottom: 58px !important;
     }
   }
 </style>
 
 <script>
   (function() {
-    var bar = document.getElementById('bm-sticky-filter');
-    if (!bar) return;
-    var btn = bar.querySelector('[data-open-filters]');
-    if (!btn) return;
+    var scrollBtn = document.getElementById('bm-scroll-top');
+    if (!scrollBtn) return;
 
-    btn.addEventListener('click', function(e) {
+    /* Scroll to top */
+    scrollBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      /* Use the theme's native panel system */
-      var trigger = document.querySelector('a[data-panel="filters-aside"]');
-      if (trigger) {
-        trigger.click();
-        return;
-      }
-      /* Fallback: try openPanel directly */
-      if (typeof openPanel === 'function') {
-        openPanel('filters-aside');
-        return;
-      }
-      /* Last fallback: scroll to static filter */
-      var filterEl = document.getElementById('filter');
-      if (filterEl) filterEl.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    /* Show/hide scroll button based on scroll position */
+    var ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+          } else {
+            scrollBtn.classList.remove('visible');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
     /* Sync active filter count */
     function syncCount() {
-      var source = document.querySelector('.filters-count');
+      var source = document.querySelector('.f8sr .filters-count');
       var badge = document.getElementById('bm-sticky-filter-count');
       if (!badge) return;
       if (source && source.textContent.trim() !== '0' && source.textContent.trim() !== '') {
@@ -133,8 +180,6 @@
       }
     }
     syncCount();
-
-    /* Re-sync after filter AJAX updates */
     var observer = new MutationObserver(syncCount);
     var root = document.getElementById('root');
     if (root) observer.observe(root, { childList: true, subtree: true });
