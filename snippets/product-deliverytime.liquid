@@ -77,23 +77,39 @@
 {%- if show -%}
   {%- if extra_element -%}{{ extra_element }}{%- endif -%}
   {%- if origin == 'productitem' -%}
-    {%- comment -%} Product card: styled delivery matching bm-delivery-status {%- endcomment -%}
+    {%- comment -%} Product card: two-line delivery matching bm-delivery-status {%- endcomment -%}
+    {%- liquid
+      assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl'
+      assign bm_lang = bm_lang | downcase | split: '-' | first
+      if bm_lang == 'en'
+        assign bm_stock_label = 'In stock in the webshop & store'
+        assign bm_nostock_label = 'Out of stock'
+      elsif bm_lang == 'de'
+        assign bm_stock_label = 'Auf Lager'
+        assign bm_nostock_label = 'Nicht auf Lager'
+      elsif bm_lang == 'fr'
+        assign bm_stock_label = 'En stock'
+        assign bm_nostock_label = 'Rupture de stock'
+      elsif bm_lang == 'es'
+        assign bm_stock_label = 'En stock'
+        assign bm_nostock_label = 'Agotado'
+      elsif bm_lang == 'it'
+        assign bm_stock_label = 'Disponibile'
+        assign bm_nostock_label = 'Non disponibile'
+      else
+        assign bm_stock_label = 'Beschikbaar in webshop & winkel'
+        assign bm_nostock_label = 'Niet op voorraad'
+      endif
+    -%}
     {%- if total_stock > 0 or inventory_tracking == false -%}
       <div class="bm-delivery-card {{ extra_class }}">
         <svg class="bm-delivery-card__icon bm-delivery-card__icon--ok" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
           <path d="M10 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm3.36 5.22a.75.75 0 0 0-1.06.04L9.4 10.6 7.7 8.9a.75.75 0 1 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.08-.02l3.43-3.91a.75.75 0 0 0-.04-1.06z" fill="currentColor"/>
         </svg>
         <div class="bm-delivery-card__text">
+          <span class="bm-delivery-card__label bm-delivery-card__label--ok">{{ bm_stock_label }}</span>
           {%- if deliverytime_in_stock != empty -%}
-            <span class="bm-delivery-card__label bm-delivery-card__label--ok">{{ deliverytime_in_stock }}</span>
-          {%- elsif show_stock -%}
-            <span class="bm-delivery-card__label bm-delivery-card__label--ok">
-              {%- if stock == 'available_stock' -%}
-                {{ 'product.form.in_stock_amount' | t: amount: total_stock }}
-              {%- elsif stock == 'stock' -%}
-                {{ 'product.form.in_stock' | t }}
-              {%- endif -%}
-            </span>
+            <span class="bm-delivery-card__detail">{{ deliverytime_in_stock }}</span>
           {%- endif -%}
         </div>
       </div>
@@ -104,10 +120,9 @@
           <path d="M10 6v5M10 13v1" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
         <div class="bm-delivery-card__text">
+          <span class="bm-delivery-card__label bm-delivery-card__label--warn">{{ bm_nostock_label }}</span>
           {%- if deliverytime_not_in_stock != empty -%}
-            <span class="bm-delivery-card__label bm-delivery-card__label--warn">{{ deliverytime_not_in_stock }}</span>
-          {%- elsif show_stock -%}
-            <span class="bm-delivery-card__label bm-delivery-card__label--warn">{{ 'product.form.not_in_stock' | t }}</span>
+            <span class="bm-delivery-card__detail">{{ deliverytime_not_in_stock }}</span>
           {%- endif -%}
         </div>
       </div>
@@ -153,14 +168,14 @@
   .bm-delivery-card {
     display: flex;
     align-items: flex-start;
-    gap: 4px;
-    margin: 3px 0 0;
+    gap: 5px;
+    margin: 4px 0 6px;
     line-height: 1.3;
   }
   .bm-delivery-card__icon {
-    width: 15px;
-    height: 15px;
-    min-width: 15px;
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
     flex: 0 0 auto;
     margin-top: 1px;
   }
@@ -176,11 +191,8 @@
     min-width: 0;
   }
   .bm-delivery-card__label {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
   .bm-delivery-card__label--ok {
     color: #008000;
@@ -188,15 +200,9 @@
   .bm-delivery-card__label--warn {
     color: #ea6c44;
   }
-  @media screen and (max-width: 749px) {
-    .bm-delivery-card__icon {
-      width: 13px;
-      height: 13px;
-      min-width: 13px;
-    }
-    .bm-delivery-card__label {
-      font-size: 11px;
-    }
+  .bm-delivery-card__detail {
+    font-size: 12px;
+    color: #1f1f1f;
   }
 </style>
 {%- endif -%}
