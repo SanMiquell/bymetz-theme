@@ -1035,7 +1035,7 @@
     {%- if color_picker and static_color_picker -%}
       {{ color_picker }}
     {%- elsif color_picker and static_color_picker == false and settings.layout_productcard == 'standard' and layout != 'list-compact' and layout != 'hotspot' -%}
-      {{ color_picker | replace: 'class-x', 'mobile-only' | replace: 'data-limit="6"', 'data-limit="3"' }}
+      {{ color_picker | replace: 'class-x', 'mobile-only' }}
     {% elsif color_picker and layout == 'list' %}
       {{ color_picker }}
     {%- endif -%}
@@ -1186,25 +1186,5 @@
 {% endif %}
 {% if extra_style contains '--vertical' %}</div>{% endif %}
 
-{%- unless bm_mobile_swatch_limit_loaded -%}
-{%- assign bm_mobile_swatch_limit_loaded = true -%}
-<script>
-(function(){
-  if(window._bmMobileLimit||window.innerWidth>749)return;
-  window._bmMobileLimit=true;
-  var orig=window.check_limit_event;
-  if(orig){
-    window.check_limit_event=function(){
-      document.querySelectorAll('.check.color[data-limit]:not(.check-limit-initialized)').forEach(function(u){
-        if(u.classList.contains('mobile-only')||!u.classList.contains('mobile-hide')){
-          u.setAttribute('data-limit','3');
-        }
-      });
-      orig();
-    };
-  }
-})();
-</script>
-{%- endunless -%}
 
 </{{ container }}>
