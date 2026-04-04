@@ -126,5 +126,20 @@
       }
     }
   });
+  /* Debug: log state after click and on load */
+  btn.addEventListener('click', function() {
+    setTimeout(function() {
+      console.log('[bm-debug] f8fl-open:', document.documentElement.classList.contains('f8fl-open'));
+      console.log('[bm-debug] #filter exists:', !!document.getElementById('filter'));
+      console.log('[bm-debug] .f8fl exists:', !!document.querySelector('.f8fl'));
+      console.log('[bm-debug] all f8fl-toggle count:', document.querySelectorAll('.f8fl-toggle').length);
+      console.log('[bm-debug] filepaths:', !!window.filepaths, window.filepaths ? Object.keys(window.filepaths).filter(function(k){return k.indexOf('filter')>-1;}) : 'none');
+      var filterEl = document.getElementById('filter') || document.querySelector('.f8fl');
+      if (filterEl) {
+        var cs = window.getComputedStyle(filterEl);
+        console.log('[bm-debug] filter display:', cs.display, 'visibility:', cs.visibility, 'height:', cs.height, 'overflow:', cs.overflow);
+      }
+    }, 500);
+  });
 })();
 </script>
