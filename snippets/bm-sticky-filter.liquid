@@ -35,7 +35,11 @@
       padding: 8px 12px;
       background: #fff;
       box-shadow: 0 -2px 8px rgba(0,0,0,0.12);
-      z-index: 100;
+      z-index: 9999;
+      pointer-events: auto !important;
+    }
+    .bm-sticky-filter * {
+      pointer-events: auto !important;
     }
     .bm-sticky-filter__btn {
       display: flex;
@@ -87,7 +91,6 @@
   if (!btn) return;
   btn.addEventListener('click', function(e) {
     e.preventDefault();
-    alert('clicked! f8fl-open=' + document.documentElement.classList.contains('f8fl-open'));
     var html = document.documentElement;
 
     /* Load async filter CSS if not yet loaded */
