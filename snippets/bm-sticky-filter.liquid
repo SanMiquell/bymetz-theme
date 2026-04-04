@@ -123,6 +123,19 @@
       background: #333;
     }
 
+    /* Visually hide original filter link — stays in DOM and clickable */
+    .f8sr .link-btn > a[data-panel="filters-aside"] {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0,0,0,0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
     #root {
       padding-bottom: 58px !important;
     }
@@ -136,22 +149,20 @@
       filterBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('[bm-sticky-filter] click fired, html classes:', document.documentElement.className);
-        /* Fresh querySelectorAll every click — AJAX replaces DOM elements */
-        var allTriggers = document.querySelectorAll('a[data-panel="filters-aside"]');
-        for (var i = 0; i < allTriggers.length; i++) {
-          if (!allTriggers[i].closest('.bm-sticky-filter')) {
-            allTriggers[i].click();
-            return;
-          }
-        }
-        var staticLinks = document.querySelectorAll('a[href="#filter"]');
-        for (var j = 0; j < staticLinks.length; j++) {
-          if (!staticLinks[j].closest('.bm-sticky-filter')) {
-            staticLinks[j].click();
-            return;
-          }
-        }
+        console.log('[bm-sticky-filter] click fired');
+        /* Create temp <a data-panel> inside #root and click it.
+         * Theme's handlePanelEvents is a document-level listener that
+         * catches clicks on a[data-panel] and calls openPanel().
+         * Placing inside #root ensures event delegation works.
+         * Fresh element each click avoids stale references after AJAX. */
+        var root = document.getElementById('root');
+        var tmp = document.createElement('a');
+        tmp.setAttribute('data-panel', 'filters-aside');
+        tmp.setAttribute('href', './');
+        tmp.style.display = 'none';
+        root.appendChild(tmp);
+        tmp.click();
+        setTimeout(function() { tmp.remove(); }, 100);
       });
     }
 
