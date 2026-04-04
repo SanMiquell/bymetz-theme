@@ -56,6 +56,7 @@
   function moveLink() {
     var link = document.querySelector('.f8sr .link-btn a[data-panel="filters-aside"]');
     if (!link) link = document.querySelector('.f8sr a[data-panel="filters-aside"]');
+    if (!link) link = document.querySelector('a[data-panel="filters-aside"]');
     if (!link) return;
 
     moving = true;
@@ -65,8 +66,28 @@
     moving = false;
   }
 
-  /* Initial move */
-  moveLink();
+  /* Initial move — retry until the link exists (theme may load it async) */
+  function tryMove() {
+    var link = document.querySelector('.f8sr .link-btn a[data-panel="filters-aside"]')
+            || document.querySelector('.f8sr a[data-panel="filters-aside"]')
+            || document.querySelector('a[data-panel="filters-aside"]');
+    if (link) {
+      moveLink();
+    } else {
+      /* Retry up to 3 seconds */
+      if (tryMove.attempts < 12) {
+        tryMove.attempts++;
+        setTimeout(tryMove, 250);
+      }
+    }
+  }
+  tryMove.attempts = 0;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryMove);
+  } else {
+    tryMove();
+  }
 
   /* After AJAX filter updates: move the new link again */
   var debounce = null;

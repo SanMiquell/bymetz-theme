@@ -275,6 +275,6 @@
 /* 11. Scroll-to-top: raise above sticky filter bar on mobile */
 @media screen and (max-width: 749px) {
   #totop {
-    bottom: 70px !important;
+    bottom: 80px !important;
   }
 }
