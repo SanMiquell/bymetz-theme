@@ -1,7 +1,7 @@
 {%- comment -%}
-  Sticky mobile filter bar — uses the theme's own f8fl-toggle class
-  so the theme's click handler (aria-controls="filter" → toggle f8fl-open)
-  works natively. No custom JS for filter opening needed.
+  Sticky mobile filter bar — button clicks the original theme filter link.
+  The original link has working event handlers from the theme's JS init.
+  Our button is a plain <button>, NOT a f8fl-toggle, so theme ignores it.
 {%- endcomment -%}
 
 {%- assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl' | downcase | split: '-' | first -%}
@@ -15,12 +15,12 @@
 {%- endcase -%}
 
 <div class="bm-sticky-filter" id="bm-sticky-filter">
-  <a href="#filter" class="bm-sticky-filter__btn f8fl-toggle" aria-controls="filter" aria-label="{{ bm_filter_label }}">
+  <button type="button" class="bm-sticky-filter__btn" aria-label="{{ bm_filter_label }}">
     <svg class="bm-sticky-filter__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 13.5" fill="currentColor" aria-hidden="true">
       <path d="M5.25 0c-.7 0-1.13-.03-1.61.17A2.25 2.25 0 0 0 2.42 1.39c-.1.26-.08.58-.09.86H.75a.75.75 0 0 0 0 1.5h1.58c.02.28-.01.6.09.86a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.2-.48.17-.91.17-1.61s.03-1.13-.17-1.61A2.25 2.25 0 0 0 6.86.17C6.38-.03 5.95 0 5.25 0zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4C3.78 3.97 3.75 3.7 3.75 3s.03-.97.06-1.04a.75.75 0 0 1 .4-.4C4.28 1.53 4.55 1.5 5.25 1.5zm4.5.75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5zm0 5.25c-.7 0-1.13-.03-1.61.17a2.25 2.25 0 0 0-1.22 1.22c-.2.48-.17.91-.17 1.61s-.03 1.13.17 1.61a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.1-.26.08-.58.09-.86h1.58a.75.75 0 0 0 0-1.5h-1.58c-.02-.28.01-.6-.09-.86a2.25 2.25 0 0 0-1.22-1.22c-.48-.2-.91-.17-1.61-.17zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4c-.03-.07-.06-.34-.06-1.04s.03-.97.06-1.04a.75.75 0 0 1 .4-.4c.07-.03.34-.06 1.04-.06zm-9 .75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5z"/>
     </svg>
     <span>{{ bm_filter_label }}</span>
-  </a>
+  </button>
 </div>
 
 <style>
@@ -44,7 +44,7 @@
       width: 100%;
       height: 42px;
       background: #1a1a1a;
-      color: #fff !important;
+      color: #fff;
       border: none;
       border-radius: 4px;
       font-family: inherit;
@@ -64,7 +64,7 @@
       height: 14px;
       flex-shrink: 0;
     }
-    /* Hide original filter link on mobile */
+    /* sr-only: visually hidden but still in DOM with working event handlers */
     .f8sr .link-btn > a.f8fl-toggle {
       position: absolute !important;
       width: 1px !important;
@@ -83,63 +83,17 @@
 <script>
 (function() {
   if (window.innerWidth > 749) return;
-  /*
-   * Fallback: if the theme's JS already initialized f8fl-toggle handlers
-   * before our element existed, attach our own handler that does the same:
-   * toggle html.f8fl-open and load the filter CSS.
-   */
-  var btn = document.querySelector('#bm-sticky-filter .f8fl-toggle');
+  var btn = document.querySelector('#bm-sticky-filter .bm-sticky-filter__btn');
   if (!btn) return;
   btn.addEventListener('click', function(e) {
-    console.log('[bm-sticky-filter] click handler fired');
     e.preventDefault();
-    var html = document.documentElement;
-
-    /* Replicate theme's exact handler from custom-async.js lines 3869-3883 */
-    html.classList.add('has-filters');
-
-    if (html.classList.contains('f8fl-open')) {
-      html.classList.remove('f8fl-open');
-    } else {
-      /* hidePanels() — close any open panels first (lines 2136-2153) */
-      html.classList.remove('m6pn-open', 'm6cp-open', 'f8fl-open');
-      document.querySelectorAll('.m6pn').forEach(function(el) {
-        el.classList.remove('toggle');
-        el.setAttribute('aria-hidden', 'true');
-      });
-
-      html.classList.add('f8fl-open');
+    /* Fresh query each click — AJAX may replace the original link */
+    var orig = document.querySelector('.f8sr a.f8fl-toggle')
+            || document.querySelector('.f8sr a[aria-controls="filter"]')
+            || document.querySelector('a[aria-controls="filter"]');
+    if (orig) {
+      orig.click();
     }
-
-    /* getStickyFooters — trigger layout recalc */
-    if (typeof getStickyFooters === 'function') getStickyFooters();
-
-    /* new_css('css-filters', ...) — load async filter CSS */
-    if (window.filepaths && window.filepaths['async_filters_css']) {
-      var id = 'css-filters';
-      if (!document.getElementById(id)) {
-        var lnk = document.createElement('link');
-        lnk.id = id;
-        lnk.rel = 'stylesheet';
-        lnk.href = window.filepaths['async_filters_css'];
-        document.head.appendChild(lnk);
-      }
-    }
-  });
-  /* Debug: log state after click and on load */
-  btn.addEventListener('click', function() {
-    setTimeout(function() {
-      console.log('[bm-debug] f8fl-open:', document.documentElement.classList.contains('f8fl-open'));
-      console.log('[bm-debug] #filter exists:', !!document.getElementById('filter'));
-      console.log('[bm-debug] .f8fl exists:', !!document.querySelector('.f8fl'));
-      console.log('[bm-debug] all f8fl-toggle count:', document.querySelectorAll('.f8fl-toggle').length);
-      console.log('[bm-debug] filepaths:', !!window.filepaths, window.filepaths ? Object.keys(window.filepaths).filter(function(k){return k.indexOf('filter')>-1;}) : 'none');
-      var filterEl = document.getElementById('filter') || document.querySelector('.f8fl');
-      if (filterEl) {
-        var cs = window.getComputedStyle(filterEl);
-        console.log('[bm-debug] filter display:', cs.display, 'visibility:', cs.visibility, 'height:', cs.height, 'overflow:', cs.overflow);
-      }
-    }, 500);
   });
 })();
 </script>
