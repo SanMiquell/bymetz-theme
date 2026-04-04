@@ -1,11 +1,10 @@
 {%- comment -%}
-  Sticky mobile filter bar — fixed to bottom of viewport on mobile.
-  Opens the existing filter drawer by clicking the original theme trigger.
-  Scroll-to-top FAB floats above the bar.
+  Sticky mobile filter bar — clones the original filter trigger link
+  so the theme's panel system stays 100% intact. After AJAX filter
+  updates, re-hides the new original link and updates the clone's target.
 {%- endcomment -%}
 
 {%- assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl' | downcase | split: '-' | first -%}
-
 {%- case bm_lang -%}
   {%- when 'en' -%}
     {%- assign filter_label = 'Filter & Sort' -%}
@@ -27,19 +26,12 @@
     {%- assign scroll_top_label = 'Scroll naar boven' -%}
 {%- endcase -%}
 
-<!-- Sticky filter bar -->
 <div class="bm-sticky-filter" id="bm-sticky-filter">
-  <button type="button" class="bm-sticky-filter__btn" id="bm-filter-btn" aria-label="{{ filter_label }}">
-    <svg class="bm-sticky-filter__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 13.5" fill="currentColor" aria-hidden="true">
-      <path d="M5.25 0c-.7 0-1.13-.03-1.61.17A2.25 2.25 0 0 0 2.42 1.39c-.1.26-.08.58-.09.86H.75a.75.75 0 0 0 0 1.5h1.58c.02.28-.01.6.09.86a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.2-.48.17-.91.17-1.61s.03-1.13-.17-1.61A2.25 2.25 0 0 0 6.86.17C6.38-.03 5.95 0 5.25 0zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4C3.78 3.97 3.75 3.7 3.75 3s.03-.97.06-1.04a.75.75 0 0 1 .4-.4C4.28 1.53 4.55 1.5 5.25 1.5zm4.5.75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5zm0 5.25c-.7 0-1.13-.03-1.61.17a2.25 2.25 0 0 0-1.22 1.22c-.2.48-.17.91-.17 1.61s-.03 1.13.17 1.61a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.1-.26.08-.58.09-.86h1.58a.75.75 0 0 0 0-1.5h-1.58c-.02-.28.01-.6-.09-.86a2.25 2.25 0 0 0-1.22-1.22c-.48-.2-.91-.17-1.61-.17zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4c-.03-.07-.06-.34-.06-1.04s.03-.97.06-1.04a.75.75 0 0 1 .4-.4c.07-.03.34-.06 1.04-.06zm-9 .75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5z"/>
-    </svg>
-    <span class="bm-sticky-filter__label">{{ filter_label }}</span>
-  </button>
+  <div class="bm-sticky-filter__slot" id="bm-sticky-filter-slot"></div>
 </div>
 
-<!-- Scroll-to-top FAB -->
 <button type="button" class="bm-scroll-top" id="bm-scroll-top" aria-label="{{ scroll_top_label }}">
-  <span style="font-size:32px;color:#fff;line-height:1;display:block;">&#8593;</span>
+  <span style="font-size:28px;color:#fff;line-height:1;">&#8593;</span>
 </button>
 
 <style>
@@ -59,7 +51,6 @@
       box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
       z-index: 100;
     }
-
     .bm-sticky-filter__btn {
       display: flex;
       align-items: center;
@@ -75,6 +66,7 @@
       font-size: 14px;
       font-weight: 600;
       letter-spacing: 0.02em;
+      text-decoration: none;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       transition: background 0.15s ease;
@@ -82,18 +74,12 @@
     .bm-sticky-filter__btn:active {
       background: #333;
     }
-
     .bm-sticky-filter__icon {
       width: 16px;
       height: 16px;
       margin-right: 8px;
       flex-shrink: 0;
     }
-
-    .bm-sticky-filter__label {
-      line-height: 1;
-    }
-
     .bm-scroll-top {
       display: flex;
       align-items: center;
@@ -122,20 +108,6 @@
     .bm-scroll-top:active {
       background: #333;
     }
-
-    /* Visually hide original filter link — stays in DOM and clickable */
-    .f8sr .link-btn > a[data-panel="filters-aside"] {
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      padding: 0 !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      clip: rect(0,0,0,0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    }
-
     #root {
       padding-bottom: 58px !important;
     }
@@ -143,50 +115,92 @@
 </style>
 
 <script>
-  (function() {
-    var filterBtn = document.getElementById('bm-filter-btn');
-    if (filterBtn) {
-      filterBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('[bm-sticky-filter] click fired');
-        /* Create temp <a data-panel> inside #root and click it.
-         * Theme's handlePanelEvents is a document-level listener that
-         * catches clicks on a[data-panel] and calls openPanel().
-         * Placing inside #root ensures event delegation works.
-         * Fresh element each click avoids stale references after AJAX. */
-        var root = document.getElementById('root');
-        var tmp = document.createElement('a');
-        tmp.setAttribute('data-panel', 'filters-aside');
-        tmp.setAttribute('href', './');
-        tmp.style.display = 'none';
-        root.appendChild(tmp);
-        tmp.click();
-        setTimeout(function() { tmp.remove(); }, 100);
-      });
-    }
+(function() {
+  if (window.innerWidth > 749) return;
 
-    var scrollBtn = document.getElementById('bm-scroll-top');
-    if (scrollBtn) {
-      scrollBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+  var slot = document.getElementById('bm-sticky-filter-slot');
+  if (!slot) return;
 
-      var ticking = false;
-      window.addEventListener('scroll', function() {
-        if (!ticking) {
-          requestAnimationFrame(function() {
-            if (window.scrollY > 300) {
-              scrollBtn.classList.add('visible');
-            } else {
-              scrollBtn.classList.remove('visible');
-            }
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-    }
-  })();
+  var filterLabel = {{ filter_label | json }};
+  var svgIcon = '<svg class="bm-sticky-filter__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 13.5" fill="currentColor" aria-hidden="true"><path d="M5.25 0c-.7 0-1.13-.03-1.61.17A2.25 2.25 0 0 0 2.42 1.39c-.1.26-.08.58-.09.86H.75a.75.75 0 0 0 0 1.5h1.58c.02.28-.01.6.09.86a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.2-.48.17-.91.17-1.61s.03-1.13-.17-1.61A2.25 2.25 0 0 0 6.86.17C6.38-.03 5.95 0 5.25 0zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4C3.78 3.97 3.75 3.7 3.75 3s.03-.97.06-1.04a.75.75 0 0 1 .4-.4C4.28 1.53 4.55 1.5 5.25 1.5zm4.5.75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5zm0 5.25c-.7 0-1.13-.03-1.61.17a2.25 2.25 0 0 0-1.22 1.22c-.2.48-.17.91-.17 1.61s-.03 1.13.17 1.61a2.25 2.25 0 0 0 1.22 1.22c.48.2.91.17 1.61.17s1.13.03 1.61-.17a2.25 2.25 0 0 0 1.22-1.22c.1-.26.08-.58.09-.86h1.58a.75.75 0 0 0 0-1.5h-1.58c-.02-.28.01-.6-.09-.86a2.25 2.25 0 0 0-1.22-1.22c-.48-.2-.91-.17-1.61-.17zm0 1.5c.7 0 .97.03 1.04.06a.75.75 0 0 1 .4.4c.03.07.06.34.06 1.04s-.03.97-.06 1.04a.75.75 0 0 1-.4.4c-.07.03-.34.06-1.04.06s-.97-.03-1.04-.06a.75.75 0 0 1-.4-.4c-.03-.07-.06-.34-.06-1.04s.03-.97.06-1.04a.75.75 0 0 1 .4-.4c.07-.03.34-.06 1.04-.06zm-9 .75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5z"/></svg>';
+
+  /* Visually hide an element (sr-only) via inline styles */
+  function srHide(el) {
+    if (!el || el.getAttribute('data-bm-hidden') === '1') return;
+    el.style.position = 'absolute';
+    el.style.width = '1px';
+    el.style.height = '1px';
+    el.style.overflow = 'hidden';
+    el.style.clip = 'rect(0,0,0,0)';
+    el.setAttribute('data-bm-hidden', '1');
+  }
+
+  /* Current reference to the original link — updated after AJAX */
+  var currentOrigLink = null;
+
+  function setup() {
+    var origLink = document.querySelector('.f8sr .link-btn a[data-panel="filters-aside"]')
+                || document.querySelector('a[data-panel="filters-aside"]');
+    if (!origLink || origLink === currentOrigLink) return;
+    currentOrigLink = origLink;
+
+    /* Hide original */
+    srHide(origLink);
+
+    /* Build clone styled as our button */
+    slot.innerHTML = '';
+    var clone = document.createElement('a');
+    clone.className = 'bm-sticky-filter__btn';
+    clone.setAttribute('href', '#');
+    clone.setAttribute('aria-label', filterLabel);
+    clone.innerHTML = svgIcon + '<span>' + filterLabel + '</span>';
+    slot.appendChild(clone);
+
+    /* Clone click → trigger the real original link */
+    clone.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      /* Re-query in case AJAX replaced it */
+      var live = document.querySelector('.f8sr .link-btn a[data-panel="filters-aside"]')
+              || document.querySelector('a[data-panel="filters-aside"]');
+      if (live) live.click();
+    });
+  }
+
+  /* Initial setup */
+  setup();
+
+  /* After AJAX filter updates: re-hide new original, update clone target */
+  var debounce = null;
+  var obs = new MutationObserver(function() {
+    clearTimeout(debounce);
+    debounce = setTimeout(function() {
+      /* Hide any new/replaced original links */
+      document.querySelectorAll('.f8sr .link-btn a[data-panel="filters-aside"]').forEach(srHide);
+      /* Re-setup if link was replaced */
+      var fresh = document.querySelector('.f8sr .link-btn a[data-panel="filters-aside"]');
+      if (fresh && fresh !== currentOrigLink) setup();
+    }, 200);
+  });
+  var root = document.getElementById('root');
+  if (root) obs.observe(root, { childList: true, subtree: true });
+
+  /* Scroll to top */
+  var scrollBtn = document.getElementById('bm-scroll-top');
+  if (scrollBtn) {
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          scrollBtn.classList.toggle('visible', window.scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+    scrollBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
 </script>
