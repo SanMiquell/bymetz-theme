@@ -271,3 +271,10 @@
 .l4cl:not(.list) li.product-card > div:not(.static) > ul.check.color {
   margin-top: auto !important;
 }
+
+/* 11. Scroll-to-top: raise above sticky filter bar on mobile */
+@media screen and (max-width: 749px) {
+  #totop {
+    bottom: 70px !important;
+  }
+}
