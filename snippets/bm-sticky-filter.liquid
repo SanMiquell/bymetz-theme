@@ -13,7 +13,7 @@
   {%- else -%}{%- assign bm_filter_label = 'Filter & Sorteer' -%}
 {%- endcase -%}
 
-<div class="bm-sticky-filter" id="bm-sticky-filter"></div>
+<div class="bm-sticky-filter" id="bm-sticky-filter" style="position:fixed;bottom:0;left:0;width:100%;background:red;color:white;padding:20px;z-index:9999;font-size:16px;">DEBUG: bar rendered, wacht op link...</div>
 
 <style>
   .bm-sticky-filter { display: none; }
@@ -72,12 +72,15 @@
             || document.querySelector('.f8sr a[data-panel="filters-aside"]')
             || document.querySelector('a[data-panel="filters-aside"]');
     if (link) {
+      bar.innerHTML = 'LINK GEVONDEN: ' + link.tagName + ' class=' + link.className + ' text=' + link.textContent.substring(0,30);
       moveLink();
     } else {
-      /* Retry up to 3 seconds */
+      bar.innerHTML = 'Poging ' + tryMove.attempts + '/12 — nog niet gevonden. f8sr=' + !!document.querySelector('.f8sr') + ' link-btn=' + !!document.querySelector('.link-btn') + ' any-panel=' + !!document.querySelector('[data-panel]');
       if (tryMove.attempts < 12) {
         tryMove.attempts++;
         setTimeout(tryMove, 250);
+      } else {
+        bar.innerHTML = 'LINK NIET GEVONDEN na 12 pogingen. f8sr=' + !!document.querySelector('.f8sr') + ' allPanels=' + document.querySelectorAll('[data-panel]').length;
       }
     }
   }
