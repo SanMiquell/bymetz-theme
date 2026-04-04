@@ -80,7 +80,17 @@
         tryMove.attempts++;
         setTimeout(tryMove, 250);
       } else {
-        bar.innerHTML = 'LINK NIET GEVONDEN na 12 pogingen. f8sr=' + !!document.querySelector('.f8sr') + ' allPanels=' + document.querySelectorAll('[data-panel]').length;
+        var allPanels = document.querySelectorAll('[data-panel]');
+        var panelInfo = [];
+        allPanels.forEach(function(el) {
+          panelInfo.push(el.tagName + ' data-panel="' + el.getAttribute('data-panel') + '" text=' + el.textContent.substring(0,20));
+        });
+        var filterLinks = document.querySelectorAll('.f8sr a');
+        var linkInfo = [];
+        filterLinks.forEach(function(el) {
+          linkInfo.push('href=' + (el.getAttribute('href')||'') + ' class=' + el.className.substring(0,30) + ' panel=' + (el.getAttribute('data-panel')||'none') + ' text=' + el.textContent.substring(0,20));
+        });
+        bar.innerHTML = 'PANELS: ' + (panelInfo.join(' | ') || 'geen') + '<br>F8SR LINKS: ' + (linkInfo.join(' | ') || 'geen');
       }
     }
   }
