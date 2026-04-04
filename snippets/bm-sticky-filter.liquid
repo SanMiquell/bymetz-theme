@@ -87,12 +87,30 @@
   if (!btn) return;
   btn.addEventListener('click', function(e) {
     e.preventDefault();
-    /* Fresh query each click — AJAX may replace the original link */
-    var orig = document.querySelector('.f8sr a.f8fl-toggle')
-            || document.querySelector('.f8sr a[aria-controls="filter"]')
-            || document.querySelector('a[aria-controls="filter"]');
-    if (orig) {
-      orig.click();
+    var html = document.documentElement;
+
+    /* Load async filter CSS if not yet loaded */
+    if (window.filepaths && window.filepaths['async_filters_css']) {
+      if (!document.getElementById('css-filters')) {
+        var lnk = document.createElement('link');
+        lnk.id = 'css-filters';
+        lnk.rel = 'stylesheet';
+        lnk.href = window.filepaths['async_filters_css'];
+        document.head.appendChild(lnk);
+      }
+    }
+
+    /* Toggle filter — direct class manipulation, no dependency on theme handlers */
+    html.classList.add('has-filters');
+    if (html.classList.contains('f8fl-open')) {
+      html.classList.remove('f8fl-open');
+    } else {
+      /* Close other panels first */
+      html.classList.remove('m6pn-open', 'm6cp-open');
+      document.querySelectorAll('.m6pn.toggle').forEach(function(el) {
+        el.classList.remove('toggle');
+      });
+      html.classList.add('f8fl-open');
     }
   });
 })();
