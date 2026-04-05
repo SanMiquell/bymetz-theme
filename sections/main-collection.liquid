@@ -449,77 +449,26 @@
               continue
             endif
           -%}
-          {%- comment -%} Build vendor list sorted by product count (bestsellers first) {%- endcomment -%}
+          {%- comment -%} Build vendor list in collection product order (respects collection sort — set to "Best selling" in admin for bestseller ordering) {%- endcomment -%}
           {%- liquid
-            assign bm_vendor_list = ''
-            assign bm_vendor_counts = ''
+            assign bm_sorted_vendors = ''
             for product in collection.products limit: 250
               assign pv = product.vendor
-              if bm_vendor_list == ''
-                assign bm_vendor_list = pv
-                assign bm_vendor_counts = '1'
-              else
-                assign bm_vl_arr = bm_vendor_list | split: '|||'
-                assign bm_found = false
-                assign bm_found_idx = 0
-                for v in bm_vl_arr
-                  if v == pv
-                    assign bm_found = true
-                    assign bm_found_idx = forloop.index0
-                    break
-                  endif
-                endfor
-                if bm_found
-                  assign bm_vc_arr = bm_vendor_counts | split: '|||'
-                  assign bm_new_counts = ''
-                  for c in bm_vc_arr
-                    if forloop.index0 == bm_found_idx
-                      assign bm_c_int = c | plus: 1
-                    else
-                      assign bm_c_int = c | plus: 0
-                    endif
-                    if bm_new_counts == ''
-                      assign bm_new_counts = bm_c_int | append: ''
-                    else
-                      assign bm_new_counts = bm_new_counts | append: '|||' | append: bm_c_int
-                    endif
-                  endfor
-                  assign bm_vendor_counts = bm_new_counts
-                else
-                  assign bm_vendor_list = bm_vendor_list | append: '|||' | append: pv
-                  assign bm_vendor_counts = bm_vendor_counts | append: '|||1'
-                endif
-              endif
-            endfor
-
-            assign bm_vl_arr = bm_vendor_list | split: '|||'
-            assign bm_vc_arr = bm_vendor_counts | split: '|||'
-            assign bm_max_count = 0
-            for c in bm_vc_arr
-              assign bm_c_int = c | plus: 0
-              if bm_c_int > bm_max_count
-                assign bm_max_count = bm_c_int
-              endif
-            endfor
-
-            assign bm_sorted_vendors = ''
-            assign bm_threshold = bm_max_count
-            for i in (1..500)
-              if bm_threshold <= 0
-                break
-              endif
-              for c in bm_vc_arr
-                assign bm_c_int = c | plus: 0
-                if bm_c_int == bm_threshold
-                  assign bm_v = bm_vl_arr[forloop.index0]
-                  if bm_sorted_vendors == ''
-                    assign bm_sorted_vendors = bm_v
-                  else
-                    assign bm_sorted_vendors = bm_sorted_vendors | append: '|||' | append: bm_v
-                  endif
+              assign bm_vl_arr = bm_sorted_vendors | split: '|||'
+              assign bm_found = false
+              for v in bm_vl_arr
+                if v == pv
+                  assign bm_found = true
+                  break
                 endif
               endfor
-              assign bm_threshold = bm_threshold | minus: 1
+              unless bm_found
+                if bm_sorted_vendors == ''
+                  assign bm_sorted_vendors = pv
+                else
+                  assign bm_sorted_vendors = bm_sorted_vendors | append: '|||' | append: pv
+                endif
+              endunless
             endfor
             assign bm_sorted_arr = bm_sorted_vendors | split: '|||'
           -%}
