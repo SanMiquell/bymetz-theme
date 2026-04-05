@@ -298,6 +298,11 @@
   fetch(url)
     .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(data) {
+      /* DEBUG: show raw API response */
+      var debug = document.createElement('pre');
+      debug.style.cssText = 'font-size:10px;background:#f0f0f0;padding:8px;margin:8px 0;max-height:200px;overflow:auto;border:1px solid #ccc;';
+      debug.textContent = JSON.stringify(data, null, 2);
+      document.querySelector('[data-bm-hours]').appendChild(debug);
       /* Prefer currentOpeningHours (includes special/holiday hours) */
       var hours = (data && data.currentOpeningHours) || (data && data.regularOpeningHours);
       if (!hours || !hours.periods) return;
