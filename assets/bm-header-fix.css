@@ -316,25 +316,24 @@
   text-align: center;
 }
 
-/* 14. Header button: subtle opening hours style */
+/* 14. Header button: subtle opening hours style, matches search bar height */
 #header-inner #nav-bar > ul > li.link-btn a,
 #header-inner #nav > ul > li.link-btn a {
-  padding: 6px 14px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  border-radius: 4px !important;
+  height: 35px !important;
   min-height: 0 !important;
-  line-height: 1.3 !important;
+  padding: 0 14px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 35px !important;
+  border-radius: 4px !important;
+  color: #E65324 !important;
+  white-space: nowrap !important;
 }
 #header-inner #nav-bar > ul > li.link-btn a:before,
 #header-inner #nav > ul > li.link-btn a:before {
   background: #FFF0EB !important;
-  border: 1px solid rgba(230, 83, 36, 0.3) !important;
+  border: 1px solid rgba(231, 90, 45, 0.3) !important;
   border-radius: 4px !important;
-}
-#header-inner #nav-bar > ul > li.link-btn a,
-#header-inner #nav > ul > li.link-btn a {
-  color: #C4512B !important;
 }
 
 /* 15. Language selector fixes */

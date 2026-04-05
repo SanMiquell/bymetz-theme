@@ -119,7 +119,7 @@
         "extra_image_link": "",
         "enable_button": true,
         "button_text": "Openingstijden",
-        "button_url": "/#bymetz-hours-anchor",
+        "button_url": "/#bm-hours-anchor",
         "button_style": "primary plain",
         "header_icon_width": 10,
         "disable_online_store": false,
