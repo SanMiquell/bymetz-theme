@@ -195,5 +195,6 @@
 		<script defer src="{{ 'custom.js' | asset_url }}"></script>
 		{%- if request.design_mode -%}<script defer src="{{ 'backend-listeners.js' | asset_url }}"></script>{%- endif -%}
 		{{ settings.custom_script_for_body }}
+		{% if template contains 'collection' %}{% render 'bm-sticky-filter' %}{% endif %}
 	</body>
 </html>
