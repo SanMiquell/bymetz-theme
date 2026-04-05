@@ -302,7 +302,21 @@
   }
 }
 
-/* 13. Language selector fixes */
+/* 13. USP icons: fixed width for text alignment */
+.l4us li .cols {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+}
+.l4us li .cols svg,
+.l4us li .cols .icon {
+  width: 18px !important;
+  min-width: 18px !important;
+  flex: 0 0 18px !important;
+  text-align: center;
+}
+
+/* 14. Language selector fixes */
 /* Header dropdown: show all languages without scrolling */
 #nav-user > ul > li.lang > .localization-form,
 #nav-user > ul > li.lang > .localization-form ul {
