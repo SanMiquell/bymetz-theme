@@ -316,7 +316,10 @@
   text-align: center;
 }
 
-/* 14. Custom opening hours button (inline styles, no overrides needed) */
+/* 14. Align search bar vertically with header icons and opening hours button */
+#header-inner #search {
+  align-self: center !important;
+}
 
 /* 15. Language selector fixes */
 /* Header dropdown: show all languages without scrolling */
