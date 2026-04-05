@@ -1033,7 +1033,12 @@
       {%- endif -%}
     {%- endif -%}
     {%- if color_picker and static_color_picker -%}
-      {{ color_picker }}
+      {{ color_picker | replace: 'class-x', 'mobile-hide' }}
+      {%- if colors_size <= 4 -%}
+        {{ color_picker | replace: 'class-x', 'mobile-only' }}
+      {%- else -%}
+        {{ color_picker | replace: 'class-x', 'mobile-only' | replace: 'data-limit="6"', 'data-limit="3"' }}
+      {%- endif -%}
     {%- elsif color_picker and static_color_picker == false and settings.layout_productcard == 'standard' and layout != 'list-compact' and layout != 'hotspot' -%}
       {%- if colors_size <= 4 -%}
         {{ color_picker | replace: 'class-x', 'mobile-only' }}
