@@ -252,9 +252,10 @@
     return dayName + ' ' + dateNum + ' ' + monthName;
   }
 
-  function renderTable(schedule) {
+  function renderTable(schedule, closedDays) {
     var tbody = document.querySelector('[data-bm-hours-body]');
     if (!tbody) return;
+    closedDays = closedDays || {};
     var html = '';
     for (var i = 0; i < 7; i++) {
       var date = weekDates[i];
@@ -265,7 +266,9 @@
       var holidayName = holiday ? (holiday[LANG] || holiday.nl) : '';
 
       var hours;
-      if (schedule) {
+      if (closedDays[key]) {
+        hours = closed;
+      } else if (schedule) {
         var gDay = date.getDay(); /* Google day index: 0=Sun */
         hours = schedule[gDay] && schedule[gDay].length ? schedule[gDay].join(', ') : closed;
       } else {
@@ -289,17 +292,31 @@
   if (!API_KEY || API_KEY.indexOf('JOUW_') === 0 || !PLACE_ID || PLACE_ID.indexOf('JOUW_') === 0) return;
 
   var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID +
-            '?fields=regularOpeningHours&languageCode=' + LANG +
+            '?fields=regularOpeningHours,currentOpeningHours&languageCode=' + LANG +
             '&key=' + API_KEY;
 
   fetch(url)
     .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(data) {
-      var hours = data && data.regularOpeningHours;
+      /* Prefer currentOpeningHours (includes special/holiday hours) */
+      var hours = (data && data.currentOpeningHours) || (data && data.regularOpeningHours);
       if (!hours || !hours.periods) return;
 
       var schedule = {};
       for (var j = 0; j < 7; j++) schedule[j] = [];
+
+      /* Check for special days marked as closed */
+      var closedDays = {};
+      if (hours.specialDays) {
+        hours.specialDays.forEach(function(sd) {
+          if (sd.date) {
+            var k = sd.date.year + '-' + pad(sd.date.month) + '-' + pad(sd.date.day);
+            if (sd.exceptionalHours === false || (sd.hours && sd.hours.length === 0)) {
+              closedDays[k] = true;
+            }
+          }
+        });
+      }
 
       hours.periods.forEach(function(p) {
         var dIdx = p.open.day;
@@ -308,7 +325,7 @@
         schedule[dIdx].push(open + (close ? ' \u2013 ' + close : '+'));
       });
 
-      renderTable(schedule);
+      renderTable(schedule, closedDays);
     })
     .catch(function(err) {
       console.warn('ByMetz opening hours: using fallback \u2013', err);
