@@ -82,7 +82,7 @@
       assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl'
       assign bm_lang = bm_lang | downcase | split: '-' | first
       if bm_lang == 'en'
-        assign bm_stock_label = 'In stock in the webshop & store'
+        assign bm_stock_label = 'In stock'
         assign bm_nostock_label = 'Out of stock'
       elsif bm_lang == 'de'
         assign bm_stock_label = 'Auf Lager'
@@ -97,7 +97,7 @@
         assign bm_stock_label = 'Disponibile'
         assign bm_nostock_label = 'Non disponibile'
       else
-        assign bm_stock_label = 'Beschikbaar in webshop & winkel'
+        assign bm_stock_label = 'Op voorraad'
         assign bm_nostock_label = 'Niet op voorraad'
       endif
     -%}
