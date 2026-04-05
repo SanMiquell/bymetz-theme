@@ -504,8 +504,20 @@
       </div>
       <style>
         .bm-brands {
+          position: relative;
           margin: 0 0 8px;
           overflow: hidden;
+        }
+        .bm-brands::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 40px;
+          background: linear-gradient(to right, transparent, #fff);
+          pointer-events: none;
+          z-index: 1;
         }
         .bm-brands__track {
           display: flex;
@@ -526,16 +538,10 @@
           height: 32px;
           padding: 4px 8px;
           text-decoration: none;
-          opacity: 0.7;
-          transition: opacity 0.2s;
-        }
-        .bm-brands__item:hover {
-          opacity: 1;
         }
         .bm-brands__item img {
           max-height: 24px;
           width: auto;
-          max-width: 80px;
           object-fit: contain;
         }
         .bm-brands__name {
@@ -550,9 +556,11 @@
             overflow-x: visible;
             gap: 16px;
           }
+          .bm-brands::after {
+            display: none;
+          }
           .bm-brands__item img {
             max-height: 28px;
-            max-width: 100px;
           }
         }
       </style>
