@@ -46,7 +46,6 @@
     <p class="link-btn"><a href="{{ routes.collections_url }}" class="w300">{{ 'cart.continue_shopping' | t }}</a></p>
   </article>
 {%- endif -%}
-{% render 'bm-reviewbar' %}
 <{{ section.settings.title_size }} style="margin-top: 0;">{{ 'cart.title' | t }}</{{ section.settings.title_size }}>
 <article class="form-cart" data-totalqty={{ cart.item_count }} {% render 'price', origin: 'cartsubtotal', source: 'attributes' %} data-total="{{ cart.total_price | money }}">
   <fieldset>
@@ -565,9 +564,7 @@
           </p>
         {%- endif -%}
 
-        {%- if settings.show_trustbadge -%}
-          {%- render 'trustbadge' -%}
-        {%- endif -%}
+        {% render 'bm-reviewbar' %}
 
         {% if settings.show_payment_methods %}
           {%- render 'payment-methods', classes: 'text-center base-font' %}
