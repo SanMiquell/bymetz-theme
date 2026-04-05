@@ -298,17 +298,4 @@
   overflow-y: visible !important;
 }
 
-/* Footer: fix language selector on mobile */
-@media screen and (max-width: 749px) {
-  /* Hide broken mobile link that opens empty nav panel */
-  .l4dr > li.lang > a.mobile-only[aria-controls="nav"] {
-    display: none !important;
-  }
-  /* Show the desktop toggle (with dropdown) on mobile too */
-  /* Theme hides .mobile-hide via position:absolute;left:-3000em (screen.css:4232) */
-  .l4dr > li.lang > a.toggle.mobile-hide {
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-  }
-}
+/* Footer: language selector — restore original behavior on mobile */
