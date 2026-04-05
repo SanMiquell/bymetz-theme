@@ -337,26 +337,7 @@
     </figure>
   {%- endif -%}
   <p>&copy; <span class="date">{{ 'now' | date: "%Y" }}</span> {{ shop.name }}, {{ powered_by_link }}</a></p>
-  {%- liquid
-    assign show_selectors = false
-    if section.settings.enable_country_selector and localization.available_countries.size > 1
-      assign show_selectors = true
-    elsif section.settings.enable_language_selector and localization.available_languages.size > 1
-      assign show_selectors = true
-    endif
-  -%}
-  {% if show_selectors %}
-  <ul class="l4dr">
-    {%- liquid
-      if section.settings.enable_country_selector and localization.available_countries.size > 1
-        render 'language-country-selector', display: 'country', origin: 'footer'
-      endif
-      if section.settings.enable_language_selector and localization.available_languages.size > 1
-        render 'language-country-selector', display: 'language', origin: 'footer'
-      endif
-    -%}
-  </ul>
-  {% endif %}
+  {%- comment -%} Footer language/country selector removed — header selector is sufficient {%- endcomment -%}
   {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
     <p class="follow-on-shop">
       {% comment %} TODO: enable theme-check once `login_button` is accepted as valid filter {% endcomment %}
