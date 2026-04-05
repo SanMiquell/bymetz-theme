@@ -151,7 +151,7 @@
           "type": "usp",
           "settings": {
             "usp": "<p>Gratis <strong>PostNL/DHL</strong> Verzending vanaf €29,-</p>",
-            "usp_item_icon": "default",
+            "usp_item_icon": "truck",
             "image_width": 55
           }
         },
@@ -159,7 +159,7 @@
           "type": "usp",
           "settings": {
             "usp": "<p>Écht Familiebedrijf sinds <strong>1974</strong></p>",
-            "usp_item_icon": "default",
+            "usp_item_icon": "heart",
             "image_width": 55
           }
         },
@@ -167,7 +167,7 @@
           "type": "usp",
           "settings": {
             "usp": "<p>Gratis Achteraf Betalen met <strong>Klarna</strong></p>",
-            "usp_item_icon": "default",
+            "usp_item_icon": "payment",
             "image_width": 55
           }
         },
