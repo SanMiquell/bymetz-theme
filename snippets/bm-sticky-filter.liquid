@@ -41,6 +41,11 @@
     .bm-sticky-filter * {
       pointer-events: auto !important;
     }
+    /* Hide when hamburger menu or filter panel is open */
+    html.m2a .bm-sticky-filter,
+    html.f8fl-open .bm-sticky-filter {
+      display: none !important;
+    }
     .bm-sticky-filter__btn {
       display: flex;
       align-items: center;
