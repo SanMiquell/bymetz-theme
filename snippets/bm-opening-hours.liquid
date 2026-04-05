@@ -302,7 +302,7 @@
   if (!API_KEY || API_KEY.indexOf('JOUW_') === 0 || !PLACE_ID || PLACE_ID.indexOf('JOUW_') === 0) return;
 
   var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID +
-            '?fields=regularOpeningHours,currentOpeningHours&languageCode=' + LANG +
+            '?fields=regularOpeningHours&languageCode=' + LANG +
             '&key=' + API_KEY;
 
   fetch(url)
@@ -345,7 +345,7 @@
     .catch(function(err) {
       var errEl = document.createElement('div');
       errEl.style.cssText = 'background:red;color:white;padding:10px;margin:10px 0;font-size:12px;';
-      errEl.textContent = 'API ERROR: ' + err.message + ' | URL: ' + url.substring(0, 80);
+      errEl.textContent = 'API ERROR: ' + err.message + ' | FULL URL: ' + url;
       var c = document.querySelector('[data-bm-hours]');
       if (c) c.appendChild(errEl);
     });
