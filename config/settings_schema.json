@@ -3301,5 +3301,22 @@
         "label": "t:settings_schema.rich_snippets.settings.review.review_snippet_platform_url.label"
       }
     ]
+  },
+  {
+    "name": "ByMetz Google Places",
+    "settings": [
+      {
+        "type": "text",
+        "id": "bm_google_places_api_key",
+        "label": "Google Places API Key",
+        "info": "API key for opening hours (restricted to bymetz.nl)"
+      },
+      {
+        "type": "text",
+        "id": "bm_google_place_id",
+        "label": "Google Place ID",
+        "info": "Place ID of the store"
+      }
+    ]
   }
 ]

@@ -4,8 +4,8 @@
 {%- endcomment -%}
 
 {%- liquid
-  assign bm_places_api_key = 'AIzaSyCqs1RoaaPDvVnTQKfGFJAu1gIfXsrqJgQ'
-  assign bm_place_id       = 'ChIJ59mDpzLZxkcRz7cMXXlEXnQ'
+  assign bm_places_api_key = settings.bm_google_places_api_key
+  assign bm_place_id       = settings.bm_google_place_id
 
   assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl' | downcase | split: '-' | first
 -%}
