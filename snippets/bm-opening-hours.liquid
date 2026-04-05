@@ -1,0 +1,240 @@
+{%- comment -%}
+  ByMetz Opening Hours — fetches live data from Google Places API.
+  Falls back to hardcoded times if API key is missing or call fails.
+{%- endcomment -%}
+
+{%- liquid
+  assign bm_places_api_key = 'AIzaSyCqs1RoaaPDvVnTQKfGFJAu1gIfXsrqJgQ'
+  assign bm_place_id       = 'ChIJ59mDpzLZxkcRz7cMXXlEXnQ'
+
+  assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl' | downcase | split: '-' | first
+-%}
+
+<div class="bymetz-hours" data-bm-hours>
+  {%- case bm_lang -%}
+    {%- when 'en' -%}<h3 class="bymetz-hours__title">Opening hours ByMetz Eindhoven</h3>
+    {%- when 'de' -%}<h3 class="bymetz-hours__title">&Ouml;ffnungszeiten ByMetz Eindhoven</h3>
+    {%- when 'fr' -%}<h3 class="bymetz-hours__title">Horaires d'ouverture ByMetz Eindhoven</h3>
+    {%- when 'es' -%}<h3 class="bymetz-hours__title">Horario de apertura ByMetz Eindhoven</h3>
+    {%- when 'it' -%}<h3 class="bymetz-hours__title">Orari di apertura ByMetz Eindhoven</h3>
+    {%- else -%}<h3 class="bymetz-hours__title">Openingstijden winkel ByMetz Eindhoven</h3>
+  {%- endcase -%}
+
+  <div class="bymetz-hours__center">
+    <table class="bymetz-hours__table" aria-label="Opening hours" data-bm-hours-table>
+      <thead>
+        <tr>
+          {%- case bm_lang -%}
+            {%- when 'en' -%}<th scope="col">Day</th><th scope="col">Hours</th>
+            {%- when 'de' -%}<th scope="col">Tag</th><th scope="col">&Ouml;ffnungszeiten</th>
+            {%- when 'fr' -%}<th scope="col">Jour</th><th scope="col">Horaires</th>
+            {%- when 'es' -%}<th scope="col">D&iacute;a</th><th scope="col">Horario</th>
+            {%- when 'it' -%}<th scope="col">Giorno</th><th scope="col">Orario</th>
+            {%- else -%}<th scope="col">Dag</th><th scope="col">Openingstijden</th>
+          {%- endcase -%}
+        </tr>
+      </thead>
+      <tbody data-bm-hours-body>
+        {%- comment -%} Fallback: hardcoded hours shown until JS replaces them {%- endcomment -%}
+        {%- case bm_lang -%}
+          {%- when 'en' -%}
+            <tr><td>Monday</td><td>12:00 – 17:30</td></tr>
+            <tr><td>Tuesday</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Wednesday</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Thursday</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Friday</td><td>10:00 – 20:00</td></tr>
+            <tr><td>Saturday</td><td>10:00 – 17:00</td></tr>
+            <tr><td>Sunday</td><td>12:00 – 17:00<div class="bymetz-hours__note">Note: first and last Sunday of the month.</div></td></tr>
+          {%- when 'de' -%}
+            <tr><td>Montag</td><td>12:00 – 17:30</td></tr>
+            <tr><td>Dienstag</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Mittwoch</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Donnerstag</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Freitag</td><td>10:00 – 20:00</td></tr>
+            <tr><td>Samstag</td><td>10:00 – 17:00</td></tr>
+            <tr><td>Sonntag</td><td>12:00 – 17:00<div class="bymetz-hours__note">Hinweis: erster und letzter Sonntag im Monat.</div></td></tr>
+          {%- when 'fr' -%}
+            <tr><td>Lundi</td><td>12:00 – 17:30</td></tr>
+            <tr><td>Mardi</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Mercredi</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Jeudi</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Vendredi</td><td>10:00 – 20:00</td></tr>
+            <tr><td>Samedi</td><td>10:00 – 17:00</td></tr>
+            <tr><td>Dimanche</td><td>12:00 – 17:00<div class="bymetz-hours__note">Remarque : premier et dernier dimanche du mois.</div></td></tr>
+          {%- when 'es' -%}
+            <tr><td>Lunes</td><td>12:00 – 17:30</td></tr>
+            <tr><td>Martes</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Mi&eacute;rcoles</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Jueves</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Viernes</td><td>10:00 – 20:00</td></tr>
+            <tr><td>S&aacute;bado</td><td>10:00 – 17:00</td></tr>
+            <tr><td>Domingo</td><td>12:00 – 17:00<div class="bymetz-hours__note">Nota: primer y &uacute;ltimo domingo del mes.</div></td></tr>
+          {%- when 'it' -%}
+            <tr><td>Luned&igrave;</td><td>12:00 – 17:30</td></tr>
+            <tr><td>Marted&igrave;</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Mercoled&igrave;</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Gioved&igrave;</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Venerd&igrave;</td><td>10:00 – 20:00</td></tr>
+            <tr><td>Sabato</td><td>10:00 – 17:00</td></tr>
+            <tr><td>Domenica</td><td>12:00 – 17:00<div class="bymetz-hours__note">Nota: prima e ultima domenica del mese.</div></td></tr>
+          {%- else -%}
+            <tr><td>Maandag</td><td>12:00 – 17:30</td></tr>
+            <tr><td>Dinsdag</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Woensdag</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Donderdag</td><td>10:00 – 17:30</td></tr>
+            <tr><td>Vrijdag</td><td>10:00 – 20:00</td></tr>
+            <tr><td>Zaterdag</td><td>10:00 – 17:00</td></tr>
+            <tr><td>Zondag</td><td>12:00 – 17:00<div class="bymetz-hours__note">Let op: eerste en laatste zondag van de maand.</div></td></tr>
+        {%- endcase -%}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .bymetz-hours {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+  .bymetz-hours__title {
+    margin: 0 0 12px 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .bymetz-hours__center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .bymetz-hours__table {
+    display: table !important;
+    overflow: visible !important;
+    width: fit-content;
+    max-width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.18);
+    box-sizing: border-box;
+  }
+  .bymetz-hours__table thead th {
+    text-align: left;
+    font-weight: 700;
+    padding: 12px 16px;
+    background: #f4f4f4;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+  }
+  .bymetz-hours__table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    vertical-align: top;
+  }
+  .bymetz-hours__table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .bymetz-hours__table td:nth-child(2) {
+    white-space: nowrap;
+  }
+  .bymetz-hours__today td {
+    font-weight: 700;
+    background: rgba(0,128,0,.06);
+  }
+  .bymetz-hours__note {
+    margin-top: 6px;
+    font-weight: 700;
+    font-size: 0.95em;
+    white-space: normal;
+  }
+  @media (max-width: 600px) {
+    .bymetz-hours { padding: 0 14px; }
+    .bymetz-hours__title { font-size: 20px; }
+    .bymetz-hours__table thead th,
+    .bymetz-hours__table tbody td {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  var API_KEY  = {{ bm_places_api_key | json }};
+  var PLACE_ID = {{ bm_place_id | json }};
+  var LANG     = {{ bm_lang | json }};
+
+  /* Skip if placeholders haven't been replaced */
+  if (!API_KEY || API_KEY.indexOf('JOUW_') === 0 || !PLACE_ID || PLACE_ID.indexOf('JOUW_') === 0) return;
+
+  var dayNames = {
+    nl: ['Zondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag'],
+    en: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+    de: ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],
+    fr: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+    es: ['Domingo','Lunes','Martes','Mi\u00e9rcoles','Jueves','Viernes','S\u00e1bado'],
+    it: ['Domenica','Luned\u00ec','Marted\u00ec','Mercoled\u00ec','Gioved\u00ec','Venerd\u00ec','Sabato']
+  };
+
+  /* Google Places API (New) day order: SUNDAY=0 … SATURDAY=6
+     We display Monday–Sunday, so reorder: [1,2,3,4,5,6,0] */
+  var displayOrder = [1,2,3,4,5,6,0];
+  var names = dayNames[LANG] || dayNames.nl;
+  var todayIdx = new Date().getDay(); /* 0=Sun */
+
+  var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID +
+            '?fields=regularOpeningHours&languageCode=' + LANG +
+            '&key=' + API_KEY;
+
+  fetch(url)
+    .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(data) {
+      var hours = data && data.regularOpeningHours;
+      if (!hours || !hours.periods) return;
+
+      /* Build a map: dayIndex → [{open, close}] */
+      var schedule = {};
+      for (var i = 0; i < 7; i++) schedule[i] = [];
+
+      hours.periods.forEach(function(p) {
+        var day = p.open.day;
+        var open  = pad(p.open.hour)  + ':' + pad(p.open.minute);
+        var close = p.close ? pad(p.close.hour) + ':' + pad(p.close.minute) : '';
+        schedule[day].push(open + (close ? ' \u2013 ' + close : '+'));
+      });
+
+      /* Render rows in display order */
+      var tbody = document.querySelector('[data-bm-hours-body]');
+      if (!tbody) return;
+      var html = '';
+      displayOrder.forEach(function(dayIdx) {
+        var isToday = dayIdx === todayIdx;
+        var timeStr = schedule[dayIdx].length ? schedule[dayIdx].join(', ') : (LANG === 'nl' ? 'Gesloten' : LANG === 'de' ? 'Geschlossen' : LANG === 'fr' ? 'Ferm\u00e9' : 'Closed');
+        html += '<tr' + (isToday ? ' class="bymetz-hours__today"' : '') + '>';
+        html += '<td>' + names[dayIdx] + '</td>';
+        html += '<td>' + timeStr + '</td>';
+        html += '</tr>';
+      });
+      tbody.innerHTML = html;
+    })
+    .catch(function(err) {
+      console.warn('ByMetz opening hours: using fallback –', err);
+      /* Highlight today in fallback table */
+      highlightToday();
+    });
+
+  /* Also highlight today in fallback (before API resolves) */
+  highlightToday();
+
+  function highlightToday() {
+    var tbody = document.querySelector('[data-bm-hours-body]');
+    if (!tbody) return;
+    /* Fallback rows are Mon–Sun = indices 0–6, map todayIdx (0=Sun) */
+    var rowMap = {1:0, 2:1, 3:2, 4:3, 5:4, 6:5, 0:6};
+    var row = tbody.rows[rowMap[todayIdx]];
+    if (row) row.classList.add('bymetz-hours__today');
+  }
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+})();
+</script>
