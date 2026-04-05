@@ -501,25 +501,17 @@
             </a>
           {%- endfor -%}
         </div>
-        <button type="button" class="bm-brands__arrow" aria-label="Scroll merken">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <button type="button" class="bm-brands__arrow bm-brands__arrow--left" aria-label="Scroll merken terug" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="bm-brands__arrow bm-brands__arrow--right" aria-label="Scroll merken">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
       <style>
         .bm-brands {
           position: relative;
           margin: 0 0 8px;
-        }
-        .bm-brands::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          width: 40px;
-          background: linear-gradient(to right, transparent, #fff);
-          pointer-events: none;
-          z-index: 1;
         }
         .bm-brands__track {
           display: flex;
@@ -528,7 +520,7 @@
           scroll-behavior: smooth;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
-          padding: 8px 40px 8px 0;
+          padding: 8px 50px 8px 0;
           align-items: center;
         }
         .bm-brands__track::-webkit-scrollbar { display: none; }
@@ -554,25 +546,26 @@
         }
         .bm-brands__arrow {
           position: absolute;
-          right: 0;
           top: 50%;
           transform: translateY(-50%);
-          width: 28px;
-          height: 28px;
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
-          background: #fff;
-          border: 1px solid #e0e0e0;
-          box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+          background: transparent;
+          border: none;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           z-index: 2;
           padding: 0;
+          color: #1a1a1a;
         }
+        .bm-brands__arrow--left { left: 0; }
+        .bm-brands__arrow--right { right: 0; }
         .bm-brands__arrow svg {
-          width: 14px;
-          height: 14px;
+          width: 18px;
+          height: 18px;
         }
         @media screen and (min-width: 750px) {
           .bm-brands__track {
@@ -581,11 +574,8 @@
             gap: 16px;
             padding-right: 0;
           }
-          .bm-brands::after {
-            display: none;
-          }
           .bm-brands__arrow {
-            display: none;
+            display: none !important;
           }
           .bm-brands__item img {
             max-height: 28px;
@@ -594,21 +584,23 @@
       </style>
       <script>
       (function(){
-        var arrow = document.querySelector('.bm-brands__arrow');
         var track = document.querySelector('.bm-brands__track');
-        if (!arrow || !track) return;
-        arrow.addEventListener('click', function() {
-          track.scrollBy({ left: 200, behavior: 'smooth' });
-        });
-        function checkArrow() {
-          if (track.scrollWidth <= track.clientWidth) {
-            arrow.style.display = 'none';
-          } else {
-            arrow.style.display = 'flex';
-          }
+        if (!track) return;
+        var arrowL = document.querySelector('.bm-brands__arrow--left');
+        var arrowR = document.querySelector('.bm-brands__arrow--right');
+        function updateArrows() {
+          if (!arrowL || !arrowR) return;
+          var sl = track.scrollLeft;
+          var max = track.scrollWidth - track.clientWidth;
+          arrowL.style.display = sl > 10 ? 'flex' : 'none';
+          if (max <= 0) { arrowR.style.display = 'none'; }
+          else { arrowR.style.display = sl < max - 10 ? 'flex' : 'none'; }
         }
-        checkArrow();
-        window.addEventListener('resize', checkArrow);
+        if (arrowR) arrowR.addEventListener('click', function(){ track.scrollBy({left:200,behavior:'smooth'}); });
+        if (arrowL) arrowL.addEventListener('click', function(){ track.scrollBy({left:-200,behavior:'smooth'}); });
+        track.addEventListener('scroll', updateArrows, {passive:true});
+        window.addEventListener('resize', updateArrows);
+        updateArrows();
       })();
       </script>
         {%- when 'collection_navigation'-%}
