@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 /* ByMetz header fix — mobile top-bar spacing + cart icon overflow */
 
 /* 1. Mobile: shrink #nav-top (top-bar) which is mostly empty on mobile
@@ -201,6 +202,7 @@
 @media screen and (max-width: 749px) {
   .l4cl:not(.list) li.product-card > section > h3 > a.fz-heading-productcard,
   .l4cl:not(.list) li.product-card > div:not(.static) > h3 > a.fz-heading-productcard {
+    font-family: 'Open Sans', system-ui, -apple-system, sans-serif !important;
     font-size: 12px !important;
     font-weight: 600 !important;
     line-height: 1.6 !important;
