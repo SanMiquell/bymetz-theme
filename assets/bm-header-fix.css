@@ -298,9 +298,14 @@
   overflow-y: visible !important;
 }
 
-/* Footer: hide mobile language link that opens empty nav panel */
+/* Footer: fix language selector on mobile */
 @media screen and (max-width: 749px) {
+  /* Hide broken mobile link that opens empty nav panel */
   .l4dr > li.lang > a.mobile-only[aria-controls="nav"] {
     display: none !important;
+  }
+  /* Show the desktop toggle (with dropdown) on mobile too */
+  .l4dr > li.lang > a.toggle.mobile-hide {
+    display: inline-flex !important;
   }
 }
