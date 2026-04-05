@@ -504,18 +504,17 @@
       </div>
       <style>
         .bm-brands {
-          position: relative;
           margin: 0 0 12px;
-          overflow: hidden;
         }
         .bm-brands__track {
           display: flex;
-          gap: 8px;
+          align-items: center;
+          gap: 16px;
           overflow-x: auto;
           scroll-behavior: smooth;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
-          padding: 4px 0;
+          padding: 8px 0;
         }
         .bm-brands__track::-webkit-scrollbar { display: none; }
         .bm-brands__item {
@@ -523,46 +522,38 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 140px;
-          height: 64px;
-          padding: 10px 16px;
-          background: #fff;
-          border: 1px solid #e8e8e8;
-          border-radius: 6px;
           text-decoration: none;
-          transition: border-color 0.2s, box-shadow 0.2s;
+          padding: 4px;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+          opacity: 0.75;
         }
         .bm-brands__item:hover {
-          border-color: #ccc;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+          transform: scale(1.08);
+          opacity: 1;
         }
         .bm-brands__item img {
+          display: block;
           width: auto;
-          height: auto;
-          max-width: 90%;
-          max-height: 80%;
+          height: 40px;
+          max-width: 120px;
           object-fit: contain;
         }
         .bm-brands__name {
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 600;
-          color: #333;
-          text-align: center;
-          line-height: 1.2;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          color: #555;
           white-space: nowrap;
-          max-width: 100%;
+          text-decoration: none;
         }
         @media screen and (min-width: 750px) {
           .bm-brands__track {
             flex-wrap: wrap;
             overflow-x: visible;
-            justify-content: flex-start;
+            gap: 24px;
           }
-          .bm-brands__item {
-            width: 150px;
-            height: 68px;
+          .bm-brands__item img {
+            height: 48px;
+            max-width: 150px;
           }
         }
       </style>
