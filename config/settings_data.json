@@ -198,6 +198,8 @@
     "review_snippet_maximum_rating": "10",
     "review_snippet_amount_of_reviews": "1724",
     "review_snippet_platform_url": "https://www.webwinkelkeur.nl/webshop/ByMetz-nl-Tassen-Koffers_1205113",
+    "bm_google_places_api_key": "AIzaSyCqs1RoaaPDvVnTQKfGFJAu1gIfXsrqJgQ",
+    "bm_google_place_id": "hIJ59mDpzLZxkcRz7cMXXlEXnQ",
     "cart_drawer_checkout_button": true,
     "checkout_accent_color": "#f1bc49",
     "checkout_body_background_color": "#FFFFFF",
