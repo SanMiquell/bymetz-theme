@@ -159,6 +159,11 @@
   }
 </style>
 
+<div style="background:red;color:white;padding:5px;font-size:10px;">
+  KEY: {{ settings.bm_google_places_api_key | default: 'NIET INGESTELD' }} |
+  PLACE: {{ settings.bm_google_place_id | default: 'NIET INGESTELD' }}
+</div>
+
 <script>
 (function() {
   var API_KEY  = {{ bm_places_api_key | json }};
@@ -289,6 +294,11 @@
   renderTable(null);
 
   /* Fetch live hours from Google Places API */
+  var debugEl = document.createElement('div');
+  debugEl.style.cssText = 'background:yellow;padding:10px;margin:10px 0;font-size:12px;';
+  debugEl.textContent = 'API_KEY: ' + (API_KEY ? API_KEY.substring(0,10) + '...' : 'LEEG') + ' | PLACE_ID: ' + (PLACE_ID || 'LEEG') + ' | Skipped: ' + (!API_KEY || API_KEY.indexOf('JOUW_') === 0 || !PLACE_ID || PLACE_ID.indexOf('JOUW_') === 0);
+  var container = document.querySelector('[data-bm-hours]');
+  if (container) container.appendChild(debugEl);
   if (!API_KEY || API_KEY.indexOf('JOUW_') === 0 || !PLACE_ID || PLACE_ID.indexOf('JOUW_') === 0) return;
 
   var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID +
