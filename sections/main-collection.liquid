@@ -504,17 +504,18 @@
       </div>
       <style>
         .bm-brands {
-          margin: 0 0 12px;
+          margin: 0 0 8px;
+          overflow: hidden;
         }
         .bm-brands__track {
           display: flex;
-          align-items: center;
-          gap: 16px;
+          gap: 12px;
           overflow-x: auto;
           scroll-behavior: smooth;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
           padding: 8px 0;
+          align-items: center;
         }
         .bm-brands__track::-webkit-scrollbar { display: none; }
         .bm-brands__item {
@@ -522,38 +523,36 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          height: 32px;
+          padding: 4px 8px;
           text-decoration: none;
-          padding: 4px;
-          transition: transform 0.2s ease, opacity 0.2s ease;
-          opacity: 0.75;
+          opacity: 0.7;
+          transition: opacity 0.2s;
         }
         .bm-brands__item:hover {
-          transform: scale(1.08);
           opacity: 1;
         }
         .bm-brands__item img {
-          display: block;
+          max-height: 24px;
           width: auto;
-          height: 40px;
-          max-width: 120px;
+          max-width: 80px;
           object-fit: contain;
         }
         .bm-brands__name {
-          font-size: 12px;
+          font-size: 10px;
           font-weight: 600;
-          color: #555;
+          color: #666;
           white-space: nowrap;
-          text-decoration: none;
         }
         @media screen and (min-width: 750px) {
           .bm-brands__track {
             flex-wrap: wrap;
             overflow-x: visible;
-            gap: 24px;
+            gap: 16px;
           }
           .bm-brands__item img {
-            height: 48px;
-            max-width: 150px;
+            max-height: 28px;
+            max-width: 100px;
           }
         }
       </style>
