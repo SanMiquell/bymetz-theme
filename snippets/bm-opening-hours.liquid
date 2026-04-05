@@ -343,7 +343,11 @@
       renderTable(schedule, closedDays);
     })
     .catch(function(err) {
-      console.warn('ByMetz opening hours: using fallback \u2013', err);
+      var errEl = document.createElement('div');
+      errEl.style.cssText = 'background:red;color:white;padding:10px;margin:10px 0;font-size:12px;';
+      errEl.textContent = 'API ERROR: ' + err.message + ' | URL: ' + url.substring(0, 80);
+      var c = document.querySelector('[data-bm-hours]');
+      if (c) c.appendChild(errEl);
     });
 })();
 </script>
