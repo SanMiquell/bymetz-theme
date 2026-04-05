@@ -281,9 +281,11 @@
 
 /* 12. Footer headings: more space above on mobile */
 @media screen and (max-width: 749px) {
-  footer .w25 > p.h5,
-  footer .w25 > div > p.h5 {
+  #shopify-section-footer > div,
+  #shopify-section-footer > .w25 {
     padding-top: 16px !important;
+  }
+  #shopify-section-footer p.h5 {
     margin-bottom: 8px !important;
   }
 }
