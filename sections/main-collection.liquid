@@ -449,57 +449,172 @@
               continue
             endif
           -%}
-      <div class="syk-slider-container" data-visible-items="8">
-          <ul class="l4cl b2r bls syk-slider auto-height align-stretch text-center w12 base-font" style="--li_w: min(220px, 30vw);" {{ block.shopify_attributes }}>
-            {% for product_vendor in collection.all_vendors %}
-              {%- liquid
-                assign vendor_handle = product_vendor | handleize
-                assign vendor_collection = collections[vendor_handle]
-                if vendor_collection != blank and vendor_collection.image.src
-                  assign has_vendor_image = true
+          {%- comment -%} Build vendor list sorted by product count (bestsellers first) {%- endcomment -%}
+          {%- liquid
+            assign bm_vendor_list = ''
+            assign bm_vendor_counts = ''
+            for product in collection.products limit: 250
+              assign pv = product.vendor
+              if bm_vendor_list == ''
+                assign bm_vendor_list = pv
+                assign bm_vendor_counts = '1'
+              else
+                assign bm_vl_arr = bm_vendor_list | split: '|||'
+                assign bm_found = false
+                assign bm_found_idx = 0
+                for v in bm_vl_arr
+                  if v == pv
+                    assign bm_found = true
+                    assign bm_found_idx = forloop.index0
+                    break
+                  endif
+                endfor
+                if bm_found
+                  assign bm_vc_arr = bm_vendor_counts | split: '|||'
+                  assign bm_new_counts = ''
+                  for c in bm_vc_arr
+                    if forloop.index0 == bm_found_idx
+                      assign bm_c_int = c | plus: 1
+                    else
+                      assign bm_c_int = c | plus: 0
+                    endif
+                    if bm_new_counts == ''
+                      assign bm_new_counts = bm_c_int | append: ''
+                    else
+                      assign bm_new_counts = bm_new_counts | append: '|||' | append: bm_c_int
+                    endif
+                  endfor
+                  assign bm_vendor_counts = bm_new_counts
                 else
-                  assign has_vendor_image = false
+                  assign bm_vendor_list = bm_vendor_list | append: '|||' | append: pv
+                  assign bm_vendor_counts = bm_vendor_counts | append: '|||1'
                 endif
-              -%}
-              <li style="{% if block.settings.show_border %}--bw: 1px; --bd: var(--custom_bd); --pd: 10px;{% else %}--bw: 0; --pd: 0;{% endif %}" {% unless has_vendor_image %}class="has-text"{% endunless %}>
-                {%- if vendor_collection != blank -%}
-                  {%- if vendor_collection.image.src -%}
-                    <a href="{{ vendor_collection.url }}" class="link-overlay"></a>
-                    <figure class="no-bd-radius" style="--ratio: 0.3;">
-                      <picture{% if block.settings.multiply %} class="img-multiply"{% endif %}>
-                        <img
-                          src="{{ vendor_collection.image.src | image_url: width: 150 }}"
-                          srcset="{% render 'image-srcset', image: vendor_collection.image.src, max_width: 350 %}"
-                          sizes="150px"
-                          width="120"
-                          height="75"
-                          alt="{{ vendor_collection.image.src | default: product_vendor | escape }}"
-                          data-slide-index={{ forloop.index0 }}
-                          loading="{% if section.index > 1 or forloop.first == false %}lazy{% else %}eager{% endif %}"
-                        >
-                      </picture>
-                    </figure>
-                  {%- else -%}
-                    {{ product_vendor | link_to_vendor }}
-                  {%- endif %}
-                {%- else-%}
-                  {{ product_vendor | link_to_vendor }}
-                {%- endif -%}
-              </li>
-            {% endfor %}
-          </ul>
-        <div class="syk-slider-pagination">
-          <span class="syk-slider-button hidden" data-direction="prev" role="button" aria-label="Previous slide"></span>
-          <span class="syk-slider-button" data-direction="next" role="button" aria-label="Next slide"></span>
+              endif
+            endfor
+
+            assign bm_vl_arr = bm_vendor_list | split: '|||'
+            assign bm_vc_arr = bm_vendor_counts | split: '|||'
+            assign bm_max_count = 0
+            for c in bm_vc_arr
+              assign bm_c_int = c | plus: 0
+              if bm_c_int > bm_max_count
+                assign bm_max_count = bm_c_int
+              endif
+            endfor
+
+            assign bm_sorted_vendors = ''
+            assign bm_threshold = bm_max_count
+            for i in (1..500)
+              if bm_threshold <= 0
+                break
+              endif
+              for c in bm_vc_arr
+                assign bm_c_int = c | plus: 0
+                if bm_c_int == bm_threshold
+                  assign bm_v = bm_vl_arr[forloop.index0]
+                  if bm_sorted_vendors == ''
+                    assign bm_sorted_vendors = bm_v
+                  else
+                    assign bm_sorted_vendors = bm_sorted_vendors | append: '|||' | append: bm_v
+                  endif
+                endif
+              endfor
+              assign bm_threshold = bm_threshold | minus: 1
+            endfor
+            assign bm_sorted_arr = bm_sorted_vendors | split: '|||'
+          -%}
+      <div class="bm-brands" {{ block.shopify_attributes }}>
+        <div class="bm-brands__track">
+          {%- for bm_vendor in bm_sorted_arr -%}
+            {%- liquid
+              assign vendor_handle = bm_vendor | handleize
+              assign vendor_collection = collections[vendor_handle]
+              assign has_vendor_image = false
+              if vendor_collection != blank and vendor_collection.image.src
+                assign has_vendor_image = true
+              endif
+            -%}
+            <a href="{{ vendor_collection.url | default: '#' }}" class="bm-brands__item" title="{{ bm_vendor | escape }}">
+              {%- if has_vendor_image -%}
+                <img
+                  src="{{ vendor_collection.image.src | image_url: width: 160 }}"
+                  srcset="{% render 'image-srcset', image: vendor_collection.image.src, max_width: 320 %}"
+                  sizes="120px"
+                  width="120"
+                  height="60"
+                  alt="{{ bm_vendor | escape }}"
+                  loading="{% if forloop.index > 6 %}lazy{% else %}eager{% endif %}"
+                  {% if block.settings.multiply %}class="img-multiply"{% endif %}
+                >
+              {%- else -%}
+                <span class="bm-brands__name">{{ bm_vendor | escape }}</span>
+              {%- endif -%}
+            </a>
+          {%- endfor -%}
         </div>
       </div>
-          {% if block.settings.show_border %}
-            <style>
-              .l4cl.b2r.bls .li, .l4cl.b2r.bls li {
-                min-height: 64px;
-              }
-            </style>
-          {% endif %}
+      <style>
+        .bm-brands {
+          position: relative;
+          margin: 0 0 12px;
+          overflow: hidden;
+        }
+        .bm-brands__track {
+          display: flex;
+          gap: 8px;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          padding: 4px 0;
+        }
+        .bm-brands__track::-webkit-scrollbar { display: none; }
+        .bm-brands__item {
+          flex: 0 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 120px;
+          height: 56px;
+          padding: 8px 12px;
+          background: #fff;
+          border: 1px solid #e8e8e8;
+          border-radius: 6px;
+          text-decoration: none;
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .bm-brands__item:hover {
+          border-color: #ccc;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .bm-brands__item img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+        }
+        .bm-brands__name {
+          font-size: 11px;
+          font-weight: 600;
+          color: #333;
+          text-align: center;
+          line-height: 1.2;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 100%;
+        }
+        @media screen and (min-width: 750px) {
+          .bm-brands__track {
+            flex-wrap: wrap;
+            overflow-x: visible;
+            justify-content: flex-start;
+          }
+          .bm-brands__item {
+            width: 130px;
+            height: 60px;
+          }
+        }
+      </style>
         {%- when 'collection_navigation'-%}
           {%- liquid
             assign collection_nav = collections[block.settings.collection]
