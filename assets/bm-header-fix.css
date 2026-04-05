@@ -305,7 +305,10 @@
     display: none !important;
   }
   /* Show the desktop toggle (with dropdown) on mobile too */
+  /* Theme hides .mobile-hide via position:absolute;left:-3000em (screen.css:4232) */
   .l4dr > li.lang > a.toggle.mobile-hide {
-    display: inline-flex !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
   }
 }
