@@ -532,11 +532,18 @@
           height: 32px;
           padding: 4px 8px;
           text-decoration: none;
+          border-radius: 0 !important;
+          overflow: visible !important;
         }
         .bm-brands__item img {
           max-height: 24px;
           width: auto;
+          max-width: none !important;
           object-fit: contain;
+          border-radius: 0 !important;
+          clip: auto !important;
+          clip-path: none !important;
+          overflow: visible !important;
         }
         .bm-brands__name {
           font-size: 10px;
@@ -551,15 +558,17 @@
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          background: transparent;
-          border: none;
+          background: transparent !important;
+          background-color: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           z-index: 2;
           padding: 0;
-          color: #1a1a1a;
+          color: #1a1a1a !important;
         }
         .bm-brands__arrow--left { left: 0; }
         .bm-brands__arrow--right { right: 0; }
