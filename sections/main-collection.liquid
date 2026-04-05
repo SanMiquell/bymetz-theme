@@ -488,9 +488,9 @@
                 <img
                   src="{{ vendor_collection.image.src | image_url: width: 160 }}"
                   srcset="{% render 'image-srcset', image: vendor_collection.image.src, max_width: 320 %}"
-                  sizes="120px"
-                  width="120"
-                  height="60"
+                  sizes="140px"
+                  width="140"
+                  height="64"
                   alt="{{ bm_vendor | escape }}"
                   loading="{% if forloop.index > 6 %}lazy{% else %}eager{% endif %}"
                   {% if block.settings.multiply %}class="img-multiply"{% endif %}
@@ -523,9 +523,9 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 120px;
-          height: 56px;
-          padding: 8px 12px;
+          width: 140px;
+          height: 64px;
+          padding: 10px 16px;
           background: #fff;
           border: 1px solid #e8e8e8;
           border-radius: 6px;
@@ -537,8 +537,10 @@
           box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .bm-brands__item img {
-          max-width: 100%;
-          max-height: 100%;
+          width: auto;
+          height: auto;
+          max-width: 90%;
+          max-height: 80%;
           object-fit: contain;
         }
         .bm-brands__name {
@@ -559,8 +561,8 @@
             justify-content: flex-start;
           }
           .bm-brands__item {
-            width: 130px;
-            height: 60px;
+            width: 150px;
+            height: 68px;
           }
         }
       </style>
