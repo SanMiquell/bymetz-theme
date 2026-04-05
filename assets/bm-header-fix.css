@@ -289,3 +289,18 @@
     margin-bottom: 8px !important;
   }
 }
+
+/* 13. Language selector fixes */
+/* Header dropdown: show all languages without scrolling */
+#nav-user > ul > li.lang > .localization-form,
+#nav-user > ul > li.lang > .localization-form ul {
+  max-height: none !important;
+  overflow-y: visible !important;
+}
+
+/* Footer: hide mobile language link that opens empty nav panel */
+@media screen and (max-width: 749px) {
+  .l4dr > li.lang > a.mobile-only[aria-controls="nav"] {
+    display: none !important;
+  }
+}
