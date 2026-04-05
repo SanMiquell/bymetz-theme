@@ -278,3 +278,12 @@
     bottom: 80px !important;
   }
 }
+
+/* 12. Footer headings: more space above on mobile */
+@media screen and (max-width: 749px) {
+  footer .w25 > p.h5,
+  footer .w25 > div > p.h5 {
+    padding-top: 16px !important;
+    margin-bottom: 8px !important;
+  }
+}
