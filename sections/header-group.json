@@ -117,7 +117,7 @@
         "menu_subs_font_weight": "600",
         "extra_image_width": 50,
         "extra_image_link": "",
-        "enable_button": true,
+        "enable_button": false,
         "button_text": "Openingstijden",
         "button_url": "/#bm-hours-anchor",
         "button_style": "primary plain",

@@ -316,40 +316,7 @@
   text-align: center;
 }
 
-/* 14. Header button: subtle opening hours style, matches search bar height */
-#header-inner #nav-bar > ul > li.link-btn,
-#header-inner #nav > ul > li.link-btn {
-  margin: 0 !important;
-  padding: 0 !important;
-  height: 35px !important;
-  display: flex !important;
-  align-items: center !important;
-}
-#header-inner #nav-bar > ul > li.link-btn a,
-#header-inner #nav > ul > li.link-btn a {
-  height: 35px !important;
-  min-height: 0 !important;
-  max-height: 35px !important;
-  padding: 0 12px !important;
-  margin: 0 !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  line-height: 35px !important;
-  border-radius: 4px !important;
-  color: #E65324 !important;
-  white-space: nowrap !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
-}
-#header-inner #nav-bar > ul > li.link-btn a:before,
-#header-inner #nav > ul > li.link-btn a:before {
-  background: #FFF0EB !important;
-  border: 1px solid rgba(231, 90, 45, 0.3) !important;
-  border-radius: 4px !important;
-  height: 35px !important;
-  top: 0 !important;
-  bottom: auto !important;
-}
+/* 14. Custom opening hours button (inline styles, no overrides needed) */
 
 /* 15. Language selector fixes */
 /* Header dropdown: show all languages without scrolling */
