@@ -281,8 +281,8 @@
   }
 
   function renderTable(schedule, closedDays) {
-    var tbody = document.querySelector('[data-bm-hours-body]');
-    if (!tbody) return;
+    var tbodies = document.querySelectorAll('[data-bm-hours-body]');
+    if (!tbodies.length) return;
     closedDays = closedDays || {};
     var html = '';
     for (var i = 0; i < 7; i++) {
@@ -310,11 +310,15 @@
       html += '<td>' + hours + '</td>';
       html += '</tr>';
     }
-    tbody.innerHTML = html;
+    tbodies.forEach(function(tbody) { tbody.innerHTML = html; });
   }
 
   /* Render fallback with dates immediately */
   renderTable(null);
+
+  /* Only fetch API once even if snippet is rendered multiple times */
+  if (window._bmHoursFetched) return;
+  window._bmHoursFetched = true;
 
   /* Fetch live hours from Google Places API */
   if (!API_KEY || !PLACE_ID) return;
