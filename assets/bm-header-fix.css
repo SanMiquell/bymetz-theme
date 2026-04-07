@@ -334,6 +334,26 @@
   }
 }
 
+/* 15b. ByMetz logo-text: render "ByMetz" in the SEO intro title with the
+        brand logo font (Poppins, the theme's primary_font) in uppercase,
+        so the inline brand mention matches the visual identity of the
+        actual logo image in the header. */
+.bm-logo-text {
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+
+/* Slightly tighten on mobile so the longer "BYMETZ" doesn't blow out the
+   title line on small screens. */
+@media screen and (max-width: 600px) {
+  .bm-logo-text {
+    letter-spacing: -0.02em;
+  }
+}
+
 /* 15. Language selector fixes */
 /* Header dropdown: show all languages without scrolling */
 #nav-user > ul > li.lang > .localization-form,
