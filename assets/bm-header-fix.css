@@ -115,10 +115,17 @@
   color: #008000 !important;  /* was #02ad02 (2.9:1) → #008000 (4.7:1) */
 }
 
-/* Product labels: darken #EA6C44 orange labels for AA contrast with white text */
-#root .s1lb > span[style*="EA6C44"] {
-  --product_label_bg: #C4512B !important;
-  --product_label_bg_dark: #A8431F !important;
+/* Product highlight labels (e.g. "Super Light 3.2KG", "#1 BESTSELLER",
+   "Alle Airlines", "Gratis Personalisatie"): force the brand orange so
+   they match the homepage "Bekijk het assortiment" primary CTA button
+   (#E65324). The selector targets only custom-color labels rendered
+   via product metafields (which always carry an inline
+   --product_label_bg var) — SALE, stock, preorder and discount
+   badges use class-based overlay-* colors instead and stay untouched. */
+#root .s1lb > span[style*="--product_label_bg"] {
+  --product_label_bg: #E65324 !important;
+  --product_label_bg_dark: #C4441A !important;
+  color: #fff !important;
 }
 
 /* 7. Hide original inventory/delivery block (replaced by bm-delivery-status) */
