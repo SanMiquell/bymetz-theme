@@ -240,33 +240,29 @@
   var months = monthNames[LANG] || monthNames.nl;
   var closed = closedText[LANG] || closedText.nl;
 
-  /* Get Monday of current week */
+  /* Build rolling 7 days starting from today */
   var now = new Date();
   var todayStr = toKey(now);
-  var day = now.getDay(); /* 0=Sun */
-  var diff = day === 0 ? -6 : 1 - day;
-  var monday = new Date(now);
-  monday.setDate(now.getDate() + diff);
-  monday.setHours(0,0,0,0);
+  var today = new Date(now);
+  today.setHours(0,0,0,0);
 
-  /* Build 7 dates Mon–Sun */
   var weekDates = [];
   for (var i = 0; i < 7; i++) {
-    var d = new Date(monday);
-    d.setDate(monday.getDate() + i);
+    var d = new Date(today);
+    d.setDate(today.getDate() + i);
     weekDates.push(d);
   }
 
-  /* Default fallback hours per weekday (Mon=0 … Sun=6 in our array) */
-  var fallbackHours = [
-    '12:00 \u2013 17:30',
-    '10:00 \u2013 17:30',
-    '10:00 \u2013 17:30',
-    '10:00 \u2013 17:30',
-    '10:00 \u2013 20:00',
-    '10:00 \u2013 17:00',
-    '12:00 \u2013 17:00'
-  ];
+  /* Default fallback hours keyed by JS day-of-week (0=Sun … 6=Sat) */
+  var fallbackHours = {
+    0: '12:00 \u2013 17:00', /* Sunday */
+    1: '12:00 \u2013 17:30', /* Monday */
+    2: '10:00 \u2013 17:30', /* Tuesday */
+    3: '10:00 \u2013 17:30', /* Wednesday */
+    4: '10:00 \u2013 17:30', /* Thursday */
+    5: '10:00 \u2013 20:00', /* Friday */
+    6: '10:00 \u2013 17:00'  /* Saturday */
+  };
 
   function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
@@ -300,7 +296,7 @@
         var gDay = date.getDay(); /* Google day index: 0=Sun */
         hours = schedule[gDay] && schedule[gDay].length ? schedule[gDay].join(', ') : closed;
       } else {
-        hours = fallbackHours[i];
+        hours = fallbackHours[date.getDay()];
       }
 
       html += '<tr' + (isToday ? ' class="bymetz-hours__today"' : '') + '>';
