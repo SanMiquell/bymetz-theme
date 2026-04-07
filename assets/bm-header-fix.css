@@ -316,9 +316,13 @@
   text-align: center;
 }
 
-/* 14. Align search bar vertically with header icons and opening hours button */
+/* 14. Align search bar vertically with header icons and opening hours button.
+       screen.css sets `#search { margin: 0 0 12px }` which offsets the
+       centerline upward inside the flex row — zero out the vertical margins. */
 #header-inner #search {
   align-self: center !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* 14b. Openingstijden button: desktop only (>=1001px).
