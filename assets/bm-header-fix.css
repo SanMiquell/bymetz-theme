@@ -321,6 +321,15 @@
   align-self: center !important;
 }
 
+/* 14b. Openingstijden button: desktop only (>=1001px).
+        Hide on tablet/mobile where the hamburger menu is active.
+        Theme breakpoint: hamburger shows at max-width: 1000px. */
+@media screen and (max-width: 1000px) {
+  .bm-openinghours-btn {
+    display: none !important;
+  }
+}
+
 /* 15. Language selector fixes */
 /* Header dropdown: show all languages without scrolling */
 #nav-user > ul > li.lang > .localization-form,
