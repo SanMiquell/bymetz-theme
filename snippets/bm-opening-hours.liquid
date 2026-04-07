@@ -10,7 +10,9 @@
   assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl' | downcase | split: '-' | first
 -%}
 
+{%- unless in_nav -%}
 <span id="bm-hours-anchor" style="display:block;position:relative;top:-120px;visibility:hidden;"></span>
+{%- endunless -%}
 <div class="bymetz-hours" data-bm-hours>
   {%- case bm_lang -%}
     {%- when 'en' -%}<h3 class="bymetz-hours__title">Store Opening Hours</h3>
