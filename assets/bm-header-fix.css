@@ -334,6 +334,88 @@
   }
 }
 
+/* 16. "Onze Bestsellers" featured-collection section: premium centered
+       header consistent with the SEO intro section restyle. Surgical
+       targeting via the rendered section ID so no other featured
+       collections (e.g. on collection pages) are affected. */
+#shopify-section-section_featured_collection_f7HVjY .title-styling {
+  display: block !important;
+  text-align: center !important;
+  margin: 0 auto 36px !important;
+  padding: 0 16px;
+  max-width: 760px;
+}
+
+#shopify-section-section_featured_collection_f7HVjY .title-styling h2 {
+  font-size: clamp(26px, 3.4vw, 40px) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.025em !important;
+  color: #1a1a1a !important;
+  margin: 0 0 16px !important;
+  display: inline-block;
+  position: relative;
+}
+
+/* Kill any leftover inline decoration on inner spans (e.g. theme-injected underlines) */
+#shopify-section-section_featured_collection_f7HVjY .title-styling h2 span,
+#shopify-section-section_featured_collection_f7HVjY .title-styling h2 a {
+  text-decoration: none !important;
+  background: none !important;
+  border: none !important;
+  color: inherit !important;
+}
+
+/* Gradient accent line under the title (matches the SEO intro highlight) */
+#shopify-section-section_featured_collection_f7HVjY .title-styling h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: linear-gradient(90deg, #E65324 0%, #F58800 100%);
+  border-radius: 2px;
+  margin: 16px auto 0;
+}
+
+/* Subtitle: muted, lighter, refined */
+#shopify-section-section_featured_collection_f7HVjY .title-styling p {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.65 !important;
+  color: #666 !important;
+  margin: 0 auto !important;
+  max-width: 560px;
+}
+
+/* Belt-and-suspenders: disable theme's built-in title-underline pseudo accents
+   in case any user setting reactivates them on this section. */
+#shopify-section-section_featured_collection_f7HVjY .title-underline-accent::before,
+#shopify-section-section_featured_collection_f7HVjY .title-underline-accent::after,
+#shopify-section-section_featured_collection_f7HVjY .title-underline-gradient::before,
+#shopify-section-section_featured_collection_f7HVjY .title-underline-gradient::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Mobile: tighter scale */
+@media screen and (max-width: 749px) {
+  #shopify-section-section_featured_collection_f7HVjY .title-styling {
+    margin-bottom: 24px !important;
+    padding: 0 12px;
+  }
+  #shopify-section-section_featured_collection_f7HVjY .title-styling h2 {
+    font-size: 24px !important;
+  }
+  #shopify-section-section_featured_collection_f7HVjY .title-styling h2::after {
+    width: 44px;
+    height: 2px;
+    margin-top: 12px;
+  }
+  #shopify-section-section_featured_collection_f7HVjY .title-styling p {
+    font-size: 14px !important;
+  }
+}
+
 /* 15. Language selector fixes */
 /* Header dropdown: show all languages without scrolling */
 #nav-user > ul > li.lang > .localization-form,
