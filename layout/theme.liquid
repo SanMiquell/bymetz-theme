@@ -14,6 +14,9 @@
 		<meta name="msapplication-config" content="{{ 'browserconfig.xml' | asset_url }}">
 		<link rel="canonical" href="{{ canonical_url }}">
 		{% unless settings.primary_font.system? and settings.secondary_font.system? %}<link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>{%- endunless -%}
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700&display=swap" rel="stylesheet">
 		<link rel="preload" as="style" href="{{ 'screen.css' | asset_url }}">
 		<link rel="preload" as="style" href="{{ 'theme-xpert.css' | asset_url }}">
 		<link rel="preload" as="style" href="{{ 'screen-settings.css' | asset_url }}">

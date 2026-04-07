@@ -339,19 +339,13 @@
         so the inline brand mention matches the visual identity of the
         actual logo image in the header. */
 .bm-logo-text {
-  font-family: 'Poppins', system-ui, -apple-system, sans-serif !important;
-  font-weight: 700 !important;
+  font-family: 'Bricolage Grotesque', sans-serif !important;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em;
   color: inherit;
-}
-
-/* Slightly tighten on mobile so the longer "BYMETZ" doesn't blow out the
-   title line on small screens. */
-@media screen and (max-width: 600px) {
-  .bm-logo-text {
-    letter-spacing: -0.02em;
-  }
+  text-decoration: none !important;
+  border-bottom: none !important;
 }
 
 /* 15. Language selector fixes */
