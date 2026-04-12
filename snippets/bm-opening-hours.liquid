@@ -141,7 +141,6 @@
     font-weight: 700;
     background: rgba(0,128,0,.06);
   }
-  .bymetz-hours__today--open td { color: #16a34a; }
   .bymetz-hours__today--closed td { color: #dc2626; }
   .bymetz-hours__holiday {
     display: block;
@@ -488,7 +487,7 @@
 
       var rowClass = '';
       if (isToday) {
-        rowClass = 'bymetz-hours__today ' + (openNow ? 'bymetz-hours__today--open' : 'bymetz-hours__today--closed');
+        rowClass = 'bymetz-hours__today' + (openNow ? '' : ' bymetz-hours__today--closed');
       }
       html += '<tr' + (rowClass ? ' class="' + rowClass + '"' : '') + '>';
       html += '<td>' + label;
