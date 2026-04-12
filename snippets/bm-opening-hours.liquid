@@ -1,12 +1,9 @@
 {%- comment -%}
-  ByMetz Opening Hours — shows current week with dates, fetches live
-  data from Google Places API, highlights today, marks holidays.
+  ByMetz Opening Hours — reads from theme settings, calculates Dutch
+  holidays & first/last-Sunday rule in JS, no external API calls.
 {%- endcomment -%}
 
 {%- liquid
-  assign bm_places_api_key = settings.bm_google_places_api_key
-  assign bm_place_id       = settings.bm_google_place_id
-
   assign bm_lang = request.locale.iso_code | default: localization.language.iso_code | default: shop.locale | default: 'nl' | downcase | split: '-' | first
 -%}
 
@@ -91,6 +88,7 @@
         {%- endcase -%}
       </tbody>
     </table>
+    <div class="bymetz-hours__status" data-bm-hours-status></div>
   </div>
 </div>
 
@@ -151,6 +149,14 @@
     font-weight: 600;
     margin-top: 2px;
   }
+  .bymetz-hours__status {
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .bymetz-hours__status--open { color: #16a34a; }
+  .bymetz-hours__status--closed { color: #dc2626; }
   @media (max-width: 600px) {
     .bymetz-hours { padding: 0 14px; }
     .bymetz-hours__title { font-size: 20px; }
@@ -182,6 +188,10 @@
     padding: 6px 8px !important;
     font-size: 12px !important;
   }
+  .bm-nav-hours .bymetz-hours__status {
+    font-size: 11px !important;
+    margin-top: 4px !important;
+  }
   @media screen and (min-width: 1001px) {
     .bm-nav-hours {
       display: none !important;
@@ -191,10 +201,40 @@
 
 <script>
 (function() {
-  var API_KEY  = {{ bm_places_api_key | json }};
-  var PLACE_ID = {{ bm_place_id | json }};
-  var LANG     = {{ bm_lang | json }};
+  /* ── Configuration from Shopify theme settings ── */
+  var CFG = {
+    weekdays: [
+      /* 0 = Sunday */
+      {open:{{ settings.bm_hours_sun_open | json }},from:{{ settings.bm_hours_sun_from | json }},to:{{ settings.bm_hours_sun_to | json }},split:{{ settings.bm_hours_sun_split | json }},from2:{{ settings.bm_hours_sun_from2 | json }},to2:{{ settings.bm_hours_sun_to2 | json }}},
+      /* 1 = Monday */
+      {open:{{ settings.bm_hours_mon_open | json }},from:{{ settings.bm_hours_mon_from | json }},to:{{ settings.bm_hours_mon_to | json }},split:{{ settings.bm_hours_mon_split | json }},from2:{{ settings.bm_hours_mon_from2 | json }},to2:{{ settings.bm_hours_mon_to2 | json }}},
+      /* 2 = Tuesday */
+      {open:{{ settings.bm_hours_tue_open | json }},from:{{ settings.bm_hours_tue_from | json }},to:{{ settings.bm_hours_tue_to | json }},split:{{ settings.bm_hours_tue_split | json }},from2:{{ settings.bm_hours_tue_from2 | json }},to2:{{ settings.bm_hours_tue_to2 | json }}},
+      /* 3 = Wednesday */
+      {open:{{ settings.bm_hours_wed_open | json }},from:{{ settings.bm_hours_wed_from | json }},to:{{ settings.bm_hours_wed_to | json }},split:{{ settings.bm_hours_wed_split | json }},from2:{{ settings.bm_hours_wed_from2 | json }},to2:{{ settings.bm_hours_wed_to2 | json }}},
+      /* 4 = Thursday */
+      {open:{{ settings.bm_hours_thu_open | json }},from:{{ settings.bm_hours_thu_from | json }},to:{{ settings.bm_hours_thu_to | json }},split:{{ settings.bm_hours_thu_split | json }},from2:{{ settings.bm_hours_thu_from2 | json }},to2:{{ settings.bm_hours_thu_to2 | json }}},
+      /* 5 = Friday */
+      {open:{{ settings.bm_hours_fri_open | json }},from:{{ settings.bm_hours_fri_from | json }},to:{{ settings.bm_hours_fri_to | json }},split:{{ settings.bm_hours_fri_split | json }},from2:{{ settings.bm_hours_fri_from2 | json }},to2:{{ settings.bm_hours_fri_to2 | json }}},
+      /* 6 = Saturday */
+      {open:{{ settings.bm_hours_sat_open | json }},from:{{ settings.bm_hours_sat_from | json }},to:{{ settings.bm_hours_sat_to | json }},split:{{ settings.bm_hours_sat_split | json }},from2:{{ settings.bm_hours_sat_from2 | json }},to2:{{ settings.bm_hours_sat_to2 | json }}}
+    ],
+    sundayFL: {
+      enabled: {{ settings.bm_hours_sun_first_last | json }},
+      from: {{ settings.bm_hours_sun_fl_from | json }},
+      to: {{ settings.bm_hours_sun_fl_to | json }}
+    },
+    holidays: {
+      open: {{ settings.bm_hours_holidays_open | json }},
+      from: {{ settings.bm_hours_holidays_from | json }},
+      to: {{ settings.bm_hours_holidays_to | json }},
+      closed: {{ settings.bm_hours_holidays_closed | default: '' | json }}
+    },
+    specialDays: {{ settings.bm_hours_special_days | default: '' | json }},
+    lang: {{ bm_lang | json }}
+  };
 
+  /* ── Localisation ── */
   var dayNames = {
     nl: ['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'],
     en: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
@@ -212,41 +252,234 @@
     it: ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']
   };
   var closedText = {nl:'Gesloten',en:'Closed',de:'Geschlossen',fr:'Ferm\u00e9',es:'Cerrado',it:'Chiuso'};
+  var nowOpenText = {nl:'Nu open',en:'Open now',de:'Jetzt ge\u00f6ffnet',fr:'Ouvert',es:'Abierto',it:'Aperto'};
+  var nowClosedText = {nl:'Nu gesloten',en:'Closed now',de:'Jetzt geschlossen',fr:'Ferm\u00e9',es:'Cerrado',it:'Chiuso'};
 
-  var holidays = {
-    '2025-01-01':{nl:'Nieuwjaarsdag',en:'New Year',de:'Neujahr',fr:'Nouvel An',es:'A\u00f1o Nuevo',it:'Capodanno'},
-    '2025-04-18':{nl:'Goede Vrijdag',en:'Good Friday',de:'Karfreitag',fr:'Vendredi Saint',es:'Viernes Santo',it:'Venerd\u00ec Santo'},
-    '2025-04-20':{nl:'Eerste Paasdag',en:'Easter Sunday',de:'Ostersonntag',fr:'P\u00e2ques',es:'Pascua',it:'Pasqua'},
-    '2025-04-21':{nl:'Tweede Paasdag',en:'Easter Monday',de:'Ostermontag',fr:'Lundi de P\u00e2ques',es:'Lunes de Pascua',it:'Luned\u00ec di Pasqua'},
-    '2025-04-27':{nl:'Koningsdag',en:"King's Day",de:'K\u00f6nigstag',fr:'F\u00eate du Roi',es:'D\u00eda del Rey',it:'Giorno del Re'},
-    '2025-05-05':{nl:'Bevrijdingsdag',en:'Liberation Day',de:'Befreiungstag',fr:'Jour de la Lib\u00e9ration',es:'D\u00eda de la Liberaci\u00f3n',it:'Giorno della Liberazione'},
-    '2025-05-29':{nl:'Hemelvaartsdag',en:'Ascension Day',de:'Christi Himmelfahrt',fr:'Ascension',es:'Ascensi\u00f3n',it:'Ascensione'},
-    '2025-06-08':{nl:'Eerste Pinksterdag',en:'Whit Sunday',de:'Pfingstsonntag',fr:'Pentec\u00f4te',es:'Pentecost\u00e9s',it:'Pentecoste'},
-    '2025-06-09':{nl:'Tweede Pinksterdag',en:'Whit Monday',de:'Pfingstmontag',fr:'Lundi de Pentec\u00f4te',es:'Lunes de Pentecost\u00e9s',it:'Luned\u00ec di Pentecoste'},
-    '2025-12-25':{nl:'Eerste Kerstdag',en:'Christmas Day',de:'1. Weihnachtstag',fr:'No\u00ebl',es:'Navidad',it:'Natale'},
-    '2025-12-26':{nl:'Tweede Kerstdag',en:'Boxing Day',de:'2. Weihnachtstag',fr:'Lendemain de No\u00ebl',es:'San Esteban',it:'Santo Stefano'},
-    '2026-01-01':{nl:'Nieuwjaarsdag',en:'New Year',de:'Neujahr',fr:'Nouvel An',es:'A\u00f1o Nuevo',it:'Capodanno'},
-    '2026-04-03':{nl:'Goede Vrijdag',en:'Good Friday',de:'Karfreitag',fr:'Vendredi Saint',es:'Viernes Santo',it:'Venerd\u00ec Santo'},
-    '2026-04-05':{nl:'Eerste Paasdag',en:'Easter Sunday',de:'Ostersonntag',fr:'P\u00e2ques',es:'Pascua',it:'Pasqua'},
-    '2026-04-06':{nl:'Tweede Paasdag',en:'Easter Monday',de:'Ostermontag',fr:'Lundi de P\u00e2ques',es:'Lunes de Pascua',it:'Luned\u00ec di Pasqua'},
-    '2026-04-27':{nl:'Koningsdag',en:"King's Day",de:'K\u00f6nigstag',fr:'F\u00eate du Roi',es:'D\u00eda del Rey',it:'Giorno del Re'},
-    '2026-05-05':{nl:'Bevrijdingsdag',en:'Liberation Day',de:'Befreiungstag',fr:'Jour de la Lib\u00e9ration',es:'D\u00eda de la Liberaci\u00f3n',it:'Giorno della Liberazione'},
-    '2026-05-14':{nl:'Hemelvaartsdag',en:'Ascension Day',de:'Christi Himmelfahrt',fr:'Ascension',es:'Ascensi\u00f3n',it:'Ascensione'},
-    '2026-05-24':{nl:'Eerste Pinksterdag',en:'Whit Sunday',de:'Pfingstsonntag',fr:'Pentec\u00f4te',es:'Pentecost\u00e9s',it:'Pentecoste'},
-    '2026-05-25':{nl:'Tweede Pinksterdag',en:'Whit Monday',de:'Pfingstmontag',fr:'Lundi de Pentec\u00f4te',es:'Lunes de Pentecost\u00e9s',it:'Luned\u00ec di Pentecoste'},
-    '2026-12-25':{nl:'Eerste Kerstdag',en:'Christmas Day',de:'1. Weihnachtstag',fr:'No\u00ebl',es:'Navidad',it:'Natale'},
-    '2026-12-26':{nl:'Tweede Kerstdag',en:'Boxing Day',de:'2. Weihnachtstag',fr:'Lendemain de No\u00ebl',es:'San Esteban',it:'Santo Stefano'}
-  };
-
+  var LANG = CFG.lang;
   var names = dayNames[LANG] || dayNames.nl;
   var months = monthNames[LANG] || monthNames.nl;
   var closed = closedText[LANG] || closedText.nl;
 
-  /* Build rolling 7 days starting from today */
-  var now = new Date();
+  /* ── Dutch holiday calculation ── */
+  var holidayNames = {
+    'nieuwjaarsdag':       {nl:'Nieuwjaarsdag',en:'New Year\'s Day',de:'Neujahr',fr:'Nouvel An',es:'A\u00f1o Nuevo',it:'Capodanno'},
+    'goede vrijdag':       {nl:'Goede Vrijdag',en:'Good Friday',de:'Karfreitag',fr:'Vendredi Saint',es:'Viernes Santo',it:'Venerd\u00ec Santo'},
+    'eerste paasdag':      {nl:'Eerste Paasdag',en:'Easter Sunday',de:'Ostersonntag',fr:'P\u00e2ques',es:'Pascua',it:'Pasqua'},
+    'tweede paasdag':      {nl:'Tweede Paasdag',en:'Easter Monday',de:'Ostermontag',fr:'Lundi de P\u00e2ques',es:'Lunes de Pascua',it:'Luned\u00ec di Pasqua'},
+    'koningsdag':          {nl:'Koningsdag',en:'King\'s Day',de:'K\u00f6nigstag',fr:'F\u00eate du Roi',es:'D\u00eda del Rey',it:'Giorno del Re'},
+    'bevrijdingsdag':      {nl:'Bevrijdingsdag',en:'Liberation Day',de:'Befreiungstag',fr:'Jour de la Lib\u00e9ration',es:'D\u00eda de la Liberaci\u00f3n',it:'Giorno della Liberazione'},
+    'hemelvaartsdag':      {nl:'Hemelvaartsdag',en:'Ascension Day',de:'Christi Himmelfahrt',fr:'Ascension',es:'Ascensi\u00f3n',it:'Ascensione'},
+    'eerste pinksterdag':  {nl:'Eerste Pinksterdag',en:'Whit Sunday',de:'Pfingstsonntag',fr:'Pentec\u00f4te',es:'Pentecost\u00e9s',it:'Pentecoste'},
+    'tweede pinksterdag':  {nl:'Tweede Pinksterdag',en:'Whit Monday',de:'Pfingstmontag',fr:'Lundi de Pentec\u00f4te',es:'Lunes de Pentecost\u00e9s',it:'Luned\u00ec di Pentecoste'},
+    'eerste kerstdag':     {nl:'Eerste Kerstdag',en:'Christmas Day',de:'1. Weihnachtstag',fr:'No\u00ebl',es:'Navidad',it:'Natale'},
+    'tweede kerstdag':     {nl:'Tweede Kerstdag',en:'Boxing Day',de:'2. Weihnachtstag',fr:'Lendemain de No\u00ebl',es:'San Esteban',it:'Santo Stefano'},
+    'oudejaarsdag':        {nl:'Oudejaarsdag',en:'New Year\'s Eve',de:'Silvester',fr:'Saint-Sylvestre',es:'Nochevieja',it:'San Silvestro'}
+  };
+
+  function easterSunday(year) {
+    var a = year % 19;
+    var b = Math.floor(year / 100);
+    var c = year % 100;
+    var d = Math.floor(b / 4);
+    var e = b % 4;
+    var f = Math.floor((b + 8) / 25);
+    var g = Math.floor((b - f + 1) / 3);
+    var h = (19 * a + b - d - g + 15) % 30;
+    var i = Math.floor(c / 4);
+    var k = c % 4;
+    var l = (32 + 2 * e + 2 * i - h - k) % 7;
+    var m = Math.floor((a + 11 * h + 22 * l) / 451);
+    var month = Math.floor((h + l - 7 * m + 114) / 31);
+    var day = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(year, month - 1, day);
+  }
+
+  function addDays(d, n) {
+    var r = new Date(d);
+    r.setDate(r.getDate() + n);
+    return r;
+  }
+
+  function computeHolidays(year) {
+    var easter = easterSunday(year);
+    var koningsdag = new Date(year, 3, 27);
+    if (koningsdag.getDay() === 0) koningsdag = new Date(year, 3, 26);
+
+    var list = [
+      {date: new Date(year, 0, 1),           key: 'nieuwjaarsdag'},
+      {date: addDays(easter, -2),             key: 'goede vrijdag'},
+      {date: easter,                          key: 'eerste paasdag'},
+      {date: addDays(easter, 1),              key: 'tweede paasdag'},
+      {date: koningsdag,                      key: 'koningsdag'},
+      {date: new Date(year, 4, 5),            key: 'bevrijdingsdag'},
+      {date: addDays(easter, 39),             key: 'hemelvaartsdag'},
+      {date: addDays(easter, 49),             key: 'eerste pinksterdag'},
+      {date: addDays(easter, 50),             key: 'tweede pinksterdag'},
+      {date: new Date(year, 11, 25),          key: 'eerste kerstdag'},
+      {date: new Date(year, 11, 26),          key: 'tweede kerstdag'},
+      {date: new Date(year, 11, 31),          key: 'oudejaarsdag'}
+    ];
+    var map = {};
+    list.forEach(function(h) { map[toKey(h.date)] = h.key; });
+    return map;
+  }
+
+  /* ── Parse special days textarea ── */
+  function parseSpecialDays(text) {
+    var map = {};
+    if (!text) return map;
+    text.split('\n').forEach(function(line) {
+      line = line.trim();
+      if (!line) return;
+      var parts = line.split('|');
+      if (parts.length >= 2) {
+        map[parts[0].trim()] = parts[1].trim();
+      }
+    });
+    return map;
+  }
+
+  /* ── Parse holidays-closed textarea ── */
+  function parseHolidaysClosed(text) {
+    var set = {};
+    if (!text) return set;
+    text.split('\n').forEach(function(line) {
+      line = line.trim().toLowerCase();
+      if (line) set[line] = true;
+    });
+    return set;
+  }
+
+  /* ── First / last Sunday check ── */
+  function isFirstOrLastSunday(date) {
+    if (date.getDay() !== 0) return false;
+    var day = date.getDate();
+    if (day <= 7) return true;
+    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    return day > lastDay - 7;
+  }
+
+  /* ── Helpers ── */
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function toKey(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  function formatDayLabel(date) {
+    return capitalize(names[date.getDay()]) + ' ' + date.getDate() + ' ' + months[date.getMonth()];
+  }
+
+  /* ── Get Amsterdam time ── */
+  function getAmsterdamNow() {
+    var ams = new Date(new Date().toLocaleString('en-US', {timeZone: 'Europe/Amsterdam'}));
+    return ams;
+  }
+
+  /* ── Build schedule for a single date ── */
+  var specialDays = parseSpecialDays(CFG.specialDays);
+  var holidaysClosed = parseHolidaysClosed(CFG.holidays.closed);
+
+  var now = getAmsterdamNow();
+  var thisYear = now.getFullYear();
+  var allHolidays = {};
+  var h1 = computeHolidays(thisYear);
+  var h2 = computeHolidays(thisYear + 1);
+  for (var k in h1) allHolidays[k] = h1[k];
+  for (var k2 in h2) allHolidays[k2] = h2[k2];
+
+  function getHoursForDate(date) {
+    var key = toKey(date);
+    var dow = date.getDay();
+    var holidayKey = allHolidays[key];
+    var holidayLabel = null;
+    var result = {hours: '', isOpen: false, holidayName: ''};
+
+    /* Priority 1: Manual special days */
+    if (specialDays[key]) {
+      var val = specialDays[key].toLowerCase();
+      if (val === 'gesloten' || val === 'closed' || val === 'geschlossen' || val === 'fermé' || val === 'cerrado' || val === 'chiuso') {
+        result.hours = closed;
+        if (holidayKey) {
+          var hn = holidayNames[holidayKey];
+          result.holidayName = hn ? (hn[LANG] || hn.nl) : '';
+        }
+        return result;
+      }
+      result.hours = val.replace(/(\d{1,2}:\d{2})-(\d{1,2}:\d{2})/g, '$1 \u2013 $2');
+      result.isOpen = true;
+      if (holidayKey) {
+        var hn2 = holidayNames[holidayKey];
+        result.holidayName = hn2 ? (hn2[LANG] || hn2.nl) : '';
+      }
+      return result;
+    }
+
+    /* Priority 2: Holidays */
+    if (holidayKey) {
+      var hn3 = holidayNames[holidayKey];
+      result.holidayName = hn3 ? (hn3[LANG] || hn3.nl) : '';
+
+      if (holidaysClosed[holidayKey]) {
+        result.hours = closed;
+        return result;
+      }
+      if (CFG.holidays.open) {
+        result.hours = (CFG.holidays.from || '12:00') + ' \u2013 ' + (CFG.holidays.to || '17:00');
+        result.isOpen = true;
+        return result;
+      }
+      result.hours = closed;
+      return result;
+    }
+
+    /* Priority 3: First/last Sunday */
+    if (dow === 0 && CFG.sundayFL.enabled && isFirstOrLastSunday(date)) {
+      result.hours = (CFG.sundayFL.from || '12:00') + ' \u2013 ' + (CFG.sundayFL.to || '17:00');
+      result.isOpen = true;
+      return result;
+    }
+
+    /* Priority 4: Normal weekday hours */
+    var dayConf = CFG.weekdays[dow];
+    if (!dayConf || !dayConf.open) {
+      result.hours = closed;
+      return result;
+    }
+
+    var slot1 = (dayConf.from || '10:00') + ' \u2013 ' + (dayConf.to || '17:00');
+    if (dayConf.split) {
+      var slot2 = (dayConf.from2 || '13:00') + ' \u2013 ' + (dayConf.to2 || '17:00');
+      result.hours = slot1 + ', ' + slot2;
+    } else {
+      result.hours = slot1;
+    }
+    result.isOpen = true;
+    return result;
+  }
+
+  /* ── Check if currently open right now ── */
+  function isOpenRightNow() {
+    var ams = getAmsterdamNow();
+    var info = getHoursForDate(ams);
+    if (!info.isOpen) return false;
+
+    var currentMinutes = ams.getHours() * 60 + ams.getMinutes();
+    var slots = info.hours.split(', ');
+    for (var i = 0; i < slots.length; i++) {
+      var parts = slots[i].split(' \u2013 ');
+      if (parts.length !== 2) continue;
+      var openParts = parts[0].trim().split(':');
+      var closeParts = parts[1].trim().split(':');
+      var openMin = parseInt(openParts[0], 10) * 60 + parseInt(openParts[1], 10);
+      var closeMin = parseInt(closeParts[0], 10) * 60 + parseInt(closeParts[1], 10);
+      if (currentMinutes >= openMin && currentMinutes < closeMin) return true;
+    }
+    return false;
+  }
+
+  /* ── Render table ── */
   var todayStr = toKey(now);
   var today = new Date(now);
-  today.setHours(0,0,0,0);
+  today.setHours(0, 0, 0, 0);
 
   var weekDates = [];
   for (var i = 0; i < 7; i++) {
@@ -255,128 +488,43 @@
     weekDates.push(d);
   }
 
-  /* Default fallback hours keyed by JS day-of-week (0=Sun … 6=Sat) */
-  var fallbackHours = {
-    0: '12:00 \u2013 17:00', /* Sunday */
-    1: '12:00 \u2013 17:30', /* Monday */
-    2: '10:00 \u2013 17:30', /* Tuesday */
-    3: '10:00 \u2013 17:30', /* Wednesday */
-    4: '10:00 \u2013 17:30', /* Thursday */
-    5: '10:00 \u2013 20:00', /* Friday */
-    6: '10:00 \u2013 17:00'  /* Saturday */
-  };
-
-  function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
-  function pad(n) { return (n < 10 ? '0' : '') + n; }
-  function toKey(d) { return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
-
-  function formatDayLabel(date) {
-    var dayIdx = date.getDay();
-    var dayName = capitalize(names[dayIdx]);
-    var dateNum = date.getDate();
-    var monthName = months[date.getMonth()];
-    return dayName + ' ' + dateNum + ' ' + monthName;
-  }
-
-  function renderTable(schedule, closedDays) {
+  function renderTable() {
     var tbodies = document.querySelectorAll('[data-bm-hours-body]');
     if (!tbodies.length) return;
-    closedDays = closedDays || {};
     var html = '';
     for (var i = 0; i < 7; i++) {
       var date = weekDates[i];
       var key = toKey(date);
       var isToday = key === todayStr;
       var label = formatDayLabel(date);
-      var holiday = holidays[key];
-      var holidayName = holiday ? (holiday[LANG] || holiday.nl) : '';
-
-      var hours;
-      if (closedDays[key]) {
-        hours = closed;
-      } else if (schedule) {
-        var gDay = date.getDay(); /* Google day index: 0=Sun */
-        hours = schedule[gDay] && schedule[gDay].length ? schedule[gDay].join(', ') : closed;
-      } else {
-        hours = fallbackHours[date.getDay()];
-      }
+      var info = getHoursForDate(date);
 
       html += '<tr' + (isToday ? ' class="bymetz-hours__today"' : '') + '>';
       html += '<td>' + label;
-      if (holidayName) html += '<span class="bymetz-hours__holiday">' + holidayName + '</span>';
+      if (info.holidayName) html += '<span class="bymetz-hours__holiday">' + info.holidayName + '</span>';
       html += '</td>';
-      html += '<td>' + hours + '</td>';
+      html += '<td>' + info.hours + '</td>';
       html += '</tr>';
     }
     tbodies.forEach(function(tbody) { tbody.innerHTML = html; });
+
+    /* Render open/closed status */
+    var statusDivs = document.querySelectorAll('[data-bm-hours-status]');
+    var openNow = isOpenRightNow();
+    var statusText = openNow
+      ? (nowOpenText[LANG] || nowOpenText.nl)
+      : (nowClosedText[LANG] || nowClosedText.nl);
+    var statusClass = openNow ? 'bymetz-hours__status--open' : 'bymetz-hours__status--closed';
+    statusDivs.forEach(function(div) {
+      div.textContent = statusText;
+      div.className = 'bymetz-hours__status ' + statusClass;
+    });
   }
 
-  /* Render fallback with dates immediately */
-  renderTable(null);
+  renderTable();
 
-  /* Only fetch API once even if snippet is rendered multiple times */
+  /* Only run once even if snippet is rendered multiple times */
   if (window._bmHoursFetched) return;
   window._bmHoursFetched = true;
-
-  /* Fetch live hours from Google Places API */
-  if (!API_KEY || !PLACE_ID) return;
-
-  var baseUrl = 'https://places.googleapis.com/v1/places/' + PLACE_ID + '?languageCode=' + LANG + '&key=' + API_KEY;
-
-  function parseHours(hours) {
-    var schedule = {};
-    for (var j = 0; j < 7; j++) schedule[j] = [];
-    var closedDays = {};
-
-    if (hours.specialDays) {
-      hours.specialDays.forEach(function(sd) {
-        if (sd.date) {
-          var k = sd.date.year + '-' + pad(sd.date.month) + '-' + pad(sd.date.day);
-          if (sd.exceptionalHours === false || (sd.hours && sd.hours.length === 0)) {
-            closedDays[k] = true;
-          }
-        }
-      });
-    }
-
-    hours.periods.forEach(function(p) {
-      var dIdx = p.open.day;
-      var open  = pad(p.open.hour) + ':' + pad(p.open.minute);
-      var close = p.close ? pad(p.close.hour) + ':' + pad(p.close.minute) : '';
-      schedule[dIdx].push(open + (close ? ' \u2013 ' + close : '+'));
-    });
-
-    return { schedule: schedule, closedDays: closedDays };
-  }
-
-  /* Try currentOpeningHours first (includes holiday/special hours),
-     fall back to regularOpeningHours if that field is unsupported */
-  fetch(baseUrl + '&fields=currentOpeningHours')
-    .then(function(r) {
-      if (!r.ok) throw new Error(r.status);
-      return r.json();
-    })
-    .then(function(data) {
-      if (data && data.currentOpeningHours && data.currentOpeningHours.periods) {
-        var result = parseHours(data.currentOpeningHours);
-        renderTable(result.schedule, result.closedDays);
-      } else {
-        throw new Error('no currentOpeningHours');
-      }
-    })
-    .catch(function() {
-      /* Fallback: fetch regularOpeningHours */
-      fetch(baseUrl + '&fields=regularOpeningHours')
-        .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(function(data) {
-          if (data && data.regularOpeningHours && data.regularOpeningHours.periods) {
-            var result = parseHours(data.regularOpeningHours);
-            renderTable(result.schedule, result.closedDays);
-          }
-        })
-        .catch(function(err) {
-          console.warn('ByMetz opening hours: using fallback \u2013', err);
-        });
-    });
 })();
 </script>
