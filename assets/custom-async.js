@@ -2017,6 +2017,9 @@ function stickyAddToCartinit() {
 							html_tag.classList.add('product-not-scrolled');
 							if (form_product_sticky) {
 								aria_hide(form_product_sticky);
+								Array.from(form_product_sticky.querySelectorAll('a, input, button, select, textarea, [role="button"]')).forEach(function (childEl) {
+									childEl.setAttribute('tabindex', -1);
+								});
 							}
 						} else {
 							// Echte knop NIET zichtbaar (boven OF onder viewport) → toon sticky
@@ -2024,6 +2027,9 @@ function stickyAddToCartinit() {
 							html_tag.classList.remove('product-not-scrolled');
 							if (form_product_sticky) {
 								aria_show(form_product_sticky);
+								Array.from(form_product_sticky.querySelectorAll('a, input, button, select, textarea, [role="button"]')).forEach(function (childEl) {
+									childEl.removeAttribute('tabindex');
+								});
 							}
 							assignStyles();
 							requestAnimationFrame(function () {
