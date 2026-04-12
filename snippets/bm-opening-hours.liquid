@@ -88,7 +88,6 @@
         {%- endcase -%}
       </tbody>
     </table>
-    <div class="bymetz-hours__status" data-bm-hours-status></div>
   </div>
 </div>
 
@@ -142,6 +141,8 @@
     font-weight: 700;
     background: rgba(0,128,0,.06);
   }
+  .bymetz-hours__today--open td { color: #16a34a; }
+  .bymetz-hours__today--closed td { color: #dc2626; }
   .bymetz-hours__holiday {
     display: block;
     font-size: 0.85em;
@@ -149,14 +150,6 @@
     font-weight: 600;
     margin-top: 2px;
   }
-  .bymetz-hours__status {
-    text-align: center;
-    margin-top: 8px;
-    font-weight: 700;
-    font-size: 14px;
-  }
-  .bymetz-hours__status--open { color: #16a34a; }
-  .bymetz-hours__status--closed { color: #dc2626; }
   @media (max-width: 600px) {
     .bymetz-hours { padding: 0 14px; }
     .bymetz-hours__title { font-size: 20px; }
@@ -187,10 +180,6 @@
   .bm-nav-hours .bymetz-hours__table tbody td {
     padding: 6px 8px !important;
     font-size: 12px !important;
-  }
-  .bm-nav-hours .bymetz-hours__status {
-    font-size: 11px !important;
-    margin-top: 4px !important;
   }
   @media screen and (min-width: 1001px) {
     .bm-nav-hours {
@@ -252,9 +241,6 @@
     it: ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre']
   };
   var closedText = {nl:'Gesloten',en:'Closed',de:'Geschlossen',fr:'Ferm\u00e9',es:'Cerrado',it:'Chiuso'};
-  var nowOpenText = {nl:'Nu open',en:'Open now',de:'Jetzt ge\u00f6ffnet',fr:'Ouvert',es:'Abierto',it:'Aperto'};
-  var nowClosedText = {nl:'Nu gesloten',en:'Closed now',de:'Jetzt geschlossen',fr:'Ferm\u00e9',es:'Cerrado',it:'Chiuso'};
-
   var LANG = CFG.lang;
   var names = dayNames[LANG] || dayNames.nl;
   var months = monthNames[LANG] || monthNames.nl;
@@ -491,6 +477,7 @@
   function renderTable() {
     var tbodies = document.querySelectorAll('[data-bm-hours-body]');
     if (!tbodies.length) return;
+    var openNow = isOpenRightNow();
     var html = '';
     for (var i = 0; i < 7; i++) {
       var date = weekDates[i];
@@ -499,7 +486,11 @@
       var label = formatDayLabel(date);
       var info = getHoursForDate(date);
 
-      html += '<tr' + (isToday ? ' class="bymetz-hours__today"' : '') + '>';
+      var rowClass = '';
+      if (isToday) {
+        rowClass = 'bymetz-hours__today ' + (openNow ? 'bymetz-hours__today--open' : 'bymetz-hours__today--closed');
+      }
+      html += '<tr' + (rowClass ? ' class="' + rowClass + '"' : '') + '>';
       html += '<td>' + label;
       if (info.holidayName) html += '<span class="bymetz-hours__holiday">' + info.holidayName + '</span>';
       html += '</td>';
@@ -507,18 +498,6 @@
       html += '</tr>';
     }
     tbodies.forEach(function(tbody) { tbody.innerHTML = html; });
-
-    /* Render open/closed status */
-    var statusDivs = document.querySelectorAll('[data-bm-hours-status]');
-    var openNow = isOpenRightNow();
-    var statusText = openNow
-      ? (nowOpenText[LANG] || nowOpenText.nl)
-      : (nowClosedText[LANG] || nowClosedText.nl);
-    var statusClass = openNow ? 'bymetz-hours__status--open' : 'bymetz-hours__status--closed';
-    statusDivs.forEach(function(div) {
-      div.textContent = statusText;
-      div.className = 'bymetz-hours__status ' + statusClass;
-    });
   }
 
   renderTable();
