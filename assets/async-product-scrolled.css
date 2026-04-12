@@ -7,7 +7,7 @@
 .product-scrolled.has-f8ps.m6pn-open { --root_pb: 0px; }
 
 .f8ps {
-	visibility: hidden; position: fixed; left: 0; right: 0; top: auto; bottom: 0; z-index: 10; height: auto; margin: 0; padding: 7px var(--rpp) 3px; background: var(--f8ps_bg); color: var(--f8ps_fg); font-size: var(--main_fz); line-height: var(--main_lh_l); opacity: 0;
+	visibility: hidden; position: fixed; left: 0; right: 0; top: auto; bottom: 0; z-index: 10; height: auto; margin: 0; padding: 7px var(--rpp) 3px; background: var(--f8ps_bg); color: var(--f8ps_fg); font-size: var(--main_fz); line-height: var(--main_lh_l); opacity: 0; pointer-events: none;
 	transform: translateY(20px);
 }
 .f8ps fieldset { width: 100%; max-width: var(--glw); margin-left: auto; margin-right: auto; }
@@ -40,7 +40,7 @@
 .f8ps-css #root > .shopify-section .f8ps { display: flex; }
 #root .f8ps .invalid-feedback { display: none; }
 .f8ps .submit > *, #root #content .f8ps { margin-bottom: 0; }
-.product-scrolled:not(.m6pn-open) #root > .shopify-section .f8ps { visibility: visible; opacity: 1; }
+.product-scrolled:not(.m6pn-open) #root > .shopify-section .f8ps { visibility: visible; opacity: 1; pointer-events: auto; }
 .product-scrolled.m6cp-open #root > .shopify-section .f8ps:not(.align-top) { visibility: hidden; opacity: 0; transform: translateY(20px); }
 .product-scrolled #root > .shopify-section .f8ps:before { box-shadow: 0 -3px 15px rgba(0,0,0,.04); }
 .product-scrolled #root > .shopify-section .f8ps.align-top:before { box-shadow: 0 3px 15px rgba(0,0,0,.04); }
