@@ -2670,12 +2670,14 @@ label + .check { margin-top: 18px; }
 #root .input-amount .decr { bottom: -10px; }
 #root .input-amount .incr:before { content: "\e908"; top: auto; bottom: -1px; margin: 0; line-height: calc(var(--main_fz) * 0.6428571429); }
 #root .input-amount .decr:before { content: "\e904"; top: 1px; bottom: auto; margin: 0; line-height: calc(var(--main_fz) * 0.6428571429); }
-#root .input-amount .disabled[role="button"] { color: var(--custom_input_pl); opacity: 0.33; cursor: default; pointer-events: none; }
+#root .input-amount .disabled[role="button"] { color: #bbb; background: #f2f2f2; opacity: 1; cursor: not-allowed; pointer-events: none; position: relative; }
+#root .input-amount .disabled[role="button"]::after { content: ""; position: absolute; top: 50%; left: 20%; right: 20%; height: 2px; background: #999; transform: rotate(-20deg); transform-origin: center; }
 #root .input-amount input { padding-right: calc(var(--main_fz) * 1.4285714286); --custom_input_pl: var(--custom_input_fg); }
 .input-amount.is-valid input, .is-valid .input-amount input { background-position: -3000em -3000em; }
 .input-amount ~ button { align-self: stretch; }
 span ~ .input-amount ~ button { align-self: center; }
-.input-amount:has(input[disabled]) a[role="button"], .input-amount:has(input.disabled) a[role="button"] { opacity: .3; pointer-events: none; }
+.input-amount:has(input[disabled]) a[role="button"], .input-amount:has(input.disabled) a[role="button"] { color: #bbb; background: #f2f2f2; opacity: 1; cursor: not-allowed; pointer-events: none; position: relative; }
+.input-amount:has(input[disabled]) a[role="button"]::after, .input-amount:has(input.disabled) a[role="button"]::after { content: ""; position: absolute; top: 50%; left: 20%; right: 20%; height: 2px; background: #999; transform: rotate(-20deg); transform-origin: center; }
 .input-amount.size-m, .input-amount.size-m input { width: calc(var(--main_fz) * 4); --input_h: calc(var(--btn_pv) * 1.2 * 2 + var(--btn_fz) * var(--btn_lh)); }
 .input-amount.size-l, .input-amount.size-l input { width: calc(var(--main_fz) * 4.4285714286); --input_h: calc(var(--btn_pv) * 1.35 * 2 + var(--btn_fz) * var(--btn_lh)); }
 

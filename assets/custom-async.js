@@ -1500,6 +1500,8 @@ function amountRun(el) {
 
 	Array.from(el.children).forEach(function (el) {
 		var inp = el.querySelector('input');
+		inp.setAttribute('readonly', 'true');
+		inp.setAttribute('inputmode', 'none');
 		el.appendChild(inc);
 		el.appendChild(dec);
 		if (parseFloat(inp.value) === 1 || inp.value === '') {
