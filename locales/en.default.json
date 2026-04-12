@@ -285,6 +285,7 @@
     "whatsapp_html": "Ask your question via <span class='strong'>WhatsApp</span>"
   },
   "general": {
+    "opening_hours_button": "Opening hours",
     "accessibility": {
       "choose_category": "Choose a category",
       "close": "Close",

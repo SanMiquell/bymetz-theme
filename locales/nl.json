@@ -285,6 +285,7 @@
     "whatsapp_html": "Stel jouw vraag via <span class='strong'>WhatsApp</span>"
   },
   "general": {
+    "opening_hours_button": "Openingstijden",
     "accessibility": {
       "choose_category": "Kies een categorie",
       "close": "Sluit",

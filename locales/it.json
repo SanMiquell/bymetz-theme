@@ -285,6 +285,7 @@
     "whatsapp_html": "Fai la tua domanda tramite <span class='strong'>Whatsapp</span>"
   },
   "general": {
+    "opening_hours_button": "Orari di apertura",
     "accessibility": {
       "toggle": "Attiva/disattiva {{ item }} in",
       "only_you_can_see_this": "Solo tu puoi vederlo",
