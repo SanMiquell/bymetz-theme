@@ -3303,19 +3303,372 @@
     ]
   },
   {
-    "name": "ByMetz Google Places",
+    "name": "ByMetz Openingstijden",
     "settings": [
+      {
+        "type": "header",
+        "content": "Google Places API (niet meer in gebruik)"
+      },
       {
         "type": "text",
         "id": "bm_google_places_api_key",
         "label": "Google Places API Key",
-        "info": "API key for opening hours (restricted to bymetz.nl)"
+        "info": "Niet meer in gebruik — bewaard voor eventueel herstel"
       },
       {
         "type": "text",
         "id": "bm_google_place_id",
         "label": "Google Place ID",
-        "info": "Place ID of the store"
+        "info": "Niet meer in gebruik — bewaard voor eventueel herstel"
+      },
+      {
+        "type": "header",
+        "content": "Maandag"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_mon_open",
+        "label": "Open op maandag",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_mon_from",
+        "label": "Openingstijd",
+        "default": "12:00",
+        "info": "Formaat: HH:MM"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_mon_to",
+        "label": "Sluitingstijd",
+        "default": "17:30"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_mon_split",
+        "label": "Tweede tijdslot (lunchpauze)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_mon_from2",
+        "label": "Openingstijd 2e slot",
+        "default": "13:00"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_mon_to2",
+        "label": "Sluitingstijd 2e slot",
+        "default": "17:30"
+      },
+      {
+        "type": "header",
+        "content": "Dinsdag"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_tue_open",
+        "label": "Open op dinsdag",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_tue_from",
+        "label": "Openingstijd",
+        "default": "10:00",
+        "info": "Formaat: HH:MM"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_tue_to",
+        "label": "Sluitingstijd",
+        "default": "17:30"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_tue_split",
+        "label": "Tweede tijdslot (lunchpauze)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_tue_from2",
+        "label": "Openingstijd 2e slot",
+        "default": "13:00"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_tue_to2",
+        "label": "Sluitingstijd 2e slot",
+        "default": "17:30"
+      },
+      {
+        "type": "header",
+        "content": "Woensdag"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_wed_open",
+        "label": "Open op woensdag",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_wed_from",
+        "label": "Openingstijd",
+        "default": "10:00",
+        "info": "Formaat: HH:MM"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_wed_to",
+        "label": "Sluitingstijd",
+        "default": "17:30"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_wed_split",
+        "label": "Tweede tijdslot (lunchpauze)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_wed_from2",
+        "label": "Openingstijd 2e slot",
+        "default": "13:00"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_wed_to2",
+        "label": "Sluitingstijd 2e slot",
+        "default": "17:30"
+      },
+      {
+        "type": "header",
+        "content": "Donderdag"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_thu_open",
+        "label": "Open op donderdag",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_thu_from",
+        "label": "Openingstijd",
+        "default": "10:00",
+        "info": "Formaat: HH:MM"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_thu_to",
+        "label": "Sluitingstijd",
+        "default": "17:30"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_thu_split",
+        "label": "Tweede tijdslot (lunchpauze)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_thu_from2",
+        "label": "Openingstijd 2e slot",
+        "default": "13:00"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_thu_to2",
+        "label": "Sluitingstijd 2e slot",
+        "default": "17:30"
+      },
+      {
+        "type": "header",
+        "content": "Vrijdag"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_fri_open",
+        "label": "Open op vrijdag",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_fri_from",
+        "label": "Openingstijd",
+        "default": "10:00",
+        "info": "Formaat: HH:MM"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_fri_to",
+        "label": "Sluitingstijd",
+        "default": "20:00"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_fri_split",
+        "label": "Tweede tijdslot (lunchpauze)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_fri_from2",
+        "label": "Openingstijd 2e slot",
+        "default": "13:00"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_fri_to2",
+        "label": "Sluitingstijd 2e slot",
+        "default": "20:00"
+      },
+      {
+        "type": "header",
+        "content": "Zaterdag"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_sat_open",
+        "label": "Open op zaterdag",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sat_from",
+        "label": "Openingstijd",
+        "default": "10:00",
+        "info": "Formaat: HH:MM"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sat_to",
+        "label": "Sluitingstijd",
+        "default": "17:00"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_sat_split",
+        "label": "Tweede tijdslot (lunchpauze)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sat_from2",
+        "label": "Openingstijd 2e slot",
+        "default": "13:00"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sat_to2",
+        "label": "Sluitingstijd 2e slot",
+        "default": "17:00"
+      },
+      {
+        "type": "header",
+        "content": "Zondag"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_sun_open",
+        "label": "Open op zondag",
+        "default": false,
+        "info": "Standaard gesloten — gebruik de instelling hieronder voor eerste/laatste zondag"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sun_from",
+        "label": "Openingstijd",
+        "default": "12:00",
+        "info": "Formaat: HH:MM"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sun_to",
+        "label": "Sluitingstijd",
+        "default": "17:00"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_sun_split",
+        "label": "Tweede tijdslot (lunchpauze)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sun_from2",
+        "label": "Openingstijd 2e slot",
+        "default": "13:00"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sun_to2",
+        "label": "Sluitingstijd 2e slot",
+        "default": "17:00"
+      },
+      {
+        "type": "header",
+        "content": "Eerste en laatste zondag"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_sun_first_last",
+        "label": "Eerste en laatste zondag van de maand open",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sun_fl_from",
+        "label": "Openingstijd",
+        "default": "12:00"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_sun_fl_to",
+        "label": "Sluitingstijd",
+        "default": "17:00"
+      },
+      {
+        "type": "header",
+        "content": "Nederlandse feestdagen"
+      },
+      {
+        "type": "checkbox",
+        "id": "bm_hours_holidays_open",
+        "label": "Feestdagen open met afwijkende tijden",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_holidays_from",
+        "label": "Openingstijd feestdagen",
+        "default": "12:00"
+      },
+      {
+        "type": "text",
+        "id": "bm_hours_holidays_to",
+        "label": "Sluitingstijd feestdagen",
+        "default": "17:00"
+      },
+      {
+        "type": "textarea",
+        "id": "bm_hours_holidays_closed",
+        "label": "Feestdagen gesloten (één per regel)",
+        "default": "Nieuwjaarsdag\nEerste Kerstdag",
+        "info": "Voer de Nederlandse naam in van feestdagen die helemaal gesloten zijn, bijv. Nieuwjaarsdag"
+      },
+      {
+        "type": "header",
+        "content": "Speciale dagen (handmatig)"
+      },
+      {
+        "type": "textarea",
+        "id": "bm_hours_special_days",
+        "label": "Speciale dagen",
+        "info": "Eén per regel. Formaat: JJJJ-MM-DD|gesloten of JJJJ-MM-DD|10:00-15:00. Overschrijft alle andere regels."
       }
     ]
   }
