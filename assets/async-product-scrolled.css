@@ -1,4 +1,15 @@
 
+@media (min-width: 768px) {
+    .product-scrolled #root > .shopify-section .f8ps,
+    .product-scrolled:not(.m6pn-open) #root > .shopify-section .f8ps,
+    #root > .shopify-section .f8ps {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        display: none !important;
+    }
+}
+
 .f8ps header ul:after { content: ""; display: block; overflow: hidden; clear: both; }
 .f8ps:before { content: ""; display: block; position: absolute; left: 50%; top: -1px; bottom: 0; z-index: -1; width: 110vw; margin: 0 0 0 -55vw; }
 .product-scrolled #root > .shopify-section .f8ps { transform: none; }
