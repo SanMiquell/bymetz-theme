@@ -2019,17 +2019,16 @@ function stickyAddToCartinit() {
 								aria_hide(form_product_sticky);
 							}
 						} else {
-							if (boundingRect.top < 0) {
-								html_tag.classList.add('product-scrolled', 'f8ps-css');
-								html_tag.classList.remove('product-not-scrolled');
-								if (form_product_sticky) {
-									aria_show(form_product_sticky);
-								}
-								assignStyles();
-								requestAnimationFrame(function () {
-									assignStyles();
-								});
+							// Echte knop NIET zichtbaar (boven OF onder viewport) → toon sticky
+							html_tag.classList.add('product-scrolled', 'f8ps-css');
+							html_tag.classList.remove('product-not-scrolled');
+							if (form_product_sticky) {
+								aria_show(form_product_sticky);
 							}
+							assignStyles();
+							requestAnimationFrame(function () {
+								assignStyles();
+							});
 						}
 					});
 				}
