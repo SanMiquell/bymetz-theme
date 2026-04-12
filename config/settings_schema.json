@@ -3329,24 +3329,6 @@
         "default": "17:30"
       },
       {
-        "type": "checkbox",
-        "id": "bm_hours_mon_split",
-        "label": "Tweede tijdslot (lunchpauze)",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_mon_from2",
-        "label": "Openingstijd 2e slot",
-        "default": "13:00"
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_mon_to2",
-        "label": "Sluitingstijd 2e slot",
-        "default": "17:30"
-      },
-      {
         "type": "header",
         "content": "Dinsdag"
       },
@@ -3367,24 +3349,6 @@
         "type": "text",
         "id": "bm_hours_tue_to",
         "label": "Sluitingstijd",
-        "default": "17:30"
-      },
-      {
-        "type": "checkbox",
-        "id": "bm_hours_tue_split",
-        "label": "Tweede tijdslot (lunchpauze)",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_tue_from2",
-        "label": "Openingstijd 2e slot",
-        "default": "13:00"
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_tue_to2",
-        "label": "Sluitingstijd 2e slot",
         "default": "17:30"
       },
       {
@@ -3411,24 +3375,6 @@
         "default": "17:30"
       },
       {
-        "type": "checkbox",
-        "id": "bm_hours_wed_split",
-        "label": "Tweede tijdslot (lunchpauze)",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_wed_from2",
-        "label": "Openingstijd 2e slot",
-        "default": "13:00"
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_wed_to2",
-        "label": "Sluitingstijd 2e slot",
-        "default": "17:30"
-      },
-      {
         "type": "header",
         "content": "Donderdag"
       },
@@ -3449,24 +3395,6 @@
         "type": "text",
         "id": "bm_hours_thu_to",
         "label": "Sluitingstijd",
-        "default": "17:30"
-      },
-      {
-        "type": "checkbox",
-        "id": "bm_hours_thu_split",
-        "label": "Tweede tijdslot (lunchpauze)",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_thu_from2",
-        "label": "Openingstijd 2e slot",
-        "default": "13:00"
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_thu_to2",
-        "label": "Sluitingstijd 2e slot",
         "default": "17:30"
       },
       {
@@ -3493,24 +3421,6 @@
         "default": "20:00"
       },
       {
-        "type": "checkbox",
-        "id": "bm_hours_fri_split",
-        "label": "Tweede tijdslot (lunchpauze)",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_fri_from2",
-        "label": "Openingstijd 2e slot",
-        "default": "13:00"
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_fri_to2",
-        "label": "Sluitingstijd 2e slot",
-        "default": "20:00"
-      },
-      {
         "type": "header",
         "content": "Zaterdag"
       },
@@ -3531,24 +3441,6 @@
         "type": "text",
         "id": "bm_hours_sat_to",
         "label": "Sluitingstijd",
-        "default": "17:00"
-      },
-      {
-        "type": "checkbox",
-        "id": "bm_hours_sat_split",
-        "label": "Tweede tijdslot (lunchpauze)",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_sat_from2",
-        "label": "Openingstijd 2e slot",
-        "default": "13:00"
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_sat_to2",
-        "label": "Sluitingstijd 2e slot",
         "default": "17:00"
       },
       {
@@ -3573,24 +3465,6 @@
         "type": "text",
         "id": "bm_hours_sun_to",
         "label": "Sluitingstijd",
-        "default": "17:00"
-      },
-      {
-        "type": "checkbox",
-        "id": "bm_hours_sun_split",
-        "label": "Tweede tijdslot (lunchpauze)",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_sun_from2",
-        "label": "Openingstijd 2e slot",
-        "default": "13:00"
-      },
-      {
-        "type": "text",
-        "id": "bm_hours_sun_to2",
-        "label": "Sluitingstijd 2e slot",
         "default": "17:00"
       },
       {

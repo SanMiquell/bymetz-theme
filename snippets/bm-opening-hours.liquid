@@ -193,19 +193,19 @@
   var CFG = {
     weekdays: [
       /* 0 = Sunday */
-      {open:{{ settings.bm_hours_sun_open | json }},from:{{ settings.bm_hours_sun_from | json }},to:{{ settings.bm_hours_sun_to | json }},split:{{ settings.bm_hours_sun_split | json }},from2:{{ settings.bm_hours_sun_from2 | json }},to2:{{ settings.bm_hours_sun_to2 | json }}},
+      {open:{{ settings.bm_hours_sun_open | json }},from:{{ settings.bm_hours_sun_from | json }},to:{{ settings.bm_hours_sun_to | json }}},
       /* 1 = Monday */
-      {open:{{ settings.bm_hours_mon_open | json }},from:{{ settings.bm_hours_mon_from | json }},to:{{ settings.bm_hours_mon_to | json }},split:{{ settings.bm_hours_mon_split | json }},from2:{{ settings.bm_hours_mon_from2 | json }},to2:{{ settings.bm_hours_mon_to2 | json }}},
+      {open:{{ settings.bm_hours_mon_open | json }},from:{{ settings.bm_hours_mon_from | json }},to:{{ settings.bm_hours_mon_to | json }}},
       /* 2 = Tuesday */
-      {open:{{ settings.bm_hours_tue_open | json }},from:{{ settings.bm_hours_tue_from | json }},to:{{ settings.bm_hours_tue_to | json }},split:{{ settings.bm_hours_tue_split | json }},from2:{{ settings.bm_hours_tue_from2 | json }},to2:{{ settings.bm_hours_tue_to2 | json }}},
+      {open:{{ settings.bm_hours_tue_open | json }},from:{{ settings.bm_hours_tue_from | json }},to:{{ settings.bm_hours_tue_to | json }}},
       /* 3 = Wednesday */
-      {open:{{ settings.bm_hours_wed_open | json }},from:{{ settings.bm_hours_wed_from | json }},to:{{ settings.bm_hours_wed_to | json }},split:{{ settings.bm_hours_wed_split | json }},from2:{{ settings.bm_hours_wed_from2 | json }},to2:{{ settings.bm_hours_wed_to2 | json }}},
+      {open:{{ settings.bm_hours_wed_open | json }},from:{{ settings.bm_hours_wed_from | json }},to:{{ settings.bm_hours_wed_to | json }}},
       /* 4 = Thursday */
-      {open:{{ settings.bm_hours_thu_open | json }},from:{{ settings.bm_hours_thu_from | json }},to:{{ settings.bm_hours_thu_to | json }},split:{{ settings.bm_hours_thu_split | json }},from2:{{ settings.bm_hours_thu_from2 | json }},to2:{{ settings.bm_hours_thu_to2 | json }}},
+      {open:{{ settings.bm_hours_thu_open | json }},from:{{ settings.bm_hours_thu_from | json }},to:{{ settings.bm_hours_thu_to | json }}},
       /* 5 = Friday */
-      {open:{{ settings.bm_hours_fri_open | json }},from:{{ settings.bm_hours_fri_from | json }},to:{{ settings.bm_hours_fri_to | json }},split:{{ settings.bm_hours_fri_split | json }},from2:{{ settings.bm_hours_fri_from2 | json }},to2:{{ settings.bm_hours_fri_to2 | json }}},
+      {open:{{ settings.bm_hours_fri_open | json }},from:{{ settings.bm_hours_fri_from | json }},to:{{ settings.bm_hours_fri_to | json }}},
       /* 6 = Saturday */
-      {open:{{ settings.bm_hours_sat_open | json }},from:{{ settings.bm_hours_sat_from | json }},to:{{ settings.bm_hours_sat_to | json }},split:{{ settings.bm_hours_sat_split | json }},from2:{{ settings.bm_hours_sat_from2 | json }},to2:{{ settings.bm_hours_sat_to2 | json }}}
+      {open:{{ settings.bm_hours_sat_open | json }},from:{{ settings.bm_hours_sat_from | json }},to:{{ settings.bm_hours_sat_to | json }}}
     ],
     sundayFL: {
       enabled: {{ settings.bm_hours_sun_first_last | json }},
@@ -430,13 +430,7 @@
       return result;
     }
 
-    var slot1 = (dayConf.from || '10:00') + ' \u2013 ' + (dayConf.to || '17:00');
-    if (dayConf.split) {
-      var slot2 = (dayConf.from2 || '13:00') + ' \u2013 ' + (dayConf.to2 || '17:00');
-      result.hours = slot1 + ', ' + slot2;
-    } else {
-      result.hours = slot1;
-    }
+    result.hours = (dayConf.from || '10:00') + ' \u2013 ' + (dayConf.to || '17:00');
     result.isOpen = true;
     return result;
   }
