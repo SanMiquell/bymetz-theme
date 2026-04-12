@@ -2447,7 +2447,7 @@ header + .l4st.grid { margin-top: calc(var(--main_mr)* -1); }
 .l4us svg { width: auto; height: var(--main_fz); }
 #root .l4us a.next-item { display: none; }
 .l4us .next-item:before { content: "\e906"; }
-.l4us .cols { justify-content: flex-start; align-items: center; }
+.l4us .cols { display: flex; justify-content: flex-start; align-items: center; }
 .l4us:empty { margin: 0; padding: 0; }
 .l4us:empty + hr { display: none; }
 .l4us.empty { margin: 0; padding: 0; }
