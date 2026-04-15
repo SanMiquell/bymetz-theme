@@ -2,7 +2,13 @@
 {%- liquid
   assign search_compact = false
   assign logo_centered = false
-  assign header_logo_image = section.settings.header_logo_override | default: settings.logo
+  assign bm_lang = request.locale.iso_code | downcase | split: '-' | first
+  if bm_lang == 'nl'
+    assign header_logo_default = settings.logo
+  else
+    assign header_logo_default = settings.non_nl_header_logo | default: settings.logo
+  endif
+  assign header_logo_image = section.settings.header_logo_override | default: header_logo_default
   assign search_centered = false
   assign search_right = false
   assign has_menu_bar = true

@@ -31,6 +31,12 @@
       },
       {
         "type": "image_picker",
+        "id": "non_nl_header_logo",
+        "label": "Logo voor niet-NL markten",
+        "info": "Wordt getoond op alle storefronts behalve de Nederlandse. Laat leeg om overal het hoofd-logo te gebruiken."
+      },
+      {
+        "type": "image_picker",
         "id": "darkmode_logo",
         "label": "t:settings_schema.logos.settings.darkmode_logo.label",
         "info": "t:settings_schema.logos.settings.darkmode_logo.info"
