@@ -687,8 +687,7 @@
             "title_too_long": "Der Titel der Ware ist zu lang.",
             "title_empty": "Der Titel der Ware ist leer.",
             "mixed_currencies": "Die Checkout-Phase enthält Bestellpositionen mit unterschiedlichen Währungen.",
-            "product_not_published_in_buyer_location": "Produkt ist am Standort des Käufers nicht veröffentlicht.",
-            "combined_listing_parent_not_purchasable": "Hauptprodukte aus kombinierten Angaben können nicht direkt gekauft werden."
+            "product_not_published_in_buyer_location": "Produkt ist am Standort des Käufers nicht veröffentlicht."
           },
           "buyer_identity": {
             "business_customer_does_not_match_company": "Kontaktperson innerhalb des Unternehmens hat keinen Zugriff auf das Unternehmen.",
@@ -1021,8 +1020,7 @@
         "email_rollup_accessibility_label": "E-Mail-Optionen",
         "phone_rollup_accessibility_label": "Telefon-Optionen",
         "phone_country_code_label": "Ländercode der Telefonnummer",
-        "storefront_link": "Website des Händlers",
-        "suburb_label": "Stadtteil"
+        "storefront_link": "Website des Händlers"
       },
       "delivery_options": {
         "ship": "Lieferung",
@@ -1046,8 +1044,7 @@
         "subscription_pickup_information": "Diese Versandmethode gilt für alle Artikel in dieser Bestellung sowie für alle zukünftigen Artikel für dieses Abonnement.",
         "ship_to_address": "Lieferung an Adresse",
         "pick_up_from_store": "Abholung im Laden",
-        "company_location_no_address_banner": "Bestellungen, die an Standorte ohne Adresse gesendet werden, werden zur Prüfung eingereicht.",
-        "pickup_point_map_title": "Karte mit Abholpunkten"
+        "company_location_no_address_banner": "Bestellungen, die an Standorte ohne Adresse gesendet werden, werden zur Prüfung eingereicht."
       },
       "customer_account": {
         "not_user_label": "Bist du nicht %{first_name}?",
@@ -1377,16 +1374,6 @@
         "pickup_unavailable_banner_title_with_country": {
           "one": "Keine Geschäfte verfügbar in %{country} mit Ihrem Artikel",
           "other": "Keine Geschäfte verfügbar in %{country} mit Ihren Artikeln"
-        },
-        "pay_merchant_label": "%{merchant_name} bezahlen",
-        "compare_at_sale": "Ausverkauf (%{sale_amount})",
-        "tax_line": {
-          "hst": "HST",
-          "gst": "GST",
-          "pst": "PST",
-          "rst": "RST",
-          "qst": "QST",
-          "vpt": "VPT"
         }
       },
       "shipping": {
@@ -1619,19 +1606,7 @@
         "third_party_address_error": "Beim Laden der Adressauswahl ist ein Fehler aufgetreten. Geben Sie Ihre Adresse unten bitte manuell ein.",
         "third_party_payment_timeout": "Zahlungsmethoden können nicht geladen werden. Bitte versuchen Sie es erneut oder verwenden Sie eine andere Zahlungsmethode.",
         "third_party_payment_error": "Beim Laden der Zahlungsauswahl ist ein Fehler aufgetreten. Verwenden Sie eine andere Zahlungsmethode.",
-        "add_shipping_address": "Lieferadresse hinzufügen",
-        "choose_new_address": "Wählen Sie eine neue Adresse",
-        "unbranded_description_same_day": "Wird am selben Werktag versendet",
-        "unbranded_description_with_fulfillment_days": {
-          "one": "Wird am nächsten Werktag versendet",
-          "other": "Wird in über %{count} Werktagen versendet"
-        },
-        "unbranded_description_with_fulfillment_weeks": {
-          "one": "Wird in über %{count} Wochen versendet",
-          "other": "Wird in über %{count} Wochen versendet"
-        },
-        "add_new_delivery_address": "Eine neue Lieferadresse hinzufügen",
-        "delivery_to": "Lieferung an"
+        "add_shipping_address": "Lieferadresse hinzufügen"
       },
       "payment": {
         "amazon_payments_label": "Amazon Pay",
@@ -1977,11 +1952,7 @@
         "bank_account_missing": "Das Bankkonto muss verknüpft sein",
         "crypto_payment_method": {
           "description": "Verbinde deine Geldbörse sicher im Base-Netzwerk",
-          "tooltip": "Das Guthaben deiner Geldbörse und deine Adresse werden nicht geteilt und es kann nur der angeforderte Betrag abgebucht werden",
-          "cashback_descriptor": {
-            "one": "Dein Cashback erhältst du nach %{count} Tag.",
-            "other": "Dein Cashback erhältst du nach %{count} Tagen."
-          }
+          "tooltip": "Das Guthaben deiner Geldbörse und deine Adresse werden nicht geteilt und es kann nur der angeforderte Betrag abgebucht werden"
         },
         "usdc_cashback_title": "%{incentive_percentage}% Cashback",
         "usdc_cashback_additional_info": "Zahle mit USDC auf Base und erhalte innerhalb von 30 Tagen %{incentive_percentage}% zurück in deine digitale Geldbörse, bis zu 100 USDC.",
@@ -2006,17 +1977,7 @@
         "save_this_address": "Speichern Sie diese Adresse",
         "default": "Standard",
         "continue_to_guest_checkout": "Als Gast zur Kasse",
-        "add_payment_method": "Zahlungsmethode hinzufügen",
-        "choose_new_payment_method": "Wähle eine neue Zahlungsmethode",
-        "add_new_payment_method": "Eine neue Zahlungsmethode hinzufügen",
-        "discount_codes_modified_summary": {
-          "one": "Der Rabattcode %{count} wurde geändert",
-          "other": "Die Rabattcodes %{count} wurden geändert"
-        },
-        "discount_codes_removed_or_modified_summary": {
-          "one": "Der Rabattcode %{count} wurde entfernt oder geändert",
-          "other": "Die Rabattcodes %{count} wurden entfernt oder geändert"
-        }
+        "add_payment_method": "Zahlungsmethode hinzufügen"
       },
       "payment_summary": {
         "gift_card_current_balance_notice": "Aktueller Kontostand %{amount}",
@@ -2301,8 +2262,7 @@
         "draft_order_deposit_due_on_fulfillment": "{{depositAmount}}  ist fällig, wenn die Bestellung bestätigt ist. Der Saldo ist fällig, sobald deine Bestellung abgeschlossen ist.",
         "order_deposit_due_on_receipt": "{{depositAmount}} muss heute bezahlt werden. Der Restbetrag ist später fällig.",
         "order_deposit_due_on_fixed_date": "{{depositAmount}} muss heute bezahlt werden. Der Restbetrag muss an {{dueDate}} zahlen sein.",
-        "bank_account_label": "Bankkonto",
-        "credit_or_debit_card_label": "Kredit-/Debitkarte"
+        "bank_account_label": "Bankkonto"
       },
       "thank_you": {
         "title": "Danke für deinen Einkauf!",
