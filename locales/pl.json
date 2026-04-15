@@ -9,6 +9,7 @@
  */
 {
   "general": {
+    "opening_hours_button": "Godziny otwarcia",
     "accessibility": {
       "choose_category": "Wybierz kategorię",
       "close": "Zamknij",
