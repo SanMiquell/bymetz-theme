@@ -7,7 +7,7 @@
   {% if section.settings.width == 'wide' %}content-wide{% endif %}
   {% if section.settings.layout == 'slider' %}slider{% endif %}
   {% unless section.settings.show_arrows %}no-nav{% endunless %}
-  {% unless section.settings.layout == 'slider' %}bm-usp-rotator{% endunless %}
+  bm-usp-rotator
   "
   style="
     --main_fz_usp: calc(var(--main_fz) * {{ section.settings.font_size }});
@@ -17,7 +17,7 @@
   >
   {%- for block in section.blocks -%}
     {%- if block.settings.usp != empty -%}
-      <li class="{% if block.settings.usp_item_icon != 'default' or block.settings.image %}no-checks {% endif %}{% unless section.settings.layout == 'slider' %}bm-usp-item{% endunless %}" {{ block.shopify_attributes }}
+      <li class="{% if block.settings.usp_item_icon != 'default' or block.settings.image %}no-checks {% endif %}bm-usp-item" {{ block.shopify_attributes }}
       style="
       --main_fz: var(--main_fz_usp);
       --pd: calc(var(--main_fz_usp) * 1.5);
@@ -94,9 +94,7 @@
 
 </style>
 
-{%- unless section.settings.layout == 'slider' -%}
-  <script src="{{ 'bm-usp-rotator.js' | asset_url }}" defer></script>
-{%- endunless -%}
+<script src="{{ 'bm-usp-rotator.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
