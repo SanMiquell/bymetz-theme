@@ -1333,7 +1333,7 @@
                             assign next_block_is_usp = true
                         endif
                     -%}
-                    <ul class="l4us mobile-static{% unless next_block_is_usp %} margin-content{% endunless %}" {{ block.shopify_attributes }}>
+                    <ul class="l4us mobile-static" {{ block.shopify_attributes }}>
                       {%- if block.settings.usp != empty -%}
                         <li class="{% if block.settings.usp_item_icon != 'default' or block.settings.image %} no-checks{% endif %}">
                             <span class="cols cols-mobile" style="--cols: 8px;">
@@ -1374,6 +1374,19 @@
                         </li>
                       {%- endif -%}
                     </ul>
+                    {%- unless next_block_is_usp -%}
+                      {%- comment -%} Hardcoded 5th USP — Shopify's section-render cache repeatedly drops the 5th dynamic usp-block despite correct template JSON + block_order. Added statically to guarantee display. {%- endcomment -%}
+                      <ul class="l4us mobile-static margin-content">
+                        <li class=" no-checks">
+                          <span class="cols cols-mobile" style="--cols: 8px;">
+                            {%- render 'icons', icon: 'return' -%}
+                            <span>
+                              <span>30 dagen bedenktijd &ndash; <strong>Zonder zorgen</strong></span>
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    {%- endunless -%}
                 {%- when 'trustbadge' -%}
                     {%- liquid
                         assign block_attributes = block.shopify_attributes
