@@ -201,9 +201,11 @@
                             {% assign spec_value = spec_link_name | link_to: spec_link %}
                           {% endif %}
                           {%- if spec_name != empty -%}
+                            {%- assign spec_value_clean = spec_value | remove: '<p>' | remove: '</p>' -%}
+                            {%- assign spec_value_key = spec_value_clean | strip | downcase -%}
                             <tr>
                               <td style="width: 50%;">{{ spec_name | remove: '<p>' | remove: '</p>' }}</td>
-                              <td style="width: 50%;">{{ spec_value | remove: '<p>' | remove: '</p>' }}</td>
+                              <td style="width: 50%;">{%- case spec_value_key -%}{%- when 'check' -%}<span class="bm-spec-check" aria-label="ja">✓</span>{%- when 'cross' -%}<span class="bm-spec-cross" aria-label="nee">✕</span>{%- else -%}{{ spec_value_clean }}{%- endcase -%}</td>
                             </tr>
                           {%- endif -%}
                         {%- endfor -%}
