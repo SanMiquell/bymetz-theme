@@ -466,7 +466,7 @@
     "vendor": "Verkäufer",
     "sku": "Artikelnummer",
     "barcode": "Barcode",
-    "bm_usp_return": "30 Tage Rückgaberecht – <strong>Sorgenfrei</strong>",
+    "bm_usp_return": "30 Tage Rückgaberecht – {{ strong_open }}Sorgenfrei{{ strong_close }}",
     "sale_tag": "Verkauf",
     "preorder_tag": "Vorbestellung",
     "unit_price_separator": "/",

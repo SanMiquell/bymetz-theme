@@ -509,7 +509,7 @@
     "vendor": "Vendedor",
     "sku": "SKU",
     "barcode": "código de barras",
-    "bm_usp_return": "30 días para devolver – <strong>Sin preocupaciones</strong>",
+    "bm_usp_return": "30 días para devolver – {{ strong_open }}Sin preocupaciones{{ strong_close }}",
     "sale_tag": "Venta",
     "preorder_tag": "Reservar",
     "stock_tag": "Casi agotado",
