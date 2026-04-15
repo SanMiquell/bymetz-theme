@@ -194,11 +194,10 @@
   }
 }
 
-/* USP rotator: fade between items every 3s (controlled by bm-usp-rotator.js) */
+/* USP rotator: positioning/visibility applied via inline style by bm-usp-rotator.js.
+   If JS fails, all items stay visible (graceful degradation). */
 .bm-usp-rotator { position: relative; }
-.bm-usp-rotator .bm-usp-item { transition: opacity 200ms ease; }
-.bm-usp-rotator .bm-usp-item:not(.is-active) { opacity: 0; pointer-events: none; position: absolute; inset: 0; }
-.bm-usp-rotator .bm-usp-item.is-active { opacity: 1; position: relative; }
+.bm-usp-item { transition: opacity 250ms ease; }
 
 /* Spec table icons: render "check"/"cross" metafield values as colored glyphs */
 .bm-spec-check { color: #2e7d32; font-weight: 700; font-size: 1.15em; line-height: 1; }
