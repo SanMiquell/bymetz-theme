@@ -202,7 +202,9 @@
   /* ── Compact variant (hamburger menu) ── */
   .bymetz-hours--compact {
     padding: 12px 16px 14px;
-    text-align: center;
+    padding-left: 16px;
+    margin-bottom: 12px;
+    text-align: left;
   }
   .bymetz-hours__compact-row {
     display: inline-flex;
@@ -226,7 +228,7 @@
   .bymetz-hours__compact-sep  { opacity: 0.4; }
   .bymetz-hours__compact-time { font-weight: 500; }
   .bymetz-hours__cta {
-    display: block;
+    display: inline-block;
     margin-top: 8px;
     color: #E65324;
     text-transform: uppercase;
@@ -573,5 +575,13 @@
   /* Only run once even if snippet is rendered multiple times */
   if (window._bmHoursFetched) return;
   window._bmHoursFetched = true;
+
+  /* Close mobile hamburger when compact CTA is clicked (link keeps navigating to anchor) */
+  document.addEventListener('click', function(e) {
+    var cta = e.target.closest('.bymetz-hours__cta');
+    if (!cta) return;
+    var closeBtn = document.querySelector('#nav a.close-nav');
+    if (closeBtn) closeBtn.click();
+  });
 })();
 </script>
