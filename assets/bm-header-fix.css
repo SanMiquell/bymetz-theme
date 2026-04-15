@@ -181,6 +181,17 @@
   #nav-top li.lang.mobile-nav-only {
     display: none !important;
   }
+
+  /* Align logo vertically with header icons.
+     screen.css sets margin-top: -12px on .link-btn and #nav-user but not #logo,
+     and #logo has margin-bottom: 4px — both push the logo below the icon centerline. */
+  #root .shopify-section-header #header-inner > #logo,
+  #header > #logo,
+  #header-inner > #logo {
+    margin-top: -12px !important;
+    margin-bottom: 0 !important;
+    align-self: center;
+  }
 }
 
 /* 10. Product card vertical alignment */
