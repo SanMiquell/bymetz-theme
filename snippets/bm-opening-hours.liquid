@@ -177,11 +177,9 @@
       display: none !important;
     }
   }
-  /* Reduce heavy top-padding on footer info block when it follows bm-nav-hours */
-  .bm-nav-hours + .m6cn,
-  .bm-nav-hours ~ .m6cn:first-of-type {
-    padding-top: 4px !important;
-  }
+  /* Tighten spacing between compact hours and the footer-info/.m6cn block in hamburger */
+  #nav .m6cn { padding-top: 4px !important; }
+  #nav > ul.nav-top { margin-top: 0 !important; margin-bottom: 0 !important; }
   /* ── Compact variant (hamburger menu) ── */
   .bymetz-hours--compact {
     padding: 12px 16px 14px;
