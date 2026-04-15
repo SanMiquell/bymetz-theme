@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
+      "Bash(git fetch:*)",
+      "Bash(git commit:*)",
+      "Bash(curl -s https://bymetz.nl/ -o /tmp/bymetz.html)",
+      "Read(//tmp/**)",
+      "Bash(curl -s \"https://bymetz.nl/cdn/shop/t/4/assets/bm-usp-rotator.js?v=120800529496329673231776281540\")",
+      "Bash(git rm:*)",
+      "Bash(curl -s \"https://bymetz.nl/cdn/shop/t/4/assets/page-product.css\")",
+      "Bash(curl -s \"https://bymetz.nl/cdn/shop/t/4/assets/bm-header-fix.css?v=114366903709984981291776282056\" -o /tmp/live-bm.css)",
+      "Bash(curl -sL \"https://bymetz.nl/products/handbagage-rugzak-40x30x15-40x30x20-uitbreidbaar\" -o /tmp/p1.html)",
+      "Bash(curl -sL \"https://bymetz.nl/collections/all\")",
+      "Bash(curl -sL https://bymetz.nl/products/__TRACKED_VAR__ -o /tmp/tmp.html)",
+      "Bash(awk NR>=140 && NR<=180:*)",
+      "Bash(shopify version:*)",
+      "Bash(shopify theme:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)",
+      "Bash(git branch:*)"
+    ]
+  }
+}
