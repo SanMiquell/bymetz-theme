@@ -451,6 +451,7 @@
     "vendor": "Vendeur",
     "sku": "UGS",
     "barcode": "Code à barres",
+    "bm_usp_return": "30 jours pour changer d'avis – <strong>Sans souci</strong>",
     "sale_tag": "Vente",
     "preorder_tag": "Précommande",
     "stock_tag": "Presque épuisé",

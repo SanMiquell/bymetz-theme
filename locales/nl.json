@@ -449,6 +449,7 @@
   },
   "product": {
     "barcode": "Barcode",
+    "bm_usp_return": "30 dagen bedenktijd – <strong>Zonder zorgen</strong>",
     "description": "Omschrijving",
     "excluding_tax": "Excl. BTW",
     "form": {

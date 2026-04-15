@@ -509,6 +509,7 @@
     "vendor": "Venditore",
     "sku": "SKU",
     "barcode": "Codice a barre",
+    "bm_usp_return": "30 giorni per il reso – <strong>Senza pensieri</strong>",
     "sale_tag": "Vendita",
     "preorder_tag": "Preordine",
     "stock_tag": "Quasi esaurito",
