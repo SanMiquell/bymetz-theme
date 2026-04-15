@@ -449,7 +449,8 @@
   },
   "product": {
     "barcode": "Barcode",
-    "bm_usp_return": "30 days return policy – {{ strong_open }}Worry-free{{ strong_close }}",
+    "bm_usp_return_text": "30 days return policy – ",
+    "bm_usp_return_bold": "Worry-free",
     "description": "Description",
     "excluding_tax": "Excl. VAT",
     "form": {
