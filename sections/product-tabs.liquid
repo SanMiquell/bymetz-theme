@@ -205,7 +205,17 @@
                             {%- assign spec_value_key = spec_value_clean | strip | downcase -%}
                             <tr>
                               <td style="width: 50%;">{{ spec_name | remove: '<p>' | remove: '</p>' }}</td>
-                              <td style="width: 50%;">{%- case spec_value_key -%}{%- when 'check' or 'ja' or 'yes' or 'oui' or 'sí' or 'si' or 'sì' or 'prüfen' or 'controlla' or 'comprobar' or 'consultar' or 'verifica' or 'verificar' or 'check' or '✓' or '✔' -%}<span class="bm-spec-check" aria-label="ja">✓</span>{%- when 'cross' or 'nee' or 'no' or 'non' or 'nein' or 'kreuz' or 'croix' or 'croce' or 'cruz' or '✕' or '✗' or '×' -%}<span class="bm-spec-cross" aria-label="nee">✕</span>{%- else -%}{{ spec_value_clean }}{%- endcase -%}</td>
+                              <td style="width: 50%;">
+                              {%- assign spec_check_values = 'check,ja,yes,oui,sí,si,sì,prüfen,controlla,comprobar,consultar,verifica,verificar,✓,✔' | split: ',' -%}
+                              {%- assign spec_cross_values = 'cross,nee,no,non,nein,kreuz,croix,croce,cruz,✕,✗,×' | split: ',' -%}
+                              {%- if spec_check_values contains spec_value_key -%}
+                                <span class="bm-spec-check" aria-label="ja">✓</span>
+                              {%- elsif spec_cross_values contains spec_value_key -%}
+                                <span class="bm-spec-cross" aria-label="nee">✕</span>
+                              {%- else -%}
+                                {{ spec_value_clean }}
+                              {%- endif -%}
+                              </td>
                             </tr>
                           {%- endif -%}
                         {%- endfor -%}
