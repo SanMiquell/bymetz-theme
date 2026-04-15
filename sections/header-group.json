@@ -55,6 +55,7 @@
       "settings": {
         "layout": "layout_2",
         "width": 1500,
+        "header_logo_override": "shopify://shop_images/by-metz-logo-groot.png",
         "header_height": "48px|42px",
         "show_header_border": "both",
         "header_border_opacity": 10,
