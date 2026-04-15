@@ -10,6 +10,18 @@
 {%- unless in_nav -%}
 <span id="bm-hours-anchor" style="display:block;position:relative;top:-120px;visibility:hidden;"></span>
 {%- endunless -%}
+{%- if variant == 'compact' -%}
+<div class="bymetz-hours bymetz-hours--compact" data-bm-hours>
+  <table class="bymetz-hours__table bymetz-hours__table--compact" aria-label="Opening hours" data-bm-hours-table>
+    <tbody data-bm-hours-body data-bm-hours-compact>
+      {%- comment -%} JS replaces with 7 dated rows; today-row gets .is-today + .is-open/.is-closed {%- endcomment -%}
+    </tbody>
+  </table>
+  <a class="bymetz-hours__cta" href="{{ routes.root_url }}#bm-hours-anchor">
+    {%- if request.locale.iso_code == 'de' -%}Öffnungszeiten{%- else -%}{{ 'general.opening_hours_button' | t }}{%- endif -%}
+  </a>
+</div>
+{%- else -%}
 <div class="bymetz-hours" data-bm-hours>
   {%- case bm_lang -%}
     {%- when 'en' -%}<h3 class="bymetz-hours__title">Store Opening Hours</h3>
@@ -90,6 +102,7 @@
     </table>
   </div>
 </div>
+{%- endif -%}
 
 <style>
   .bymetz-hours {
@@ -185,6 +198,65 @@
       display: none !important;
     }
   }
+  /* ── Compact variant (hamburger menu) ── */
+  .bymetz-hours--compact {
+    padding: 10px 16px 14px;
+    text-align: center;
+  }
+  .bymetz-hours__table--compact {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    border: 0;
+    background: transparent;
+    border-collapse: collapse;
+  }
+  .bymetz-hours__table--compact tbody td {
+    padding: 6px 4px;
+    font-size: 13px;
+    line-height: 1.3;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    vertical-align: middle;
+    background: transparent;
+  }
+  .bymetz-hours__table--compact tbody tr:last-child td { border-bottom: 0; }
+  .bymetz-hours__table--compact td:first-child {
+    text-align: left;
+    position: relative;
+    padding-left: 18px;
+  }
+  .bymetz-hours__table--compact td:last-child {
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .bymetz-hours__table--compact .is-today td { font-weight: 700; }
+  .bymetz-hours__table--compact .is-today td:first-child::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #9ca3af;
+  }
+  .bymetz-hours__table--compact .is-today.is-open   td:first-child::before { background: #16a34a; }
+  .bymetz-hours__table--compact .is-today.is-closed td:first-child::before { background: #dc2626; }
+  .bymetz-hours__cta {
+    display: inline-block;
+    margin-top: 10px;
+    color: #E65324;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    letter-spacing: 0.08em;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .bymetz-hours__cta:hover,
+  .bymetz-hours__cta:focus { color: #c43f18; }
 </style>
 
 <script>
@@ -471,7 +543,8 @@
     var tbodies = document.querySelectorAll('[data-bm-hours-body]');
     if (!tbodies.length) return;
     var openNow = isOpenRightNow();
-    var html = '';
+    var htmlFull = '';
+    var htmlCompact = '';
     for (var i = 0; i < 7; i++) {
       var date = weekDates[i];
       var key = toKey(date);
@@ -479,18 +552,27 @@
       var label = formatDayLabel(date);
       var info = getHoursForDate(date);
 
-      var rowClass = '';
+      var fullClass = '';
       if (isToday) {
-        rowClass = 'bymetz-hours__today' + (openNow ? '' : ' bymetz-hours__today--closed');
+        fullClass = 'bymetz-hours__today' + (openNow ? '' : ' bymetz-hours__today--closed');
       }
-      html += '<tr' + (rowClass ? ' class="' + rowClass + '"' : '') + '>';
-      html += '<td>' + label;
-      if (info.holidayName) html += '<span class="bymetz-hours__holiday">' + info.holidayName + '</span>';
-      html += '</td>';
-      html += '<td>' + info.hours + '</td>';
-      html += '</tr>';
+      htmlFull += '<tr' + (fullClass ? ' class="' + fullClass + '"' : '') + '>';
+      htmlFull += '<td>' + label;
+      if (info.holidayName) htmlFull += '<span class="bymetz-hours__holiday">' + info.holidayName + '</span>';
+      htmlFull += '</td>';
+      htmlFull += '<td>' + info.hours + '</td>';
+      htmlFull += '</tr>';
+
+      var compactClass = '';
+      if (isToday) compactClass = 'is-today ' + (openNow ? 'is-open' : 'is-closed');
+      htmlCompact += '<tr' + (compactClass ? ' class="' + compactClass + '"' : '') + '>';
+      htmlCompact += '<td>' + label + '</td>';
+      htmlCompact += '<td>' + info.hours + '</td>';
+      htmlCompact += '</tr>';
     }
-    tbodies.forEach(function(tbody) { tbody.innerHTML = html; });
+    tbodies.forEach(function(tbody) {
+      tbody.innerHTML = tbody.hasAttribute('data-bm-hours-compact') ? htmlCompact : htmlFull;
+    });
   }
 
   renderTable();

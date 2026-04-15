@@ -952,7 +952,7 @@
         {%- render 'header-menu', menu: nav_menu, show_dropdown_images: section.settings.show_dropdown_images, show_dropdown_images_autofill: section.settings.show_dropdown_images_autofill, show_dropdown_images_rounded: section.settings.show_dropdown_images_rounded, show_dropdown_images_subs: section.settings.show_dropdown_images_subs, layout: menu_layout, main_menu_items_clickable: section.settings.main_menu_items_clickable, menubar_caps: section.settings.menubar_caps, sale_highlight: section.settings.sale_highlight, sale_highlight_item: section.settings.sale_highlight_item, manual_collapse: false, submenu_items_limit: section.settings.submenu_items_limit, custom_menu_items_per_columns: section.settings.custom_menu_items_per_columns, menu_items_limit: section.settings.menu_items_limit, blocks: section.blocks, header_width: section.settings.width, main_menu_show_lines: section.settings.main_menu_show_lines, menu_subs_font: section.settings.menu_subs_font, show_chevrons: section.settings.menu_show_chevrons -%}
       </ul>
       <div class="bm-nav-hours" style="border-top:1px solid rgba(0,0,0,0.08);padding:0;">
-        {% render 'bm-opening-hours', in_nav: true %}
+        {% render 'bm-opening-hours', in_nav: true, variant: 'compact' %}
       </div>
       {% unless section.settings.show_top_bar %}
         <ul data-type="top-nav" class="nav-top">
