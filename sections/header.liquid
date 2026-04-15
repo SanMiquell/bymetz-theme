@@ -2,13 +2,6 @@
 {%- liquid
   assign search_compact = false
   assign logo_centered = false
-  assign bm_lang = request.locale.iso_code | downcase | split: '-' | first
-  if bm_lang == 'nl'
-    assign header_logo_default = settings.logo
-  else
-    assign header_logo_default = settings.non_nl_header_logo | default: settings.logo
-  endif
-  assign header_logo_image = section.settings.header_logo_override | default: header_logo_default
   assign search_centered = false
   assign search_right = false
   assign has_menu_bar = true
@@ -258,7 +251,7 @@
       --content_p:                  {{ section.settings.spacing_mobile }}px;
       --custom_top_search_h:        {{ section.settings.searchbar_height_mobile }}px;
     }
-    {%- if header_logo_image -%}
+    {%- if settings.logo -%}
       .shopify-section-header { --logo_w: {{ settings.logo_width_mobile }}px; }
     {%- endif -%}
     html #root .shopify-section-header #search.full:not(.no-autocomplete) > p, html #root .shopify-section-header #search.full:not(.no-autocomplete) > fieldset > p {
@@ -275,7 +268,7 @@
       --search_w:               {% if section.settings.searchbar_width == 600 %}100%{% else %}{{ section.settings.searchbar_width }}px{% endif %};
     }
     #nav-bar > ul > li > ul > li > ul > li > a, #nav > ul > li > ul > li > ul > li > a { --main_fw: {{ section.settings.menu_subs_font_weight }}; font-weight: {{ section.settings.menu_subs_font_weight }}; }
-    {%- if header_logo_image -%}
+    {%- if settings.logo -%}
       .shopify-section-header { --logo_w: {{ settings.logo_width }}px; }
     {%- endif -%}
   }
@@ -345,13 +338,13 @@
 {%- capture logo -%}
   <p id="logo" class="{% if section.settings.layout_mobile == 'logo_right' %}mobile-text-end{% endif %}">
     <a href="{{ routes.root_url }}">
-      {%- if header_logo_image -%}
+      {%- if settings.logo -%}
         {%- capture sizes %}(min-width: 760px) {{ settings.logo_width }}px, {{ settings.logo_width_mobile }}px{%- endcapture -%}
         {%- capture widths %}{{ settings.logo_width }},{{ settings.logo_width | times: 2 }}{%- endcapture -%}
         {%- capture widths_mobile %}{{ settings.logo_width_mobile }},{{ settings.logo_width_mobile | times: 2 }}{%- endcapture -%}
         {%- liquid
           assign width = settings.logo_width | times: 2
-          assign alt = header_logo_image.alt | default: shop.name | escape
+          assign alt = section.settings.logo.alt | default: shop.name | escape
         -%}
 
         {%- if settings.darkmode_logo -%}
@@ -387,7 +380,7 @@
                 {%- endfor -%}
               ">
           {%- endif -%}
-          {{ header_logo_image | image_url: width: width | image_tag:
+          {{ settings.logo | image_url: width: width | image_tag:
             class: 'logo-img',
             height: logo_height,
             width: settings.logo_width,
@@ -400,7 +393,7 @@
         <span>{{ shop.name }}</span>
       {%- endif -%}
     </a>
-    {%- if header_logo_image -%}
+    {%- if settings.logo -%}
       <style>
         #logo {
           --logo_w: {{ settings.logo_width }}px;
@@ -1075,12 +1068,6 @@
       "step": 100,
       "unit": "px",
       "default": 2000
-    },
-    {
-      "type": "image_picker",
-      "id": "header_logo_override",
-      "label": "Logo override (per markt instelbaar)",
-      "info": "Laat leeg om het globale logo (settings.logo) te gebruiken. Vul in om per markt een ander logo te tonen."
     },
     {
       "id": "header_height",
