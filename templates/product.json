@@ -171,15 +171,15 @@
             "image_width": 55
           }
         },
-        "pickup": {
-          "type": "pickup",
-          "settings": {}
-        },
         "payments_xpcKBt": {
           "type": "payments",
           "settings": {
             "alignment": "start"
           }
+        },
+        "pickup": {
+          "type": "pickup",
+          "settings": {}
         },
         "codes_TJiVFL": {
           "type": "codes",
